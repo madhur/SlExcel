@@ -576,7 +576,7 @@ namespace manage
 
             IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
             columnDescriptor.SuspendNotifications();
-            radGrid.FilterDescriptors.Clear();
+            //radGrid.FilterDescriptors.Clear();
             columnDescriptor.DistinctFilter.Clear();
             foreach (String status in statuses)
                 columnDescriptor.DistinctFilter.AddDistinctValue(status);
@@ -586,21 +586,7 @@ namespace manage
 
         private void ApplyStatusFilter()
         {
-            GridViewColumn statusColumn = null;
-            RadGridView radGrid = adminGrid;
-           
-
-            statusColumn = radGrid.Columns[Status.STATUS_COLUMN];
-
-            IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
-            columnDescriptor.SuspendNotifications();
-            radGrid.FilterDescriptors.Clear();
-            columnDescriptor.DistinctFilter.Clear();
-            foreach (String status in new String[]{Status.SUBMIT_APPROVAL, Status.PENDING_ACTUALS, Status.FINANCE_REVIEW})
-                columnDescriptor.DistinctFilter.AddDistinctValue(status);
-            columnDescriptor.ResumeNotifications();
-
-
+            ApplyFilters(new String[] { Status.SUBMIT_APPROVAL, Status.PENDING_ACTUALS, Status.FINANCE_REVIEW }, TAB.ADMIN, Status.STATUS_COLUMN);
         }
 
         public void btn_draft_Click(object sender, RoutedEventArgs e)
