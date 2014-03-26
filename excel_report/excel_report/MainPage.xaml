@@ -1,0 +1,167 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+    xmlns:local="clr-namespace:excel_report"
+    xmlns:controls ="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Data"
+    x:Class="excel_report.MainPage"
+    mc:Ignorable="d"
+    d:DesignHeight="500" d:DesignWidth="1000" VerticalAlignment="Center" HorizontalAlignment="Center"
+    xmlns:dataInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.Resources>
+            <local:MyConverter x:Key="myConverter"/>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="437*"/>
+            <RowDefinition Height="63*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#FF002663" BorderThickness="1" CornerRadius="5" Margin="0,3,0,0" Grid.RowSpan="2"/>
+
+        <Rectangle Fill="#FFD1D1D1" Margin="0,14,10,359" HorizontalAlignment="Right" Width="980" StrokeThickness="0" RadiusX="5" RadiusY="5"/>
+        <Border BorderBrush="#FF009BBB" BorderThickness="0,1,0,0" Margin="21,36,21,400" Height="1"/>
+        <Border BorderBrush="#FF002663" BorderThickness="0,1,0,0" Margin="0,94,0,342" Height="1"/>
+        <dataInput:Label Margin="10,110,0,313" FontFamily="Arial" FontSize="12" Content="Select a report by clicking any of the icons under Report Type, or create your own using the table below. Then export using Export to Excel button." HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF002663"/>
+        <telerik:RadGridView x:Name="dataGrid1" DataLoadMode="Asynchronous" ShowGroupPanel="False" telerik:StyleManager.Theme="Summer" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" Margin="10,146,10,10" Height="344" ActionOnLostFocus="None" FontFamily="Arial" CanUserDeleteRows="False" CanUserInsertRows="False" Grid.RowSpan="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" EditTriggers="None" DragElementAction="None" ValidatesOnDataErrors="None" ShowColumnSortIndexes="True" RowIndicatorVisibility="Collapsed">
+
+            <telerik:RadGridView.ControlPanelItems>
+
+                <telerik:ControlPanelItem ButtonTooltip="Column chooser">
+
+
+                    <telerik:ControlPanelItem.ButtonContent>
+                        <Grid HorizontalAlignment="Center" Height="16" Width="16" Margin="-3,0,0,0">
+                            <Path Data="M2.6822092E-06,12.000001 L6.0000029,12.000001 L6.0000029,15.000001 L2.6822092E-06,15.000001 z M2.6822092E-06,8.000001 L6.0000029,8.000001 L6.0000029,11.000001 L2.6822092E-06,11.000001 z M0,0 L6,0 L6,3 L0,3 z" Fill="{telerik:Windows8Resource ResourceKey=StrongBrush}" Margin="4,0,9,0" Stretch="Fill"/>
+                            <Path Data="M0,0 L6,0 L6,3 L0,3 z" Fill="{telerik:Windows8Resource ResourceKey=StrongBrush}" Height="3" Margin="4,4,9,0" Stretch="Fill" VerticalAlignment="Top"/>
+                            <Path Data="M3,0 L3,3 L0,3 z" Fill="{telerik:Windows8Resource ResourceKey=StrongBrush}" HorizontalAlignment="Left" Height="3" Margin="0,4,0,0" Stretch="Fill" Stroke="{telerik:Windows8Resource ResourceKey=StrongBrush}" StrokeThickness="0" VerticalAlignment="Top" Width="3" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="-45"/>
+                                        <ScaleTransform ScaleX="-2.3299793205922015E-08" ScaleY="4.4408920985006262E-16">
+                                        </ScaleTransform>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Data="M0.50000036,12.499999 L2.5000005,12.499999 L2.5000005,14.499999 L0.50000036,14.499999 z M0.5,8.5 L2.5000002,8.5 L2.5000002,10.5 L0.5,10.5 z M0.5,4.5 L7.5,4.5 L7.5,6.5 L0.5,6.5 z M0.5,0.5 L7.5,0.5 L7.5,2.5 L0.5,2.5 z" HorizontalAlignment="Right" Stretch="Fill" Stroke="#FF767676" Width="8"/>
+                        </Grid>
+                    </telerik:ControlPanelItem.ButtonContent>
+                    <telerik:ControlPanelItem.Content>
+                        <ListBox ItemsSource="{Binding Columns}" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="400" MaxWidth="200" Width="200" Height="300" MinWidth="200" MinHeight="300" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding Header, Mode=OneWay}" IsChecked="{Binding IsVisible, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </telerik:ControlPanelItem.Content>
+
+                </telerik:ControlPanelItem>
+            </telerik:RadGridView.ControlPanelItems>
+
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Idea ID"  IsGroupable="False" IsFilterable="True" DataMemberBinding="{Binding ideaID}"/>
+                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="True" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
+                <telerik:GridViewDataColumn Header="Idea Status"  DataMemberBinding="{Binding ideaStatus}" IsFilterable="True"/>
+                <telerik:GridViewDataColumn Header="Cost Type" DataMemberBinding="{Binding costType}" IsFilterable="True"/>
+                <telerik:GridViewDataColumn Header="Tech Impact" IsGroupable="False" IsVisible="False" IsFilterable="False" DataMemberBinding="{Binding TechImpact}" TextWrapping="Wrap" MaxWidth="200"/>
+
+
+                <telerik:GridViewDataColumn Header="Total Savings"  IsGroupable="False" IsFilterable="True" DataMemberBinding="{Binding totalSave, Converter={StaticResource ResourceKey=myConverter},  StringFormat='{}{0:c}'}" />
+                <telerik:GridViewDataColumn Header="1st Mo Saves Date"  IsFilterable="True" DataMemberBinding="{Binding firstMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat='{}{0:M/d/yyyy}'}" IsGroupable="False" Width="100">
+
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Revised 1st Mo Saves Date" IsFilterable="True" DataMemberBinding="{Binding revisedMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat ='{}{0:M/d/yyyy}'}" IsGroupable="False" Width="100">
+                </telerik:GridViewDataColumn>
+
+
+                <telerik:GridViewDataColumn Header="Idea Executor" IsFilterable="True" DataMemberBinding="{Binding Executor}"/>
+                <telerik:GridViewDataColumn Header="Idea Director" IsFilterable="True" DataMemberBinding="{Binding Director}"/>
+                <telerik:GridViewDataColumn Header="Idea VP" IsFilterable="True" DataMemberBinding="{Binding VP}"/>
+                <telerik:GridViewDataColumn Header="Created By" IsFilterable="True" IsVisible="False" DataMemberBinding="{Binding CreatedBy}"/>
+
+                <telerik:GridViewDataColumn Header="FTE Contributors" IsFilterable="False" IsGroupable="False" IsVisible="True" DataMemberBinding="{Binding FTE}" TextWrapping="Wrap" MaxWidth="150" />
+
+                <telerik:GridViewDataColumn Header="LOB-T1" IsFilterable="True" DataMemberBinding="{Binding LOBT1}" TextWrapping="Wrap"/>
+                <telerik:GridViewDataColumn Header="LOB-T2" IsFilterable="True" IsGroupable="False" DataMemberBinding="{Binding LOBT2}" TextWrapping="Wrap"/>
+
+             
+
+                <telerik:GridViewDataColumn Header="Idea Description" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Description}" TextWrapping="Wrap" MaxWidth="200" />
+                <telerik:GridViewDataColumn Header="AIM Application Name" IsFilterable="True"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding AppName}" TextWrapping="Wrap" MaxWidth="200" />
+                <telerik:GridViewDataColumn  Header="AIM Application ID" IsFilterable="True"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding AppID, Converter={StaticResource ResourceKey=myConverter}}"/>
+
+                <telerik:GridViewDataColumn Header="Assumptions or Dependencies" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding AssumpDepen}" TextWrapping="Wrap" MaxWidth="200"/>
+                <telerik:GridViewDataColumn Header="EXCEL Identifier" IsFilterable="True"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Identify}"/>
+                <telerik:GridViewDataColumn Header="Risk" IsFilterable="True" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Risk}"/>
+
+                <telerik:GridViewDataColumn Header="Project Comments" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding ProjComments}" TextWrapping="Wrap" MaxWidth="300" />
+                <telerik:GridViewDataColumn Header="Audit History" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Audit}" TextWrapping="Wrap" MaxWidth="300" />
+
+
+
+            </telerik:RadGridView.Columns>
+
+
+        </telerik:RadGridView>
+
+
+        <Button x:Name="btn_export" HorizontalAlignment="Right" Margin="0,0,10,203" VerticalAlignment="Center" Width="130" Height="30" Cursor="Hand" FontFamily="Arial" FontSize="12" Click="btn_export_Click" Foreground="#FF002663" Content="Export to Excel" />
+         
+
+
+        <StackPanel x:Name="rpt" VerticalAlignment="Top" Orientation="Horizontal" Margin="21,17,21,0" Height="63">
+
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF002663" Margin="0" FontFamily="Arial" FontSize="14" Height="18">
+        		<Run Text="Report Type"/>
+        		<LineBreak/>
+        		<Run/>
+            </TextBlock>
+            <HyperlinkButton FontFamily="Arial" FontSize="12" Foreground="#FF002663" ClickMode="Press" NavigateUri="https://teams.aexp.com/sites/excel/Reports/My%20Ideas%20And%20Contibutor.xlsx" Padding="4,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-56,0,0,0">
+                <HyperlinkButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/ExportToExcel16x16.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" Margin="0,0,6,0"/>
+                        <TextBlock Text="My Ideas + Contributor"/>
+                    </StackPanel>
+                </HyperlinkButton.Content>
+
+
+
+            </HyperlinkButton>
+
+            <HyperlinkButton x:Name="btn_director" FontFamily="Arial" FontSize="12" Background="{x:Null}" Foreground="#FF002663" NavigateUri="https://teams.aexp.com/sites/excel/Reports/By%20Idea%20VP.xlsx" Padding="4,0,10,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <HyperlinkButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/ExportToExcel16x16.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" Margin="0,0,6,0"/>
+                        <TextBlock Text="By Idea VP"/>
+                    </StackPanel>
+                </HyperlinkButton.Content>
+            </HyperlinkButton>
+
+            <HyperlinkButton x:Name="btn_executor"  FontFamily="Arial" FontSize="12" Background="{x:Null}" Foreground="#FF002663" NavigateUri="https://teams.aexp.com/sites/excel/Reports/Financial%20Summaries.xlsx" Padding="4,0,10,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <HyperlinkButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/ExportToExcel16x16.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" Margin="0,0,6,0"/>
+                        <TextBlock Text="Financial Summaries"/>
+                    </StackPanel>
+                </HyperlinkButton.Content>
+            </HyperlinkButton>
+            <HyperlinkButton x:Name="btn_status" FontFamily="Arial" FontSize="12" Background="{x:Null}" Foreground="#FF002663" NavigateUri="https://teams.aexp.com/sites/excel/Reports/Export%20All.xlsx" Padding="4,0,10,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <HyperlinkButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/ExportToExcel16x16.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" Margin="0,0,6,0"/>
+                        <TextBlock Text="Export All"/>
+                    </StackPanel>
+                </HyperlinkButton.Content>
+            </HyperlinkButton>
+
+
+        </StackPanel>
+        <TextBlock x:Name="columns" Text="Add/Remove Columns" Margin="0,0,41,112" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Arial" Foreground="#FF3F9C35" FontSize="14"/>
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,708 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dataInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" 
+    xmlns:Primitives="clr-namespace:Telerik.Windows.Controls.RibbonView.Primitives;assembly=Telerik.Windows.Controls.RibbonView"
+    xmlns:Controls="clr-namespace:excel_create.Controls" 
+    xmlns:Controls1="clr-namespace:excel_create.Controls"
+    xmlns:local="clr-namespace:excel_create" x:Class="excel_create.MainPage"
+    mc:Ignorable="d" d:DesignWidth="900" Height="500">
+
+    <telerik:RadBusyIndicator Name="busyIndicator"  IsBusy="False"  BusyContent="Please wait ...">
+        <Grid x:Name="LayoutRoot" Background="White">
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition/>
+                <ColumnDefinition Width="172" />
+                <ColumnDefinition Width="172" />
+                <ColumnDefinition Width="172"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="84"/>
+                <RowDefinition Height="27*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="74*"/>
+                <RowDefinition Height="39"/>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="54*"/>
+                <RowDefinition Height="66*"/>
+            </Grid.RowDefinitions>
+
+            <!--navigation images -->
+
+            <StackPanel Margin="0,36,7,25" Grid.ColumnSpan="3" Orientation="Vertical" Grid.RowSpan="2">
+                <toolkit:DockPanel x:Name="overview_image" Margin="0" >
+                    <Image Source="Images/bgg_OverviewActive.png" Margin="5,0,0,0" Height="40" Width="518" HorizontalAlignment="Left" Stretch="Fill"/>
+                </toolkit:DockPanel>
+                <toolkit:DockPanel x:Name="scope_image" Margin="0" Visibility="Collapsed" >
+                    <Image Source="Images/gbgrey_ScopeActive.png" Stretch="Fill" Margin="5,0,0,0" Height="40" Width="518" HorizontalAlignment="Left"/>
+                </toolkit:DockPanel>
+                <toolkit:DockPanel x:Name="financials_image" Margin="0,0,0,0" Visibility="Collapsed" >
+                    <Image Source="Images/ggBlue_FinancialsActive.png" Stretch="Fill" Margin="5,0,0,0" Height="40" Width="518" HorizontalAlignment="Left"/>
+                </toolkit:DockPanel>
+                <toolkit:DockPanel x:Name="comments_image" Margin="0,0,0,0" Visibility="Collapsed" >
+                    <Image Source="Images/ggrey_commentsActive.png" Stretch="Fill" Margin="5,0,0,0" Height="40" Width="518" HorizontalAlignment="Left"/>
+                </toolkit:DockPanel>
+
+            </StackPanel>
+
+            <!--tabcontrol-->
+            <telerik:RadTabControl x:Name="tabcontrol1" Align="Right" Grid.RowSpan="10" Grid.ColumnSpan="5" BorderBrush="{x:Null}" HeaderBackground="{x:Null}" Margin="0,23,0,0" BorderThickness="0" Style="{StaticResource RadTabControlStyle1}" Height="380">
+
+
+                <!--project overview tab-->
+                <telerik:RadTabItem x:Name="overview" Header="Project Overview" Width="166" Height="30" BorderBrush="{x:Null}" Foreground="#FF002663" FontSize="12" Background="{x:Null}" Padding="6,3" Margin="4,0,0,0" IsTabStop="False" IsSelected="True" BorderThickness="0" Visibility="Collapsed" >
+
+
+                    <Border BorderBrush="#002663" BorderThickness="2" Margin="0,0,0,-45" CornerRadius="5">
+                        <Grid Background="Transparent" Margin="0,0,0,55">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="18*"/>
+                                <RowDefinition Height="29"/>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="60*"/>
+                                <RowDefinition Height="68*"/>
+
+
+                                <RowDefinition Height="46*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock x:Name="requiredfields" FontFamily="Arial" FontSize="13" Margin="25,6,0,0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">                        
+                            <Run Text="All fields marked with" Foreground="#FF002663"/>
+                            <Run Text=" * " Foreground="#FFF30606"/>
+                            <Run Text="are required fields." Foreground="#FF002663"/>
+                            </TextBlock>
+                            <TextBlock x:Name="ideanameTxt" HorizontalAlignment="Left" Margin="25,8,0,0" Grid.Row="2" VerticalAlignment="Center" FontFamily="Arial" FontSize="12">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+
+                            <Run Text="  Idea Name"/>
+                            <LineBreak/>
+                            <Run FontSize="9" Text="     (Character Limit 60)"/>
+
+                            </TextBlock>
+                            <TextBox x:Name="ideaname" HorizontalAlignment="Left" TextChanged="Ideanametextchanged" Height="23" Margin="155,11,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" MaxLength="60">
+
+                            </TextBox>
+
+
+                            <TextBlock x:Name="descriptionTxt" HorizontalAlignment="Left" Margin="24,0,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Arial" FontSize="12">
+							<Run Text="*" FontSize="14" Foreground="#FFF30606"/>   
+                            <Run Text="  Idea Description"/>
+                                                 
+                        <LineBreak/>
+							<Run FontSize="9" Text="      (Character Limit 255)"/>
+                            </TextBlock>
+                            <TextBox x:Name="description" HorizontalAlignment="Left" TextChanged="Descriptiontextchanged" Height="60" Margin="155,16,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" MaxLength="255"/>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="12,6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Created By" VerticalAlignment="Top" Grid.Column="1" Height="16" Width="81" FontFamily="Arial" FontSize="12"/>
+                            <TextBox x:Name="createdby" HorizontalAlignment="Left" Height="23" Margin="134,0,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Grid.Column="1" FontFamily="Arial" FontSize="12" IsReadOnly="True"/>
+
+
+                            <TextBlock x:Name="executorTxt" HorizontalAlignment="Left" Margin="0,14,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Column="1">
+                            
+                             <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                            <Run Text="  Idea Executor"/>
+                            </TextBlock>
+                            <Controls1:PeopleChooser x:Name="SinglePeopleChooser" AllowMultiple="False"  Grid.Column="1" Margin="133,11,44,0" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Right"/>
+                            <Controls1:PeopleChooser x:Name="SinglePeopleChooser1" AllowMultiple="false" Grid.Column="1" Margin="133,15,44,26" Grid.Row="3" Grid.RowSpan="2" HorizontalAlignment="Right"/>
+                            <Controls1:PeopleChooser x:Name="SinglePeopleChooser2" AllowMultiple="false" Grid.Column="1" Margin="133,60,44,63" Grid.Row="3" Grid.RowSpan="3" HorizontalAlignment="Right"/>
+
+
+                            <TextBlock x:Name="directorTxt" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" FontFamily="Arial" FontSize="12">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+
+                            <Run Text="  Idea Director"/>
+                            </TextBlock>
+
+
+                            <TextBlock x:Name="vpTxt" HorizontalAlignment="Left" Margin="0,64,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" FontFamily="Arial" FontSize="12">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                            <Run Text="  Idea VP"/>
+
+                            </TextBlock>
+
+
+                            <TextBlock x:Name="lobt1Txt" Grid.Column="1" HorizontalAlignment="Left" Margin="0,23,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Width="110" Height="28">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                            <Run Text="  Line of"/>
+                            <LineBreak/>
+                            <Run Text="     Business - Tier 1"/>
+
+                            </TextBlock>
+
+                            <StackPanel x:Name="lob1_stack" Orientation="Horizontal" Grid.Column="1" Margin="15,0,0,30" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2">
+
+                                <RadioButton GroupName="LOB1" x:Name="gbs_radio" Content="GBS" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Grid.Row="4" VerticalAlignment="Top" Height="17" Width="60" Checked="LOBRadioButtons_Checked" Unchecked="LOBRadioButtons_Unchecked" FontFamily="Arial" FontSize="12" />
+                                <RadioButton GroupName="LOB1" x:Name="gbt_radio" Content="GBT" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Grid.Row="4" VerticalAlignment="Top" Height="17" Width="60" Checked="LOBRadioButtons_Checked" Unchecked="LOBRadioButtons_Unchecked" FontFamily="Arial" FontSize="12"/>
+                                <RadioButton GroupName="LOB1" x:Name="gcp_radio" Content="GCP" Grid.Column="1" HorizontalAlignment="Left" Margin="6,0,0,0" Grid.Row="4" VerticalAlignment="Top" Height="17" Width="60" Checked="LOBRadioButtons_Checked" Unchecked="LOBRadioButtons_Unchecked" FontFamily="Arial" FontSize="12"/>
+
+                                <RadioButton GroupName="LOB1" x:Name="hr_radio" Content="HR" Grid.Column="1" HorizontalAlignment="Left" Margin="-186,25,0,0" Grid.Row="4" VerticalAlignment="Center" Height="17" Width="60" Checked="LOBRadioButtons_Checked" Unchecked="LOBRadioButtons_Unchecked" FontFamily="Arial" FontSize="12" Grid.RowSpan="2"/>
+                                <RadioButton GroupName="LOB1" x:Name="pbmt_radio" Content="PBMT" Grid.Column="1" HorizontalAlignment="Left" Margin="-126,25,0,0" Grid.Row="4" VerticalAlignment="Center" Checked="LOBRadioButtons_Checked" Unchecked="LOBRadioButtons_Unchecked" Height="17" Width="60" FontFamily="Arial" FontSize="12" Grid.RowSpan="2"/>
+                                <RadioButton GroupName="LOB1" x:Name="wsgcat_radio" Content="WSGCAT" Grid.Column="1" HorizontalAlignment="Left" Margin="-60,25,0,0" Grid.Row="4" VerticalAlignment="Center" FontFamily="Arial" FontSize="12" Checked="LOBRadioButtons_Checked" Unchecked="LOBRadioButtons_Unchecked" Height="16" Width="75" Grid.RowSpan="2"/>
+                            </StackPanel>
+                            <TextBox x:Name="resultsLOB2" Margin="129,34,105,2" Grid.Row="5"  Visibility="Collapsed" TextChanged="LOB2textchanged"/>
+
+
+                            <!--lob2-->
+                            <StackPanel x:Name="LOBT2_stack" DataContext="overview" Grid.Column="1" Margin="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <toolkit:DockPanel x:Name="lobgbt" LastChildFill="False" Margin="0" Visibility="Collapsed">
+                                    <TextBlock x:Name="gbtTxt" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left">
+                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                    <Run Text="  Line of"/>
+                                    <LineBreak/>
+                                    <Run Text="     Business - GBT"/>
+
+
+                                    </TextBlock>
+                                    <RadioButton x:Name="lobgbt_gcp" GroupName="lob2" Content="GCP" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobgbt_qms" GroupName="lob2" Content="QMS" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="13,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobgbt_gbtjv" GroupName="lob2" Content="GBT/JV" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="18,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
+
+                                </toolkit:DockPanel>
+
+
+                                <toolkit:DockPanel x:Name="lobwsgcat" LastChildFill="False" Margin="0" Visibility="Collapsed">
+                                    <TextBlock x:Name="wsgcatTxt" TextWrapping="Wrap" Margin="0" FontFamily="Arial" FontSize="12" Height="32">
+                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                    <Run Text="  Line of Business"/><LineBreak/>
+                                    <Run Text="    - WSGCAT"/>
+
+                                    </TextBlock>
+                                    <RadioButton x:Name="lobwsgcat_ws" GroupName="lob2" Content="WS" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="44" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobwsgcat_gca" GroupName="lob2" Content="GCA" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="16,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobwsgcat_both" GroupName="lob2" Content="WS and GCA" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="19,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
+
+                                </toolkit:DockPanel>
+
+
+                                <toolkit:DockPanel x:Name="lobpbmt" LastChildFill="False" Height="40" Margin="0,15,0,0" Visibility="Collapsed">
+                                    <TextBlock x:Name="pbmtTxt" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left" Margin="0">
+                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                                                        <Run Text="  Line of "/>
+                                    <LineBreak/>
+                                    <Run Text="     Business - PBMT"/>
+
+                                    </TextBlock>
+                                    <RadioButton x:Name="lobpbmt_pegasus" GroupName="lob2" Content="GCST Pegasus" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="22,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobpbmt_busmgmt" GroupName="lob2" Content="Business Managment and Transformation" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="-104,0,0,0" Grid.Row="5" VerticalAlignment="Bottom" FontFamily="Arial" FontSize="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="1,1,0,0"/>
+
+                                </toolkit:DockPanel>
+                                <toolkit:DockPanel x:Name="lobgbs" LastChildFill="False" Margin="0,15,0,0" Visibility="Collapsed">
+                                    <TextBlock x:Name="gbsTxt" TextWrapping="Wrap" Margin="0" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Height="41">
+                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                                                        <Run Text="  Line of"/>
+                                    <LineBreak/>
+                                    <Run Text="     Business - GBS"/>
+
+                                    </TextBlock>
+                                    <RadioButton x:Name="lobgbs_gbt" GroupName="lob2" Content="GBT" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="29,10,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobgbs_gfo" GroupName="lob2" Content="GFO" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="15,10,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobgbs_grewe" GroupName="lob2" Content="GREWE" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobgbs_gsm" GroupName="lob2" Content="GSM" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="-193,35,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobgbs_tech" GroupName="lob2" Content="Tech" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="-132,35,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobgbs_other" GroupName="lob2" Content="Other External Group" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="-66,35,0,0" Grid.Row="5" VerticalAlignment="Top" Height="19" FontFamily="Arial" FontSize="12"/>
+                                </toolkit:DockPanel>
+                                <toolkit:DockPanel x:Name="lobhr" LastChildFill="False" Margin="0,15,0,0" Visibility="Collapsed">
+                                    <TextBlock x:Name="hrTxt" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left">
+                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                                                        <Run Text="   Line of"/>
+                                    <LineBreak/>
+                                    <Run Text="      Business - HR"/>
+
+                                    </TextBlock>
+                                    <RadioButton x:Name="lobhr_hr" GroupName="lob2" Content="HR" Grid.Column="1" Checked="LOB2RadioButtons_Checked" HorizontalAlignment="Left" Margin="34,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobhr_tech" GroupName="lob2" Content="Tech" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="22,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobhr_pmo" GroupName="lob2" Content="PMO Only" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+
+                                    <RadioButton x:Name="lobhr_benefits" GroupName="lob2" Content="HR Benefits" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="-202,20,0,0" Grid.Row="5" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
+
+                                    <RadioButton x:Name="lobhr_other" GroupName="lob2" Content="Other External Group" Click="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="-76,20,0,0" Grid.Row="5" VerticalAlignment="Center" Width="140" FontFamily="Arial" FontSize="12"/>
+                                </toolkit:DockPanel>
+                            </StackPanel>
+
+                            <!--help popups-->
+                            <Image x:Name="imghelp_description" MouseLeftButtonDown="imghelp_description_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="125,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_descrip" Margin="225,13,218,17"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalOffset="-643" VerticalOffset="-55" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663" Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopupButton1" Content="X" Click="PopUpButton1_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_descrip" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="300" Height="50"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_executor" MouseLeftButtonDown="imghelp_executor_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="90,5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand" Grid.Column="1"/>
+                            <Popup x:Name="myPopup_executor" Margin="231,17,221,17"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalOffset="-108" HorizontalOffset="-230" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopupButton2" Content="X" Click="PopUpButton2_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_executor" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="200" Height="50"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_lob1" MouseLeftButtonDown="imghelp_lob1_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="60,15,0,0" Grid.Row="4" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand" Grid.Column="1"/>
+                            <Popup x:Name="myPopup_lob1" Margin="225,19,223,17"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalOffset="-256" VerticalOffset="20" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopupButton3" Content="X" Click="PopUpButton3_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_lob1" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="250" Height="50"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <!--<TextBlock x:Name="futureTxt" Margin="24,30,312,0" Grid.Row="4" FontFamily="Arial" FontSize="12" TextWrapping="Wrap" Text="     Future Pipeline"/>
+                        <CheckBox x:Name="fp_check" Content="" HorizontalAlignment="Left" Margin="155,28,0,0" Grid.Row="4" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Height="16" Width="20"/>-->
+
+                            <!--<Image x:Name="imghelp_future" MouseLeftButtonDown="imghelp_future_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="130,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                        <Popup x:Name="myPopup_future" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalOffset="3" VerticalOffset="10" Height="0" Margin="-1,2,0,9" Width="0">
+                            <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663" Margin="140,51,263,12" Grid.Row="3" Height="125" Width="323">
+                                <StackPanel Margin="5" Height="115" Width="300">
+                                    <Button x:Name="PopupButton13" Content="X" Click="PopUpButton13_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,0,5,0" />
+                                    <TextBlock x:Name="PopUpText_future" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,2,1,4" Foreground="#FF002663" Width="300" Height="115"/>
+
+                                </StackPanel>
+                            </Border>
+                        </Popup>-->
+
+
+                        </Grid>
+                    </Border>
+                </telerik:RadTabItem>
+
+                <!--Project Scope Tab-->
+                <telerik:RadTabItem x:Name="scope" Width="166" Height="30" Header="Project Scope" Background="#FF37AAC7" BorderBrush="{x:Null}" Foreground="#FF002663" FontFamily="Arial" FontSize="12" Visibility="Collapsed" BorderThickness="0">
+
+                    <Border BorderBrush="#002663" BorderThickness="2" Margin="0,0,0,-45" CornerRadius="5">
+                        <Grid Background="Transparent" Margin="10,-2,-10,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="19*"/>
+                                <RowDefinition Height="362*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="24,25,0,0" VerticalAlignment="Top" Height="34" Width="96" FontFamily="Arial" FontSize="12" TextWrapping="Wrap" Grid.RowSpan="2" >
+                            <Run Text="Other GCST"/>
+                            <LineBreak/>
+                            <Run Text="FTE Contributors"/>
+                            </TextBlock>
+                            <Controls:PeopleChooser x:Name="MultiplePeopleChooser" AllowMultiple="True" Margin="148,25,509,297" Width="Auto" Grid.RowSpan="2"/>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="24,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="90" FontFamily="Arial" FontSize="12" Grid.Row="1" Text="AIM Application"/>
+                            <ComboBox x:Name="aimcombo" HorizontalAlignment="Left" Margin="148,70,0,0" VerticalAlignment="Top" Grid.Row="1" Height="20" FontFamily="Arial" FontSize="12" MaxWidth="300" Width="200" SelectionChanged="aimcombo_SelectionChanged" />
+
+                            <TextBlock HorizontalAlignment="Left" Margin="24,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Text="AIM ID" Grid.Row="1" Height="14" Width="37"/>
+                            <TextBox x:Name="AIM_ID" HorizontalAlignment="Left" Height="23" Margin="148,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1" IsReadOnly="True"/>
+
+
+                            <TextBlock x:Name="identifyTxt" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="11,150,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1" Width="200">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                                        <Run Text="  EXCEL Identifier"/>
+
+
+                            </TextBlock>
+
+                            <StackPanel x:Name="identify_stack" Margin="148,128,574,124" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="106" Width="175">
+                                <RadioButton GroupName="identify" x:Name="identify_e" Content="E - Excessive Demand" Checked="ScopeRadioButtons_Checked" FontFamily="Arial" FontSize="12"/>
+                                <RadioButton GroupName="identify" x:Name="identify_x" Content="X - eXpense Reduction" Checked="ScopeRadioButtons_Checked" Grid.Row="1" FontFamily="Arial" FontSize="12" Margin="0,5,0,0"/>
+                                <RadioButton GroupName="identify" x:Name="identify_c" Content="C - Customization Reduction" Checked="ScopeRadioButtons_Checked" Grid.Row="1" FontFamily="Arial" FontSize="12" Margin="0,5,0,0"/>
+                                <RadioButton GroupName="identify" x:Name="identify_e2" Content="E - Effective Talent Utilization" Checked="ScopeRadioButtons_Checked" Grid.Row="1" FontFamily="Arial" FontSize="12" Margin="0,5,0,0"/>
+                                <RadioButton GroupName="identify" x:Name="identify_l" Content="L - Less Duplication" Checked="ScopeRadioButtons_Checked" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Grid.Row="1" FontFamily="Arial" FontSize="12" Height="16" Width="125"/>
+                            </StackPanel>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="24,263,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" FontFamily="Arial" FontSize="12" Height="48">
+							<Run Text="Assumptions or Dependencies "/>
+							<Run FontSize="9" Text="(Character Limit 255)"/>
+                            </TextBlock>
+                            <TextBox x:Name="assump_depend" HorizontalAlignment="Left" Height="60" Margin="148,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1" AcceptsReturn="True" MaxLength="255"/>
+
+
+
+
+                            <TextBlock x:Name="riskTxt" HorizontalAlignment="Left" Margin="450,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1" Width="111">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                                        <Run Text="  Risk of"/>
+                            <LineBreak/>
+                            <Run Text="     Implementation"/>
+
+                            </TextBlock>
+                            <StackPanel x:Name="risk_stack" Margin="585,-24,78,333" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
+                                <RadioButton GroupName="risk" x:Name="risk_high" Content="High" Checked="ScopeRadioButtons_Checked" Margin="0" Grid.Row="1" FontFamily="Arial" FontSize="12" Width="51"/>
+                                <RadioButton GroupName="risk" x:Name="risk_med" Content="Medium" Checked="ScopeRadioButtons_Checked" Margin="7,0,0,0" Grid.Row="1" FontFamily="Arial" FontSize="12" Width="71"/>
+                                <RadioButton GroupName="risk" x:Name="risk_low" Content="Low" Checked="ScopeRadioButtons_Checked" Margin="7,0,0,0" Grid.Row="1" FontFamily="Arial" FontSize="12" Width="48"/>
+                            </StackPanel>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="462,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="105" FontFamily="Arial" FontSize="12" Grid.Row="1" Text="Business Capability"/>
+                            <TextBox x:Name="biz_capability" HorizontalAlignment="Left" Height="23" Margin="585,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1"/>
+
+                            <TextBox x:Name="sdlc_projID" HorizontalAlignment="Left" Height="23" Margin="585,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1"/>
+                            <TextBox x:Name="sdlc_projName" HorizontalAlignment="Left" Height="23" Margin="585,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1"/>
+                            <TextBox x:Name="Identify" HorizontalAlignment="Left" Height="23" Margin="367,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1" Visibility="Collapsed" />
+                            <TextBox x:Name="Risk" HorizontalAlignment="Left" Height="23" Margin="367,273,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1" Visibility="Collapsed"/>
+                            <TextBox x:Name="Save" HorizontalAlignment="Left" Height="23" Margin="593,273,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1" Visibility="Collapsed"/>
+                            <TextBox x:Name="CT" HorizontalAlignment="Left" Height="23" Margin="367,301,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1" Visibility="Collapsed"/>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="462,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="105" FontFamily="Arial" FontSize="12" Grid.Row="1" Text="SDLC Project ID"/>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="462,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="105" FontFamily="Arial" FontSize="12" Grid.Row="1" Text="SDLC Project Name"/>
+
+
+                            <TextBlock x:Name="vendorTxt" HorizontalAlignment="Left" Margin="449,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                                                        <Run Text="  Vendor Save?"/>
+
+                            </TextBlock>
+
+                            <StackPanel x:Name="save_stack" Margin="585,175,0,0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="108">
+                                <RadioButton GroupName="vendor" x:Name="vendorSave_yes" Checked="ScopeRadioButtons_Checked" Content="Yes" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Grid.Row="1" FontFamily="Arial" FontSize="12"/>
+                                <RadioButton GroupName="vendor" x:Name="vendorSave_no" Checked="ScopeRadioButtons_Checked" Content="No" HorizontalAlignment="Center" Margin="11,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
+                            </StackPanel>
+
+
+                            <TextBlock x:Name="costTxt" HorizontalAlignment="Left" Margin="450,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="100" FontFamily="Arial" FontSize="12" Grid.Row="1">
+                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+                            <Run Text="  Cost Type"/>
+                            <LineBreak/>
+                            <Run Text="      Need help?" FontSize="10"/>
+                            <LineBreak/>
+                                 <Run Text="      Click here..." FontSize="10"/>
+
+                            </TextBlock>
+
+                            <StackPanel x:Name="cost_stack" Margin="585,0,0,122" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <RadioButton GroupName="cost" x:Name="type_Avoid" Content="Cost Avoidance" HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Checked="ScopeRadioButtons_Checked" />
+                                <RadioButton GroupName="cost" x:Name="type_reEngineer" Content="Re-engineering (REE)" HorizontalAlignment="Left" Margin="16,0,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="ScopeRadioButtons_Checked" FontFamily="Arial" FontSize="12"/>
+                                <RadioButton GroupName="cost" x:Name="type_Reduction" Content="Cost Reduction" HorizontalAlignment="Left" Margin="-259,22,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Checked="ScopeRadioButtons_Checked" Padding="4,1,0,0"/>
+                                <RadioButton GroupName="cost" x:Name="type_Growth" Content="Growth Reduction" HorizontalAlignment="Left" Margin="-138,22,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Checked="ScopeRadioButtons_Checked"/>
+                            </StackPanel>
+                            <StackPanel x:Name="tech_impact1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,276,0,0" Grid.Row="1" Orientation="Horizontal" Width="420" Height="76" Visibility="Collapsed">
+                                <TextBlock x:Name="techTxt" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Arial" FontSize="12" Height="47" Margin="-14,0,67,0">
+								                                <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+
+                                <Run Text="  Technology"/>
+                                <LineBreak/>
+                                <Run Text="      Impacted"/>
+                                <LineBreak/>
+                                
+								<Run Text="       (Character Limit 255)" FontSize="9"/>
+                                </TextBlock>
+                                <TextBox x:Name="tech_impact" TextWrapping="Wrap" TextChanged="Techimpacttextchanged" VerticalAlignment="Center" FontFamily="Arial" FontSize="12" Margin="-31,0,0,0" MaxLength="255" Height="60" HorizontalAlignment="Center" Width="250"/>
+                                <Image x:Name="imghelp_tech" MouseLeftButtonDown="imghelp_tech_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" VerticalAlignment="Center" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand" Margin="-311,-18,0,0"/>
+                                <Popup x:Name="myPopup_tech" Margin="0,0,0,0"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalOffset="-401" VerticalOffset="-147">
+                                    <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,2,2" BorderBrush="#FF002663" Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                        <StackPanel Margin="5">
+                                            <Button x:Name="PopUpButton8" Content="X" Click="PopUpButton8_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                            <TextBlock x:Name="PopUpText_tech" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="300" Height="45"/>
+
+                                        </StackPanel>
+                                    </Border>
+                                </Popup>
+                            </StackPanel>
+                            <HyperlinkButton x:Name="help_type" Content="" Click="help_type_Click" Height="20" VerticalAlignment="Top" Width="25" HorizontalAlignment="Left" Margin="518,242,0,0" Grid.Row="1">
+                                <HyperlinkButton.Background>
+                                    <ImageBrush ImageSource="Images/tool.png" Stretch="Uniform"/>
+                                </HyperlinkButton.Background>
+                            </HyperlinkButton>
+                            <Image x:Name="imghelp_fte" MouseLeftButtonDown="imghelp_fte_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="115,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_fte" Margin="0,171,0,179"  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalOffset="24" VerticalOffset="-310" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopUpButton4" Content="X" Click="PopUpButton4_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <RichTextBlock x:Name="PopUpText_fte" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="300" Height="75"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_identify" MouseLeftButtonDown="imghelp_identify_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="112,137,0,0" Grid.Row="1" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_identify" Margin="11,198,0,179"  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalOffset="15" VerticalOffset="-322" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2" Width="519" Height="250">
+                                    <StackPanel Margin="5,5,5,0">
+                                        <Button x:Name="PopUpButton5" Content="X" Click="PopUpButton5_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_identify" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="500" Height="219"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_risk" MouseLeftButtonDown="imghelp_risk_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="545,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_risk" Margin="0,0,0,0"  Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalOffset="-442" VerticalOffset="-82" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopUpButton6" Content="X" Click="PopUpButton6_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_risk" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="300" Height="40"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_vendor" MouseLeftButtonDown="imghelp_vendor_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="538,165,0,0" Grid.Row="1" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_vendor" Margin="448,0"  Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalOffset="-1" VerticalOffset="-310" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopUpButton7" Content="X" Click="PopUpButton7_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_vendor" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="250" Height="40"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+                </telerik:RadTabItem>
+
+                <!---F I N A N C I A L   T A B -->
+                <telerik:RadTabItem x:Name="financial" Width="166" Height="30" Header="Financial" Background="#FF009BBB" BorderBrush="{x:Null}" Foreground="#FF002663" FontFamily="Arial" FontSize="12" Visibility="Collapsed">
+
+                    <Border BorderBrush="#002663" BorderThickness="2" Margin="0,0,0,-45" CornerRadius="5">
+                        <Grid Background="Transparent">
+                            <StackPanel HorizontalAlignment="Left" Height="341" VerticalAlignment="Top" Width="896" RenderTransformOrigin="0.5,0.5" Margin="-0.034,0,0,0" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
+
+
+                            <TextBlock x:Name="firstmonthTxt" HorizontalAlignment="Left" Margin="30,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Width="80">
+                                                      <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+
+                            <Run Text="  1st Month"/>
+                            <LineBreak/>
+                            <Run Text="     Saves Date"/>
+                            </TextBlock>
+                            <sdk:DatePicker x:Name="firstmonth" HorizontalAlignment="Left" Height="23" Margin="140,23,0,0" VerticalAlignment="Top" Width="178" FontFamily="Arial" FontSize="12" SelectedDateChanged="firstmonth_SelectedDateChanged"/>
+
+
+                            <TextBlock x:Name="attachTxt" HorizontalAlignment="Left" Margin="354,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontFamily="Arial" FontSize="12" Height="61">
+                            <Run Text="Please attach documentation that clearly demonstrates how the save is determined."/>
+                            <LineBreak/>
+                            <Run Text=" *" FontSize="16" Foreground="#FFF30606" FontWeight="Bold"/>
+                            <Run Text="  Required to Submit for Approval (Limit 3MB)" FontSize="9" Foreground="#FF002663"/>
+                            </TextBlock>
+
+
+                            <ListBox x:Name="FileListBox" DataContext="selectedFiles" ItemsSource="{Binding SelectedFiles, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220" Height="69" Margin="0,20,90,0" FontFamily="Arial" />
+
+                            <TextBlock x:Name="Attach_Alert" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,89,25,0" FontSize="10" FontFamily="Arial" Width="285">
+                            <Run Text="Please do not include AXP Restricted or AXP Secret information"/>
+                                 <LineBreak/>
+                                <Run Text="(eg. Card #'s, cardholder information, contracts, etc.)."/>
+                            <LineBreak/>
+                            <Run Text="If you have questions, please contact your EXCEL Admin."/>
+                            </TextBlock>
+
+                            <Button x:Name="Add" Click="FileUpload_Click" Content="Add" FontFamily="Arial" FontSize="12" Width="60" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,25,0"/>
+                            <Button x:Name="Remove" Click="RemoveButton_Click" Content="Remove" FontFamily="Arial" FontSize="12" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,45,25,0" IsEnabled="False"/>
+                            <Button x:Name="View" Click="ViewButton_Click" Content="View" FontFamily="Arial" FontSize="12" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,68,25,0" />
+
+
+
+                            <TextBlock x:Name="savingsTxt" HorizontalAlignment="Left" Margin="308,-65,0,0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="16" FontFamily="Arial" Foreground="#FF002663">
+                                                       <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+
+                            <Run Text="  Estimated Savings - 12 Months Only"/>
+                            </TextBlock>
+                            <Image x:Name="imghelp_firstmonth" MouseLeftButtonDown="imghelp_firstmonth_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="109,19,0,0" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_firstmonth" Margin="0,0,0,0"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalOffset="16" VerticalOffset="-283">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,8,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopUpButton9" Content="X" Click="PopUpButton9_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_firstmonth" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="300" Height="60"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_attach" MouseLeftButtonDown="imghelp_attach_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="556,51,0,0" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_attach" Margin="0,0,0,0"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalOffset="-149" HorizontalOffset="-302">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,8,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopUpButton10" Content="X" Click="PopUpButton10_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_attach" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="300" Height="70"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_estimatedsavings" MouseLeftButtonDown="imghelp_estimatedsavings_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="584,-82,0,0" VerticalAlignment="Center" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_es" Margin="0,0,0,0"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalOffset="45" VerticalOffset="-369">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopUpButton11" Content="X" Click="PopUpButton11_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_es" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="275" Height="65"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+
+
+                            <Grid HorizontalAlignment="Center" Height="124" Margin="0,87,0,0" VerticalAlignment="Center" Width="629">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="38*"/>
+                                    <RowDefinition Height="26*"/>
+                                    <RowDefinition Height="35*"/>
+                                    <RowDefinition Height="25*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="99*"/>
+                                    <ColumnDefinition Width="130*"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Fill="#FF002663" Grid.RowSpan="1" Grid.ColumnSpan="6"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1" Grid.ColumnSpan="6" Grid.Row="2" HorizontalAlignment="Left" Width="500" Background="#FFE0E0E0" Opacity="0.5" Margin="0,0,0,23" Grid.RowSpan="2"/>
+
+                                <TextBlock Text="Total" Grid.Column="5" Grid.Row="0" Foreground="White" FontFamily="Arial" FontSize="16" TextAlignment="Center" FontWeight="Bold" Margin="0,0,0,9" VerticalAlignment="Bottom" Height="18"/>
+
+                                <TextBlock x:Name="header1" Tag="0" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" Foreground="White" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Height="18" Margin="0,10" />
+                                <TextBlock x:Name="header2"  Tag="1" Grid.Column="1" Grid.Row="0" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Margin="0,10" Height="18"  />
+                                <TextBlock x:Name="header3"  Tag="2" TextWrapping="Wrap" Text="" Grid.Column="2" Grid.Row="0" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" Height="18" Margin="0,10" VerticalAlignment="Center" />
+                                <TextBlock x:Name="header4"  Tag="3" TextWrapping="Wrap" Text="" Grid.Column="3" Grid.Row="0" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" Margin="0,10" VerticalAlignment="Center" Height="18" />
+                                <TextBlock x:Name="header5"  Tag="4" TextWrapping="Wrap" Text=""  Grid.Column="4" Grid.Row="0" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" Height="18" Margin="0,11,0,10" VerticalAlignment="Center" />
+
+                                <telerik:RadMaskedTextBox x:Name="es1" UpdateValueEvent="PropertyChanged" Grid.Column="0" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch" Mask="c" MaskType="Numeric" Value="0" IsSpinEnabled="False" Margin="0" IsEmpty="False"/>
+                                <telerik:RadMaskedTextBox x:Name="es2" UpdateValueEvent="PropertyChanged" Grid.Column="1" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" Margin="0" HorizontalAlignment="Stretch" Mask="c" Value="0" MaskType="Numeric" IsSpinEnabled="False"/>
+                                <telerik:RadMaskedTextBox x:Name="es3" UpdateValueEvent="PropertyChanged" Grid.Column="2" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" Margin="0" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch"  Mask="c" Value="0" MaskType="Numeric" IsSpinEnabled="False"/>
+
+                                <telerik:RadMaskedTextBox x:Name="es4" UpdateValueEvent="PropertyChanged" Grid.Column="3" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch" Mask="c" Value="0" IsSpinEnabled="False" MaskType="Numeric" Margin="0"/>
+
+                                <telerik:RadMaskedTextBox x:Name="es5" Grid.Column="4" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch" Mask="c" Value="0" MaskType="Numeric" Margin="0" IsSpinEnabled="False"/>
+                                <TextBox x:Name="totalText" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="8,0,0,-57"/>
+                                <TextBox x:Name="firstmonthText" Visibility="Collapsed"/>
+                                <telerik:RadMaskedTextBox x:Name="es_Total" Mask="c" Value="0" Grid.Column="5" Grid.Row="2" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="Arial" FontSize="14" FontWeight="Bold" Margin="0,-1,0,0" MaskType="Numeric" BorderThickness="0,2,0,0" BorderBrush="#FF37AAC7" />
+
+
+
+                                <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Margin="0,10,10,9" Grid.Row="2" Text="Total Estimated Savings" Foreground="#FF002663" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right" Height="16" Width="161"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" Grid.RowSpan="2" Grid.Column="3" Width="100" HorizontalAlignment="Left"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1" Grid.RowSpan="2" Grid.Column="4" HorizontalAlignment="Left" Width="100" Grid.ColumnSpan="2"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,1,0" Grid.Column="5" Grid.RowSpan="4" Margin="0,0,0,23"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Left" Width="100" Height="64" VerticalAlignment="Top"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1" HorizontalAlignment="Left" Height="63" Grid.RowSpan="3" VerticalAlignment="Top" Width="629" Grid.ColumnSpan="6" Grid.Row="1"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" HorizontalAlignment="Left" Width="100" Tag="1" Grid.Column="1" Grid.RowSpan="2"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Left" Width="100"/>
+
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                </telerik:RadTabItem>
+                <telerik:RadTabItem Header="Project Comments" Background="#FFA0A1A2" BorderBrush="{x:Null}" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Right" Height="24" Width="130" Margin="0,0,2,0" Visibility="Collapsed">
+                    <Border BorderBrush="#002663" BorderThickness="2" Margin="0,0,0,-45" CornerRadius="5">
+                        <Grid Background="Transparent">
+
+                            <sdk:Label Content="Project Comments" Foreground="#FF7D7E80" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Margin="0,13,0,0"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="13,55,0,0" TextWrapping="Wrap" Text="Write a comment" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Foreground="#FF002663"/>
+                            <TextBox x:Name="pcomments" HorizontalAlignment="Right" Margin="0,76,520,0" TextWrapping="Wrap" Text="" FontFamily="Arial" FontSize="12" Background="{x:Null}" VerticalAlignment="Top" Width="361" Height="164" HorizontalScrollBarVisibility="Auto" BorderBrush="#FF002663"/>
+                            <Image HorizontalAlignment="Left" Margin="108,51,0,0" VerticalAlignment="Top" Source="Images/help.png" Stretch="Fill" Width="20" Height="20" Cursor="Hand" MouseLeftButtonDown="imghelp_comments_MouseLeftButtonDown" />
+                            <Popup x:Name="myPopup_comments" Margin="0,0,0,0"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalOffset="19" VerticalOffset="-42">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663" Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopupButton" Content="X" Click="PopUpButton_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_comments" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="250" Height="50"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Button x:Name="btn_add" Content="Add" HorizontalAlignment="Left" Margin="143,258,0,0" VerticalAlignment="Top" Width="75" Background="#FF002663" Click="btn_add_Click" Height="27" FontFamily="Arial" FontSize="12" Foreground="#FF002663"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="499,55,0,0" TextWrapping="Wrap" Text="Comment History" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Foreground="#FF002663" Width="103"/>
+                            <TextBox x:Name="projcomText" IsReadOnly="True" HorizontalAlignment="Left" Margin="499,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="385" Height="164" FontFamily="Arial" FontSize="12" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="#FF002663"/>
+
+                        </Grid>
+                    </Border>
+                </telerik:RadTabItem>
+
+
+            </telerik:RadTabControl>
+
+            <TextBlock HorizontalAlignment="Center" Margin="7,19,110,49" TextWrapping="Wrap" Text="Idea Status:" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" Grid.Column="4" Foreground="#FF002663" Height="16" Width="75"/>
+            <sdk:Label Content="Draft" x:Name="statusLevel" Grid.Column="4" Margin="0,19,45,48" FontFamily="Arial" FontSize="14" Foreground="#FF002663" VerticalAlignment="Center" HorizontalAlignment="Right" Width="32" Height="17"/>
+
+
+
+            <StackPanel Grid.Row="9" Margin="2,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39" Width="115" Grid.Column="1">
+                <HyperlinkButton x:Name="btn_draft" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" ToolTipService.ToolTip="" Cursor="Hand" Click="btn_draft_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsTabStop="False">
+                    <HyperlinkButton.Background>
+                        <ImageBrush ImageSource="Images/DraftButton.png" Stretch="None"/>
+                    </HyperlinkButton.Background>
+                </HyperlinkButton>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="35,0,0,0" Height="39" Width="115" Grid.ColumnSpan="2">
+                <HyperlinkButton x:Name="btn_fp" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" Margin="0" Width="115" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_future_Click" IsTabStop="False" Visibility="Collapsed">
+                    <HyperlinkButton.Background>
+                        <ImageBrush ImageSource="Images/FutureButton.png" Stretch="None"/>
+                    </HyperlinkButton.Background>
+                </HyperlinkButton>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,40,0" Height="39" Width="115" Grid.ColumnSpan="2">
+                <HyperlinkButton x:Name="btn_inprogress" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Width="115" Height="39" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Cursor="Hand" Click="btn_inprogress_Click" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsTabStop="False" Visibility="Collapsed">
+                    <HyperlinkButton.Background>
+                        <ImageBrush Stretch="None" ImageSource="Images/InProgressButton.png"/>
+                    </HyperlinkButton.Background>
+                </HyperlinkButton>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="9" Margin="0,0,2,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="115" Height="39">
+                <HyperlinkButton x:Name="btn_approve" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" ToolTipService.ToolTip="" Cursor="Hand" Click="btn_approval_Click" Width="115" IsTabStop="False" Margin="0" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                    <HyperlinkButton.Background>
+                        <ImageBrush ImageSource="Images/ApprovalButton.png" Stretch="None"/>
+                    </HyperlinkButton.Background>
+                </HyperlinkButton>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="9" Margin="0,15,0,14" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Height="22" Width="130">
+
+                <StackPanel x:Name="btnstack_overview" Orientation="Horizontal" Height="22" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center">
+
+                    <Button x:Name="btn_next" Content="Next" FontFamily="Arial" Foreground="#FF002663" Click="btn_next_Click" Background="#FF1F3B53" FontSize="12" Padding="0" VerticalAlignment="Center" Width="60" Height="20" HorizontalAlignment="Right"/>
+                </StackPanel>
+
+
+                <StackPanel x:Name="btnstack_scope" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Height="22" Visibility="Collapsed">
+
+                    <Button x:Name="btn_next2" Content="Next" VerticalAlignment="Center" Width="60" Margin="0" FontFamily="Arial" Height="20" Foreground="#FF002663" Click="btn_next2_Click" Background="#FF002663" FontSize="12" Padding="0" HorizontalAlignment="Right"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel x:Name="btnstack_overviewClose" Orientation="Horizontal" Height="22" HorizontalAlignment="Left" Margin="5,15,0,14" VerticalAlignment="Center" Width="130" Grid.Row="9">
+                <Button x:Name="btn_close" Content="Close" FontFamily="Arial" FontSize="12" Foreground="#FF002663" Click="btn_close_Click" Padding="0" Grid.Row="9" Margin="70,0,0,0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20"/>
+
+            </StackPanel>
+
+            <StackPanel x:Name="btnstack_scopeBack" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,15,0,14" VerticalAlignment="Center" Grid.Row="9" Height="22" Width="130" Visibility="Collapsed">
+                <Button x:Name="btn_scopeback" Content="Back" FontFamily="Arial" FontSize="12"  Padding="0" Margin="0" HorizontalAlignment="Center" Height="20" Width="60" Click="btn_back_Click" VerticalAlignment="Center" Foreground="#FF002663"/>
+                <Button x:Name="btn_close2" Content="Close" FontFamily="Arial" FontSize="12" Foreground="#FF002663" Click="btn_close_Click" Padding="0" Grid.Row="9" Margin="10,0" Width="60" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+            </StackPanel>
+            <StackPanel x:Name="btnstack_financial" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,15,0,14" Grid.Row="9" VerticalAlignment="Center" Height="22" Width="130" Visibility="Collapsed">
+                <Button x:Name="btn_back2" Content="Back" FontFamily="Arial" FontSize="12"  Padding="0" HorizontalAlignment="Center" Click="btn_back2_Click" Height="20" Width="60" VerticalAlignment="Center" Foreground="#FF002663"/>
+                <Button x:Name="btn_close3" Content="Close" FontFamily="Arial" FontSize="12" Foreground="#FF002663" Click="btn_close_Click" Padding="0" Grid.Row="9" Margin="10,0,0,0" Width="60" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+            </StackPanel>
+            <StackPanel x:Name="btnstack_comments" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,15,0,14" Grid.Row="9" Height="22" Width="130" Visibility="Collapsed">
+                <Button x:Name="btn_back3" Content="Back" FontFamily="Arial" FontSize="12"  Padding="0" Margin="0" HorizontalAlignment="Center" Height="20" Width=" 60" Click="btn_back3_Click" VerticalAlignment="Center" Foreground="#FF002663"/>
+                <Button x:Name="btn_close4" Content="Close" FontFamily="Arial" FontSize="12" Foreground="#FF002663" Click="btn_close_Click" Padding="0" Grid.Row="9" Margin="10,0,0,0" Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            </StackPanel>
+
+
+
+            <Button x:Name="btn_comments" Grid.Column="4" HorizontalAlignment="Center" Margin="29,45,28,9" VerticalAlignment="Center" Width="135" Height="30" Click="btn_comments_Click" ClickMode="Press" Foreground="#FF002663" Content="Project Comments" FontFamily="Arial" FontSize="12" FontWeight="Bold" IsTabStop="False"/>
+
+
+            <TextBlock x:Name="IsErrors" MaxWidth="400" Foreground="#FFFF0606" Margin="-25,6,93,53" FontFamily="Arial" FontSize="12" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Width="468" Grid.ColumnSpan="3" Height="25"/>
+            <TextBlock MaxWidth="400" Foreground="#FF002663" Text=" = Required to Submit in Progress" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-322,-327,334,397" Height="14" Width="180"/>
+
+
+
+        </Grid>
+    </telerik:RadBusyIndicator>
+</UserControl>

@@ -1,0 +1,40 @@
+﻿<controls:ChildWindow
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="excel_create.Controls.ProjComments"
+           Width="700" Height="400" 
+           Title="" Background="White" OverlayBrush="{x:Null}" HasCloseButton="False" BorderBrush="#FF9B9999">
+    <Grid x:Name="LayoutRoot" Margin="2" Cursor="Hand">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="55,287,0,0" TextWrapping="Wrap" Text="Write a comment" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Foreground="#FF002663"/>
+        <TextBox x:Name="pcomments" HorizontalAlignment="Right" Margin="0,283,99,0" TextWrapping="Wrap" Text="" FontFamily="Arial" FontSize="12" Background="#FFFBF9F9" VerticalAlignment="Top" Width="394" Height="24" HorizontalScrollBarVisibility="Auto"/>
+        <Image HorizontalAlignment="Left" Margin="150,283,0,0" VerticalAlignment="Top" Source="/excel_create;component/Images/help.png" Stretch="Fill" Width="20" Height="20" Cursor="Hand" MouseLeftButtonDown="imghelp_comments_MouseLeftButtonDown" />
+        <Popup x:Name="myPopup_comments" Margin="0,0,0,0"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalOffset="-284" VerticalOffset="-192">
+            <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663" Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                <StackPanel Margin="5">
+                    <Button x:Name="PopupButton" Content="X" Click="PopUpButton_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                    <TextBlock x:Name="PopUpText_comments" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="250" Height="50"/>
+
+                </StackPanel>
+            </Border>
+        </Popup>
+
+        <Button x:Name="btn_add" Content="Add" HorizontalAlignment="Left" Margin="584,280,0,0" VerticalAlignment="Top" Width="75" Background="#FF002663" Click="btn_add_Click" Height="27" FontFamily="Arial" FontSize="12"/>
+        
+        <Border BorderBrush="#FF002663" BorderThickness="2" Height="238" Margin="10,36,10,0" VerticalAlignment="Top" Background="#FFEEEEEE" CornerRadius="5">
+            <StackPanel>
+                <ListBox x:Name="chatlist" Background="{x:Null}" Padding="5,1" Margin="8">
+
+                </ListBox>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="#FF002663" BorderThickness="1,2,1,1" HorizontalAlignment="Left" Height="58" Margin="-10,330,-10,-11" VerticalAlignment="Top" Width="698" Grid.RowSpan="2"/>
+        <Button x:Name="submitBtn" Content="Save" Click="submit_btn_Click" Width="75" Height="23" HorizontalAlignment="Center" Margin="234,344,369,10" FontFamily="Arial" FontSize="12" VerticalAlignment="Center" />
+        <Button x:Name="cancel_btn" Content="Cancel" Click="cancel_btn_Click" Width="75" Height="23" HorizontalAlignment="Center" Margin="328,344,275,10" Cursor="Hand" FontFamily="Arial" FontSize="12" VerticalAlignment="Center" />
+
+    </Grid>
+</controls:ChildWindow>

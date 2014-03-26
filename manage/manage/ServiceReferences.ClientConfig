@@ -1,0 +1,29 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="ListsSoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="Transport" />
+                </binding>
+                <binding name="PeopleSoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="Transport" />
+                </binding>
+                <binding name="UserProfileServiceSoap" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="Transport" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="https://teams.aexp.com/_vti_bin/Lists.asmx"
+                binding="basicHttpBinding" bindingConfiguration="ListsSoap"
+                contract="ServiceReference1.ListsSoap" name="ListsSoap" />
+            <endpoint address="https://teams.aexp.com/sites/excel/_vti_bin/People.asmx"
+                binding="basicHttpBinding" bindingConfiguration="PeopleSoap"
+                contract="PeopleWS.PeopleSoap" name="PeopleSoap" />
+            <endpoint address="https://teams.aexp.com/_vti_bin/UserProfileService.asmx"
+                binding="basicHttpBinding" bindingConfiguration="UserProfileServiceSoap"
+                contract="UserProfileWS.UserProfileServiceSoap" name="UserProfileServiceSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>
