@@ -47,7 +47,7 @@ namespace manage
     {
         public const String FILE_SIZE_ERROR = "File size cannot exceed 3MB";
 
-        public const String PAST_DATE_ERROR = "1st Month Saves Date cannot be in the past.  Please update Revised 1st Month Saves Date or if the date is correct, please Submit for Approval";
+        public const String PAST_DATE_ERROR = "1st Month Saves Date cannot be in the past.  Please update the date or if the date is correct, please Submit for Approval";
         public const String PAST_DATE_ERROR_REVISED = "Revised 1st Month Saves Date cannot be in the past.  Please update the date or if the date is correct, please Submit for Approval";
         public const String OVERVIEW_TAB = "Project Overview\n";
         public const String SCOPE_TAB = "Project Scope\n";
