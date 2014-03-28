@@ -20,7 +20,7 @@ namespace excel_report
     {
 
         private List<Idea> ideas = new List<Idea>();
-        private IEnumerable<ListItem> returnedItems = null;
+        IEnumerable<ListItem> returnedItems = null;
 
         public MainPage()
         {
@@ -30,14 +30,26 @@ namespace excel_report
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+
+            BindGrid(QueryType.IN_PROGRESS);
+            FormatControls(txtinprogress);
+        }
+
+        private void BindGrid(QueryType type)
+        {
             ClientContext context = ClientContext.Current;
+
+         
+
             returnedItems = context.LoadQuery(
-                context.Web.Lists.GetByTitle("Idea").GetItems(new CamlQuery())
-                );
+                   context.Web.Lists.GetByTitle("Idea").GetItems(GetQuery(type))
+                   );
 
             dataGrid1.IsBusy = true;
             context.ExecuteQueryAsync(succeededCallback, failedCallback);
+
         }
+
 
         private void failedCallback(object sender, ClientRequestFailedEventArgs e)
         {
@@ -48,7 +60,7 @@ namespace excel_report
             }
            );
 
-          
+
         }
 
         private void succeededCallback(object sender, ClientRequestSucceededEventArgs e)
@@ -62,6 +74,8 @@ namespace excel_report
                 }
 
                 dataGrid1.ItemsSource = ideas;
+                dataGrid1.DataContext = ideas;
+                dataGrid1.Rebind();
                 dataGrid1.IsBusy = false;
             }
            );
@@ -134,10 +148,155 @@ namespace excel_report
             }
         }
 
+        private CamlQuery GetQuery(QueryType type)
+        {
+            CamlQuery query = new CamlQuery();
+
+            if (type == QueryType.IN_PROGRESS)
+            {
+                query.ViewXml = "<View><Query>" +
+                 "<Where>" +
+
+                     "<Eq>" +
+                            "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.IN_PROGRESS + "</Value>" +
+                     "</Eq>" +
+
+               "</Where>" +
+                 "</Query></View>";
+            }
+            else if (type == QueryType.FUTURE)
+            {
+                query.ViewXml = "<View><Query>" +
+                "<Where>" +
+
+                    "<Eq>" +
+                           "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.FUTURE_PIPELINE + "</Value>" +
+                    "</Eq>" +
+
+              "</Where>" +
+                "</Query></View>";
+
+
+            }
+            else if (type == QueryType.APPROVED)
+            {
+                query.ViewXml = "<View><Query>" +
+               "<Where>" +
+
+                   "<Eq>" +
+                          "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.APPROVED + "</Value>" +
+                   "</Eq>" +
+
+             "</Where>" +
+               "</Query></View>";
+
+
+            }
+            else if (type == QueryType.UNDER_REVIEW)
+            {
+
+
+                query.ViewXml = "<View><Query>" +
+                  "<Where>" +
+                  "<Or>" +
+                  "<Or>" +
+                      "<Eq>" +
+                             "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.SUBMIT_APPROVAL + "</Value>" +
+                      "</Eq>" +
+                               "<Eq>" +
+                                      "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.FINANCE_REVIEW + "</Value>" +
+                               "</Eq>" +
+                                       "</Or>" +
+                                       "<Or>" +
+                                             "<Eq>" +
+                                                "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.READY_FINANCE_REVIEW + "</Value>" +
+                                             "</Eq>" +
+                                              "<Eq>" +
+                                                "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.PENDING_ACTUALS + "</Value>" +
+                                             "</Eq>" +
+
+                                          "</Or>" +
+                                           "</Or>" +
+
+                "</Where>" +
+                  "</Query></View>";
+            }
+            else if (type == QueryType.ALL)
+            {
+
+                query = CamlQuery.CreateAllItemsQuery();
+            }
+            else
+                query = CamlQuery.CreateAllItemsQuery();
+
+            return query;
+
+        }
+
+        private void btn_InProgress_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid(QueryType.IN_PROGRESS);
+            FormatControls(txtinprogress);
+        }
+
+        private void btn_underreview_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid(QueryType.UNDER_REVIEW);
+            FormatControls(txtunderreview);
+        }
+
+        private void btn_Future_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid(QueryType.FUTURE);
+            FormatControls(txtfuture);
+
+        }
+
+        private void btn_All_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid(QueryType.ALL);
+            FormatControls(txtall);
+        }
+
+        private void btn_Approved_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid(QueryType.APPROVED);
+            FormatControls(txtapproved);
+
+        }
+
+        private void FormatControls(TextBlock activeBlock)
+        {
+            TextBlock[] textBlocks = null;
+
+            textBlocks = new TextBlock[] { txtinprogress, txtall, txtfuture, txtapproved, txtfuture, txtunderreview };
+
+            foreach (TextBlock textBlock in textBlocks)
+            {
+                textBlock.TextDecorations = TextDecorations.Underline;
+                textBlock.FontWeight = FontWeights.Normal;
+                textBlock.Foreground = new SolidColorBrush(Colors.Black);
+
+            }
+
+            activeBlock.FontWeight = FontWeights.Bold;
+            activeBlock.TextDecorations = null;
+            activeBlock.Foreground = new SolidColorBrush(Colors.Green);
+        }
+
 
 
     }
 
+    public enum QueryType
+    {
+        ALL,
+        IN_PROGRESS,
+        UNDER_REVIEW,
+        APPROVED,
+        FUTURE
+
+    };
 }
 
       

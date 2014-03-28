@@ -378,28 +378,57 @@ namespace manage
 
             ClientContext context = new ClientContext(siteUrl);
             CamlQuery query = new CamlQuery();
+            //query.ViewXml = "<View><Query>" +
+            //    "<Where>" +
+            //            "<Or>" +
+            //                "<Or>" +
+            //                    "<Eq>" +
+            //                        "<FieldRef Name='Executor' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+            //                     "</Eq>" +
+            //                     "<Eq>" +
+            //                        "<FieldRef Name='Director' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+            //                     "</Eq>" +
+            //                "</Or>" +
+            //                "<Or>" +
+            //                    "<Eq>" +
+            //                        "<FieldRef Name='VP' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+            //                     "</Eq>" +
+            //                     "<Eq>" +
+            //                        "<FieldRef Name='FTE_x0020_Contributors' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+            //                     "</Eq>" +
+            //                "</Or>" +
+            //            "</Or>" +
+            //     "</Where>" +
+            //    "</Query></View>";
+
             query.ViewXml = "<View><Query>" +
-                "<Where>" +
-                        "<Or>" +
-                            "<Or>" +
+              "<Where>" +
+                      "<Or>" +
                                 "<Eq>" +
-                                    "<FieldRef Name='Executor' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
-                                 "</Eq>" +
-                                 "<Eq>" +
-                                    "<FieldRef Name='Director' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
-                                 "</Eq>" +
-                            "</Or>" +
-                            "<Or>" +
-                                "<Eq>" +
-                                    "<FieldRef Name='VP' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
-                                 "</Eq>" +
-                                 "<Eq>" +
-                                    "<FieldRef Name='FTE_x0020_Contributors' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
-                                 "</Eq>" +
-                            "</Or>" +
+                                  "<FieldRef Name='Author' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+                               "</Eq>" +
+                                 "<Or>" +
+                                      "<Eq>" +
+                                          "<FieldRef Name='Executor' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+                                       "</Eq>" +
+                                            "<Or>" +
+                                                   "<Eq>" +
+                                                      "<FieldRef Name='Director' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+                                                   "</Eq>" +
+                         
+                          "<Or>" +
+                              "<Eq>" +
+                                  "<FieldRef Name='VP' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+                               "</Eq>" +
+                               "<Eq>" +
+                                  "<FieldRef Name='FTE_x0020_Contributors' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
+                               "</Eq>" +
+                          "</Or>" +
+                      "</Or>" +
+                       "</Or>" +
                         "</Or>" +
-                 "</Where>" +
-                "</Query></View>";
+               "</Where>" +
+              "</Query></View>";
 
 
 

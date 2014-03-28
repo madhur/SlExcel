@@ -14,7 +14,7 @@
         <Grid.Resources>
             <local:MyConverter x:Key="myConverter"/>
         </Grid.Resources>
-        <Button x:Name="myidea_add" Content="Add an Idea" HorizontalAlignment="Right" Margin="0,0,150,400" VerticalAlignment="Center" FontFamily="Arial" FontSize="12" Foreground="#FF002663" Width="100" Height="30" Click="myidea_add_Click">
+        <Button x:Name="myidea_add" Content="Add an Idea" HorizontalAlignment="Right" Margin="0,0,150,400" VerticalAlignment="Center" FontFamily="Arial" FontSize="12" Foreground="#FF002663" Width="140" Height="30" Click="myidea_add_Click">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFA3AEB9" Offset="0"/>
@@ -24,7 +24,7 @@
                 </LinearGradientBrush>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btn_MyIdeaExport" Content="Export to Excel" HorizontalAlignment="Right" Margin="0,0,25,400" VerticalAlignment="Center" Width="100" Height="30" Cursor="Hand" FontFamily="Arial" FontSize="12" Click="btn_export_Click" Background="#FF72787A" Foreground="#FF002663">
+        <Button x:Name="btn_MyIdeaExport" Content="Export to Excel" HorizontalAlignment="Right" Margin="0,0,5,400" VerticalAlignment="Center" Width="140" Height="30" Cursor="Hand" FontFamily="Arial" FontSize="12" Click="btn_export_Click" Background="#FF72787A" Foreground="#FF002663">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFA3AEB9" Offset="0"/>
@@ -34,10 +34,10 @@
                 </LinearGradientBrush>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btn_siteadmin" Content="Site Administration" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Height="30" Cursor="Hand" FontFamily="Arial" FontSize="12" Click="btn_siteadmin_Click" Background="#FF72787A" Foreground="#FF002663"/>
+        <Button x:Name="btn_siteadmin"  Width="140" Content="Site Administration" HorizontalAlignment="Right" Margin="0,20,5,0" VerticalAlignment="Top" Height="30" Cursor="Hand" FontFamily="Arial" FontSize="12" Click="btn_siteadmin_Click" Background="#FF72787A" Foreground="#FF002663"/>
 
             <telerik:RadTabControl Name="radTabControl" Margin="0,65,0,0" BorderBrush="#FF002663" BorderThickness="1" HeaderBackground="{x:Null}">
-            <telerik:RadTabItem Header="My Ideas" x:Name="myideas" Width="118" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
+            <telerik:RadTabItem Header="My Ideas" x:Name="myideas" Width="140" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
                 <Grid Background="Transparent" Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -177,7 +177,7 @@
 
             </telerik:RadTabItem>
 
-            <telerik:RadTabItem x:Name="teamtab" Header="My Team's Ideas" Loaded="teamtab_Loaded" Width="118" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
+            <telerik:RadTabItem x:Name="teamtab" Header="My Associated Ideas" Loaded="teamtab_Loaded" Width="140" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
                 <Grid Background="Transparent">
 
                     <StackPanel Orientation="Vertical">
@@ -297,7 +297,7 @@
             </telerik:RadTabItem>
             
             
-            <telerik:RadTabItem x:Name="admintab" Loaded="admintab_Loaded" Header="Admin" Width="118" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
+            <telerik:RadTabItem x:Name="admintab" Loaded="admintab_Loaded" Header="Admin" Width="140" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
                 <Grid Background="Transparent" Margin="0,0,0,-1">
                     <StackPanel Orientation="Vertical">
 
@@ -431,7 +431,7 @@
                 </Grid>
             </telerik:RadTabItem>
 
-            <telerik:RadTabItem x:Name="financetab" Loaded="financetab_Loaded" Header="Finance" Width="118" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
+            <telerik:RadTabItem x:Name="financetab" Loaded="financetab_Loaded" Header="Finance" Width="140" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
                 <Grid Background="Transparent">
 
                     <StackPanel Orientation="Vertical">

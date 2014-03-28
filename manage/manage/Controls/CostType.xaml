@@ -59,10 +59,10 @@
                         <toolkit:DockPanel x:Name="type_4" LastChildFill="False" Visibility="Collapsed">
                             <TextBlock TextWrapping="Wrap" Text="What kind of TI Expense is this?" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0"/>
                             <RadioButton GroupName="q4" x:Name="typeTI_1" Content="Midrange (MR)" HorizontalAlignment="Left" Margin="18,9,0,0" VerticalAlignment="Top" Width="100" Checked="typeTI_1_Checked"/>
-                            <RadioButton GroupName="q4" x:Name="typeTI_2" Content="Mainframe (MF)" HorizontalAlignment="Left" Margin="15,9,0,0" VerticalAlignment="Top" Width="105" Checked="REE"/>
+                            <RadioButton GroupName="q4" x:Name="typeTI_2" Content="Mainframe (MF)" HorizontalAlignment="Left" Margin="15,9,0,0" VerticalAlignment="Top" Width="105" Checked="typeTI_2_Checked"/>
                             <RadioButton GroupName="q4" x:Name="typeTI_3" Content="TIMS" HorizontalAlignment="Left" Margin="27,9,0,0" VerticalAlignment="Top" Width="57" Checked="typeTI_3_Checked"/>
                             <RadioButton GroupName="q4" x:Name="typeTI_4" Content="Direct Tech (DT)" HorizontalAlignment="Left" Margin="-303,30,0,0" VerticalAlignment="Top" Width="113" Checked="typeTI_4_Checked"/>
-                            <RadioButton GroupName="q4" x:Name="typeTI_5" Content="Voice/Network/EUC" HorizontalAlignment="Left" Margin="-135,30,0,0" VerticalAlignment="Top" Width="129" Checked="typeTI_5_Checked"/>
+                            <RadioButton GroupName="q4" x:Name="typeTI_5" Content="Voice/Network/EUC" HorizontalAlignment="Left" Margin="-189,30,0,0" VerticalAlignment="Top" Width="129" Checked="typeTI_5_Checked"/>
                         </toolkit:DockPanel>
                         <toolkit:DockPanel x:Name="type_5" LastChildFill="False" Margin="0,8,0,0" Visibility="Collapsed">
                             <TextBlock Text="Is this TIMs Dedicated SAN, TIMs Server or Not TIMs?" TextWrapping="Wrap" Width="215"/>
@@ -80,23 +80,14 @@
                             <RadioButton x:Name="type9_no" Content="No" Checked="type9_no_Checked"/>
                             <RadioButton x:Name="type9_yes" Content="Yes" Padding="4,1,0,0" Margin="4,0,0,0" Checked="type9_yes_Checked"/>
                         </toolkit:DockPanel>
-                        <toolkit:DockPanel x:Name="type_10" LastChildFill="False" Margin="0,8,0,0" Visibility="Collapsed">
-                            <TextBlock Text="Is this current year forecasted Midrange TI growth?" TextWrapping="Wrap" Width="272"/>
-                            <RadioButton x:Name="type10_no" Content="No" Margin="39,0,0,0" VerticalAlignment="Center" Checked="type10_no_Checked"/>
-                            <RadioButton x:Name="type10_yes" Content="Yes" Padding="4,1,0,0" Margin="16,0,0,0" VerticalAlignment="Center" Checked="type10_yes_Checked"/>
-                        </toolkit:DockPanel>
+                       
                         <toolkit:DockPanel x:Name="type_11" LastChildFill="False" Margin="0,8,0,0" Visibility="Collapsed">
-                            <TextBlock Text="Was the cost postponed to next year or canceled? " TextWrapping="Wrap" Width="281"/>
+                            <TextBlock Text="Was the cost postponed or canceled? " TextWrapping="Wrap" Width="281"/>
                             <RadioButton x:Name="type11_no" Content="No" Margin="29,0,0,0" VerticalAlignment="Center" Checked="type11_no_Checked"/>
                             <RadioButton x:Name="type11_yes" Content="Yes" Padding="4,1,0,0" Margin="16,0,0,0" VerticalAlignment="Center" Checked="type11_yes_Checked"/>
 
                         </toolkit:DockPanel>
-                        <toolkit:DockPanel x:Name="type_12" LastChildFill="False" Margin="0,8,0,0" Visibility="Collapsed">
-                            <TextBlock Text="Was action taken to adjust growth in the current year to save money (i.e. app/server consolidation, scope reduction, etc.)?" TextWrapping="Wrap" Width="283"/>
-                            <RadioButton x:Name="type12_no" Content="No" Margin="27,0,0,0" VerticalAlignment="Center" Checked="typeQ1_no_Checked"/>
-                            <RadioButton x:Name="type12_yes" Content="Yes" Padding="4,1,0,0" Margin="16,0,0,0" VerticalAlignment="Center" Checked="type12_yes_Checked"/>
-
-                        </toolkit:DockPanel>
+                     
                         <toolkit:DockPanel x:Name="type_13" LastChildFill="False" Margin="0,7,0,0" Visibility="Collapsed">
                             <TextBlock Text="What type of MR save is this? " TextWrapping="Wrap" Width="215"/>
                             <RadioButton x:Name="type13_1" Content="Server/SAN" Margin="37,0,0,0" VerticalAlignment="Center" Checked="type13_1_Checked"/>
@@ -127,7 +118,7 @@
                 <Grid>
                     <sdk:Label Content="Cost Type" FontSize="18" Foreground="#FF002E7A" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="234,15,249,0" Width="97"/>
                     <TextBlock x:Name="answersTxt" TextWrapping="NoWrap" Text="Based on your answers, your Cost Type is...." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,51,0,202"/>
-                    <TextBlock x:Name="cost_label" Margin="0,0,0,-24" VerticalAlignment="Center" Foreground="#FF4D4F53" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock x:Name="cost_label" Margin="0,0,0,-24" VerticalAlignment="Center" Foreground="#FF4D4F53" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
                     <HyperlinkButton x:Name="btn_close" HorizontalAlignment="Left" Margin="511,228,0,0" VerticalAlignment="Top" Click="close_Click" ClickMode="Press" Foreground="#FF002E7A" FontSize="14" BorderThickness="0">
                         <TextBlock Text ="Close" TextDecorations = "Underline" />
 

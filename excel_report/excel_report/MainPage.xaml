@@ -26,6 +26,9 @@
         <Border BorderBrush="#FF009BBB" BorderThickness="0,1,0,0" Margin="21,36,21,400" Height="1"/>
         <Border BorderBrush="#FF002663" BorderThickness="0,1,0,0" Margin="0,94,0,342" Height="1"/>
         <dataInput:Label Margin="10,110,0,313" FontFamily="Arial" FontSize="12" Content="Select a report by clicking any of the icons under Report Type, or create your own using the table below. Then export using Export to Excel button." HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF002663"/>
+
+        
+       
         <telerik:RadGridView x:Name="dataGrid1" DataLoadMode="Asynchronous" ShowGroupPanel="False" telerik:StyleManager.Theme="Summer" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" Margin="10,146,10,10" Height="344" ActionOnLostFocus="None" FontFamily="Arial" CanUserDeleteRows="False" CanUserInsertRows="False" Grid.RowSpan="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" EditTriggers="None" DragElementAction="None" ValidatesOnDataErrors="None" ShowColumnSortIndexes="True" RowIndicatorVisibility="Collapsed">
 
             <telerik:RadGridView.ControlPanelItems>
@@ -109,9 +112,46 @@
         </telerik:RadGridView>
 
 
+        <StackPanel Orientation="Horizontal" Margin="12,-120,0,0"  HorizontalAlignment="Left" Width="400" Height="31">
+            <HyperlinkButton Margin="0" Foreground="#FF002663" FontFamily="Arial" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="5,0" Click="btn_InProgress_Click">
+                <TextBlock x:Name="txtinprogress" Text="In Progress" TextDecorations="Underline" Foreground="Black">
+
+                </TextBlock>
+            </HyperlinkButton>
+            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
+            <HyperlinkButton Margin="0" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="btn_underreview_Click">
+                <TextBlock  x:Name="txtunderreview" Text="Under Review" TextDecorations="Underline" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                </TextBlock>
+            </HyperlinkButton>
+
+            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
+            <HyperlinkButton Margin="0" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="btn_Approved_Click">
+                <TextBlock x:Name="txtapproved" Text="Approved" TextDecorations="Underline" Foreground="Black">
+
+                </TextBlock>
+            </HyperlinkButton>
+            
+            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
+            <HyperlinkButton Margin="0" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="btn_Future_Click">
+                <TextBlock x:Name="txtfuture" Text="Future" TextDecorations="Underline" Foreground="Black">
+
+                </TextBlock>
+            </HyperlinkButton>
+           
+            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
+            <HyperlinkButton Margin="0" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="btn_All_Click">
+                <TextBlock x:Name="txtall" Text="All" Foreground="#FF3F9C35" FontWeight="Bold">
+
+                </TextBlock>
+            </HyperlinkButton>
+        </StackPanel>
+
+
         <Button x:Name="btn_export" HorizontalAlignment="Right" Margin="0,0,10,203" VerticalAlignment="Center" Width="130" Height="30" Cursor="Hand" FontFamily="Arial" FontSize="12" Click="btn_export_Click" Foreground="#FF002663" Content="Export to Excel" />
          
 
+        
 
         <StackPanel x:Name="rpt" VerticalAlignment="Top" Orientation="Horizontal" Margin="21,17,21,0" Height="63">
 
