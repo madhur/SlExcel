@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -29,7 +30,7 @@ namespace excel_create.Controls
         private void SubmitOKButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            Uri redirect = new Uri("https://teams.aexp.com/sites/excel/SitePages/manage.aspx");
+            Uri redirect = new Uri(Utils.GetSiteUrl()+"/SitePages/manage.aspx");
             System.Windows.Browser.HtmlPage.Window.Navigate(redirect, "_parent");
         }
 

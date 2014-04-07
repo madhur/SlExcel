@@ -175,7 +175,6 @@
     <Compile Include="Controls\ProjComments.xaml.cs">
       <DependentUpon>ProjComments.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Utils.cs" />
     <Compile Include="Idea.cs" />
     <Compile Include="ImageFilterColumn.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -443,6 +442,12 @@
     <WCFMetadataStorage Include="Service References\PeopleWS\" />
     <WCFMetadataStorage Include="Service References\UserProfileWS\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{e5c7a894-8744-4edd-b6d9-987a9b0db4a4}</Project>
+      <Name>Common %28Common\Common%29</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -458,4 +463,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>copy *.xap $(SolutionDir)Output\$(ConfigurationName)\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

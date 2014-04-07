@@ -20,6 +20,7 @@ using manage.Controls;
 using System.Text;
 using System.Windows.Data;
 using System.Collections.ObjectModel;
+using Common;
 
 
 namespace manage.Controls
@@ -163,7 +164,7 @@ namespace manage.Controls
                 //use the host name property to configure the request against the site in 
                 //which the control is hosted
                 ps.Endpoint.Address =
-               new System.ServiceModel.EndpointAddress("https://teams.aexp.com/sites/excel" + "/_vti_bin/People.asmx");
+               new System.ServiceModel.EndpointAddress(Utils.GetSiteUrl() + "/_vti_bin/People.asmx");
 
 
 

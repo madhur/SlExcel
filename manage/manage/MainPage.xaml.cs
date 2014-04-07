@@ -21,13 +21,14 @@ using Telerik.Windows.Controls.GridView;
 using System.Windows.Media.Imaging;
 using System.Globalization;
 using System.Windows.Browser;
+using Common;
 
 
 namespace manage
 {
     public partial class MainPage : UserControl
     {
-        private const string siteUrl = "https://teams.aexp.com/sites/excel/";
+        //private const string siteUrl = "https://teams.aexp.com/sites/excel/";
 
         private List<Idea> ideas = new List<Idea>();
 
@@ -51,7 +52,7 @@ namespace manage
             btn_siteadmin.Visibility = Visibility.Collapsed;
 
 
-            ClientContext client = new ClientContext(siteUrl);
+            ClientContext client = ClientContext.Current;
             GroupCollection groupCollection = client.Web.SiteGroups;
 
             Microsoft.SharePoint.Client.Group adminGroup = groupCollection.GetById(40);
@@ -252,7 +253,7 @@ namespace manage
 
             List<Idea> ideas = new List<Idea>();
 
-            ClientContext context = new ClientContext(siteUrl);
+            ClientContext context = ClientContext.Current;
             CamlQuery query = new CamlQuery();
             query.ViewXml = "<View><Query>" +
                 "<Where>" +
@@ -310,7 +311,7 @@ namespace manage
 
 
             List<Idea> ideas = new List<Idea>();
-            ClientContext context = new ClientContext(siteUrl);
+            ClientContext context = ClientContext.Current;
             CamlQuery query = new CamlQuery();
             query.ViewXml = "<View><Query>" +
                 "<Where>" +
@@ -376,7 +377,7 @@ namespace manage
 
             List<Idea> ideas = new List<Idea>();
 
-            ClientContext context = new ClientContext(siteUrl);
+            ClientContext context = ClientContext.Current;
             CamlQuery query = new CamlQuery();
             //query.ViewXml = "<View><Query>" +
             //    "<Where>" +
@@ -478,77 +479,7 @@ namespace manage
         private void LoadAdminTab()
         {
 
-            List<Idea> ideas = new List<Idea>();
-
-            ClientContext context = new ClientContext(siteUrl);
-            CamlQuery query = new CamlQuery();
-            query.ViewXml = "<View><Query>" +
-              "<Where>" +
-              "<Or>" +
-              "<Or>" +
-                  "<Eq>" +
-                         "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.SUBMIT_APPROVAL + "</Value>" +
-                  "</Eq>" +
-                           "<Eq>" +
-                                  "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.FINANCE_REVIEW + "</Value>" +
-                           "</Eq>" +
-                                   "</Or>" +                              
-                                         "<Eq>" +
-                                            "<FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>" + Status.PENDING_ACTUALS + "</Value>" +
-                                         "</Eq>" +
-
-                           
-                                      "</Or>" +
-           
-            "</Where>" +
-              "</Query></View>";
-
-
-            //C
-            ListItemCollection returnedItems = context.Web.Lists.GetByTitle("Idea").GetItems(CamlQuery.CreateAllItemsQuery());
-            context.Load(returnedItems);
-            adminGrid.IsBusy = true;
-            context.ExecuteQueryAsync((ssss, eeeee) =>
-            {
-                Dispatcher.BeginInvoke(() =>
-                {
-
-                    foreach (var item in returnedItems)
-                    {
-                        ideas.Add(new Idea(item));
-                    }
-
-                    adminGrid.ItemsSource = ideas;
-                    adminGrid.DataContext = ideas;
-
-                    ApplyStatusFilter();
-                    
-                    adminGrid.IsBusy = false;
-
-
-                }
-
-          );
-
-            },
-
-
-
-(ssss, eeeee) =>
-{
-    Console.WriteLine(eeeee.Message);
-    Dispatcher.BeginInvoke(() =>
-    {
-
-
-        adminGrid.IsBusy = false;
-    }
-
-          );
-});
-
-
-
+            BindGrid(Consts.LOB1.GBSHR);
 
 }
 
@@ -599,7 +530,11 @@ namespace manage
             else if (activeTab == TAB.FINANCE)
                 radGrid = financeGrid;
             else if (activeTab == TAB.ADMIN)
-                radGrid = adminGrid;
+            {
+                //radGrid = adminGrid;
+                BindGrid(statuses);
+                return;
+            }
 
             statusColumn = radGrid.Columns[colName];
 
@@ -611,6 +546,124 @@ namespace manage
                 columnDescriptor.DistinctFilter.AddDistinctValue(status);
             columnDescriptor.ResumeNotifications();
 
+        }
+
+        private void BindGrid(string[] statuses)
+        {
+
+            List<Idea> ideas = new List<Idea>();
+
+            ClientContext context = ClientContext.Current;
+            CamlQuery query = new CamlQuery();
+
+            if (statuses.Contains(Consts.LOB1.GBS) && statuses.Contains(Consts.LOB1.HR))
+            {
+                query.ViewXml = "<View><Query>" +
+                  "<Where>" +
+                  "<Or>" +
+                      "<Eq>" +
+                             "<FieldRef Name='Line_x0020_Of_x0020_Business_x001' /><Value Type='Choice'>" + Consts.LOB1.GBS + "</Value>" +
+                      "</Eq>" +
+                               "<Eq>" +
+                                      "<FieldRef Name='Line_x0020_Of_x0020_Business_x001' /><Value Type='Choice'>" + Consts.LOB1.HR + "</Value>" +
+                               "</Eq>" +
+                            "</Or>" +
+
+                "</Where>" +
+                  "</Query></View>";
+            }
+            else if (statuses.Contains(Consts.LOB1.GCP))
+            {
+                query.ViewXml = "<View><Query>" +
+                 "<Where>" +
+                     "<Eq>" +
+                            "<FieldRef Name='Line_x0020_Of_x0020_Business_x001' /><Value Type='Choice'>" + Consts.LOB1.GCP + "</Value>" +
+                     "</Eq>" +
+
+               "</Where>" +
+                 "</Query></View>";
+            }
+            else if (statuses.Contains(Consts.LOB1.GBT))
+            {
+
+                query.ViewXml = "<View><Query>" +
+                "<Where>" +
+                    "<Eq>" +
+                           "<FieldRef Name='Line_x0020_Of_x0020_Business_x001' /><Value Type='Choice'>" + Consts.LOB1.GBT + "</Value>" +
+                    "</Eq>" +
+
+              "</Where>" +
+                "</Query></View>";
+            }
+            else if (statuses.Contains(Consts.LOB1.PBMT))
+            {
+
+                query.ViewXml = "<View><Query>" +
+                "<Where>" +
+                    "<Eq>" +
+                           "<FieldRef Name='Line_x0020_Of_x0020_Business_x001' /><Value Type='Choice'>" + Consts.LOB1.PBMT + "</Value>" +
+                    "</Eq>" +
+
+              "</Where>" +
+                "</Query></View>";
+            }
+            else if (statuses.Contains(Consts.LOB1.WSGCAT))
+            {
+
+                query.ViewXml = "<View><Query>" +
+                "<Where>" +
+                    "<Eq>" +
+                           "<FieldRef Name='Line_x0020_Of_x0020_Business_x001' /><Value Type='Choice'>" + Consts.LOB1.WSGCAT + "</Value>" +
+                    "</Eq>" +
+
+              "</Where>" +
+                "</Query></View>";
+
+            }
+
+            ListItemCollection returnedItems = context.Web.Lists.GetByTitle("Idea").GetItems(CamlQuery.CreateAllItemsQuery());
+            context.Load(returnedItems);
+            adminGrid.IsBusy = true;
+            context.ExecuteQueryAsync((ssss, eeeee) =>
+            {
+                Dispatcher.BeginInvoke(() =>
+                {
+
+                    foreach (var item in returnedItems)
+                    {
+                        ideas.Add(new Idea(item));
+                    }
+
+                    adminGrid.ItemsSource = ideas;
+                    adminGrid.DataContext = ideas;
+
+                    ApplyStatusFilter();
+
+                    adminGrid.IsBusy = false;
+
+
+                }
+
+          );
+
+            },
+
+
+
+(ssss, eeeee) =>
+{
+    Console.WriteLine(eeeee.Message);
+    Dispatcher.BeginInvoke(() =>
+    {
+
+
+        adminGrid.IsBusy = false;
+    }
+
+          );
+});
+
+            
         }
 
         private void ApplyStatusFilter()
@@ -726,7 +779,7 @@ namespace manage
 
         private void myidea_add_Click(object sender, RoutedEventArgs e)
         {
-            Uri redirect = new Uri("https://teams.aexp.com/sites/excel/SitePages/create.aspx");
+            Uri redirect = new Uri(Utils.GetSiteUrl()+"/SitePages/create.aspx");
             System.Windows.Browser.HtmlPage.Window.Navigate(redirect, "_parent");
         }
 
@@ -787,7 +840,7 @@ namespace manage
             var id = Item.ideaID.ToString();
 
             //MessageBox.Show(id, id, MessageBoxButton.OK);
-            ClientContext context = new ClientContext(siteUrl);
+            ClientContext context = ClientContext.Current;
             List list = context.Web.Lists.GetByTitle("Idea");
             context.Load(list);
 
@@ -903,7 +956,7 @@ namespace manage
 
         private void btn_siteadmin_Click(object sender, RoutedEventArgs e)
         {
-            Uri siteadmin = new Uri("https://teams.aexp.com/sites/excel/SitePages/SiteAdmin.aspx");
+            Uri siteadmin = new Uri(Utils.GetSiteUrl()+"/SitePages/SiteAdmin.aspx");
             System.Windows.Browser.HtmlPage.Window.Navigate(siteadmin, "_parent");
 
         }

@@ -46,7 +46,7 @@ namespace manage.Controls
 
         public void SilverlightOM()
         {
-            ClientContext clientContext = new ClientContext("https://teams.aexp.com/sites/excel");
+            ClientContext clientContext = ClientContext.Current;
 
             oWebsite = clientContext.Web;
             collList = oWebsite.Lists;

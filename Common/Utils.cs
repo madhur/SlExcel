@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SharePoint.Client;
+using System;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace manage.Controls
+namespace Common
 {
     public class Utils
     {
@@ -34,6 +35,11 @@ namespace manage.Controls
 
             return decodedName.ToLower();
 
+        }
+
+        public static String GetSiteUrl()
+        {
+            return ClientContext.Current.Url;
         }
     }
 }

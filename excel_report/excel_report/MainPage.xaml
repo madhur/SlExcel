@@ -66,7 +66,25 @@
             </telerik:RadGridView.ControlPanelItems>
 
             <telerik:RadGridView.Columns>
-                <telerik:GridViewDataColumn Header="Idea ID"  IsGroupable="False" IsFilterable="True" DataMemberBinding="{Binding ideaID}"/>
+               
+
+                <telerik:GridViewDataColumn Header="Idea ID" DataMemberBinding="{Binding ideaID}" Width="65" MinWidth="65">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="telerik:GridViewCell">
+                                        <HyperlinkButton x:Name="hyperlinkbutton" Click="hyperlinkbutton_Click" Content="{Binding ideaID}" Foreground="Blue" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+
+
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                
                 <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="True" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
                 <telerik:GridViewDataColumn Header="Idea Status"  DataMemberBinding="{Binding ideaStatus}" IsFilterable="True"/>
                 <telerik:GridViewDataColumn Header="Cost Type" DataMemberBinding="{Binding costType}" IsFilterable="True"/>

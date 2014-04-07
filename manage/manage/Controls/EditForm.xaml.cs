@@ -25,6 +25,7 @@ using System.Windows.Resources;
 using System.Windows.Browser;
 using System.Threading.Tasks;
 using System.Text;
+using Common;
 
 
 
@@ -38,7 +39,7 @@ namespace manage.Controls
        // ListItemCollection listitems;
         User user;
         private List Idea;
-        private const string siteUrl = "https://teams.aexp.com/sites/excel";
+       // private const string siteUrl = "https://teams.aexp.com/sites/excel";
         private const string libName = "Idea Attachments";
         string folderName, newFolderName;
         private ClientContext myClContext;
@@ -92,6 +93,34 @@ namespace manage.Controls
 
         }
 
+        public EditForm(string id)
+        {
+
+            InitializeComponent();
+
+          //  this.mainPage = mainPage;
+            selectedFiles = new SelectedFiles();
+            allFiles = new SelectedFiles();
+            ideaID.Text = id;
+            mainID = id;
+            folderName = id;
+            newFolderName = id;
+            itemId = id;
+
+            ConnectToSP();
+            FileListBox.DataContext = selectedFiles;
+            FileListBox.ItemsSource = selectedFiles;
+
+
+            LoadItems1();
+
+            SinglePeopleChooser.UserTextBox.TextChanged += UserTextBox_TextChanged;
+            SinglePeopleChooser1.UserTextBox.TextChanged += UserTextBox_TextChanged;
+            SinglePeopleChooser2.UserTextBox.TextChanged += UserTextBox_TextChanged;
+
+
+        }
+
       
 
         #region ////// F O R M    L O A D ////////
@@ -104,7 +133,7 @@ namespace manage.Controls
             //isContractor = "false";
             formLoad = true;
 
-            using (ClientContext context = new ClientContext(siteUrl))
+            using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
             {
                 Web web = context.Web;
                 context.Load(web, s => s.CurrentUser);
@@ -227,7 +256,7 @@ namespace manage.Controls
       private void LoadRoles()
       {
 
-          ClientContext client = new ClientContext(siteUrl);
+          ClientContext client = ClientContext.Current;
           GroupCollection groupCollection = client.Web.SiteGroups;
 
           Microsoft.SharePoint.Client.Group contractorGroup = groupCollection.GetById(38);
@@ -369,7 +398,7 @@ namespace manage.Controls
       {
          
           tabcontrol1.IsEnabled = true;
-          ClientContext context = new ClientContext(siteUrl);
+          ClientContext context = ClientContext.Current;
           Web web = context.Web;
           context.Load(web, s => s.CurrentUser);
           List list = context.Web.Lists.GetByTitle("Idea");
@@ -380,7 +409,7 @@ namespace manage.Controls
           ListItemCollection listitems = list.GetItems(query);
           context.Load(listitems);
 
-          LoadFiles(siteUrl, "Idea Attachments", string.Empty, folderName);
+          LoadFiles(Utils.GetSiteUrl(), "Idea Attachments", string.Empty, folderName);
 
 
 
@@ -2086,7 +2115,7 @@ namespace manage.Controls
             //create the hyperlink
             Hyperlink hype = new Hyperlink();
             hype.Inlines.Add("Click Here");
-            hype.NavigateUri = new Uri("https://teams.aexp.com/sites/excel/Shared%20Documents/EXCEL%20Rewards.pptx");
+            hype.NavigateUri = new Uri(Utils.GetSiteUrl()+"/Shared%20Documents/EXCEL%20Rewards.pptx");
             hype.Foreground = new SolidColorBrush(Colors.Blue);
 
             pgraph.Inlines.Add(hype);
@@ -2451,7 +2480,7 @@ namespace manage.Controls
             else
             {
                 //Get the current context 
-                using (ClientContext context = new ClientContext(siteUrl))
+                using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
                 {
                     //Get the Idea list and add a new item 
                     List Idea = context.Web.Lists.GetByTitle("Idea");
@@ -2607,7 +2636,7 @@ namespace manage.Controls
                     context.ExecuteQueryAsync((s, ee) =>
                     {
 
-                        RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                         Dispatcher.BeginInvoke(() =>
                         {
@@ -2658,7 +2687,7 @@ namespace manage.Controls
                 else
                 {
                     //Get the current context 
-                    ClientContext context = new ClientContext(siteUrl);
+                    ClientContext context = ClientContext.Current;
                     //Get the Idea list and add a new item 
                     Idea = context.Web.Lists.GetByTitle("Idea");
                     context.Load(Idea);
@@ -2829,7 +2858,7 @@ namespace manage.Controls
                     context.ExecuteQueryAsync((s, ee) =>
                     {
 
-                        RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
 
                         Dispatcher.BeginInvoke(() =>
@@ -2885,7 +2914,7 @@ namespace manage.Controls
                 {
 
                     //Get the current context 
-                    ClientContext context = new ClientContext(siteUrl);
+                    ClientContext context = ClientContext.Current;
                     //Get the Idea list and add a new item 
                     Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -3052,7 +3081,7 @@ namespace manage.Controls
                     //Execute the query to create the new item 
                     context.ExecuteQueryAsync((s, ee) =>
                     {
-                        RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
 
 
@@ -3128,7 +3157,7 @@ namespace manage.Controls
         {
 
             //Get the current context 
-            ClientContext context = new ClientContext(siteUrl);
+            ClientContext context = ClientContext.Current;
             //Get the Idea list and add a new item 
             Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -3298,7 +3327,7 @@ namespace manage.Controls
             context.ExecuteQueryAsync((s, ee) =>
             {
 
-                RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                 Dispatcher.BeginInvoke(() =>
                 {
@@ -3549,7 +3578,7 @@ namespace manage.Controls
                 {
 
                     //Get the current context 
-                    ClientContext context = new ClientContext(siteUrl);
+                    ClientContext context = ClientContext.Current;
                     //Get the Idea list and add a new item 
                     Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -3859,7 +3888,7 @@ namespace manage.Controls
         private void Cancel_Message(object sender, EventArgs e)
         {
             //Get the current context 
-            using (ClientContext context = new ClientContext(siteUrl))
+            using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
             {
                 Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -3917,7 +3946,7 @@ namespace manage.Controls
 
         private void LoadComboItems(String aimName, String aimID)
         {
-            using (ClientContext context = new ClientContext(siteUrl))
+            using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
             {
                 Web web = context.Web;
                 context.Load(web);
@@ -4359,7 +4388,7 @@ namespace manage.Controls
             }
             else
             {
-                ClientContext context = new ClientContext(siteUrl);
+                ClientContext context = ClientContext.Current;
                 //Get the Idea list and add a new item 
                 Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -4422,7 +4451,7 @@ namespace manage.Controls
             else
             {
 
-                ClientContext context = new ClientContext(siteUrl);
+                ClientContext context = ClientContext.Current;
                 //Get the Idea list and add a new item 
                 Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -4563,13 +4592,13 @@ namespace manage.Controls
             foreach (FileEntry fileEntry in selectedFiles)
             {
                 if (fileEntry.IsTemp)
-                    DeleteFile(siteUrl, libName, string.Empty, GetFolderName(), fileEntry);
+                    DeleteFile(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName(), fileEntry);
             }
 
             foreach (FileEntry fileEntry in allFiles)
             {
                 if (fileEntry.IsTemp)
-                    DeleteFile(siteUrl, libName, string.Empty, GetFolderName(), fileEntry);
+                    DeleteFile(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName(), fileEntry);
             }
 
 
@@ -4581,7 +4610,7 @@ namespace manage.Controls
             foreach (FileEntry fileEntry in selectedFiles)
             {
                 if (fileEntry.IsTemp)
-                    MarkFilePermanent(siteUrl, libName, string.Empty, GetFolderName(), fileEntry);
+                    MarkFilePermanent(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName(), fileEntry);
             }
 
 
@@ -4807,7 +4836,7 @@ namespace manage.Controls
 
         private void ConnectToSP()
         {
-            myClContext = new ClientContext(siteUrl);
+            myClContext = ClientContext.Current;
 
 
         }
@@ -5069,7 +5098,7 @@ namespace manage.Controls
             string folderName = GetFolderName();
             if (!string.IsNullOrEmpty(folderName))
             {
-                CreateFolder(siteUrl, libName, string.Empty, folderName);
+                CreateFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName);
             }
 
 
@@ -5117,7 +5146,7 @@ namespace manage.Controls
             FileEntry selFile = FileListBox.SelectedItem as FileEntry;
             if (selFile != null)
             {
-                Uri fileUrl = new Uri(siteUrl + "/" + libName + "/" + itemId + "/" + selFile.FileName);
+                Uri fileUrl = new Uri(Utils.GetSiteUrl() + "/" + libName + "/" + itemId + "/" + selFile.FileName);
 
 
                 HtmlPage.PopupWindow(fileUrl, "_blank", null);
@@ -5143,7 +5172,7 @@ namespace manage.Controls
             foreach (FileEntry fileEntry in allFiles)
             {
                 if (fileEntry.IsTempDelete)
-                    DeleteFile(siteUrl, libName, string.Empty, GetFolderName(), fileEntry);
+                    DeleteFile(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName(), fileEntry);
 
             }
 

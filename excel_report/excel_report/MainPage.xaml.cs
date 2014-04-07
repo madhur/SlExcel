@@ -13,6 +13,8 @@ using Microsoft.SharePoint.Client;
 
 using Telerik.Windows.Data;
 using Telerik.Windows.Controls;
+using manage.Controls;
+using Telerik.Windows.Controls.GridView;
 
 namespace excel_report
 {
@@ -21,6 +23,7 @@ namespace excel_report
 
         private List<Idea> ideas = new List<Idea>();
         IEnumerable<ListItem> returnedItems = null;
+       // private const String siteUrl = "https://teams.aexp.com/sites/excel";
 
         public MainPage()
         {
@@ -33,6 +36,31 @@ namespace excel_report
 
             BindGrid(QueryType.IN_PROGRESS);
             FormatControls(txtinprogress);
+        }
+
+        private void hyperlinkbutton_Click(object sender, RoutedEventArgs e)
+        {
+            var parent = (sender as HyperlinkButton).ParentOfType<GridViewRow>();
+            var Item = parent.Item as Idea;
+            var id = Item.ideaID.ToString();
+
+            //MessageBox.Show(id, id, MessageBoxButton.OK);
+            ClientContext context = ClientContext.Current;
+            List list = context.Web.Lists.GetByTitle("Idea");
+            context.Load(list);
+
+            CamlQuery query = new CamlQuery();
+            query.ViewXml = "<View><Query><Where><Eq><FieldRef Name='ID' LookupId='TRUE'/><Value Type='Integer'>" + Item.ideaID +
+                "</Value></Eq></Where></Query></View>";
+
+
+            ListItemCollection listitems = list.GetItems(query);
+            context.Load(listitems);
+
+            ChildWindow edit = new EditForm(id);
+            edit.Show();
+
+
         }
 
         private void BindGrid(QueryType type)

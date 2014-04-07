@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.SharePoint.Client;
 using Telerik.Windows.Controls;
+using Common;
 
 namespace manage
 {
@@ -56,7 +57,7 @@ namespace manage
 
         private String getImageUrl(string colName)
         {
-            string siteUrl = "https://teams.aexp.com/sites/excel/SiteAssets/Images/{0}";
+            string siteUrl = Utils.GetSiteUrl()+"/SiteAssets/Images/{0}";
             double value = getDoubleItem(colName);
             if (value == double.Parse("0.0"))
                 return string.Empty;
@@ -193,7 +194,7 @@ namespace manage
 
         bool isFinance = false;
 
-        ClientContext context = new ClientContext("https://teams.aexp.com/sites/excel");
+        ClientContext context = ClientContext.Current;
 
 
 

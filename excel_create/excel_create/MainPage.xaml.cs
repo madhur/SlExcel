@@ -16,6 +16,7 @@ using System.IO;
 using System.Windows.Resources;
 using System.Windows.Browser;
 using System.Text;
+using Common;
 
 
 namespace excel_create
@@ -27,7 +28,7 @@ namespace excel_create
         ListCollection collList;
         private List Idea;
         User user;
-        private const string siteUrl = "https://teams.aexp.com/sites/excel";
+       // private const string siteUrl = "https://teams.aexp.com/sites/excel";
         private const string libName = "Idea Attachments";
         string folderName, newFolderName;
         private ClientContext myClContext;
@@ -70,7 +71,7 @@ namespace excel_create
 
         public void SilverlightOM()
         {
-            ClientContext clientContext = new ClientContext(siteUrl);
+            ClientContext clientContext = ClientContext.Current;
 
             oWebsite = clientContext.Web;
 
@@ -674,7 +675,7 @@ namespace excel_create
             //create the hyperlink
             Hyperlink hype = new Hyperlink();
             hype.Inlines.Add("Click Here");
-            hype.NavigateUri = new Uri("https://teams.aexp.com/sites/excel/Shared%20Documents/EXCEL%20Rewards.pptx");
+            hype.NavigateUri = new Uri(Utils.GetSiteUrl()+"/Shared%20Documents/EXCEL%20Rewards.pptx");
             hype.Foreground = new SolidColorBrush(Colors.Blue);
 
             pgraph.Inlines.Add(hype);
@@ -1480,7 +1481,7 @@ namespace excel_create
                  btn_fp.IsEnabled = false;
                  btn_inprogress.IsEnabled = false;
                  //Get the current context 
-                 ClientContext context = new ClientContext(siteUrl);
+                 ClientContext context = ClientContext.Current;
                  //Get the Idea list and add a new item 
                  List Idea = context.Web.Lists.GetByTitle("Idea");
                  ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
@@ -1759,7 +1760,7 @@ namespace excel_create
                  {
                      string itemId = newItem.Id.ToString();
 
-                     RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                     RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                      Dispatcher.BeginInvoke(() =>
                      {
@@ -1820,7 +1821,7 @@ namespace excel_create
                      btn_approve.IsEnabled = false;
                      btn_fp.IsEnabled = false;
                      btn_inprogress.IsEnabled = false;                 //Get the current context 
-                     ClientContext context = new ClientContext(siteUrl);
+                     ClientContext context = ClientContext.Current;
                      //Get the Idea list and add a new item 
                      Idea = context.Web.Lists.GetByTitle("Idea");
                      ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
@@ -2098,7 +2099,7 @@ namespace excel_create
                      {
                          string itemId = newItem.Id.ToString();
 
-                         RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                         RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                          Dispatcher.BeginInvoke(() =>
                          {
@@ -2167,7 +2168,7 @@ namespace excel_create
                      btn_inprogress.IsEnabled = false;
 
                      //Get the current context 
-                     ClientContext context = new ClientContext(siteUrl);
+                     ClientContext context = ClientContext.Current;
                      //Get the Idea list and add a new item 
                      Idea = context.Web.Lists.GetByTitle("Idea");
                      ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
@@ -2441,7 +2442,7 @@ namespace excel_create
 
                        string itemId = newItem.Id.ToString();
 
-                       RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                       RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                        Dispatcher.BeginInvoke(() =>
                        {
@@ -2516,7 +2517,7 @@ namespace excel_create
                 btn_fp.IsEnabled = false;
                 btn_inprogress.IsEnabled = false;   
                 //Get the current context 
-                ClientContext context = new ClientContext(siteUrl);
+                ClientContext context = ClientContext.Current;
                 //Get the Idea list and add a new item 
                 Idea = context.Web.Lists.GetByTitle("Idea");
                 ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
@@ -2791,7 +2792,7 @@ namespace excel_create
                 {
                     string itemId = newItem.Id.ToString();
 
-                    RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                    RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                     Dispatcher.BeginInvoke(() =>
                     {
@@ -2827,7 +2828,7 @@ namespace excel_create
 
         private void LoadComboItems()
         {
-            using (ClientContext context = new ClientContext(siteUrl))
+            using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
             {
                 Web web = context.Web;
                 context.Load(web);
@@ -3130,7 +3131,7 @@ namespace excel_create
             else
             {
 
-                ClientContext clientContext = new ClientContext(siteUrl);
+                ClientContext clientContext = ClientContext.Current;
 
                 oWebsite = clientContext.Web;
                 collList = oWebsite.Lists;
@@ -3300,7 +3301,7 @@ namespace excel_create
 
         private void ConnectToSP()
         {
-            myClContext = new ClientContext(siteUrl);
+            myClContext = ClientContext.Current;
 
 
         }
@@ -3664,7 +3665,7 @@ namespace excel_create
             string folderName = GetFolderName();
             if (!string.IsNullOrEmpty(folderName))
             {
-                CreateFolder(siteUrl, libName, string.Empty, folderName);
+                CreateFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName);
             }
             //this.txtProgress.Text = string.Empty;
 
@@ -3713,7 +3714,7 @@ namespace excel_create
             string folderName = GetFolderName();
             if (!string.IsNullOrEmpty(folderName))
             {
-                CreateFolder(siteUrl, libName, string.Empty, folderName);
+                CreateFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName);
             }
         }
 
@@ -3721,7 +3722,7 @@ namespace excel_create
         {
             // User Singleuser;
 
-            ClientContext context = new ClientContext(siteUrl);
+            ClientContext context = ClientContext.Current;
             List MadhurList = context.Web.Lists.GetByTitle("Idea");
             ListItem newItem = MadhurList.AddItem(new ListItemCreationInformation());
 
@@ -3734,7 +3735,7 @@ namespace excel_create
             {
                 string itemId = newItem.Id.ToString();
 
-                RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                 Dispatcher.BeginInvoke(() =>
                 {
@@ -3756,14 +3757,14 @@ namespace excel_create
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            DeleteFolder(siteUrl, libName, string.Empty, GetFolderName());
+            DeleteFolder(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName());
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
 
             FileEntry selFile = FileListBox.SelectedItem as FileEntry;
-            DeleteFile(siteUrl, libName, string.Empty, GetFolderName(), selFile);
+            DeleteFile(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName(), selFile);
             
 
         }
@@ -3774,7 +3775,7 @@ namespace excel_create
             FileEntry selFile = FileListBox.SelectedItem as FileEntry;
             if (selFile != null)
             {
-                Uri fileUrl = new Uri(siteUrl + "/" + libName + "/" + GetFolderName() + "/" + selFile.FileName);
+                Uri fileUrl = new Uri(Utils.GetSiteUrl() + "/" + libName + "/" + GetFolderName() + "/" + selFile.FileName);
 
 
                 HtmlPage.PopupWindow(fileUrl, "_blank", null);
@@ -3788,10 +3789,10 @@ namespace excel_create
             // cleanup if there is a temp folder
             if (!string.IsNullOrEmpty(folderName))
             {
-                DeleteFolder(siteUrl, libName, string.Empty, folderName);
+                DeleteFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName);
             }
 
-            Uri redirect = new Uri("https://teams.aexp.com/sites/excel/SitePages/manage.aspx");
+            Uri redirect = new Uri(Utils.GetSiteUrl()+"/SitePages/manage.aspx");
             System.Windows.Browser.HtmlPage.Window.Navigate(redirect, "_parent");
 
         }

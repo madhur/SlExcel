@@ -17,6 +17,7 @@ using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using excel_create.PeopleWS;
+using Common;
 
 
 
@@ -114,7 +115,7 @@ namespace excel_create.Controls
                 this.Cursor = Cursors.Wait;
                 PeopleSoapClient ps = new PeopleSoapClient();
                 ps.Endpoint.Address =
-               new System.ServiceModel.EndpointAddress("https://teams.aexp.com/sites/excel" + "/_vti_bin/People.asmx");
+               new System.ServiceModel.EndpointAddress(Utils.GetSiteUrl() + "/_vti_bin/People.asmx");
 
                 ps.SearchPrincipalsCompleted += new EventHandler<SearchPrincipalsCompletedEventArgs>(ps_SearchPrincipalsCompleted);
                 ps.SearchPrincipalsAsync(UserTextBox.Text, 50, SPPrincipalType.User);
@@ -317,7 +318,7 @@ namespace excel_create.Controls
                     //use the host name property to configure the request against the site in 
                     //which the control is hosted
                     ps.Endpoint.Address =
-                   new System.ServiceModel.EndpointAddress("https://teams.aexp.com/sites/excel" + "/_vti_bin/People.asmx");
+                   new System.ServiceModel.EndpointAddress(Utils.GetSiteUrl() + "/_vti_bin/People.asmx");
 
 
 

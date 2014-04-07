@@ -14,6 +14,7 @@ using System.Threading;
 using System.IO;
 using System.Windows.Resources;
 using excel_create.Controls;
+using Common;
 
 
 namespace excel_create.Controls
@@ -21,7 +22,7 @@ namespace excel_create.Controls
 
     public partial class Attachments : UserControl
     {
-        private const string siteUrl = "https://teams.aexp.com/sites/excel/";
+        //private const string siteUrl = "https://teams.aexp.com/sites/excel/";
         private const string libName = "Idea Attachments";
         string folderName, newFolderName;
         private ClientContext myClContext;
@@ -153,7 +154,7 @@ namespace excel_create.Controls
 
         private void ConnectToSP()
         {
-            myClContext = new ClientContext(siteUrl);
+            myClContext = ClientContext.Current;
 
 
         }
@@ -516,7 +517,7 @@ namespace excel_create.Controls
             string folderName = GetFolderName();
             if (!string.IsNullOrEmpty(folderName))
             {
-                CreateFolder(siteUrl, libName, string.Empty, folderName);
+                CreateFolder(ClientContext.Current.Url, libName, string.Empty, folderName);
             }
 
             OpenFileDialog oFileDialog = new OpenFileDialog();
@@ -544,7 +545,7 @@ namespace excel_create.Controls
             string folderName = GetFolderName();
             if (!string.IsNullOrEmpty(folderName))
             {
-                CreateFolder(siteUrl, libName, string.Empty, folderName);
+                CreateFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName);
             }
         }
 
@@ -552,7 +553,7 @@ namespace excel_create.Controls
         {
          //   User Singleuser;
 
-            ClientContext context = new ClientContext(siteUrl);
+            ClientContext context = ClientContext.Current;
             List Idea = context.Web.Lists.GetByTitle("Idea");
             ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
 
@@ -566,7 +567,7 @@ namespace excel_create.Controls
             {
                 string itemId = newItem.Id.ToString();
                 
-                RenameFolder(siteUrl, libName, string.Empty, folderName, itemId);
+                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
                 Dispatcher.BeginInvoke(() =>
                 {
@@ -588,14 +589,14 @@ namespace excel_create.Controls
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-                DeleteFolder(siteUrl, libName, string.Empty, GetFolderName());
+                DeleteFolder(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName());
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
              
             FileEntry selFile=FileListBox.SelectedItem as FileEntry;
-            DeleteFile(siteUrl, libName, string.Empty, GetFolderName(), selFile);
+            DeleteFile(Utils.GetSiteUrl(), libName, string.Empty, GetFolderName(), selFile);
             
            
         }
@@ -605,7 +606,7 @@ namespace excel_create.Controls
             // cleanup if there is a temp folder
             if (!string.IsNullOrEmpty(folderName))
             {
-                DeleteFolder(siteUrl, libName, string.Empty, folderName);
+                DeleteFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName);
             }
         }
 

@@ -115,9 +115,9 @@ namespace excel_report
             return intVal;
         }
 
-      
 
-        ClientContext context = new ClientContext("https://teams.aexp.com/sites/excel");
+
+        ClientContext context = ClientContext.Current;
 
 
 

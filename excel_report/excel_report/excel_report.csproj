@@ -138,6 +138,12 @@
   <ItemGroup>
     <Resource Include="Images\ExportButton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\manage\manage\manage.csproj">
+      <Project>{cc77b485-6bc6-47f0-a3ea-718f1d1208b2}</Project>
+      <Name>manage %28Manage\manage%29</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -153,4 +159,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>copy *.xap $(SolutionDir)Output\$(ConfigurationName)\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

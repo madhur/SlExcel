@@ -93,7 +93,7 @@ namespace manage.Views
 
         void RTFTest_Loaded(object sender, RoutedEventArgs e)
         {
-            context = new ClientContext("https://teams.aexp.com/sites/excel/");
+            context = ClientContext.Current;
             spWeb = context.Web;
             context.Load(spWeb);
             projectList = spWeb.Lists.GetByTitle("Manage Alerts");

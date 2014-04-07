@@ -18,7 +18,7 @@ namespace excel_create
     public partial class App : Application
     {
         //List Web Service for use as uploading Attachments
-        public const string ListWebService = "https://teams.aexp.com/sites/excel/_vti_bin/Lists.asmx";
+        //public const string ListWebService = "https://teams.aexp.com/sites/excel/_vti_bin/Lists.asmx";
 
 
         public App()
