@@ -22,7 +22,6 @@ namespace manage.Controls
 
     public partial class Attachments : UserControl
     {
-       // private const string siteUrl = "https://teams.aexp.com/sites/excel/";
         private const string libName = "Idea Attachments";
         string folderName, newFolderName;
         private ClientContext myClContext;

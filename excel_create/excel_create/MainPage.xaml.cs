@@ -28,7 +28,6 @@ namespace excel_create
         ListCollection collList;
         private List Idea;
         User user;
-       // private const string siteUrl = "https://teams.aexp.com/sites/excel";
         private const string libName = "Idea Attachments";
         string folderName, newFolderName;
         private ClientContext myClContext;

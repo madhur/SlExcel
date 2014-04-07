@@ -33,13 +33,11 @@ namespace manage.Controls
 {
     public partial class EditForm
     {
-        // ClientContext context = new ClientContext("https://teams.aexp.com/sites/excel");
         Web oWebsite;
         ListCollection collList;
        // ListItemCollection listitems;
         User user;
         private List Idea;
-       // private const string siteUrl = "https://teams.aexp.com/sites/excel";
         private const string libName = "Idea Attachments";
         string folderName, newFolderName;
         private ClientContext myClContext;

@@ -23,7 +23,6 @@ namespace excel_report
 
         private List<Idea> ideas = new List<Idea>();
         IEnumerable<ListItem> returnedItems = null;
-       // private const String siteUrl = "https://teams.aexp.com/sites/excel";
 
         public MainPage()
         {

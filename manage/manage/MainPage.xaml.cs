@@ -28,7 +28,6 @@ namespace manage
 {
     public partial class MainPage : UserControl
     {
-        //private const string siteUrl = "https://teams.aexp.com/sites/excel/";
 
         private List<Idea> ideas = new List<Idea>();
 
@@ -479,9 +478,11 @@ namespace manage
         private void LoadAdminTab()
         {
 
-            BindGrid(Consts.LOB1.GBSHR);
+            //Do nothing on admin tab load
+            //    BindGrid(Consts.LOB1.GBSHR);
 
-}
+
+        }
 
         #region //-------------MY IDEAS B U T T O N S ------------////
 
@@ -620,8 +621,14 @@ namespace manage
                 "</Query></View>";
 
             }
+            else
+            {
+                query.ViewXml = "<View><Query>" +
+              
+                "</Query></View>";
+            }
 
-            ListItemCollection returnedItems = context.Web.Lists.GetByTitle("Idea").GetItems(CamlQuery.CreateAllItemsQuery());
+            ListItemCollection returnedItems = context.Web.Lists.GetByTitle("Idea").GetItems(query);
             context.Load(returnedItems);
             adminGrid.IsBusy = true;
             context.ExecuteQueryAsync((ssss, eeeee) =>
@@ -637,7 +644,18 @@ namespace manage
                     adminGrid.ItemsSource = ideas;
                     adminGrid.DataContext = ideas;
 
-                    ApplyStatusFilter();
+                  
+
+                    GridViewColumn statusColumn = adminGrid.Columns[ Status.STATUS_COLUMN];
+
+                    IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
+                    columnDescriptor.SuspendNotifications();
+                    adminGrid.FilterDescriptors.Clear();
+                    columnDescriptor.DistinctFilter.Clear();
+                    foreach (String status in new String[]{ Status.SUBMIT_APPROVAL, Status.PENDING_ACTUALS, Status.FINANCE_REVIEW })
+                        columnDescriptor.DistinctFilter.AddDistinctValue(status);
+                    columnDescriptor.ResumeNotifications();
+
 
                     adminGrid.IsBusy = false;
 
