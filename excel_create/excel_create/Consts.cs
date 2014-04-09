@@ -19,7 +19,6 @@ namespace excel_create
         public const String FINANCIALS_TAB = "Financials\n";
         public const String ERROR_MSG = "\n Please complete all required fields on the following tabs: \n";
         public const String PAST_DATE_ERROR = "1st Month Saves Date cannot be in the past.  Please update 1st Month Saves Date or if the date is correct, please Submit for Approval";
-       // public const String PAST_DATE_ERROR_REVISED = "Revised 1st Month Saves Date cannot be in the past.  Please update the date or if the date is correct, please Submit for Approval";
 
     }
 }

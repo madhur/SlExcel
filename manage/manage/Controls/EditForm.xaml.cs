@@ -50,7 +50,7 @@ namespace manage.Controls
         string itemId;
         List<MyItem> items = new List<MyItem>();
         //String AimName;
-        MainPage mainPage;
+        ILoadable mainPage;
         String status, NewStatus;
         //String isAuth;
         //String isAdmin;
@@ -63,7 +63,7 @@ namespace manage.Controls
 
 
 
-        public EditForm(string id, MainPage mainPage)
+        public EditForm(string id, ILoadable mainPage)
         {
 
             InitializeComponent();
@@ -126,9 +126,7 @@ namespace manage.Controls
         {
             tabcontrol1.IsEnabled = false;
             btnAdmin_comments.Visibility = Visibility.Collapsed;
-            //isAuth = "false";
-            //isAdmin = "false";
-            //isContractor = "false";
+         
             formLoad = true;
 
             using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
@@ -644,86 +642,9 @@ namespace manage.Controls
 
                           ideaname.Text = getItem("Idea_x0020_Name", listitems[0]);
                           description.Text = getItem("EXCEL_x0020_Idea_x0020_Descripti", listitems[0]);
-                          resultsLOB2.Text = getItem("LOB_Tier2", listitems[0]);
+                       //   resultsLOB2.Text = ;
 
-                          if (resultsLOB2.Text == "WS")
-                          {
-                              lobwsgcat_ws.IsChecked = true;
-                          }
-
-                          else if (resultsLOB2.Text == "GCA")
-                          {
-                              lobwsgcat_gca.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "WS and GCA")
-                          {
-                              lobwsgcat_both.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "GCST Pegasus")
-                          {
-                              lobpbmt_pegasus.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "Business Management and Transformation")
-                          {
-                              lobpbmt_busmgmt.IsChecked = true;
-
-                          }
-                          else if (resultsLOB2.Text == "GBT")
-                          {
-                              lobgbs_gbt.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "GFO")
-                          {
-                              lobgbs_gfo.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "GREWE")
-                          {
-                              lobgbs_grewe.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "GSM")
-                          {
-                              lobgbs_gsm.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "Tech")
-                          {
-                              lobgbs_tech.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "Other External Group")
-                          {
-                              lobgbs_other.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "HR")
-                          {
-                              lobhr_hr.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "HR Benefits")
-                          {
-                              lobhr_benefits.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "PMO Only")
-                          {
-                              lobhr_pmo.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "HR Tech")
-                          {
-                              lobhr_tech.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "HR Other External Group")
-                          {
-                              lobhr_other.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "GBT/JV")
-                          {
-                              lobgbt_gbtjv.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "GCP")
-                          {
-                              lobgbt_gcp.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "QMS")
-                          {
-                              lobgbt_qms.IsChecked = true;
-                          }
+                        
 
                           Identify.Text = getItem("EXCEL_x0020_Identifier", listitems[0]);
 
@@ -748,34 +669,10 @@ namespace manage.Controls
                               identify_l.IsChecked = true;
                           }
 
-                          //  resultsLOB2.Text = listitems[0].FieldValues["Line_x0020_Of_x0020_Business_x001"].ToString();
-                          resultsLOB2.Text = getItem("Line_x0020_Of_x0020_Business_x001", listitems[0]);
-
-                          if (resultsLOB2.Text == "GBS")
-                          {
-                              gbs_radio.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "GCP")
-                          {
-                              gcp_radio.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "PBMT")
-                          {
-                              pbmt_radio.IsChecked = true;
-                          }
-
-                          else if (resultsLOB2.Text == "GBT")
-                          {
-                              gbt_radio.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "WSGCAT")
-                          {
-                              wsgcat_radio.IsChecked = true;
-                          }
-                          else if (resultsLOB2.Text == "HR")
-                          {
-                              hr_radio.IsChecked = true;
-                          }
+                          //  resultsLOB2.Text = listitems[0].FieldValues["Line_x0020_Of_x0020_Business_x001"].();
+                         // resultsLOB2.Text = ;ToString
+                          LoadRadios(getItem("Line_x0020_Of_x0020_Business_x001", listitems[0]), getItem("LOB_Tier2", listitems[0]) );
+                        
 
                           assump_depend.Text = getItem("Assumptions_x0020_or_x0020_Depen", listitems[0]);
                           Risk.Text = getItem("Risk_x0020_of_x0020_Implementati", listitems[0]);
@@ -957,8 +854,75 @@ namespace manage.Controls
  });
 
       }
-      
 
+
+
+      private void LoadRadios(String lob1, String lob2)
+      {
+          Dictionary<String, List<RadioButton>> lob2Radios = new Dictionary<string, List<RadioButton>>()
+          {
+              {"WS", new List<RadioButton> {lobwsgcat_ws}},
+              {"GCA", new List<RadioButton> { lobwsgcat_gca}},
+              {"WS and GCA", new List<RadioButton> {lobwsgcat_both}},
+              {"GCST Pegasus", new List<RadioButton> {lobpbmt_pegasus}},
+              {"Business Management and Transformation", new List<RadioButton> {lobpbmt_busmgmt}},
+              {"GBT", new List<RadioButton> {lobgbs_gbt}},
+              {"GFO", new List<RadioButton> {lobgbs_gfo}},
+              {"GREWE", new List<RadioButton> {lobgbs_grewe}},
+              {"GSM", new List<RadioButton> {lobgbs_gsm}},
+              {"Tech", new List<RadioButton> {lobgbs_tech, lobhr_tech}},
+              {"Other External Group", new List<RadioButton> {lobgbs_other, lobhr_other}},
+              {"HR", new List<RadioButton> {lobhr_hr}},
+              {"HR Benefits", new List<RadioButton> {lobhr_benefits}},
+              {"PMO Only", new List<RadioButton> {lobhr_pmo}},
+              {"GBT/JV", new List<RadioButton> {lobgbt_gbtjv}},
+              {"GCP", new List<RadioButton> {lobgbt_gcp}},
+              {"QMS", new List<RadioButton> {lobgbt_qms}}
+          };
+
+          Dictionary<String, RadioButton> lob1Radios = new Dictionary<string, RadioButton>()
+          {
+              {"GBS", gbs_radio},
+              {"GCP", gcp_radio},
+              {"PBMT", pbmt_radio},
+              {"GBT", gbt_radio},
+              {"WSGCAT", wsgcat_radio},
+              {"HR", hr_radio}
+             
+          };
+
+          Dictionary<RadioButton, List<RadioButton>> radioMapping = GetLOBMapping();
+
+
+          foreach (String lob1Val in lob1Radios.Keys)
+          {
+
+              if (lob1Val.Equals(lob1, StringComparison.OrdinalIgnoreCase))
+              {
+                  lob1Radios[lob1Val].IsChecked = true;
+
+                  List<RadioButton> lob2Radiolist = radioMapping[lob1Radios[lob1Val]];
+
+                  foreach (String lob2Val in lob2Radios.Keys)
+                  {
+                      List<RadioButton> lob2mappedVals = lob2Radios[lob2Val];
+                      foreach (RadioButton radio in lob2mappedVals)
+                      {
+                          if (lob2Radiolist.Contains(radio))
+                          {
+                              radio.IsChecked = true;
+                              break;
+                          }
+
+                      }
+                     
+                  }
+
+
+                  
+              }
+          }
+      }
 
         #endregion
 
@@ -3506,12 +3470,12 @@ namespace manage.Controls
                 }
                 else if (lobhr_tech.IsChecked == true)
                 {
-                    updateItem["LOB_Tier2"] = "HR Tech";
+                    updateItem["LOB_Tier2"] = "Tech";
                 }
 
                 else if (lobhr_other.IsChecked == true)
                 {
-                    updateItem["LOB_Tier2"] = "HR Other External Group";
+                    updateItem["LOB_Tier2"] = "Other External Group";
 
                 }
             }
@@ -3560,301 +3524,287 @@ namespace manage.Controls
                     return;
             }
 
-            //else
-            //{
-                ResetControls();
+            ResetControls();
 
-                ValidateResult result = GetValidationResultOnStatus(statusLevel.Text);
-                if (!result.IsValid)
+            ValidateResult result = GetValidationResultOnStatus(statusLevel.Text);
+            if (!result.IsValid)
+            {
+
+                GetErrorWindow(result).Show();
+                NavigateTab(result);
+            }
+
+            else
+            {
+
+                //Get the current context 
+                ClientContext context = ClientContext.Current;
+                //Get the Idea list and add a new item 
+                Idea = context.Web.Lists.GetByTitle("Idea");
+
+
+                context.Load(Idea);
+
+                ListItem updateItem = Idea.GetItemById(ideaID.Text);
+
+                MarkFilesPermanent();
+                RemoveDeletedFiles();
+                //Set the new item's properties 
+
+                if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
                 {
 
-                    GetErrorWindow(result).Show();
-                    NavigateTab(result);
+                    if (SinglePeopleChooser.selectedAccounts.Count > 0)
+                    {
+                        Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
+                        updateItem["Executor"] = Singleuser;
+
+                        Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
+                        updateItem["Director"] = Singleuser1;
+
+                        Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
+                        updateItem["VP"] = Singleuser2;
+
+                    }
+                    if (MultiplePeopleChooser.selectedAccounts.Count > 0)
+                    {
+                        List<FieldUserValue> usersList = new List<FieldUserValue>();
+                        foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
+                        {
+                            usersList.Add(FieldUserValue.FromUser(ac.AccountName));
+                        }
+
+                        updateItem["FTE_x0020_Contributors"] = usersList;
+                    }
+
+
+                }
+
+                //<-----Project Overview Tab ------>
+                updateItem["Idea_x0020_Name"] = ideaname.Text;
+                updateItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
+
+
+                if (statusLevel.Text == "Draft")
+                {
+                    updateItem["scale"] = "1";
+                }
+
+                else if (statusLevel.Text == "In Progress")
+                {
+                    updateItem["scale"] = "2";
+                }
+                else if (statusLevel.Text == "Submit for Approval")
+                {
+                    updateItem["scale"] = "3";
+                }
+                else if (statusLevel.Text == "Ready for Finance Review")
+                {
+                    updateItem["scale"] = "4";
+                }
+                else if (statusLevel.Text == "Finance Review Completed")
+                {
+                    updateItem["scale"] = "5";
+                }
+                else if (statusLevel.Text == "Canceled")
+                {
+                    updateItem["scale"] = "6";
+                }
+                else if (statusLevel.Text == "Approved")
+                {
+                    updateItem["scale"] = "7";
+                }
+                else if (statusLevel.Text == "Future Pipeline")
+                {
+                    updateItem["scale"] = "8";
+                }
+                else if (statusLevel.Text == "Pending Actuals")
+                {
+                    updateItem["scale"] = "9";
+                }
+
+
+                SetRadioStatus(updateItem);
+
+
+                //<------Scope Tab------>
+
+                MyItem item = aimcombo.SelectedItem as MyItem;
+                if (item != null)
+                    updateItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
+
+                updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
+                updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
+                updateItem["Revised_x0020_1st_x0020_Mo_x0020"] = revisedmonth.SelectedDate;
+
+
+                if (identify_e.IsChecked == true)
+                {
+                    updateItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
+                }
+                else if (identify_x.IsChecked == true)
+                {
+                    updateItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
+                }
+                else if (identify_c.IsChecked == true)
+                {
+                    updateItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
+                }
+                else if (identify_e2.IsChecked == true)
+                {
+                    updateItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
+                }
+                else if (identify_l.IsChecked == true)
+                {
+                    updateItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
+                }
+
+                //Assumptions, Risk, Business Capability, SDLC
+                updateItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
+
+                if (risk_high.IsChecked == true)
+                {
+                    updateItem["Risk_x0020_of_x0020_Implementati"] = "High";
+                }
+
+                else if (risk_med.IsChecked == true)
+                {
+                    updateItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
+                }
+                else if (risk_low.IsChecked == true)
+                {
+                    updateItem["Risk_x0020_of_x0020_Implementati"] = "Low";
+                }
+
+                updateItem["Business_x0020_Capability"] = biz_capability.Text;
+                updateItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
+                updateItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
+
+                //vendor save
+                if (vendorSave_yes.IsChecked == true)
+                {
+                    updateItem["Vendor_Save"] = "Yes";
+                }
+
+                else if (vendorSave_no.IsChecked == true)
+                {
+                    updateItem["Vendor_Save"] = "No";
+                }
+
+                //Cost Type
+                if (type_Avoid.IsChecked == true)
+                {
+                    updateItem["Cost_x0020_Type1"] = "Cost Avoidance";
+                }
+
+                else if (type_reEngineer.IsChecked == true)
+                {
+                    updateItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
+                    updateItem["Tech_Impact"] = tech_impact.Text;
+                }
+
+                else if (type_Reduction.IsChecked == true)
+                {
+                    updateItem["Cost_x0020_Type1"] = "Cost Reduction";
+                }
+                else if (type_Growth.IsChecked == true)
+                {
+                    updateItem["Cost_x0020_Type1"] = "Growth Reduction";
+                }
+
+                //<-----estimated savings----->
+
+                updateItem["SavingsHeader1"] = header1.Text;
+                updateItem["SavingsHeader2"] = header2.Text;
+                updateItem["SavingsHeader3"] = header3.Text;
+                updateItem["SavingsHeader4"] = header4.Text;
+                updateItem["SavingsHeader5"] = header5.Text;
+
+                updateItem["Savings1"] = es1.Value;
+                updateItem["Savings2"] = es2.Value;
+                updateItem["Savings3"] = es3.Value;
+                updateItem["Savings4"] = es4.Value;
+                updateItem["Savings5"] = es5.Value;
+
+                updateItem["Total_x0020_Savings"] = es_Total.Value;
+
+                //<-----comments, status & audit----->
+
+                updateItem["Project_x0020_Comments"] = projcomText.Text;
+
+                if (CEM_No.IsChecked == true)
+                {
+                    updateItem["CEM_x0020_Approved"] = "No";
+                }
+                else if (CEM_Yes.IsChecked == true)
+                {
+                    updateItem["CEM_x0020_Approved"] = "Yes";
+                }
+
+                if (topprojectCheckBox.IsChecked == true)
+                {
+                    updateItem["Top_x0020_Project"] = "Yes";
+                }
+                else if (topprojectCheckBox.IsChecked == false)
+                {
+                    updateItem["Top_x0020_Project"] = "";
+                }
+
+                updateItem["Cost_Classification"] = cc.Text;
+
+                updateItem["admin_comments"] = aCommHistoryText.Text;
+
+                updateItem["Idea_x0020_Status"] = statusLevel.Text;
+
+                if (!status.Equals(NewStatus) && !String.IsNullOrEmpty(NewStatus))
+                {
+                    Audit.Text = Audit.Text + Environment.NewLine + Environment.NewLine + currUser.Text + " " + "(" + DateTime.Now + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
+
                 }
 
                 else
                 {
 
-                    //Get the current context 
-                    ClientContext context = ClientContext.Current;
-                    //Get the Idea list and add a new item 
-                    Idea = context.Web.Lists.GetByTitle("Idea");
+                    Audit.Text = Audit.Text + Environment.NewLine + Environment.NewLine + currUser.Text + " " + "(" + DateTime.Now + ")" + " - " + "successfully saved changes to the idea";
+
+                }
+                updateItem["Audit"] = Audit.Text;
 
 
-                    context.Load(Idea);
 
-                    ListItem updateItem = Idea.GetItemById(ideaID.Text);
 
-                    MarkFilesPermanent();
-                    RemoveDeletedFiles();
-                    //Set the new item's properties 
+                updateItem.Update();
+                //Load the list 
+                context.Load(Idea, list => list.Title);
+                //Execute the query to create the new item 
+                context.ExecuteQueryAsync((s, ee) =>
+                {
 
-                    if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
+
+                    Dispatcher.BeginInvoke(() =>
                     {
 
-                        if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                            updateItem["Executor"] = Singleuser;
+                        msgwin = new Messages(this);
+                        msgwin.msgtxt.Text = "Your changes were successfully saved.";
+                        msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+                        msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                        msgwin.alert.Visibility = Visibility.Collapsed;
 
-                            Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                            updateItem["Director"] = Singleuser1;
-
-                            Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                            updateItem["VP"] = Singleuser2;
-
-                        }
-                        if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            List<FieldUserValue> usersList = new List<FieldUserValue>();
-                            foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                            {
-                                usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                            }
-
-                            updateItem["FTE_x0020_Contributors"] = usersList;
-                        }
+                        msgwin.Show();
+                        msgwin.Closed += msgwin_Closed;
 
 
                     }
-
-                    //<-----Project Overview Tab ------>
-                    updateItem["Idea_x0020_Name"] = ideaname.Text;
-                    updateItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
+                        );
 
 
-                    if (statusLevel.Text == "Draft")
-                    {
-                        updateItem["scale"] = "1";
-                    }
+                },
+    (s, ee) =>
+    {
+        Console.WriteLine(ee.Message);
 
-                    else if (statusLevel.Text == "In Progress")
-                    {
-                        updateItem["scale"] = "2";
-                    }
-                    else if (statusLevel.Text == "Submit for Approval")
-                    {
-                        updateItem["scale"] = "3";
-                    }
-                    else if (statusLevel.Text == "Ready for Finance Review")
-                    {
-                        updateItem["scale"] = "4";
-                    }
-                    else if (statusLevel.Text == "Finance Review Completed")
-                    {
-                        updateItem["scale"] = "5";
-                    }
-                    else if (statusLevel.Text == "Canceled")
-                    {
-                        updateItem["scale"] = "6";
-                    }
-                    else if (statusLevel.Text == "Approved")
-                    {
-                        updateItem["scale"] = "7";
-                    }
-                    else if (statusLevel.Text == "Future Pipeline")
-                    {
-                        updateItem["scale"] = "8";
-                    }
-                    else if (statusLevel.Text == "Pending Actuals")
-                    {
-                        updateItem["scale"] = "9";
-                    }
+    });
 
-
-                    SetRadioStatus(updateItem);
-
-
-                    //lobt1
-                   
-                    
-                    
-                   
-                    //lobt2
-                  
-                  
-
-                        //HR
-                 
-
-                    //<------Scope Tab------>
-
-                    MyItem item = aimcombo.SelectedItem as MyItem;
-                    if (item != null)
-                        updateItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                    updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                    updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-                    updateItem["Revised_x0020_1st_x0020_Mo_x0020"] = revisedmonth.SelectedDate;
-
-
-                    if (identify_e.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                    }
-                    else if (identify_x.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                    }
-                    else if (identify_c.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                    }
-                    else if (identify_e2.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                    }
-                    else if (identify_l.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                    }
-
-                    //Assumptions, Risk, Business Capability, SDLC
-                    updateItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                    if (risk_high.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                    }
-
-                    else if (risk_med.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                    }
-                    else if (risk_low.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                    }
-
-                    updateItem["Business_x0020_Capability"] = biz_capability.Text;
-                    updateItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                    updateItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                    //vendor save
-                    if (vendorSave_yes.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "Yes";
-                    }
-
-                    else if (vendorSave_no.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "No";
-                    }
-
-                    //Cost Type
-                    if (type_Avoid.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                    }
-
-                    else if (type_reEngineer.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                        updateItem["Tech_Impact"] = tech_impact.Text;
-                    }
-
-                    else if (type_Reduction.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Reduction";
-                    }
-                    else if (type_Growth.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Growth Reduction";
-                    }
-
-                    //<-----estimated savings----->
-
-                    updateItem["SavingsHeader1"] = header1.Text;
-                    updateItem["SavingsHeader2"] = header2.Text;
-                    updateItem["SavingsHeader3"] = header3.Text;
-                    updateItem["SavingsHeader4"] = header4.Text;
-                    updateItem["SavingsHeader5"] = header5.Text;
-
-                    updateItem["Savings1"] = es1.Value;
-                    updateItem["Savings2"] = es2.Value;
-                    updateItem["Savings3"] = es3.Value;
-                    updateItem["Savings4"] = es4.Value;
-                    updateItem["Savings5"] = es5.Value;
-
-                    updateItem["Total_x0020_Savings"] = es_Total.Value;
-
-                    //<-----comments, status & audit----->
-
-                    updateItem["Project_x0020_Comments"] = projcomText.Text;
-
-                    if (CEM_No.IsChecked == true)
-                    {
-                        updateItem["CEM_x0020_Approved"] = "No";
-                    }
-                    else if (CEM_Yes.IsChecked == true)
-                    {
-                        updateItem["CEM_x0020_Approved"] = "Yes";
-                    }
-
-                    if (topprojectCheckBox.IsChecked == true)
-                    {
-                        updateItem["Top_x0020_Project"] = "Yes";
-                    }
-                    else if (topprojectCheckBox.IsChecked == false)
-                    {
-                        updateItem["Top_x0020_Project"] = "";
-                    }
-
-                    updateItem["Cost_Classification"] = cc.Text;
-
-                    updateItem["admin_comments"] = aCommHistoryText.Text;
-
-                    updateItem["Idea_x0020_Status"] = statusLevel.Text;
-
-                    if (!status.Equals(NewStatus) && !String.IsNullOrEmpty(NewStatus))
-                    {
-                        Audit.Text = Audit.Text + Environment.NewLine + Environment.NewLine + currUser.Text + " " + "(" + DateTime.Now + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
-
-                    }
-
-                    else
-                    {
-
-                        Audit.Text = Audit.Text + Environment.NewLine + Environment.NewLine + currUser.Text + " " + "(" + DateTime.Now + ")" + " - " + "successfully saved changes to the idea";
-
-                    }
-                    updateItem["Audit"] = Audit.Text;
-
-
-
-
-                    updateItem.Update();
-                    //Load the list 
-                    context.Load(Idea, list => list.Title);
-                    //Execute the query to create the new item 
-                    context.ExecuteQueryAsync((s, ee) =>
-                    {
-
-
-                        Dispatcher.BeginInvoke(() =>
-                        {
-
-                            msgwin = new Messages(this);
-                            msgwin.msgtxt.Text = "Your changes were successfully saved.";
-                            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                            msgwin.alert.Visibility = Visibility.Collapsed;
-
-                            msgwin.Show();
-                            msgwin.Closed += msgwin_Closed;
-
-
-                        }
-                            );
-
-
-                    },
-        (s, ee) =>
-        {
-            Console.WriteLine(ee.Message);
-
-        });
-                
             }
         }
     
@@ -3864,7 +3814,7 @@ namespace manage.Controls
             try
             {
                 if (mainPage != null)
-                    mainPage.ReloadTabs();
+                    mainPage.Refresh() ;
             }
             catch (Exception e1)
             {

@@ -26,7 +26,7 @@ using Common;
 
 namespace manage
 {
-    public partial class MainPage : UserControl
+    public partial class MainPage : UserControl, ILoadable
     {
 
         private List<Idea> ideas = new List<Idea>();
@@ -205,7 +205,7 @@ namespace manage
 
         #region L O A D   M A I N P A G E
 
-        public void ReloadTabs()
+        private void ReloadTabs()
         {
             LoadMyIdeasTab();
             if (teamtab.Visibility == Visibility.Visible) ;
@@ -233,7 +233,7 @@ namespace manage
                 if (Int32.TryParse(queryStringValue, out id))
                 {
 
-                    ChildWindow edit = new EditForm(id.ToString(), this); 
+                    ChildWindow edit = new EditForm(id.ToString(), this);
                     edit.Show();
 
                 }
@@ -315,14 +315,14 @@ namespace manage
             query.ViewXml = "<View><Query>" +
                 "<Where>" +
                         "<Or>" +
-                            
+
                                 "<Eq>" +
                                     "<FieldRef Name='Executor' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
                                  "</Eq>" +
                                  "<Eq>" +
                                     "<FieldRef Name='Author' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
                                  "</Eq>" +
-                                                   
+
                         "</Or>" +
                  "</Where>" +
                 "</Query></View>";
@@ -415,7 +415,7 @@ namespace manage
                                                    "<Eq>" +
                                                       "<FieldRef Name='Director' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
                                                    "</Eq>" +
-                         
+
                           "<Or>" +
                               "<Eq>" +
                                   "<FieldRef Name='VP' LookupId='TRUE'/><Value Type='Integer'><UserID/></Value>" +
@@ -624,7 +624,7 @@ namespace manage
             else
             {
                 query.ViewXml = "<View><Query>" +
-              
+
                 "</Query></View>";
             }
 
@@ -644,15 +644,15 @@ namespace manage
                     adminGrid.ItemsSource = ideas;
                     adminGrid.DataContext = ideas;
 
-                  
 
-                    GridViewColumn statusColumn = adminGrid.Columns[ Status.STATUS_COLUMN];
+
+                    GridViewColumn statusColumn = adminGrid.Columns[Status.STATUS_COLUMN];
 
                     IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
                     columnDescriptor.SuspendNotifications();
                     adminGrid.FilterDescriptors.Clear();
                     columnDescriptor.DistinctFilter.Clear();
-                    foreach (String status in new String[]{ Status.SUBMIT_APPROVAL, Status.PENDING_ACTUALS, Status.FINANCE_REVIEW })
+                    foreach (String status in new String[] { Status.SUBMIT_APPROVAL, Status.PENDING_ACTUALS, Status.FINANCE_REVIEW })
                         columnDescriptor.DistinctFilter.AddDistinctValue(status);
                     columnDescriptor.ResumeNotifications();
 
@@ -681,7 +681,7 @@ namespace manage
           );
 });
 
-            
+
         }
 
         private void ApplyStatusFilter()
@@ -797,7 +797,7 @@ namespace manage
 
         private void myidea_add_Click(object sender, RoutedEventArgs e)
         {
-            Uri redirect = new Uri(Utils.GetSiteUrl()+"/SitePages/create.aspx");
+            Uri redirect = new Uri(Utils.GetSiteUrl() + "/SitePages/create.aspx");
             System.Windows.Browser.HtmlPage.Window.Navigate(redirect, "_parent");
         }
 
@@ -974,11 +974,16 @@ namespace manage
 
         private void btn_siteadmin_Click(object sender, RoutedEventArgs e)
         {
-            Uri siteadmin = new Uri(Utils.GetSiteUrl()+"/SitePages/SiteAdmin.aspx");
+            Uri siteadmin = new Uri(Utils.GetSiteUrl() + "/SitePages/SiteAdmin.aspx");
             System.Windows.Browser.HtmlPage.Window.Navigate(siteadmin, "_parent");
 
         }
 
+
+        void ILoadable.Refresh()
+        {
+            ReloadTabs();
+        }
     }
-    }
+}
 

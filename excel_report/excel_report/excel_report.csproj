@@ -139,6 +139,10 @@
     <Resource Include="Images\ExportButton.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{e5c7a894-8744-4edd-b6d9-987a9b0db4a4}</Project>
+      <Name>Common %28Common\Common%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\manage\manage\manage.csproj">
       <Project>{cc77b485-6bc6-47f0-a3ea-718f1d1208b2}</Project>
       <Name>manage %28Manage\manage%29</Name>

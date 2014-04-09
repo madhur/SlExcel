@@ -18,7 +18,7 @@ using Telerik.Windows.Controls.GridView;
 
 namespace excel_report
 {
-    public partial class MainPage : UserControl
+    public partial class MainPage : UserControl, ILoadable
     {
 
         private List<Idea> ideas = new List<Idea>();
@@ -56,7 +56,7 @@ namespace excel_report
             ListItemCollection listitems = list.GetItems(query);
             context.Load(listitems);
 
-            ChildWindow edit = new EditForm(id);
+            ChildWindow edit = new EditForm(id, this);
             edit.Show();
 
 
@@ -313,6 +313,12 @@ namespace excel_report
 
 
 
+
+        void ILoadable.Refresh()
+        {
+            BindGrid(QueryType.IN_PROGRESS);
+            FormatControls(txtinprogress);
+        }
     }
 
     public enum QueryType

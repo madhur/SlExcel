@@ -254,67 +254,6 @@ namespace manage.Controls
             }
         }
 
-        //private void ShowModalDialog()
-        //{
-        //    AutoResetEvent waitHandle = new AutoResetEvent(false);
-        //    Dispatcher.BeginInvoke(() =>
-        //    {
-        //        ChildWindow cw = new ChildWindow();
-        //        cw.Content = "Modal Dialog";
-        //        cw.Closed += (s, e) => waitHandle.Set();
-        //        cw.Show();
-        //    });
-        //    waitHandle.WaitOne();
-        //}
-
-        //private void UserTextBox_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (values != null)
-        //    {
-        //        if (values.Count > 1)
-        //            e.Handled = true;
-        //        else
-        //            e.Handled = false;
-        //    }
-        //    else
-        //        e.Handled = false;
-        //}
-
-        //private void UserTextBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    Telerik.Windows.Controls.RadContextMenu cmnu = new Telerik.Windows.Controls.RadContextMenu();
-        //    cmnu.MaxHeight = 500;
-        //    cmnu.HorizontalOffset = 400;
-        //    cmnu.Placement = Telerik.Windows.Controls.PlacementMode.MousePoint;
-
-        //    foreach (PickerEntry pi in values.Values)
-        //    {
-
-        //        mnuItem = new MenuItem();
-
-        //        mnuItem.Header = pi.DisplayName;
-        //        mnuItem.Click += mnuItem_Click;
-
-        //        cmnu.Items.Add(mnuItem);
-        //    }
-
-        //    cmnu.IsOpen = true;
-
-
-        //}
-        //void mnuItem_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MenuItem mnu = sender as MenuItem;
-
-        //    UserTextBox.Text = mnu.Header.ToString();
-        //    UserTextBox.FontStyle = FontStyles.Italic;
-        //    UserTextBox.Foreground = new SolidColorBrush(Colors.Black);
-        //    UserTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
-        //    nomatch.Visibility = Visibility.Collapsed;
-
-
-        //}
-
         private void UserTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (UserTextBox.Text.Length > 0)

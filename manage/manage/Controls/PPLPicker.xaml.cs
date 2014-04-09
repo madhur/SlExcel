@@ -82,8 +82,7 @@ namespace manage.Controls
 
             if (selectedAccounts.Count > 0)
             {
-                // MessageBox.Show(GetDisplayNames(selectedAccounts), "Selected People", MessageBoxButton.OK);
-                // MessageBox.Show(GetDisplayAccounts(selectedAccounts), "Selected Accounts", MessageBoxButton.OK);
+                
             }
             else
             {

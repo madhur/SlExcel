@@ -1519,129 +1519,11 @@ namespace excel_create
                  //<-----Project Overview Tab ------>
                  newItem["Idea_x0020_Name"] = ideaname.Text;
                  newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-                 //if (fp_check.IsChecked == true)
-                 //{
-                 //    newItem["FP_Text"] = "yes";
-                 //}
-                 //else if (fp_check.IsChecked == false)
-                 //{
-                 //    newItem["FP_Text"] = "";
-                 //}
+              
                  newItem["scale"] = "1";
 
-                 //lobt1
-                 if (gbs_radio.IsChecked == true)
-                 {
-
-                     newItem["Line_x0020_Of_x0020_Business_x001"] = "GBS";
-                 }
-                 else if (gbt_radio.IsChecked == true)
-                 {
-                     newItem["Line_x0020_Of_x0020_Business_x001"] = "GBT";
-                 }
-                 else if (gcp_radio.IsChecked == true)
-                 {
-                     newItem["Line_x0020_Of_x0020_Business_x001"] = "GCP";
-                 }
-                 else if (hr_radio.IsChecked == true)
-                 {
-                     newItem["Line_x0020_Of_x0020_Business_x001"] = "HR";
-                 }
-                 else if (pbmt_radio.IsChecked == true)
-                 {
-                     newItem["Line_x0020_Of_x0020_Business_x001"] = "PBMT";
-                 }
-                 else if (wsgcat_radio.IsChecked == true)
-                 {
-                     newItem["Line_x0020_Of_x0020_Business_x001"] = "WSGCAT";
-
-                 }
-
-                 //lobt2
-                 if (lobgbt_gbtjv.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GBT/JV";
-                 }
-                 else if (lobgbt_gcp.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GCP";
-                 }
-                 else if (lobgbt_qms.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "QMS";
-                 }
-
-               else  if (lobwsgcat_ws.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "WS";
-                 }
-                 else if (lobwsgcat_gca.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GCA";
-                 }
-                 else if (lobwsgcat_both.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "WS and GCA";
-                 }
-                 else if (lobpbmt_pegasus.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GCST Pegasus";
-                 }
-                 else if (lobpbmt_busmgmt.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "Business Management and Transformation";
-                 }
-                 else if (lobgbs_gbt.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GBT";
-
-                 }
-                 else if (lobgbs_gfo.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GFO";
-                 }
-                 else if (lobgbs_grewe.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GREWE";
-                 }
-                 else if (lobgbs_gsm.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "GSM";
-                 }
-                 else if (lobgbs_tech.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "Tech";
-                 }
-                 else if (lobgbs_other.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "Other External Group";
-
-                 }
-
-                     //HR
-                 else if (lobhr_hr.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "HR";
-
-                 }
-                 else if (lobhr_benefits.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "HR Benefits";
-                 }
-                 else if (lobhr_pmo.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "PMO Only";
-                 }
-                 else if (lobhr_tech.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "HR Tech";
-                 }
-
-                 else if (lobhr_other.IsChecked == true)
-                 {
-                     newItem["LOB_Tier2"] = "HR Other External Group";
-
-                 }
+                 SaveRadios(newItem);
+                
                  //<------Scope Tab------>
 
                  MyItem item = aimcombo.SelectedItem as MyItem;
@@ -1786,9 +1668,130 @@ namespace excel_create
 
              }
          }
-        
 
 
+         private void SaveRadios(ListItem updateItem)
+         {
+
+             if (gbs_radio.IsChecked == true)
+             {
+
+                 updateItem["Line_x0020_Of_x0020_Business_x001"] = "GBS";
+
+                 if (lobgbs_gbt.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GBT";
+
+                 }
+                 else if (lobgbs_gfo.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GFO";
+                 }
+                 else if (lobgbs_grewe.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GREWE";
+                 }
+                 else if (lobgbs_gsm.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GSM";
+                 }
+                 else if (lobgbs_tech.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "Tech";
+                 }
+                 else if (lobgbs_other.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "Other External Group";
+
+                 }
+
+             }
+             else if (gbt_radio.IsChecked == true)
+             {
+                 updateItem["Line_x0020_Of_x0020_Business_x001"] = "GBT";
+
+                 if (lobgbt_gbtjv.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GBT/JV";
+                 }
+                 else if (lobgbt_gcp.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GCP";
+                 }
+                 else if (lobgbt_qms.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "QMS";
+                 }
+
+             }
+             else if (gcp_radio.IsChecked == true)
+             {
+                 updateItem["Line_x0020_Of_x0020_Business_x001"] = "GCP";
+                 updateItem["LOB_Tier2"] = "";
+
+             }
+             else if (hr_radio.IsChecked == true)
+             {
+                 updateItem["Line_x0020_Of_x0020_Business_x001"] = "HR";
+
+                 if (lobhr_hr.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "HR";
+
+                 }
+                 else if (lobhr_benefits.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "HR Benefits";
+                 }
+                 else if (lobhr_pmo.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "PMO Only";
+                 }
+                 else if (lobhr_tech.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "Tech";
+                 }
+
+                 else if (lobhr_other.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "Other External Group";
+
+                 }
+             }
+             else if (pbmt_radio.IsChecked == true)
+             {
+                 updateItem["Line_x0020_Of_x0020_Business_x001"] = "PBMT";
+
+                 if (lobpbmt_pegasus.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GCST Pegasus";
+                 }
+                 else if (lobpbmt_busmgmt.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "Business Management and Transformation";
+                 }
+
+             }
+             else if (wsgcat_radio.IsChecked == true)
+             {
+                 updateItem["Line_x0020_Of_x0020_Business_x001"] = "WSGCAT";
+
+                 if (lobwsgcat_ws.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "WS";
+                 }
+                 else if (lobwsgcat_gca.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "GCA";
+                 }
+                 else if (lobwsgcat_both.IsChecked == true)
+                 {
+                     updateItem["LOB_Tier2"] = "WS and GCA";
+                 }
+
+             }
+
+         }
 
         //<~~~~~~~~FUTURE PIPELINE~~~~~~~~>
          private void btn_future_Click(object sender, RoutedEventArgs e)
@@ -1857,128 +1860,11 @@ namespace excel_create
                      //<-----Project Overview Tab ------>
                      newItem["Idea_x0020_Name"] = ideaname.Text;
                      newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-                     //if (fp_check.IsChecked == true)
-                     //{
-                     //    newItem["FP_Text"] = "yes";
-                     //}
+                    
 
                      newItem["scale"] = "8";
 
-                     //lobt1
-                     if (gbs_radio.IsChecked == true)
-                     {
-
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "GBS";
-                     }
-                     else if (gbt_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "GBT";
-                     }
-                     else if (gcp_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "GCP";
-                     }
-                     else if (hr_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "HR";
-                     }
-                     else if (pbmt_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "PBMT";
-                     }
-                     else if (wsgcat_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "WSGCAT";
-
-                     }
-
-                     //lobt2
-                     if (lobgbt_gbtjv.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GBT/JV";
-                     }
-                     else if (lobgbt_gcp.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GCP";
-                     }
-                     else if (lobgbt_qms.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "QMS";
-                     }
-
-
-                     if (lobwsgcat_ws.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "WS";
-                     }
-                     else if (lobwsgcat_gca.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GCA";
-                     }
-                     else if (lobwsgcat_both.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "WS and GCA";
-                     }
-                     else if (lobpbmt_pegasus.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GCST Pegasus";
-                     }
-                     else if (lobpbmt_busmgmt.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Business Management and Transformation";
-                     }
-                     else if (lobgbs_gbt.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GBT";
-
-                     }
-                     else if (lobgbs_gfo.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GFO";
-                     }
-                     else if (lobgbs_grewe.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GREWE";
-                     }
-                     else if (lobgbs_gsm.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GSM";
-                     }
-                     else if (lobgbs_tech.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Tech";
-                     }
-                     else if (lobgbs_other.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Other External Group";
-
-                     }
-
-                         //HR
-                     else if (lobhr_hr.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "HR";
-
-                     }
-                     else if (lobhr_benefits.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "HR Benefits";
-                     }
-                     else if (lobhr_pmo.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "PMO Only";
-                     }
-                     else if (lobhr_tech.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Tech";
-                     }
-
-                     else if (lobhr_other.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Other External Group";
-
-                     }
-
+                     SaveRadios(newItem);
                      //<------Scope Tab------>
 
 
@@ -2208,120 +2094,7 @@ namespace excel_create
 
                      newItem["scale"] = "2";
 
-                     //lobt1
-                     if (gbs_radio.IsChecked == true)
-                     {
-
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "GBS";
-                     }
-                     else if (gbt_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "GBT";
-                     }
-                     else if (gcp_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "GCP";
-                     }
-                     else if (hr_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "HR";
-                     }
-                     else if (pbmt_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "PBMT";
-                     }
-                     else if (wsgcat_radio.IsChecked == true)
-                     {
-                         newItem["Line_x0020_Of_x0020_Business_x001"] = "WSGCAT";
-
-                     }
-
-                     //lobt2
-                     if (lobgbt_gbtjv.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GBT/JV";
-                     }
-                     else if (lobgbt_gcp.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GCP";
-                     }
-                     else if (lobgbt_qms.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "QMS";
-                     }
-
-
-                     else if (lobwsgcat_ws.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "WS";
-                     }
-                     else if (lobwsgcat_gca.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GCA";
-                     }
-                     else if (lobwsgcat_both.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "WS and GCA";
-                     }
-                     else if (lobpbmt_pegasus.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GCST Pegasus";
-                     }
-                     else if (lobpbmt_busmgmt.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Business Management and Transformation";
-                     }
-                     else if (lobgbs_gbt.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GBT";
-
-                     }
-                     else if (lobgbs_gfo.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GFO";
-                     }
-                     else if (lobgbs_grewe.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GREWE";
-                     }
-                     else if (lobgbs_gsm.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "GSM";
-                     }
-                     else if (lobgbs_tech.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Tech";
-                     }
-                     else if (lobgbs_other.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Other External Group";
-
-                     }
-
-                         //HR
-                     else if (lobhr_hr.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "HR";
-
-                     }
-                     else if (lobhr_benefits.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "HR Benefits";
-                     }
-                     else if (lobhr_pmo.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "PMO Only";
-                     }
-                     else if (lobhr_tech.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Tech";
-                     }
-
-                     else if (lobhr_other.IsChecked == true)
-                     {
-                         newItem["LOB_Tier2"] = "Other External Group";
-
-                     }
+                     SaveRadios(newItem);
 
                      //<------Scope Tab------>
 
@@ -2558,121 +2331,7 @@ namespace excel_create
 
                 newItem["scale"] = "3";
 
-                //lobt1
-                if (gbs_radio.IsChecked == true)
-                {
-
-                    newItem["Line_x0020_Of_x0020_Business_x001"] = "GBS";
-                }
-                else if (gbt_radio.IsChecked == true)
-                {
-                    newItem["Line_x0020_Of_x0020_Business_x001"] = "GBT";
-                }
-                else if (gcp_radio.IsChecked == true)
-                {
-                    newItem["Line_x0020_Of_x0020_Business_x001"] = "GCP";
-                }
-                else if (hr_radio.IsChecked == true)
-                {
-                    newItem["Line_x0020_Of_x0020_Business_x001"] = "HR";
-                }
-                else if (pbmt_radio.IsChecked == true)
-                {
-                    newItem["Line_x0020_Of_x0020_Business_x001"] = "PBMT";
-                }
-                else if (wsgcat_radio.IsChecked == true)
-                {
-                    newItem["Line_x0020_Of_x0020_Business_x001"] = "WSGCAT";
-
-                }
-
-                //lobt2
-                if (lobgbt_gbtjv.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GBT/JV";
-                }
-                else if (lobgbt_gcp.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GCP";
-                }
-                else if (lobgbt_qms.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "QMS";
-                }
-                
-             
-                
-                else if (lobwsgcat_ws.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "WS";
-                }
-                else if (lobwsgcat_gca.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GCA";
-                }
-                else if (lobwsgcat_both.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "WS and GCA";
-                }
-                else if (lobpbmt_pegasus.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GCST Pegasus";
-                }
-                else if (lobpbmt_busmgmt.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "Business Management and Transformation";
-                }
-                else if (lobgbs_gbt.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GBT";
-
-                }
-                else if (lobgbs_gfo.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GFO";
-                }
-                else if (lobgbs_grewe.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GREWE";
-                }
-                else if (lobgbs_gsm.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "GSM";
-                }
-                else if (lobgbs_tech.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "Tech";
-                }
-                else if (lobgbs_other.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "Other External Group";
-
-                }
-
-                    //HR
-                else if (lobhr_hr.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "HR";
-
-                }
-                else if (lobhr_benefits.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "HR Benefits";
-                }
-                else if (lobhr_pmo.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "PMO Only";
-                }
-                else if (lobhr_tech.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "Tech";
-                }
-
-                else if (lobhr_other.IsChecked == true)
-                {
-                    newItem["LOB_Tier2"] = "Other External Group";
-
-                }
+                SaveRadios(newItem);
 
                 //<------Scope Tab------>
 
