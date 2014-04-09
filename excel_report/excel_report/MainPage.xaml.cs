@@ -312,12 +312,38 @@ namespace excel_report
         }
 
 
+        private QueryType GetActiveQuery()
+        {
+            TextBlock[] textBlocks = null;
 
+            textBlocks = new TextBlock[] { txtinprogress, txtall, txtfuture, txtapproved, txtfuture, txtunderreview };
+
+            foreach (TextBlock textBlock in textBlocks)
+            {
+                if (textBlock.TextDecorations != TextDecorations.Underline)
+                {
+                    if (textBlock == txtinprogress)
+                        return QueryType.IN_PROGRESS;
+                    else if (textBlock == txtall)
+                        return QueryType.ALL;
+                    else if (textBlock == txtfuture)
+                        return QueryType.FUTURE;
+                    else if (textBlock == txtapproved)
+                        return QueryType.APPROVED;
+                    else if (textBlock == txtunderreview)
+                        return QueryType.UNDER_REVIEW;
+                    else
+                        return QueryType.IN_PROGRESS;
+                }
+            }
+
+            return QueryType.IN_PROGRESS;
+        }
 
         void ILoadable.Refresh()
         {
-            BindGrid(QueryType.IN_PROGRESS);
-            FormatControls(txtinprogress);
+            BindGrid(GetActiveQuery());
+            //FormatControls(txtinprogress);
         }
     }
 

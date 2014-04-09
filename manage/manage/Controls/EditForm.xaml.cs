@@ -905,15 +905,18 @@ namespace manage.Controls
 
                   foreach (String lob2Val in lob2Radios.Keys)
                   {
-                      List<RadioButton> lob2mappedVals = lob2Radios[lob2Val];
-                      foreach (RadioButton radio in lob2mappedVals)
+                      if (lob2Val.Equals(lob2, StringComparison.OrdinalIgnoreCase))
                       {
-                          if (lob2Radiolist.Contains(radio))
+                          List<RadioButton> lob2mappedVals = lob2Radios[lob2Val];
+                          foreach (RadioButton radio in lob2mappedVals)
                           {
-                              radio.IsChecked = true;
-                              break;
-                          }
+                              if (lob2Radiolist.Contains(radio))
+                              {
+                                  radio.IsChecked = true;
+                                  break;
+                              }
 
+                          }
                       }
                      
                   }
