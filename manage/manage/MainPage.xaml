@@ -334,7 +334,7 @@
                             </HyperlinkButton>
                             <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
                             <HyperlinkButton Margin="0" Name="AdmAllLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmAllLink_Click">
-                                <TextBlock x:Name="btn_adminALL" Text="All"  Foreground="#FF3F9C35" FontWeight="Bold">
+                                <TextBlock x:Name="btn_adminALL" Text="All"  TextDecorations="Underline" Foreground="Black">
 
                                 </TextBlock>
                             </HyperlinkButton>

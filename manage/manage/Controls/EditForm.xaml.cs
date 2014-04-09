@@ -500,7 +500,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly();
+                                  MakeReadOnly(false);
                                   isReadOnly = true;
                               }
                           }
@@ -529,7 +529,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly();
+                                  MakeReadOnly(false);
                                   isReadOnly = true;
                               }
                           }
@@ -539,9 +539,7 @@ namespace manage.Controls
 
                               btn_cancel.Visibility = Visibility.Collapsed;
                               btn_save.Visibility = Visibility.Collapsed;
-                              btn_save1.Visibility = Visibility.Collapsed;
-                              btn_save2.Visibility = Visibility.Collapsed;
-                              btn_save3.Visibility = Visibility.Collapsed;
+                              
                               btn_inprogress.Visibility = Visibility.Collapsed;
                               btn_approve.Visibility = Visibility.Collapsed;
                               btn_draft.Visibility = Visibility.Collapsed;
@@ -552,13 +550,19 @@ namespace manage.Controls
 
                               statusCombo.SelectedItem = ic[3];
 
-                              FormMsg.Text = "Idea is no longer Editable.";
+                              // Fast follower ... Do not make form read only at this status
+                             // FormMsg.Text = "Idea is no longer Editable.";
 
-                              if (isEmployee || isContractor)
+                              /*if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly();
+                                 // MakeReadOnly(false);
                                   isReadOnly = true;
-                              }
+                              }*/
+
+                              // Fast follower .. Save button becomes visible.
+                              btn_save1.Visibility = Visibility.Visible;
+                              btn_save2.Visibility = Visibility.Visible;
+                              btn_save3.Visibility = Visibility.Visible;
 
 
                           }
@@ -582,7 +586,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly();
+                                  MakeReadOnly(false);
                                   isReadOnly = true;
                               }
 
@@ -606,7 +610,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly();
+                                  MakeReadOnly(false);
                                   isReadOnly = true;
                               }
 
@@ -633,7 +637,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly();
+                                  MakeReadOnly(false);
                                   isReadOnly = true;
                               }
 
@@ -1224,6 +1228,13 @@ namespace manage.Controls
 
         private void MakeReadOnly()
         {
+
+            MakeReadOnly(true);
+
+        }
+
+        private void MakeReadOnly(bool isAddButtonReadOnly)
+        {
             TextBox[] allTexts = new TextBox[] { tech_impact, assump_depend, ideaname, description, SinglePeopleChooser.UserTextBox, SinglePeopleChooser1.UserTextBox, SinglePeopleChooser2.UserTextBox, sdlc_projID, sdlc_projName, biz_capability };
             RadMaskedTextBox[] allMarks = new RadMaskedTextBox[] { es1, es2, es3, es4, es5, es_Total };
             Dictionary<RadioButton, List<RadioButton>> radios = GetLOBMapping();
@@ -1254,7 +1265,12 @@ namespace manage.Controls
             btn_fp.IsEnabled = false;
             btn_draft.IsEnabled = false;
             btn_inprogress.IsEnabled = false;
-            btn_add.IsEnabled = false;
+
+            //Add button does not need to be disabled as per fast follower
+            if (isAddButtonReadOnly)
+                btn_add.IsEnabled = false;
+            else
+                btn_add.IsEnabled = true;
 
             Remove.IsEnabled = false;
             View.IsEnabled = true;
