@@ -197,7 +197,7 @@ namespace manage.Controls
 
             tabcontrol1.SelectedIndex = 2;
             cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the Direct Tech Forecast and do an Add Direct Tech on CEM REENGINEERING TRACKER.";
+                "Validate against MF HLQ report and do an Add Mainframe on CEM REENGINEERING TRACKER.";
             result.Text = "2";
 
         }

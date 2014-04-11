@@ -40,9 +40,7 @@ namespace excel_create.Controls
             type_5.Visibility = Visibility.Collapsed;
             type_7.Visibility = Visibility.Collapsed;
             type_9.Visibility = Visibility.Collapsed;
-            type_10.Visibility = Visibility.Collapsed;
             type_11.Visibility = Visibility.Collapsed;
-            type_12.Visibility = Visibility.Collapsed;
             type_13.Visibility = Visibility.Collapsed;
             type_16.Visibility = Visibility.Collapsed;
             type_20.Visibility = Visibility.Collapsed;
@@ -61,12 +59,10 @@ namespace excel_create.Controls
                 typeTI_1.IsChecked = null;
                 typeTI_1.IsChecked = null;
                 typeTI_1.IsChecked = null;
-                type10_no.IsChecked = null;
-                type10_yes.IsChecked = null;
+               
                 type11_no.IsChecked = null;
                 type11_yes.IsChecked = null;
-                type12_no.IsChecked = null;
-                type12_yes.IsChecked = null;
+               
                 type13_1.IsChecked = null;
                 type13_2.IsChecked = null;
                 type16_no.IsChecked = null;
@@ -106,9 +102,9 @@ namespace excel_create.Controls
         {
             tabcontrol1.SelectedIndex = 2;
             answersTxt.Visibility = Visibility.Collapsed;
-            cost_label.Text = "This may not be an EXCEL Idea. Please Save as Draft and consult with your EXCEL Admin.";
+            cost_label.Text = "May not be an EXCEL Idea - Save as Draft and Consult with your EXCEL Admin.";
 
-            
+
         }
 
         private void typeQ1_yes_Checked(object sender, RoutedEventArgs e)
@@ -137,24 +133,24 @@ namespace excel_create.Controls
                 tabcontrol1.SelectedIndex = 2;
                 cost_label.Text = "Cost Avoidance";
                 result.Text = "1";
-                
+
             }
         }
 
         private void typeQ2_34_Checked(object senver, RoutedEventArgs e)
-        { 
-           
+        {
+
             typeQ3_biz.IsEnabled = true;
             typeQ3_sqp.IsEnabled = true;
             typeQ3_ti.IsEnabled = true;
-            
+
         }
 
         private void REE(object sender, RoutedEventArgs e)
         {
             tabcontrol1.SelectedIndex = 2;
             cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the MF HLQ report and submit a Mainframe CEM template.";
+                "Validate against the MF HLQ report and do an Add Mainframe on CEM REENGINEERING TRACKER.";
             result.Text = "2";
         }
 
@@ -165,11 +161,11 @@ namespace excel_create.Controls
             if (typeQ2_3.IsChecked == true)
             {
                 tabcontrol1.SelectedIndex = 1;
-            type_4.Visibility = Visibility.Visible;
+                type_4.Visibility = Visibility.Visible;
             }
-                else if(typeQ2_2.IsChecked == true)
+            else if (typeQ2_2.IsChecked == true)
             {
-                    tabcontrol1.SelectedIndex = 1;
+                tabcontrol1.SelectedIndex = 1;
                 type_5.Visibility = Visibility.Visible;
             }
         }
@@ -177,41 +173,53 @@ namespace excel_create.Controls
         private void typeQ3_sqp_Checked(object sender, RoutedEventArgs e)
         {
 
-                tabcontrol1.SelectedIndex = 1;
-                type_7.Visibility = Visibility.Visible;
-                        
+            tabcontrol1.SelectedIndex = 1;
+            type_7.Visibility = Visibility.Visible;
+
         }
 
         private void typeQ3_biz_Checked(object sender, RoutedEventArgs e)
         {
 
-                tabcontrol1.SelectedIndex = 1;
-                type_9.Visibility = Visibility.Visible;
+            tabcontrol1.SelectedIndex = 1;
+            type_9.Visibility = Visibility.Visible;
 
         }
 
         private void typeTI_1_Checked(object sender, RoutedEventArgs e)
         {
             type_4.Visibility = Visibility.Collapsed;
-                type_20.Visibility = Visibility.Visible;
-                
-            
+            type_20.Visibility = Visibility.Visible;
+
+
+        }
+
+        private void typeTI_2_Checked(object sender, RoutedEventArgs e)
+        {
+
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
+                "Validate against MF HLQ report and do an Add Mainframe on CEM REENGINEERING TRACKER.";
+            result.Text = "2";
+
         }
 
         private void typeTI_3_Checked(object sender, RoutedEventArgs e)
         {
-                    
-                type_5.Visibility = Visibility.Visible;
-                type_4.Visibility = Visibility.Collapsed;
-            
+
+            type_5.Visibility = Visibility.Visible;
+            type_4.Visibility = Visibility.Collapsed;
+
         }
+
+
 
         private void typeTI_4_Checked(object sender, RoutedEventArgs e)
         {
 
             tabcontrol1.SelectedIndex = 2;
             cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the DT tracker and submit a Direct Tech CEM template.";
+                "Validate against the Direct Tech Forecast and do an Add Direct Tech on CEM REENGINEERING TRACKER.";
             result.Text = "2";
 
         }
@@ -220,164 +228,147 @@ namespace excel_create.Controls
 
             tabcontrol1.SelectedIndex = 2;
             cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the corresponding TI Forecast/Budget and submit an Other REE CEM template.";
+                "Do an Add other REE on CEM REEGINEERING TRACKER.";
             result.Text = "2";
 
         }
 
         private void type7_yes_Checked(object sender, RoutedEventArgs e)
         {
-           
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Cost Reduction";
-                result.Text = "3";
-            
+
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Cost Reduction";
+            result.Text = "3";
+
         }
 
         private void type7_no_Checked(object sender, RoutedEventArgs e)
         {
-          
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Cost Avoidance";
-                result.Text = "1";
-            
+
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Cost Avoidance";
+            result.Text = "1";
+
         }
 
         private void type9_yes_Checked(object sender, RoutedEventArgs e)
         {
-      
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Cost Reduction";
-                result.Text = "3";
-            
+
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Cost Reduction";
+            result.Text = "3";
+
         }
 
         private void type9_no_Checked(object sender, RoutedEventArgs e)
         {
-            
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Cost Avoidance";
-                result.Text = "1";
-            
+
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Cost Avoidance";
+            result.Text = "1";
+
         }
 
         private void type5_1_Checked(object sender, RoutedEventArgs e)
         {
-            
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                    "Complete CEM Other Template.";
-                result.Text = "2";
-            
+
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
+                "Validated against CEM REE report as entered automatically.";
+            result.Text = "2";
+
         }
 
         private void type5_2_Checked(object sender, RoutedEventArgs e)
         {
-          
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Cost Avoidance";
-                result.Text = "1";
-            
+
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Cost Avoidance";
+            result.Text = "1";
+
         }
 
         private void type5_3_Checked(object sender, RoutedEventArgs e)
         {
 
             type_5.Visibility = Visibility.Collapsed;
-                type_13.Visibility = Visibility.Visible;
-            
+            type_13.Visibility = Visibility.Visible;
+
         }
 
         private void type20_1_Checked(object sender, RoutedEventArgs e)
         {
 
-            type_20.Visibility = Visibility.Collapsed;    
-            type_10.Visibility = Visibility.Visible;
-          
+            type_20.Visibility = Visibility.Collapsed;
+            type_11.Visibility = Visibility.Visible;
+
         }
 
         private void type20_2_Checked(object sender, RoutedEventArgs e)
         {
             type_13.Visibility = Visibility.Visible;
-            type_20.Visibility = Visibility.Collapsed;  
-            
+            type_20.Visibility = Visibility.Collapsed;
+
         }
 
         private void type13_1_Checked(object sender, RoutedEventArgs e)
         {
-            type_13.Visibility = Visibility.Collapsed;  
-                type_16.Visibility = Visibility.Visible;
-            
+            type_13.Visibility = Visibility.Collapsed;
+            type_16.Visibility = Visibility.Visible;
+
         }
 
         private void type13_2_Checked(object sender, RoutedEventArgs e)
         {
 
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                    "Validate against the MR Report and submit a Midrange Tape CEM template.";
-                result.Text = "2";
-        }
-       
-
-        private void type10_yes_Checked(object sender, RoutedEventArgs e)
-        {
-                type_12.Visibility = Visibility.Visible;
-                type_10.Visibility = Visibility.Collapsed;  
-            
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
+                "Validate against the MR report and do an Add Midrange Tape on the CEM REENGINEERING TRACKER.";
+            result.Text = "2";
         }
 
-        private void type10_no_Checked(object sender, RoutedEventArgs e)
-        {
-                type_11.Visibility = Visibility.Visible;
-                type_10.Visibility = Visibility.Collapsed;
-        }
+
+
 
         private void type11_no_Checked(object sender, RoutedEventArgs e)
         {
 
-                type_13.Visibility = Visibility.Visible;
-                type_11.Visibility = Visibility.Collapsed;
-            
+            tabcontrol1.SelectedIndex = 2;
+            answersTxt.Visibility = Visibility.Collapsed;
+            cost_label.Text = "May not be an EXCEL Idea - Save as Draft and Consult with your EXCEL Admin.";
+
         }
 
         private void type11_yes_Checked(object sender, RoutedEventArgs e)
         {
 
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Growth Reduction";
-                result.Text = "4";
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Growth Reduction" + "\n" + "\n" +
+                "Attach impacted TI forecast information.";
+            result.Text = "4";
 
         }
 
-        private void type12_yes_Checked(object sender, RoutedEventArgs e)
-        {
 
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                    "Validate against the MR report and submit a Midrange Growth Prevention CEM template.";
-                result.Text = "2";
-            
-        }
 
 
         private void type16_yes_Checked(object sender, RoutedEventArgs e)
         {
 
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                    "Validate against the MR report and submit a Rate Change CEM template.";
-                result.Text = "2";
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
+                "Validate against the MR report and do an Add Rate Change on CEM REENGINEERING TRACKER.";
+            result.Text = "2";
 
-            }
-        
+        }
+
 
         private void type16_no_Checked(object sender, RoutedEventArgs e)
         {
-                tabcontrol1.SelectedIndex = 2;
-                cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                    "Added to CEM REE report automatically.";
-                result.Text = "2";
+            tabcontrol1.SelectedIndex = 2;
+            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
+                "Validated against CEM REE report as entered automatically.";
+            result.Text = "2";
 
         }
 
@@ -387,6 +378,7 @@ namespace excel_create.Controls
 
 
         #endregion
+
 
     }
 }

@@ -525,7 +525,7 @@ namespace manage.Controls
                               ItemCollection ic = statusCombo.Items;
                               statusCombo.SelectedItem = ic[4];
 
-                              FormMsg.Text = "Idea is no longer Editable.";
+                              FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
 
                               if (isEmployee || isContractor)
                               {
@@ -582,7 +582,7 @@ namespace manage.Controls
                               ItemCollection ic = statusCombo.Items;
                               statusCombo.SelectedItem = ic[6];
 
-                              FormMsg.Text = "Idea is no longer Editable.";
+                              FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
 
                               if (isEmployee || isContractor)
                               {
@@ -607,6 +607,9 @@ namespace manage.Controls
 
                               ItemCollection ic = statusCombo.Items;
                               statusCombo.SelectedItem = ic[7];
+
+                              FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
+
 
                               if (isEmployee || isContractor)
                               {
@@ -633,7 +636,7 @@ namespace manage.Controls
                               ItemCollection ic = statusCombo.Items;
                               statusCombo.SelectedItem = ic.Last();
 
-                              FormMsg.Text = "Idea is no longer Editable.";
+                              FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
 
                               if (isEmployee || isContractor)
                               {
@@ -709,6 +712,10 @@ namespace manage.Controls
                           {
                               vendorSave_no.IsChecked = true;
                           }
+
+                          //ROLE FAMILY COMBO CODE
+
+
 
                           CT.Text = getItem("Cost_x0020_Type1", listitems[0]);
 
@@ -2057,6 +2064,12 @@ namespace manage.Controls
             myPopup_revised.IsOpen = false;
         }
 
+        private void PopUpButtonRole_Click(object sender, RoutedEventArgs e)
+        {
+            myPopup_role.IsOpen = false;
+        }
+
+
         private void imghelp_description_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -2131,6 +2144,13 @@ namespace manage.Controls
             PopUpText_vendor.Text = "Save that originates from and managed by the Vendor that goes towards their contracted goal." + "\n" +
                 "(*) indicates Required field";
             myPopup_vendor.IsOpen = true;
+        }
+
+        private void imghelp_role_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            PopUpText_role.Text = "Choose Role Family for this idea.";
+            myPopup_role.IsOpen = true;
         }
 
         private void imghelp_tech_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

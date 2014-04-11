@@ -118,6 +118,14 @@
                 <telerik:GridViewDataColumn Header="Assumptions or Dependencies" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding AssumpDepen}" TextWrapping="Wrap" MaxWidth="200"/>
                 <telerik:GridViewDataColumn Header="EXCEL Identifier" IsFilterable="True"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Identify}"/>
                 <telerik:GridViewDataColumn Header="Risk" IsFilterable="True" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Risk}"/>
+                <telerik:GridViewDataColumn Header="SDLC ID" IsFilterable="True" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SDLCid}"/>
+                <telerik:GridViewDataColumn Header="SDLC Name" IsFilterable="True" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SDLCname}"/>
+                <telerik:GridViewDataColumn Header="Vendor Save" IsFilterable="True" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding vendorSave}"/>
+                <telerik:GridViewDataColumn Header="Business Capability" IsFilterable="True" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding bizcapability}"/>
+                <telerik:GridViewDataColumn Header="Role Family" IsFilterable="True" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding RoleFamily}"/>
+                
+
+
 
                 <telerik:GridViewDataColumn Header="Project Comments" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding ProjComments}" TextWrapping="Wrap" MaxWidth="300" />
                 <telerik:GridViewDataColumn Header="Audit History" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Audit}" TextWrapping="Wrap" MaxWidth="300" />

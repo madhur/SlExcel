@@ -59,7 +59,7 @@
                         <toolkit:DockPanel x:Name="type_4" LastChildFill="False" Visibility="Collapsed">
                             <TextBlock TextWrapping="Wrap" Text="What kind of TI Expense is this?" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0"/>
                             <RadioButton GroupName="q4" x:Name="typeTI_1" Content="Midrange (MR)" HorizontalAlignment="Left" Margin="18,9,0,0" VerticalAlignment="Top" Width="100" Checked="typeTI_1_Checked"/>
-                            <RadioButton GroupName="q4" x:Name="typeTI_2" Content="Mainframe (MF)" HorizontalAlignment="Left" Margin="15,9,0,0" VerticalAlignment="Top" Width="105" Checked="typeTI_2_Checked"/>
+                            <RadioButton GroupName="q4" x:Name="typeTI_2" Content="Mainframe (MF)" HorizontalAlignment="Left" Margin="15,9,0,0" VerticalAlignment="Top" Width="105" Checked="REE"/>
                             <RadioButton GroupName="q4" x:Name="typeTI_3" Content="TIMS" HorizontalAlignment="Left" Margin="27,9,0,0" VerticalAlignment="Top" Width="57" Checked="typeTI_3_Checked"/>
                             <RadioButton GroupName="q4" x:Name="typeTI_4" Content="Direct Tech (DT)" HorizontalAlignment="Left" Margin="-303,30,0,0" VerticalAlignment="Top" Width="113" Checked="typeTI_4_Checked"/>
                             <RadioButton GroupName="q4" x:Name="typeTI_5" Content="Voice/Network/EUC" HorizontalAlignment="Left" Margin="-189,30,0,0" VerticalAlignment="Top" Width="129" Checked="typeTI_5_Checked"/>

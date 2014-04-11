@@ -106,7 +106,7 @@
                         <LineBreak/>
 							<Run FontSize="9" Text="      (Character Limit 255)"/>
                             </TextBlock>
-                            <TextBox x:Name="description" HorizontalAlignment="Left" TextChanged="Descriptiontextchanged" Height="60" Margin="155,16,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" MaxLength="255"/>
+                            <TextBox x:Name="description" HorizontalAlignment="Left" TextChanged="Descriptiontextchanged" Height="150" Margin="155,19,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontFamily="Arial" FontSize="12" MaxLength="255" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto"/>
 
                             <TextBlock HorizontalAlignment="Left" Margin="12,6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Created By" VerticalAlignment="Top" Grid.Column="1" Height="16" Width="81" FontFamily="Arial" FontSize="12"/>
                             <TextBox x:Name="createdby" HorizontalAlignment="Left" Height="23" Margin="134,0,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Grid.Column="1" FontFamily="Arial" FontSize="12" IsReadOnly="True"/>
@@ -360,17 +360,22 @@
                             <TextBlock HorizontalAlignment="Left" Margin="462,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="105" FontFamily="Arial" FontSize="12" Grid.Row="1" Text="SDLC Project Name"/>
 
 
-                            <TextBlock x:Name="vendorTxt" HorizontalAlignment="Left" Margin="449,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1">
+                            <TextBlock x:Name="vendorTxt" HorizontalAlignment="Left" Margin="449,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1">
                             <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
                                                         <Run Text="  Vendor Save?"/>
 
                             </TextBlock>
 
-                            <StackPanel x:Name="save_stack" Margin="585,175,0,0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="108">
+                            <StackPanel x:Name="save_stack" Margin="585,165,0,0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="108">
                                 <RadioButton GroupName="vendor" x:Name="vendorSave_yes" Checked="ScopeRadioButtons_Checked" Content="Yes" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Grid.Row="1" FontFamily="Arial" FontSize="12"/>
                                 <RadioButton GroupName="vendor" x:Name="vendorSave_no" Checked="ScopeRadioButtons_Checked" Content="No" HorizontalAlignment="Center" Margin="11,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontFamily="Arial" FontSize="12"/>
                             </StackPanel>
 
+                            <TextBlock x:Name="RoleBasedTxt" HorizontalAlignment="Left" Margin="462,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1">
+                            <Run Text="Role Family"/>
+
+                            </TextBlock>
+                            <ComboBox x:Name="rolecombo" Width="202" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,26,110,0" Height="23" Grid.Row="1"/>
 
                             <TextBlock x:Name="costTxt" HorizontalAlignment="Left" Margin="450,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="100" FontFamily="Arial" FontSize="12" Grid.Row="1">
                             <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
@@ -452,6 +457,16 @@
                                     <StackPanel Margin="5">
                                         <Button x:Name="PopUpButton7" Content="X" Click="PopUpButton7_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
                                         <TextBlock x:Name="PopUpText_vendor" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="250" Height="40"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <Image x:Name="imghelp_role" MouseLeftButtonDown="imghelp_role_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="528,192,0,0" Grid.Row="1" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                            <Popup x:Name="myPopup_role" Margin="448,0"  Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalOffset="-10" VerticalOffset="-282" Height="0" Width="0">
+                                <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663"  Grid.RowSpan="2" Margin="104,21,304,54" Grid.Row="2">
+                                    <StackPanel Margin="5">
+                                        <Button x:Name="PopUpButtonrole" Content="X" Click="PopUpButtonRole_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,-4,-2,0" />
+                                        <TextBlock x:Name="PopUpText_role" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,4" Foreground="#FF002663" Width="250" Height="40"/>
 
                                     </StackPanel>
                                 </Border>

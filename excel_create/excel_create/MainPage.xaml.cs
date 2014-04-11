@@ -633,7 +633,10 @@ namespace excel_create
             myPopup_es.IsOpen = false;
         }
 
-
+        private void PopUpButtonRole_Click(object sender, RoutedEventArgs e)
+        {
+            myPopup_role.IsOpen = false;
+        }
        
         private void imghelp_description_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -709,6 +712,13 @@ namespace excel_create
             PopUpText_vendor.Text = "Save that originates from and managed by the Vendor that goes towards their contracted goal." + "\n" +
                 "(*) indicates Required field";
             myPopup_vendor.IsOpen = true;
+        }
+
+        private void imghelp_role_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            PopUpText_role.Text = "Choose Role Family for this idea.";
+            myPopup_role.IsOpen = true;
         }
 
         private void imghelp_tech_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

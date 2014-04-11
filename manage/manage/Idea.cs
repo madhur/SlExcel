@@ -331,6 +331,13 @@ namespace manage
         }
 
         public string Risk { get { return (getItem("Risk_x0020_of_x0020_Implementati")); } }
+        public string SDLCid { get { return (getItem("SDLC_x0020_Project_x0020_ID")); } }
+
+        public string SDLCname { get { return (getItem("SDLC_x0020_Project_x0020_Name")); } }
+        public string bizcapability { get { return (getItem("Business_x0020_Capability")); } }
+        public string vendorSave { get { return (getItem("Vendor_x0020_Save")); } }
+        public string RoleFamily { get { return (getItem("RoleFamily")); } }
+
 
         public string SH1 { get { return getItem("SavingsHeader1"); } }
         public string SH2 { get { return getItem("SavingsHeader2"); } }
