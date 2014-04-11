@@ -538,7 +538,6 @@ namespace manage.Controls
                           {
 
                               btn_cancel.Visibility = Visibility.Collapsed;
-                              btn_save.Visibility = Visibility.Collapsed;
                               
                               btn_inprogress.Visibility = Visibility.Collapsed;
                               btn_approve.Visibility = Visibility.Collapsed;
@@ -563,6 +562,7 @@ namespace manage.Controls
                               btn_save1.Visibility = Visibility.Visible;
                               btn_save2.Visibility = Visibility.Visible;
                               btn_save3.Visibility = Visibility.Visible;
+                              btn_save.Visibility = Visibility.Visible;
 
 
                           }
@@ -4510,7 +4510,7 @@ namespace manage.Controls
 
                 if (!string.IsNullOrEmpty(folderName))
                 {
-                    query.FolderServerRelativeUrl = "/sites/excel/" + libName + "/" + folderName + "/";
+                    query.FolderServerRelativeUrl = new Uri(siteUrl).AbsolutePath +"/" + libName + "/" + folderName + "/";
                 }
 
                 ListItemCollection listItems = list.GetItems(query);
@@ -4599,7 +4599,7 @@ namespace manage.Controls
 
                 if (!string.IsNullOrEmpty(folderName))
                 {
-                    query.FolderServerRelativeUrl = "/sites/excel/" + listName + "/" + folderName + "/";
+                    query.FolderServerRelativeUrl = new Uri(siteUrl).AbsolutePath + "/" + listName + "/" + folderName + "/";
                 }
 
                 ListItemCollection listItems = list.GetItems(query);
@@ -4991,7 +4991,7 @@ namespace manage.Controls
 
                 if (!string.IsNullOrEmpty(folderName))
                 {
-                    query.FolderServerRelativeUrl = "/sites/excel/" + libName + "/" + folderName + "/";
+                    query.FolderServerRelativeUrl = new Uri(siteUrl).AbsolutePath + "/"+ libName + "/" + folderName + "/";
                 }
 
                 ListItemCollection listItems = list.GetItems(query);

@@ -357,7 +357,7 @@ namespace manage.Controls
 
                if(!string.IsNullOrEmpty(folderName))
                 {
-                    query.FolderServerRelativeUrl = "/sites/excel/"+libName+"/" + folderName + "/";
+                    query.FolderServerRelativeUrl = new Uri(siteUrl).AbsolutePath + "/" + libName+"/" + folderName + "/";
                 }
 
                 ListItemCollection listItems = list.GetItems(query);
