@@ -36,7 +36,7 @@
         </Button>
         <Button x:Name="btn_siteadmin"  Width="140" Content="Site Administration" HorizontalAlignment="Right" Margin="0,20,5,0" VerticalAlignment="Top" Height="30" Cursor="Hand" FontFamily="Arial" FontSize="12" Click="btn_siteadmin_Click" Background="#FF72787A" Foreground="#FF002663"/>
 
-            <telerik:RadTabControl Name="radTabControl" Margin="0,65,0,0" BorderBrush="#FF002663" BorderThickness="1" HeaderBackground="{x:Null}">
+        <telerik:RadTabControl Name="radTabControl" Margin="0,65,0,0" BorderBrush="#FF002663" BorderThickness="1" HeaderBackground="{x:Null}">
             <telerik:RadTabItem Header="My Ideas" x:Name="myideas" Width="140" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
                 <Grid Background="Transparent" Margin="0">
                     <Grid.ColumnDefinitions>
@@ -241,8 +241,8 @@
                                 <telerik:GridViewDataColumn Header="Executor" DataMemberBinding="{Binding executor}" IsVisible="True"/>
                                 <telerik:GridViewDataColumn Header="Director" DataMemberBinding="{Binding director}" IsVisible="True"/>
                                 <telerik:GridViewDataColumn Header="Created By" DataMemberBinding="{Binding CreatedBy}" IsVisible="True"/>
-                                
-                                
+
+
                                 <telerik:GridViewDataColumn Header="Idea Status" IsCustomSortingEnabled="False" DataMemberBinding="{Binding ideaStatus}" IsFilterable="True"/>
                                 <telerik:GridViewDataColumn Header="Cost Type" IsCustomSortingEnabled="False" DataMemberBinding="{Binding costType}" IsFilterable="True"/>
 
@@ -256,7 +256,7 @@
 
                                 <telerik:GridViewDataColumn Header="LOB-T1" IsFilterable="True" DataMemberBinding="{Binding LOBT1}" TextWrapping="Wrap"/>
                                 <telerik:GridViewDataColumn Header="LOB-T2" IsFilterable="True" IsGroupable="False" DataMemberBinding="{Binding LOBT2}" TextWrapping="Wrap"/>
-                               
+
                                 <telerik:GridViewDataColumn Header="VP" DataMemberBinding="{Binding ideavp}" IsVisible="False"/>
 
                                 <telerik:GridViewDataColumn  IsFilterable="False" Header="Savings Header1" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SH1}"/>
@@ -295,53 +295,42 @@
 
                 </Grid>
             </telerik:RadTabItem>
-            
-            
+
+
             <telerik:RadTabItem x:Name="admintab" Loaded="admintab_Loaded" Header="Admin" Width="140" Height="30" Background="#FFE2E2E2" BorderBrush="#FF002663" Foreground="#FF002663" FontFamily="Arial" FontSize="12">
                 <Grid Background="Transparent" Margin="0,0,0,-1">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock x:Name="loblbl" Text="Click on LOB to display ideas." Foreground="Black" HorizontalAlignment="Left" Margin="10,5,0,0"/>
+
+                        <TextBlock x:Name="loblbl" Text="Click on LOB to display ideas." Foreground="Black" HorizontalAlignment="Left" Margin="15,5,0,0" FontFamily="Arial" FontSize="12"/>
 
                         <StackPanel Orientation="Horizontal" Margin="10,10,0,0" HorizontalAlignment="Left" Width="297" Height="31">
-                            <HyperlinkButton Margin="0" Name="AdmGBSLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Click="AdmGBSLink_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock x:Name="btn_adminGBS" Text="GBS &amp; HR" TextDecorations="Underline" Foreground="Black">
-
-                                </TextBlock>
+                            <HyperlinkButton Margin="0" x:Name="AdmGBSLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,0" Click="AdmGBSLink_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock x:Name="btn_adminGBS" Text="GBS &amp; HR" TextDecorations="Underline" Foreground="Black"/>
                             </HyperlinkButton>
-                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
-                            <HyperlinkButton Margin="0" Name="AdmGBTLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmGBTLink_Click">
-                                <TextBlock x:Name="btn_adminGBT" Text="GBT" TextDecorations="Underline" Foreground="Black">
-
-                                </TextBlock>
+                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" />
+                            <HyperlinkButton Margin="0" x:Name="AdmGBTLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmGBTLink_Click">
+                                <TextBlock x:Name="btn_adminGBT" Text="GBT" TextDecorations="Underline" Foreground="Black"/>
                             </HyperlinkButton>
-                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
-                            <HyperlinkButton Margin="0" Name="AdmGCPLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmGCPLink_Click">
-                                <TextBlock x:Name="btn_adminGCP" Text="GCP" TextDecorations="Underline" Foreground="Black">
-
-                                </TextBlock>
+                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" />
+                            <HyperlinkButton Margin="0" x:Name="AdmGCPLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmGCPLink_Click">
+                                <TextBlock x:Name="btn_adminGCP" Text="GCP" TextDecorations="Underline" Foreground="Black"/>
                             </HyperlinkButton>
 
-                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
-                            <HyperlinkButton Margin="0" Name="AdmPBMTLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmPBMTLink_Click">
-                                <TextBlock x:Name="btn_adminPBMT" Text="PBMT" TextDecorations="Underline" Foreground="Black">
-
-                                </TextBlock>
+                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" />
+                            <HyperlinkButton Margin="0" x:Name="AdmPBMTLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmPBMTLink_Click">
+                                <TextBlock x:Name="btn_adminPBMT" Text="PBMT" TextDecorations="Underline" Foreground="Black"/>
                             </HyperlinkButton>
-                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
-                            <HyperlinkButton Margin="0" Name="AdmWSGCATLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmWSGCATLink_Click">
-                                <TextBlock x:Name="btn_adminWSGCAT" Text="WSGCAT" TextDecorations="Underline" Foreground="Black">
-
-                                </TextBlock>
+                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" />
+                            <HyperlinkButton Margin="0" x:Name="AdmWSGCATLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmWSGCATLink_Click">
+                                <TextBlock x:Name="btn_adminWSGCAT" Text="WSGCAT" TextDecorations="Underline" Foreground="Black"/>
                             </HyperlinkButton>
-                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" ></TextBlock>
-                            <HyperlinkButton Margin="0" Name="AdmAllLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmAllLink_Click">
-                                <TextBlock x:Name="btn_adminALL" Text="All"  TextDecorations="Underline" Foreground="Black">
-
-                                </TextBlock>
+                            <TextBlock Text="l" Foreground="#FF8D8D8D" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" />
+                            <HyperlinkButton Margin="0" x:Name="AdmAllLink" Foreground="#FF002663" FontFamily="Arial" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0" Click="AdmAllLink_Click">
+                                <TextBlock x:Name="btn_adminALL" Text="All"  TextDecorations="Underline" Foreground="Black"/>
                             </HyperlinkButton>
                         </StackPanel>
 
-                        <telerik:RadGridView x:Name="adminGrid" ShowColumnSortIndexes="True" ShowGroupPanel="False" telerik:StyleManager.Theme="Summer" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" Margin="0" Height="405" ActionOnLostFocus="None" FontFamily="Arial" CanUserDeleteRows="False" CanUserInsertRows="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" DataLoadMode="Asynchronous" MinColumnWidth="75" CanUserSelect="True" RowIndicatorVisibility="Collapsed" RowHeight="30">
+                        <telerik:RadGridView x:Name="adminGrid" ShowColumnSortIndexes="True" ShowGroupPanel="False" telerik:StyleManager.Theme="Summer" IsReadOnly="True" AutoGenerateColumns="False" VerticalAlignment="Center" Margin="0" Height="388" ActionOnLostFocus="None" FontFamily="Arial" CanUserDeleteRows="False" CanUserInsertRows="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" DataLoadMode="Asynchronous" MinColumnWidth="75" CanUserSelect="True" RowIndicatorVisibility="Collapsed" RowHeight="30">
 
 
                             <telerik:RadGridView.Columns>
@@ -366,11 +355,11 @@
                                 </telerik:GridViewDynamicHyperlinkColumn>
 
                                 <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
-                                    <telerik:GridViewImageColumn.ToolTipTemplate>
+                                    <local:ImageFilterColumn.ToolTipTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding AlertTip}" />
                                         </DataTemplate>
-                                    </telerik:GridViewImageColumn.ToolTipTemplate>
+                                    </local:ImageFilterColumn.ToolTipTemplate>
                                 </local:ImageFilterColumn>
 
                                 <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="False" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
@@ -379,14 +368,11 @@
 
                                 <telerik:GridViewDataColumn Header="Tech Impact" IsGroupable="False" IsVisible="False" IsFilterable="False" DataMemberBinding="{Binding TechImpact}" TextWrapping="Wrap" MaxWidth="200"/>
 
-                                <telerik:GridViewDataColumn Header="1st Mo Saves Date" IsCustomSortingEnabled="True" IsFilterable="True" DataMemberBinding="{Binding firstMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat='{}{0:MM/dd/yyyy}'}" IsGroupable="False" Width="125" MaxWidth="125" MinWidth="125">
-
-                                </telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn Header="Revised 1st Mo Saves Date" IsFilterable="True" DataMemberBinding="{Binding revisedMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat='{}{0:MM/dd/yyyy}'}" IsGroupable="False" Width="150" MaxWidth="150" MinWidth="150">
-                                </telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn Header="1st Mo Saves Date" IsCustomSortingEnabled="True" IsFilterable="True" DataMemberBinding="{Binding firstMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat=\{0:MM/dd/yyyy\}}" IsGroupable="False" Width="125" MaxWidth="125" MinWidth="125"/>
+                                <telerik:GridViewDataColumn Header="Revised 1st Mo Saves Date" IsFilterable="True" DataMemberBinding="{Binding revisedMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat=\{0:MM/dd/yyyy\}}" IsGroupable="False" Width="150" MaxWidth="150" MinWidth="150"/>
                                 <telerik:GridViewDataColumn Header="FTE Contributors" IsFilterable="False" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding FTE}" TextWrapping="Wrap" MaxWidth="150" />
 
-                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat='{}{0:c}'}" />
+                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat=\{0:c\}}" />
 
                                 <telerik:GridViewDataColumn Header="LOB-T1" IsFilterable="True" DataMemberBinding="{Binding LOBT1}" TextWrapping="Wrap"/>
                                 <telerik:GridViewDataColumn Header="LOB-T2" IsFilterable="True" IsGroupable="False" DataMemberBinding="{Binding LOBT2}" TextWrapping="Wrap"/>
@@ -395,19 +381,19 @@
                                 <telerik:GridViewDataColumn Header="VP" DataMemberBinding="{Binding ideavp}" IsVisible="False"/>
 
                                 <telerik:GridViewDataColumn  IsFilterable="False" Header="Savings Header1" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SH1}"/>
-                                <telerik:GridViewDataColumn   IsFilterable="False"  Header="Savings1" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S1,StringFormat='{}{0:c}'}"/>
+                                <telerik:GridViewDataColumn   IsFilterable="False"  Header="Savings1" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S1, StringFormat=\{0:c\}}"/>
 
                                 <telerik:GridViewDataColumn  IsFilterable="False"   Header="Savings Header2" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SH2}"/>
-                                <telerik:GridViewDataColumn   IsFilterable="False"  Header="Savings2" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S2,StringFormat='{}{0:c}'}"/>
+                                <telerik:GridViewDataColumn   IsFilterable="False"  Header="Savings2" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S2, StringFormat=\{0:c\}}"/>
 
                                 <telerik:GridViewDataColumn  IsFilterable="False"   Header="Savings Header3" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SH3}"/>
-                                <telerik:GridViewDataColumn  IsFilterable="False"  Header="Savings3" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S3,StringFormat='{}{0:c}'}"/>
+                                <telerik:GridViewDataColumn  IsFilterable="False"  Header="Savings3" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S3, StringFormat=\{0:c\}}"/>
 
                                 <telerik:GridViewDataColumn  IsFilterable="False"  Header="Savings Header4" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SH4}"/>
-                                <telerik:GridViewDataColumn  IsFilterable="False"   Header="Savings4" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S4,StringFormat='{}{0:c}'}"/>
+                                <telerik:GridViewDataColumn  IsFilterable="False"   Header="Savings4" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S4, StringFormat=\{0:c\}}"/>
 
                                 <telerik:GridViewDataColumn  IsFilterable="False"   Header="Savings Header5" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding SH5}"/>
-                                <telerik:GridViewDataColumn  IsFilterable="False"  Header="Savings5" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S5,StringFormat='{}{0:c}'}"/>
+                                <telerik:GridViewDataColumn  IsFilterable="False"  Header="Savings5" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding S5, StringFormat=\{0:c\}}"/>
 
                                 <telerik:GridViewDataColumn Header="Idea Description" IsFilterable="False"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding Description}" TextWrapping="Wrap" MaxWidth="200" />
                                 <telerik:GridViewDataColumn Header="AIM Application Name" IsFilterable="True"  IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding AppName}" TextWrapping="Wrap" MaxWidth="200" />
@@ -469,7 +455,7 @@
 
 
                             <telerik:RadGridView.Columns>
-                               
+
                                 <telerik:GridViewDynamicHyperlinkColumn Header="View Idea" DataMemberBinding="{Binding ideaID}" Width="65" IsGroupable="False" MaxWidth="65" MinWidth="65" TextAlignment="Center">
                                     <telerik:GridViewDynamicHyperlinkColumn.CellStyle>
                                         <Style TargetType="telerik:GridViewCell">
@@ -547,9 +533,9 @@
 
                     </StackPanel>
                 </Grid>
-                
+
             </telerik:RadTabItem>
-          
+
         </telerik:RadTabControl>
 
         <TextBlock x:Name="currUser" HorizontalAlignment="Left" Margin="558,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="198"/>

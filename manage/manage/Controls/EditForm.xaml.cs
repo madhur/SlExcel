@@ -2149,7 +2149,7 @@ namespace manage.Controls
         private void imghelp_role_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
-            PopUpText_role.Text = "Choose Role Family for this idea.";
+            PopUpText_role.Text = "Role Family is used by roles that have additional role-based EXCEL goals. This is a subset of the overall portfolio EXCEL goals. For typical end user, selection will be 'None'.";
             myPopup_role.IsOpen = true;
         }
 
