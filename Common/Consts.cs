@@ -17,6 +17,7 @@ namespace Common
         public  const  String   ROLE_LIST="RoleFamily";
         public  const String TITLE_COLUMN = "Title";
         public  const String NAME_FIELD = "Name";
+        public const String ROLEFAMILY_COLUMN = "RoleFamily";
 
     }
 }

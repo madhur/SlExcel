@@ -35,7 +35,6 @@ namespace manage.Controls
     {
         Web oWebsite;
         ListCollection collList;
-       // ListItemCollection listitems;
         User user;
         private List Idea;
         private const string libName = "Idea Attachments";
@@ -92,7 +91,6 @@ namespace manage.Controls
 
             InitializeComponent();
 
-          //  this.mainPage = mainPage;
             selectedFiles = new SelectedFiles();
             allFiles = new SelectedFiles();
             ideaID.Text = id;
@@ -165,8 +163,6 @@ namespace manage.Controls
 
                                 if (val != null)
                                 {
-                                    //   SinglePeopleChooser.UserTextBox.Text = val.LookupValue.ToString();
-                                    //LoadSingleUser(context, val, SinglePeopleChooser);
                                     values[0] = val;
 
                                     SinglePeopleChooser.UserTextBox.FontStyle = FontStyles.Italic;
@@ -188,8 +184,6 @@ namespace manage.Controls
                                 FieldUserValue val1 = listitems[0].FieldValues["Director"] as FieldUserValue;
                                 if (val1 != null)
                                 {
-                                    //SinglePeopleChooser1.UserTextBox.Text = val1.LookupValue.ToString();
-                                    //LoadSingleUser(context, val1, SinglePeopleChooser1);
                                     values[1] = val1;
                                     SinglePeopleChooser1.UserTextBox.FontStyle = FontStyles.Italic;
                                 }
@@ -200,8 +194,6 @@ namespace manage.Controls
                                 if (val2 != null)
                                 {
                                     values[2] = val2;
-                                    //LoadSingleUser(context, val2, SinglePeopleChooser2);
-                                    // SinglePeopleChooser2.UserTextBox.Text = val2.LookupValue.ToString();
                                     SinglePeopleChooser2.UserTextBox.FontStyle = FontStyles.Italic;
                                 }
 
@@ -217,7 +209,6 @@ namespace manage.Controls
                                     LoadUser(context, vals);
                                 }
 
-                               // LoadRoles();
 
                             }
                     );
@@ -645,10 +636,6 @@ namespace manage.Controls
 
                           ideaname.Text = getItem("Idea_x0020_Name", listitems[0]);
                           description.Text = getItem("EXCEL_x0020_Idea_x0020_Descripti", listitems[0]);
-                       //   resultsLOB2.Text = ;
-
-                        
-
                           Identify.Text = getItem("EXCEL_x0020_Identifier", listitems[0]);
 
                           if (Identify.Text == "1. E-Excessive Demand")
@@ -672,8 +659,6 @@ namespace manage.Controls
                               identify_l.IsChecked = true;
                           }
 
-                          //  resultsLOB2.Text = listitems[0].FieldValues["Line_x0020_Of_x0020_Business_x001"].();
-                         // resultsLOB2.Text = ;ToString
                           LoadRadios(getItem("Line_x0020_Of_x0020_Business_x001", listitems[0]), getItem("LOB_Tier2", listitems[0]) );
                         
 
@@ -802,9 +787,6 @@ namespace manage.Controls
                               costClarify_combo.SelectedItem = CC[4];
                           }
 
-
-
-                          //header1.Text = listitems[0].FieldValues["SavingsHeader1"].ToString();
                           header1.Text = getItem("SavingsHeader1", listitems[0]);
                           header2.Text = getItem("SavingsHeader2", listitems[0]);
                           header3.Text = getItem("SavingsHeader3", listitems[0]);
@@ -824,7 +806,7 @@ namespace manage.Controls
                           AIM_ID.Text = getItem("AIM_x0020_Application_x0020_ID", listitems[0]);
                           LoadComboItems(getItem("AIM_x0020_Application_x0020_Name", listitems[0]), getItem("AIM_x0020_Application_x0020_ID", listitems[0]));
 
-                          LoadRoleItems();
+                          LoadRoleItems(getItem(GlobalConsts.ROLEFAMILY_COLUMN, listitems[0]));
 
                       }
 
@@ -2509,6 +2491,9 @@ namespace manage.Controls
             updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
             updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
 
+            RoleItem roleItem = rolecombo.SelectedItem as RoleItem;
+            if (roleItem != null)
+                updateItem[GlobalConsts.ROLEFAMILY_COLUMN] = roleItem.Name;
 
             if (identify_e.IsChecked == true)
             {
@@ -3368,7 +3353,7 @@ namespace manage.Controls
 
         }
 
-        private void LoadRoleItems()
+        private void LoadRoleItems(String selectedRole)
         {
             ClientContext context = ClientContext.Current;
 
@@ -3383,25 +3368,35 @@ namespace manage.Controls
 
             context.ExecuteQueryAsync((s, ee) =>
             {
-
-
-                foreach (ListItem listitem in listItems)
-                {
-                    if (listitem.FieldValues[GlobalConsts.TITLE_COLUMN] != null)
-                    {
-                        roleItems.Add(new RoleItem { Name = listitem.FieldValues[GlobalConsts.TITLE_COLUMN].ToString() });
-                    }
-
-                }
-
                 Dispatcher.BeginInvoke(() =>
                 {
+                    foreach (ListItem listitem in listItems)
+                    {
+                        if (listitem.FieldValues[GlobalConsts.TITLE_COLUMN] != null)
+                        {
+                            roleItems.Add(new RoleItem { Name = listitem.FieldValues[GlobalConsts.TITLE_COLUMN].ToString() });
+                        }
+
+                    }
+
 
                     rolecombo.DisplayMemberPath = GlobalConsts.NAME_FIELD;
                     rolecombo.SelectedValuePath = GlobalConsts.NAME_FIELD;
                     rolecombo.SelectedValue = "{Binding Name}";
                     rolecombo.ItemsSource = roleItems;
                     rolecombo.DataContext = roleItems;
+
+                    try
+                    {
+                        if (!String.IsNullOrEmpty(selectedRole))
+                        {
+                            rolecombo.SelectedValue = selectedRole;
+                        }
+                    }
+                    finally
+                    {
+
+                    }
 
                 }
 

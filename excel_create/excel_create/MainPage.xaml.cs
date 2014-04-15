@@ -65,7 +65,6 @@ namespace excel_create
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-           // LoadItems();
         }
 
 
@@ -567,17 +566,12 @@ namespace excel_create
                 tech_impact.ClearValue(TextBox.TextProperty);
             }
 
-            //ButtonsEnableDisable();
-
         }
        
 
         #endregion
 
         #region H E L P  P O P U P S
-
-
-
         private void PopUpButton1_Click(object sender, RoutedEventArgs e)
         {
             myPopup_descrip.IsOpen = false;
@@ -833,41 +827,31 @@ namespace excel_create
         private void btn_next2_Click(object sender, RoutedEventArgs e)
         {
 
-             if ( firstmonth.Text.Length == 0)
+            if (firstmonth.Text.Length == 0)
+            {
+                NavigateFinancialTab();
+            }
+            else if (firstmonth.SelectedDate < DateTime.Now)
             {
                 NavigateFinancialTab();
 
-              
+            }
+
+            else if (firstmonth.SelectedDate > DateTime.Now)
+            {
+
+                NavigateFinancialTab();
 
 
             }
-             else     if (firstmonth.SelectedDate < DateTime.Now)
-             {
-                 NavigateFinancialTab();
 
-             }
-
-                      else     if ( firstmonth.SelectedDate > DateTime.Now)
-             {
-
-                 NavigateFinancialTab();
-          
-
-             }
-
-             else if (firstmonth.SelectedDate < DateTime.Now)
-             {
-                 NavigateFinancialTab();
+            else if (firstmonth.SelectedDate < DateTime.Now)
+            {
+                NavigateFinancialTab();
 
 
-             }
-
-
-          
-
+            }
         }
-
-
 
         private void btn_next3_Click(object sender, RoutedEventArgs e)
         {
@@ -892,20 +876,12 @@ namespace excel_create
 
         private void btn_back_Click(object sender, RoutedEventArgs e)
         {
-
-            
-
             NavigateOverviewTab();
         }
 
         private void btn_back2_Click(object sender, RoutedEventArgs e)
         {
-
-           
-
             NavigateScopeTab();
-
-
         }
 
         private void btn_back3_Click(object sender, RoutedEventArgs e)
@@ -915,14 +891,14 @@ namespace excel_create
             {
                 NavigateOverviewTab();
 
-           
+
             }
 
             else if (Identify.Text.Length == 0 || Risk.Text.Length == 0 || Save.Text.Length == 0 || CT.Text.Length == 0)
             {
-                
+
                 NavigateScopeTab();
-           
+
 
             }
             else if (Identify.Text.Length == 0 || Risk.Text.Length == 0 || Save.Text.Length == 0 || CT.Text == "type_reEngineer" && tech_impact.Text.Length == 0)
@@ -934,39 +910,24 @@ namespace excel_create
             else
             {
 
-                if ( firstmonth.Text.Length == 0)
+                if (firstmonth.Text.Length == 0)
                 {
 
                     NavigateFinancialTab();
-                  
-
-
                 }
                 else if (firstmonth.SelectedDate < DateTime.Now)
                 {
                     NavigateFinancialTab();
-
-                 
-
-
                 }
 
-                else if ( firstmonth.SelectedDate > DateTime.Now)
+                else if (firstmonth.SelectedDate > DateTime.Now)
                 {
                     NavigateFinancialTab();
-
-                   
-
-
                 }
 
-                else if ( firstmonth.SelectedDate < DateTime.Now)
+                else if (firstmonth.SelectedDate < DateTime.Now)
                 {
-
                     NavigateFinancialTab();
-                
-
-
                 }
 
 
@@ -994,9 +955,6 @@ namespace excel_create
             financials_image.Visibility = Visibility.Collapsed;
             overview_image.Visibility = Visibility.Collapsed;
             scope_image.Visibility = Visibility.Collapsed;
-
-      
-
         }
 
 
@@ -1046,12 +1004,7 @@ namespace excel_create
                 }
             }
 
-
-
             result = CheckLobMapping(result);
-
-
-
             return result;
         }
 
@@ -1366,23 +1319,23 @@ namespace excel_create
 
         private void NavigateFinancialTab()
         {
-          
-                btn_fp.Visibility = Visibility.Visible;
-                btn_inprogress.Visibility = Visibility.Visible;
-                btn_approve.Visibility = Visibility.Visible;
+
+            btn_fp.Visibility = Visibility.Visible;
+            btn_inprogress.Visibility = Visibility.Visible;
+            btn_approve.Visibility = Visibility.Visible;
 
 
-                this.tabcontrol1.SelectedIndex = 2;
-                btnstack_scope.Visibility = Visibility.Collapsed;
-                btnstack_scopeBack.Visibility = Visibility.Collapsed;
-                btnstack_financial.Visibility = Visibility.Visible;
+            this.tabcontrol1.SelectedIndex = 2;
+            btnstack_scope.Visibility = Visibility.Collapsed;
+            btnstack_scopeBack.Visibility = Visibility.Collapsed;
+            btnstack_financial.Visibility = Visibility.Visible;
 
 
-                btnstack_comments.Visibility = Visibility.Collapsed;
-                btn_comments.IsEnabled = true;
+            btnstack_comments.Visibility = Visibility.Collapsed;
+            btn_comments.IsEnabled = true;
 
-                scope_image.Visibility = Visibility.Collapsed;
-                financials_image.Visibility = Visibility.Visible;
+            scope_image.Visibility = Visibility.Collapsed;
+            financials_image.Visibility = Visibility.Visible;
 
         }
 
@@ -1468,9 +1421,6 @@ namespace excel_create
         User Singleuser1;
         User Singleuser2;
 
- 
-
-
          private void btn_draft_Click(object sender, RoutedEventArgs e)
          {
              ResetControls();
@@ -1485,10 +1435,7 @@ namespace excel_create
 
              else
              {
-                 btn_draft.IsEnabled = false;
-                 btn_approve.IsEnabled = false;
-                 btn_fp.IsEnabled = false;
-                 btn_inprogress.IsEnabled = false;
+                 DisableStatusButtons();
                  //Get the current context 
                  ClientContext context = ClientContext.Current;
                  //Get the Idea list and add a new item 
@@ -1539,6 +1486,14 @@ namespace excel_create
              }
          }
 
+         private void DisableStatusButtons()
+         {
+             btn_draft.IsEnabled = false;
+             btn_approve.IsEnabled = false;
+             btn_fp.IsEnabled = false;
+             btn_inprogress.IsEnabled = false;
+
+         }
 
          private void SaveRadios(ListItem updateItem)
          {
@@ -1700,8 +1655,6 @@ namespace excel_create
              newItem["Idea_x0020_Name"] = ideaname.Text;
              newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
 
-            
-
              SaveRadios(newItem);
 
              //<------Scope Tab------>
@@ -1709,6 +1662,10 @@ namespace excel_create
              MyItem item = aimcombo.SelectedItem as MyItem;
              if (item != null)
                  newItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
+
+             RoleItem roleItem = rolecombo.SelectedItem as RoleItem;
+             if (roleItem != null)
+                 newItem[GlobalConsts.ROLEFAMILY_COLUMN] = roleItem.Name;
 
              // newItem["AIM_x0020_Application_x0020_Name"] = aimcombo.SelectionBoxItem;
              newItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
@@ -1718,7 +1675,6 @@ namespace excel_create
              if (identify_e.IsChecked == true)
              {
                  newItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-
              }
              else if (identify_x.IsChecked == true)
              {
@@ -1809,10 +1765,6 @@ namespace excel_create
              //<-----comments, status & audit----->
 
              newItem["Project_x0020_Comments"] = projcomText.Text;
-
-
-
-
          }
 
         //<~~~~~~~~FUTURE PIPELINE~~~~~~~~>
@@ -1841,10 +1793,8 @@ namespace excel_create
 
                  else
                  {
-                     btn_draft.IsEnabled = false;
-                     btn_approve.IsEnabled = false;
-                     btn_fp.IsEnabled = false;
-                     btn_inprogress.IsEnabled = false;                 //Get the current context 
+                     DisableStatusButtons();
+                     //Get the current context 
                      ClientContext context = ClientContext.Current;
                      //Get the Idea list and add a new item 
                      Idea = context.Web.Lists.GetByTitle("Idea");
@@ -1928,10 +1878,7 @@ namespace excel_create
 
                  else
                  {
-                     btn_draft.IsEnabled = false;
-                     btn_approve.IsEnabled = false;
-                     btn_fp.IsEnabled = false;
-                     btn_inprogress.IsEnabled = false;
+                     DisableStatusButtons();
 
                      //Get the current context 
                      ClientContext context = ClientContext.Current;
@@ -1945,10 +1892,6 @@ namespace excel_create
                      newItem["scale"] = "2";
                      newItem["Idea_x0020_Status"] = "In Progress";
                      newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea in progress.";
-
-
-
-
                      newItem.Update();
                      //Load the list 
                      context.Load(Idea, list => list.Title);
@@ -2027,63 +1970,56 @@ namespace excel_create
 
         void YesClicked(object sender, EventArgs e)
         {
-          
-                btn_draft.IsEnabled = false;
-                btn_approve.IsEnabled = false;
-                btn_fp.IsEnabled = false;
-                btn_inprogress.IsEnabled = false;   
-                //Get the current context 
-                ClientContext context = ClientContext.Current;
-                //Get the Idea list and add a new item 
-                Idea = context.Web.Lists.GetByTitle("Idea");
-                ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
-                //Set the new item's properties 
-                SetFields(newItem, context);
-                
-             
-                newItem["scale"] = "3";
-                newItem["Idea_x0020_Status"] = "Submit for Approval";
-                newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea for approval.";
+
+            DisableStatusButtons();
+            //Get the current context 
+            ClientContext context = ClientContext.Current;
+            //Get the Idea list and add a new item 
+            Idea = context.Web.Lists.GetByTitle("Idea");
+            ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
+            //Set the new item's properties 
+            SetFields(newItem, context);
+
+
+            newItem["scale"] = "3";
+            newItem["Idea_x0020_Status"] = "Submit for Approval";
+            newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea for approval.";
 
 
 
-                newItem.Update();
-                //Load the list 
-                context.Load(Idea, list => list.Title);
-                //Execute the query to create the new item 
-                context.ExecuteQueryAsync((s, ee) =>
+            newItem.Update();
+            //Load the list 
+            context.Load(Idea, list => list.Title);
+            //Execute the query to create the new item 
+            context.ExecuteQueryAsync((s, ee) =>
+            {
+                string itemId = newItem.Id.ToString();
+
+                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+
+                Dispatcher.BeginInvoke(() =>
                 {
-                    string itemId = newItem.Id.ToString();
+                    newFolderName = itemId;
+                    msgwin = new Messages();
+                    msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
+                    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                    msgwin.alert.Visibility = Visibility.Collapsed;
 
-                    RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
-
-                    Dispatcher.BeginInvoke(() =>
-                    {
-                        newFolderName = itemId;
-                        msgwin = new Messages();
-                        msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
-                        msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                        msgwin.alert.Visibility = Visibility.Collapsed;
-
-                        msgwin.Show();
-                    }
-                        );
+                    msgwin.Show();
+                }
+                    );
 
 
-                },
-  (s, ee) =>
-  {
-      Console.WriteLine(ee.Message);
+            },
+(s, ee) =>
+{
+    Console.WriteLine(ee.Message);
 
-  });
+});
 
 
-            
+
         }
-        
-
-
-
         #endregion
 
 
@@ -2130,10 +2066,6 @@ namespace excel_create
                     }
 
                         );
-
-
-
-
                 },
 
 
@@ -2186,10 +2118,6 @@ namespace excel_create
                 }
 
                     );
-
-
-
-
             },
 
 
@@ -2331,10 +2259,6 @@ namespace excel_create
 
                });
 
-
-
-
-
             },
 
              (ssss, eeeee) =>
@@ -2343,11 +2267,6 @@ namespace excel_create
 
              });
         }
-
-
-
-
-
 
         #endregion*/
 
@@ -2634,8 +2553,6 @@ namespace excel_create
 
                 clientContext.Load(rootFolder);
 
-
-
                 ListItemCreationInformation newItem = new ListItemCreationInformation();
                 newItem.UnderlyingObjectType = FileSystemObjectType.Folder;
                 //newItem.FolderUrl = siteUrl + listName;
@@ -2655,14 +2572,6 @@ namespace excel_create
                 {
 
                     Folder newFolder = rootFolder.Folders.Add(folderName);
-
-
-                    Dispatcher.BeginInvoke(() =>
-                    {
-
-
-                        // MessageBox.Show("Created", "Created", MessageBoxButton.OK);
-                    });
 
                 },
           (s, ee) =>
@@ -2700,16 +2609,7 @@ namespace excel_create
                                 "</Query>" +
                                 "</View>";
 
-                /* if (relativePath.Equals(string.Empty))
-                 {
-                     query.FolderServerRelativeUrl = "/lists/" + listName;
-                 }
-                 else
-                 {
-                     query.FolderServerRelativeUrl = "/lists/" + listName + "/" + relativePath;
-                 }*/
-
-                //query.FolderServerRelativeUrl = "/"+listName;
+               
 
                 var folders = list.GetItems(query);
 
@@ -2731,16 +2631,7 @@ namespace excel_create
                         folders[0].Update();
                         clientContext.ExecuteQueryAsync((ss, eee) =>
                         {
-
-                            Dispatcher.BeginInvoke(() =>
-                            {
-
-                                //  MessageBox.Show("Success", "Success", MessageBoxButton.OK);
-                            });
-
-
-
-
+                        
                         },
           (ss, eee) =>
           {
@@ -2899,15 +2790,7 @@ namespace excel_create
                                "</Query>" +
                                "</View>";
 
-                /*if (relativePath.Equals(string.Empty))
-                {
-                    query.FolderServerRelativeUrl = "/lists/" + listName;
-                }
-                else
-                {
-                    query.FolderServerRelativeUrl = "/lists/" + listName + "/" + relativePath;
-                }*/
-
+              
                 var folders = list.GetItems(query);
 
                 clientContext.Load(list);
@@ -2942,13 +2825,7 @@ namespace excel_create
                     }
 
 
-                    Dispatcher.BeginInvoke(() =>
-                    {
-
-
-
-                    });
-
+       
                 },
          (s, ee) =>
          {
@@ -3043,7 +2920,6 @@ namespace excel_create
             List MadhurList = context.Web.Lists.GetByTitle("Idea");
             ListItem newItem = MadhurList.AddItem(new ListItemCreationInformation());
 
-            //Singleuser = context.Web.EnsureUser("ads\\mahuj4");
             newItem["Idea_x0020_Status"] = "Draft";
             newItem.Update();
             context.Load(MadhurList, list => list.Title);
