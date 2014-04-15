@@ -49,12 +49,8 @@ namespace manage.Controls
         public SelectedFiles allFiles; string mainID;
         string itemId;
         List<MyItem> items = new List<MyItem>();
-        //String AimName;
         ILoadable mainPage;
         String status, NewStatus;
-        //String isAuth;
-        //String isAdmin;
-        //String isContractor;
         String[] people = new String[3] ;
         bool formLoad;
         bool isContractor, isEmployee, isReadOnly, isAdmin;
@@ -827,6 +823,8 @@ namespace manage.Controls
 
                           AIM_ID.Text = getItem("AIM_x0020_Application_x0020_ID", listitems[0]);
                           LoadComboItems(getItem("AIM_x0020_Application_x0020_Name", listitems[0]), getItem("AIM_x0020_Application_x0020_ID", listitems[0]));
+
+                          LoadRoleItems();
 
                       }
 
@@ -2465,710 +2463,8 @@ namespace manage.Controls
 
         }
 
-        private void btn_draft_Click(object sender, RoutedEventArgs e)
+        private void SetFields(ListItem updateItem, ClientContext context)
         {
-
-            
-            ResetControls();
-
-            ValidateResult result = ValidateForDraft();
-            if (!result.IsValid)
-            {
-
-                GetErrorWindow(result).Show();
-                NavigateTab(result);
-            }
-            else
-            {
-                //Get the current context 
-                using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
-                {
-                    //Get the Idea list and add a new item 
-                    List Idea = context.Web.Lists.GetByTitle("Idea");
-                    context.Load(Idea);
-                    ListItem updateItem = Idea.GetItemById(ideaID.Text);                  //Set the new item's properties 
-
-                    if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                    {
-
-                        if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                            updateItem["Executor"] = Singleuser;
-
-                            Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                            updateItem["Director"] = Singleuser1;
-
-                            Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                            updateItem["VP"] = Singleuser2;
-
-                        }
-                        if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            List<FieldUserValue> usersList = new List<FieldUserValue>();
-                            foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                            {
-                                usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                            }
-
-                            updateItem["FTE_x0020_Contributors"] = usersList;
-                        }
-
-                    }
-
-                    //<-----Project Overview Tab ------>
-                    updateItem["Idea_x0020_Name"] = ideaname.Text;
-                    updateItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-                  
-                    updateItem["scale"] = "1";
-
-                    SetRadioStatus(updateItem);
-                    //<------Scope Tab------>
-
-                    MyItem item = aimcombo.SelectedItem as MyItem;
-                    if (item != null)
-                        updateItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                    updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                    updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-
-
-                    if (identify_e.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                    }
-                    else if (identify_x.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                    }
-                    else if (identify_c.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                    }
-                    else if (identify_e2.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                    }
-                    else if (identify_l.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                    }
-
-                    //Assumptions, Risk, Business Capability, SDLC
-                    updateItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                    if (risk_high.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                    }
-
-                    else if (risk_med.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                    }
-                    else if (risk_low.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                    }
-
-                    updateItem["Business_x0020_Capability"] = biz_capability.Text;
-                    updateItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                    updateItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                    //vendor save
-                    if (vendorSave_yes.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "Yes";
-                    }
-
-                    else if (vendorSave_no.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "No";
-                    }
-
-                    //Cost Type
-                    if (type_Avoid.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                    }
-
-                    else if (type_reEngineer.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                        updateItem["Tech_Impact"] = tech_impact.Text;
-                    }
-
-                    else if (type_Reduction.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Reduction";
-                    }
-                    else if (type_Growth.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Growth Reduction";
-                    }
-
-                    //<-----estimated savings----->
-
-                    updateItem["SavingsHeader1"] = header1.Text;
-                    updateItem["SavingsHeader2"] = header2.Text;
-                    updateItem["SavingsHeader3"] = header3.Text;
-                    updateItem["SavingsHeader4"] = header4.Text;
-                    updateItem["SavingsHeader5"] = header5.Text;
-
-                    updateItem["Savings1"] = es1.Value;
-                    updateItem["Savings2"] = es2.Value;
-                    updateItem["Savings3"] = es3.Value;
-                    updateItem["Savings4"] = es4.Value;
-                    updateItem["Savings5"] = es5.Value;
-
-                    updateItem["Total_x0020_Savings"] = es_Total.Value;
-
-                    //<-----comments, status & audit----->
-
-                    updateItem["Project_x0020_Comments"] = projcomText.Text;
-                    updateItem["Idea_x0020_Status"] = "Draft";
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "submitted the Idea in Draft status";
-                    updateItem["Audit"] = Audit.Text;
-                    updateItem.Update();
-                    //Load the list 
-                    context.Load(Idea, list => list.Title);
-
-                    //Execute the query to create the new item 
-                    context.ExecuteQueryAsync((s, ee) =>
-                    {
-
-                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
-
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            newFolderName = itemId;
-                            ChildWindow msg = new Messages(this);
-                            msgwin.alert.Visibility = Visibility.Collapsed;
-
-                            msg.Show();
-                            msgwin.Closed += msgwin_Closed;
-
-                        }
-                            );
-
-
-                    },
-        (s, ee) =>
-        {
-            Console.WriteLine(ee.Message);
-
-        });
-                }
-            }
-        }
-        
-
-
-        //<~~~~~~~~FUTURE PIPELINE~~~~~~~~>
-        private void btn_future_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (!DoDateCheck())
-                return;
-            else 
-            {
-
-                ResetControls();
-                ValidateResult draftResult = ValidateForDraft();
-                ValidateResult result = ValidateForInProgress(draftResult);
-
-                if (!result.IsValid)
-                {
-
-                    GetErrorWindow(result).Show();
-                    NavigateTab(result);
-                }
-
-
-                else
-                {
-                    //Get the current context 
-                    ClientContext context = ClientContext.Current;
-                    //Get the Idea list and add a new item 
-                    Idea = context.Web.Lists.GetByTitle("Idea");
-                    context.Load(Idea);
-                    MarkFilesPermanent();
-                    RemoveDeletedFiles();
-                    ListItem updateItem = Idea.GetItemById(ideaID.Text);
-                    //Set the new item's properties 
-                    MarkFilesPermanent();
-                    RemoveDeletedFiles();
-                    if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                    {
-
-                        if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                            updateItem["Executor"] = Singleuser;
-
-                            Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                            updateItem["Director"] = Singleuser1;
-
-                            Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                            updateItem["VP"] = Singleuser2;
-
-                        }
-                        if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            List<FieldUserValue> usersList = new List<FieldUserValue>();
-                            foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                            {
-                                usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                            }
-
-                            updateItem["FTE_x0020_Contributors"] = usersList;
-                        }
-
-                    }
-
-                    //<-----Project Overview Tab ------>
-                    updateItem["Idea_x0020_Name"] = ideaname.Text;
-                    updateItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-                    //if (fp_check.IsChecked == true)
-                    //{
-                    //    updateItem["FP_Text"] = "yes";
-                    //}
-
-                    updateItem["scale"] = "8";
-
-                    SetRadioStatus(updateItem);
-                    //<------Scope Tab------>
-
-
-                    MyItem item = aimcombo.SelectedItem as MyItem;
-                    if (item != null)
-                        updateItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                    //updateItem["AIM_x0020_Application_x0020_Name"] = aimcombo.SelectionBoxItem;
-                    updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                    updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-                    updateItem["Revised_x0020_1st_x0020_Mo_x0020"] = revisedmonth.SelectedDate;
-
-
-                    if (identify_e.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                    }
-                    else if (identify_x.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                    }
-                    else if (identify_c.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                    }
-                    else if (identify_e2.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                    }
-                    else if (identify_l.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                    }
-
-                    //Assumptions, Risk, Business Capability, SDLC
-                    updateItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                    if (risk_high.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                    }
-
-                    else if (risk_med.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                    }
-                    else if (risk_low.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                    }
-
-                    updateItem["Business_x0020_Capability"] = biz_capability.Text;
-                    updateItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                    updateItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                    //vendor save
-                    if (vendorSave_yes.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "Yes";
-                    }
-
-                    else if (vendorSave_no.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "No";
-                    }
-
-                    //Cost Type
-                    if (type_Avoid.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                    }
-
-                    else if (type_reEngineer.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                        updateItem["Tech_Impact"] = tech_impact.Text;
-                    }
-
-                    else if (type_Reduction.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Reduction";
-                    }
-                    else if (type_Growth.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Growth Reduction";
-                    }
-
-                    //<-----estimated savings----->
-
-                    updateItem["SavingsHeader1"] = header1.Text;
-                    updateItem["SavingsHeader2"] = header2.Text;
-                    updateItem["SavingsHeader3"] = header3.Text;
-                    updateItem["SavingsHeader4"] = header4.Text;
-                    updateItem["SavingsHeader5"] = header5.Text;
-
-                    updateItem["Savings1"] = es1.Value;
-                    updateItem["Savings2"] = es2.Value;
-                    updateItem["Savings3"] = es3.Value;
-                    updateItem["Savings4"] = es4.Value;
-                    updateItem["Savings5"] = es5.Value;
-
-                    updateItem["Total_x0020_Savings"] = es_Total.Value;
-
-                    //<-----comments, status & audit----->
-
-                    updateItem["Project_x0020_Comments"] = projcomText.Text;
-                    updateItem["Idea_x0020_Status"] = "Future Pipeline";
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea as future pipeline";
-                    updateItem["Audit"] = Audit.Text;
-
-
-
-
-                    updateItem.Update();
-                    //Load the list 
-                    context.Load(Idea, list => list.Title);
-
-
-                    //Execute the query to update the new item 
-                    context.ExecuteQueryAsync((s, ee) =>
-                    {
-
-                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
-
-
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            newFolderName = itemId;
-
-                            msgwin = new Messages(this);
-                            msgwin.msgtxt.Text = "Your idea was successfully submitted as future pipeline.";
-                            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                            msgwin.alert.Visibility = Visibility.Collapsed;
-
-                            msgwin.Show();
-                            msgwin.Closed += msgwin_Closed;
-
-
-                        }
-                            );
-
-
-
-                    },
-        (s, ee) =>
-        {
-            Console.WriteLine(ee.Message);
-
-        });
-                }
-            }
-        }
-
-
-
-        //<~~~~~~BEGIN IN PROGRESS~~~~~>
-        private void btn_inprogress_Click(object sender, RoutedEventArgs e)
-        {
-            if (!DoDateCheck())
-                return;
-            else 
-            {
-                ResetControls();
-                ValidateResult draftResult = ValidateForDraft();
-                ValidateResult result = ValidateForInProgress(draftResult);
-
-                if (!result.IsValid)
-                {
-
-                    GetErrorWindow(result).Show();
-                    NavigateTab(result);
-                }
-
-                else
-                {
-
-                    //Get the current context 
-                    ClientContext context = ClientContext.Current;
-                    //Get the Idea list and add a new item 
-                    Idea = context.Web.Lists.GetByTitle("Idea");
-
-                    context.Load(Idea);
-                    ListItem updateItem = Idea.GetItemById(ideaID.Text);
-                    MarkFilesPermanent();
-                    RemoveDeletedFiles();
-
-                    if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                    {
-
-                        if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                            updateItem["Executor"] = Singleuser;
-
-                            Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                            updateItem["Director"] = Singleuser1;
-
-                            Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                            updateItem["VP"] = Singleuser2;
-
-                        }
-                        if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                        {
-                            List<FieldUserValue> usersList = new List<FieldUserValue>();
-                            foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                            {
-                                usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                            }
-
-                            updateItem["FTE_x0020_Contributors"] = usersList;
-                        }
-
-
-                    }
-
-                    //<-----Project Overview Tab ------>
-                    updateItem["Idea_x0020_Name"] = ideaname.Text;
-                    updateItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-                    updateItem["FP_Text"] = "";
-
-                    SetRadioStatus(updateItem);
-
-
-                    //<------Scope Tab------>
-
-                    MyItem item = aimcombo.SelectedItem as MyItem;
-                    if (item != null)
-                        updateItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                    //updateItem["AIM_x0020_Application_x0020_Name"] = aimcombo.SelectionBoxItem;
-                    updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                    updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-                    updateItem["Revised_x0020_1st_x0020_Mo_x0020"] = revisedmonth.SelectedDate;
-
-
-
-                    if (identify_e.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                    }
-                    else if (identify_x.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                    }
-                    else if (identify_c.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                    }
-                    else if (identify_e2.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                    }
-                    else if (identify_l.IsChecked == true)
-                    {
-                        updateItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                    }
-
-                    //Assumptions, Risk, Business Capability, SDLC
-                    updateItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                    if (risk_high.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                    }
-
-                    else if (risk_med.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                    }
-                    else if (risk_low.IsChecked == true)
-                    {
-                        updateItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                    }
-
-                    updateItem["Business_x0020_Capability"] = biz_capability.Text;
-                    updateItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                    updateItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                    //vendor save
-                    if (vendorSave_yes.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "Yes";
-                    }
-
-                    else if (vendorSave_no.IsChecked == true)
-                    {
-                        updateItem["Vendor_Save"] = "No";
-                    }
-
-                    //Cost Type
-                    if (type_Avoid.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                    }
-
-                    else if (type_reEngineer.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                        updateItem["Tech_Impact"] = tech_impact.Text;
-                    }
-
-                    else if (type_Reduction.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Cost Reduction";
-                    }
-                    else if (type_Growth.IsChecked == true)
-                    {
-                        updateItem["Cost_x0020_Type1"] = "Growth Reduction";
-                    }
-
-                    //<-----estimated savings----->
-
-                    updateItem["SavingsHeader1"] = header1.Text;
-                    updateItem["SavingsHeader2"] = header2.Text;
-                    updateItem["SavingsHeader3"] = header3.Text;
-                    updateItem["SavingsHeader4"] = header4.Text;
-                    updateItem["SavingsHeader5"] = header5.Text;
-
-                    updateItem["Savings1"] = es1.Value;
-                    updateItem["Savings2"] = es2.Value;
-                    updateItem["Savings3"] = es3.Value;
-                    updateItem["Savings4"] = es4.Value;
-                    updateItem["Savings5"] = es5.Value;
-
-                    updateItem["Total_x0020_Savings"] = es_Total.Value;
-
-                    //<-----comments, status & audit----->
-
-                    updateItem["Project_x0020_Comments"] = projcomText.Text;
-                    updateItem["Idea_x0020_Status"] = "In Progress";
-                    updateItem["scale"] = "2";
-
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea as in progress";
-                    updateItem["Audit"] = Audit.Text;
-
-
-
-
-                    updateItem.Update();
-                    //Load the list 
-                    context.Load(Idea, list => list.Title);
-                    //Execute the query to create the new item 
-                    context.ExecuteQueryAsync((s, ee) =>
-                    {
-                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
-
-
-
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            newFolderName = itemId;
-
-                            msgwin = new Messages(this);
-                            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                            msgwin.msgtxt.Text = "Your idea was successfully submitted as in progress.";
-                            msgwin.alert.Visibility = Visibility.Collapsed;
-
-                            msgwin.Show();
-                            msgwin.Closed += msgwin_Closed;
-
-
-                        }
-
-                                 );
-
-
-
-                    },
-             (s, ee) =>
-             {
-                 Console.WriteLine(ee.Message);
-
-             });
-                }
-            }
-        }
-
-        //<~~~~~~BEGIN SUBMIT FOR APPROVAL~~~~~>
-        private void btn_approval_Click(object sender, RoutedEventArgs e)
-        {
-            ResetControls();
-            ValidateResult draftResult = ValidateForDraft();
-            ValidateResult progressResult = ValidateForInProgress(draftResult);
-            ValidateResult result = ValidateForApproval(progressResult);
-            if (!result.IsValid)
-            {
-
-                GetErrorWindow(result).Show();
-                NavigateTab(result);
-            }
-            else
-            {
-                ftewin = new FTEMsgBox();
-                ftewin.Show();
-                ftewin.NoClicked += new EventHandler(NoClicked);
-                ftewin.YesClicked += new EventHandler(YesClicked);
-
-            }
-        }
-        
-
-
-
-        void NoClicked(object sender, EventArgs e)
-        {
-
-            //nav to FTE Contributors tab
-            this.tabcontrol1.SelectedIndex = 1;
-            btnstack_overview.Visibility = Visibility.Collapsed;
-            overview_image.Visibility = Visibility.Collapsed;
-            scope_image.Visibility = Visibility.Visible;
-            btnstack_scope.Visibility = Visibility.Visible;
-
-        }
-
-        void YesClicked(object sender, EventArgs e)
-        {
-
-            //Get the current context 
-            ClientContext context = ClientContext.Current;
-            //Get the Idea list and add a new item 
-            Idea = context.Web.Lists.GetByTitle("Idea");
-
-            context.Load(Idea);
-
-            ListItem updateItem = Idea.GetItemById(ideaID.Text);
-
-            MarkFilesPermanent();
-            RemoveDeletedFiles();
-            //Set the new item's properties 
 
             if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
             {
@@ -3196,16 +2492,14 @@ namespace manage.Controls
                     updateItem["FTE_x0020_Contributors"] = usersList;
                 }
 
-
             }
 
             //<-----Project Overview Tab ------>
             updateItem["Idea_x0020_Name"] = ideaname.Text;
             updateItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-            updateItem["FP_Text"] = "";
+
 
             SetRadioStatus(updateItem);
-
             //<------Scope Tab------>
 
             MyItem item = aimcombo.SelectedItem as MyItem;
@@ -3214,8 +2508,6 @@ namespace manage.Controls
 
             updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
             updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-            updateItem["Revised_x0020_1st_x0020_Mo_x0020"] = revisedmonth.SelectedDate;
-
 
 
             if (identify_e.IsChecked == true)
@@ -3311,15 +2603,301 @@ namespace manage.Controls
             //<-----comments, status & audit----->
 
             updateItem["Project_x0020_Comments"] = projcomText.Text;
+
+
+
+        }
+
+
+        private void btn_draft_Click(object sender, RoutedEventArgs e)
+        {
+
+            
+            ResetControls();
+
+            ValidateResult result = ValidateForDraft();
+            if (!result.IsValid)
+            {
+
+                GetErrorWindow(result).Show();
+                NavigateTab(result);
+            }
+            else
+            {
+                //Get the current context 
+                using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
+                {
+                    //Get the Idea list and add a new item 
+                    List Idea = context.Web.Lists.GetByTitle("Idea");
+                    context.Load(Idea);
+                    ListItem updateItem = Idea.GetItemById(ideaID.Text);                  //Set the new item's properties 
+
+                    SetFields(updateItem, context);
+                   
+                    updateItem["scale"] = "1";
+                    updateItem["Idea_x0020_Status"] = "Draft";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "submitted the Idea in Draft status";
+                    updateItem["Audit"] = Audit.Text;
+                    updateItem.Update();
+                    //Load the list 
+                    context.Load(Idea, list => list.Title);
+
+                    //Execute the query to create the new item 
+                    context.ExecuteQueryAsync((s, ee) =>
+                    {
+
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            newFolderName = itemId;
+                            ChildWindow msg = new Messages(this);
+                            msgwin.alert.Visibility = Visibility.Collapsed;
+
+                            msg.Show();
+                            msgwin.Closed += msgwin_Closed;
+
+                        }
+                            );
+
+
+                    },
+        (s, ee) =>
+        {
+            Console.WriteLine(ee.Message);
+
+        });
+                }
+            }
+        }
+        
+
+
+        //<~~~~~~~~FUTURE PIPELINE~~~~~~~~>
+        private void btn_future_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (!DoDateCheck())
+                return;
+            else 
+            {
+
+                ResetControls();
+                ValidateResult draftResult = ValidateForDraft();
+                ValidateResult result = ValidateForInProgress(draftResult);
+
+                if (!result.IsValid)
+                {
+
+                    GetErrorWindow(result).Show();
+                    NavigateTab(result);
+                }
+
+
+                else
+                {
+                    //Get the current context 
+                    ClientContext context = ClientContext.Current;
+                    //Get the Idea list and add a new item 
+                    Idea = context.Web.Lists.GetByTitle("Idea");
+                    context.Load(Idea);
+                    MarkFilesPermanent();
+                    RemoveDeletedFiles();
+                    ListItem updateItem = Idea.GetItemById(ideaID.Text);
+                    //Set the new item's properties 
+                    MarkFilesPermanent();
+                    RemoveDeletedFiles();
+
+                    SetFields(updateItem, context);
+
+                    updateItem["scale"] = "8";
+                    updateItem["Idea_x0020_Status"] = "Future Pipeline";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea as future pipeline";
+                    updateItem["Audit"] = Audit.Text;
+
+                    updateItem.Update();
+                    //Load the list 
+                    context.Load(Idea, list => list.Title);
+
+
+                    //Execute the query to update the new item 
+                    context.ExecuteQueryAsync((s, ee) =>
+                    {
+
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+
+
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            newFolderName = itemId;
+
+                            msgwin = new Messages(this);
+                            msgwin.msgtxt.Text = "Your idea was successfully submitted as future pipeline.";
+                            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+                            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                            msgwin.alert.Visibility = Visibility.Collapsed;
+
+                            msgwin.Show();
+                            msgwin.Closed += msgwin_Closed;
+
+
+                        }
+                            );
+
+
+
+                    },
+        (s, ee) =>
+        {
+            Console.WriteLine(ee.Message);
+
+        });
+                }
+            }
+        }
+
+
+
+        //<~~~~~~BEGIN IN PROGRESS~~~~~>
+        private void btn_inprogress_Click(object sender, RoutedEventArgs e)
+        {
+            if (!DoDateCheck())
+                return;
+            else 
+            {
+                ResetControls();
+                ValidateResult draftResult = ValidateForDraft();
+                ValidateResult result = ValidateForInProgress(draftResult);
+
+                if (!result.IsValid)
+                {
+
+                    GetErrorWindow(result).Show();
+                    NavigateTab(result);
+                }
+
+                else
+                {
+
+                    //Get the current context 
+                    ClientContext context = ClientContext.Current;
+                    //Get the Idea list and add a new item 
+                    Idea = context.Web.Lists.GetByTitle("Idea");
+
+                    context.Load(Idea);
+                    ListItem updateItem = Idea.GetItemById(ideaID.Text);
+                    MarkFilesPermanent();
+                    RemoveDeletedFiles();
+
+                    SetFields(updateItem, context);
+
+                    updateItem["Idea_x0020_Status"] = "In Progress";
+                    updateItem["scale"] = "2";
+
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea as in progress";
+                    updateItem["Audit"] = Audit.Text;
+                    updateItem.Update();
+                    //Load the list 
+                    context.Load(Idea, list => list.Title);
+                    //Execute the query to create the new item 
+                    context.ExecuteQueryAsync((s, ee) =>
+                    {
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+
+
+
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            newFolderName = itemId;
+
+                            msgwin = new Messages(this);
+                            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+                            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                            msgwin.msgtxt.Text = "Your idea was successfully submitted as in progress.";
+                            msgwin.alert.Visibility = Visibility.Collapsed;
+
+                            msgwin.Show();
+                            msgwin.Closed += msgwin_Closed;
+
+
+                        }
+
+                                 );
+
+
+
+                    },
+             (s, ee) =>
+             {
+                 Console.WriteLine(ee.Message);
+
+             });
+                }
+            }
+        }
+
+        //<~~~~~~BEGIN SUBMIT FOR APPROVAL~~~~~>
+        private void btn_approval_Click(object sender, RoutedEventArgs e)
+        {
+            ResetControls();
+            ValidateResult draftResult = ValidateForDraft();
+            ValidateResult progressResult = ValidateForInProgress(draftResult);
+            ValidateResult result = ValidateForApproval(progressResult);
+            if (!result.IsValid)
+            {
+
+                GetErrorWindow(result).Show();
+                NavigateTab(result);
+            }
+            else
+            {
+                ftewin = new FTEMsgBox();
+                ftewin.Show();
+                ftewin.NoClicked += new EventHandler(NoClicked);
+                ftewin.YesClicked += new EventHandler(YesClicked);
+
+            }
+        }
+        
+
+
+
+        void NoClicked(object sender, EventArgs e)
+        {
+
+            //nav to FTE Contributors tab
+            this.tabcontrol1.SelectedIndex = 1;
+            btnstack_overview.Visibility = Visibility.Collapsed;
+            overview_image.Visibility = Visibility.Collapsed;
+            scope_image.Visibility = Visibility.Visible;
+            btnstack_scope.Visibility = Visibility.Visible;
+
+        }
+
+        void YesClicked(object sender, EventArgs e)
+        {
+
+            //Get the current context 
+            ClientContext context = ClientContext.Current;
+            //Get the Idea list and add a new item 
+            Idea = context.Web.Lists.GetByTitle("Idea");
+
+            context.Load(Idea);
+
+            ListItem updateItem = Idea.GetItemById(ideaID.Text);
+
+            MarkFilesPermanent();
+            RemoveDeletedFiles();
+            //Set the new item's properties 
+
+            SetFields(updateItem, context);
+
             updateItem["Idea_x0020_Status"] = "Submit for Approval";
             updateItem["scale"] = "3";
 
 
             Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea for approval";
             updateItem["Audit"] = Audit.Text;
-
-
-
 
             updateItem.Update();
             //Load the list 
@@ -3590,210 +3168,10 @@ namespace manage.Controls
                 RemoveDeletedFiles();
                 //Set the new item's properties 
 
-                if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                {
-
-                    if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                    {
-                        Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                        updateItem["Executor"] = Singleuser;
-
-                        Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                        updateItem["Director"] = Singleuser1;
-
-                        Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                        updateItem["VP"] = Singleuser2;
-
-                    }
-                    if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                    {
-                        List<FieldUserValue> usersList = new List<FieldUserValue>();
-                        foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                        {
-                            usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                        }
-
-                        updateItem["FTE_x0020_Contributors"] = usersList;
-                    }
-
-
-                }
-
-                //<-----Project Overview Tab ------>
-                updateItem["Idea_x0020_Name"] = ideaname.Text;
-                updateItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-
-
-                if (statusLevel.Text == "Draft")
-                {
-                    updateItem["scale"] = "1";
-                }
-
-                else if (statusLevel.Text == "In Progress")
-                {
-                    updateItem["scale"] = "2";
-                }
-                else if (statusLevel.Text == "Submit for Approval")
-                {
-                    updateItem["scale"] = "3";
-                }
-                else if (statusLevel.Text == "Ready for Finance Review")
-                {
-                    updateItem["scale"] = "4";
-                }
-                else if (statusLevel.Text == "Finance Review Completed")
-                {
-                    updateItem["scale"] = "5";
-                }
-                else if (statusLevel.Text == "Canceled")
-                {
-                    updateItem["scale"] = "6";
-                }
-                else if (statusLevel.Text == "Approved")
-                {
-                    updateItem["scale"] = "7";
-                }
-                else if (statusLevel.Text == "Future Pipeline")
-                {
-                    updateItem["scale"] = "8";
-                }
-                else if (statusLevel.Text == "Pending Actuals")
-                {
-                    updateItem["scale"] = "9";
-                }
-
-
-                SetRadioStatus(updateItem);
-
-
-                //<------Scope Tab------>
-
-                MyItem item = aimcombo.SelectedItem as MyItem;
-                if (item != null)
-                    updateItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-                updateItem["Revised_x0020_1st_x0020_Mo_x0020"] = revisedmonth.SelectedDate;
-
-
-                if (identify_e.IsChecked == true)
-                {
-                    updateItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                }
-                else if (identify_x.IsChecked == true)
-                {
-                    updateItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                }
-                else if (identify_c.IsChecked == true)
-                {
-                    updateItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                }
-                else if (identify_e2.IsChecked == true)
-                {
-                    updateItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                }
-                else if (identify_l.IsChecked == true)
-                {
-                    updateItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                }
-
-                //Assumptions, Risk, Business Capability, SDLC
-                updateItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                if (risk_high.IsChecked == true)
-                {
-                    updateItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                }
-
-                else if (risk_med.IsChecked == true)
-                {
-                    updateItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                }
-                else if (risk_low.IsChecked == true)
-                {
-                    updateItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                }
-
-                updateItem["Business_x0020_Capability"] = biz_capability.Text;
-                updateItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                updateItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                //vendor save
-                if (vendorSave_yes.IsChecked == true)
-                {
-                    updateItem["Vendor_Save"] = "Yes";
-                }
-
-                else if (vendorSave_no.IsChecked == true)
-                {
-                    updateItem["Vendor_Save"] = "No";
-                }
-
-                //Cost Type
-                if (type_Avoid.IsChecked == true)
-                {
-                    updateItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                }
-
-                else if (type_reEngineer.IsChecked == true)
-                {
-                    updateItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                    updateItem["Tech_Impact"] = tech_impact.Text;
-                }
-
-                else if (type_Reduction.IsChecked == true)
-                {
-                    updateItem["Cost_x0020_Type1"] = "Cost Reduction";
-                }
-                else if (type_Growth.IsChecked == true)
-                {
-                    updateItem["Cost_x0020_Type1"] = "Growth Reduction";
-                }
-
-                //<-----estimated savings----->
-
-                updateItem["SavingsHeader1"] = header1.Text;
-                updateItem["SavingsHeader2"] = header2.Text;
-                updateItem["SavingsHeader3"] = header3.Text;
-                updateItem["SavingsHeader4"] = header4.Text;
-                updateItem["SavingsHeader5"] = header5.Text;
-
-                updateItem["Savings1"] = es1.Value;
-                updateItem["Savings2"] = es2.Value;
-                updateItem["Savings3"] = es3.Value;
-                updateItem["Savings4"] = es4.Value;
-                updateItem["Savings5"] = es5.Value;
-
-                updateItem["Total_x0020_Savings"] = es_Total.Value;
-
-                //<-----comments, status & audit----->
-
-                updateItem["Project_x0020_Comments"] = projcomText.Text;
-
-                if (CEM_No.IsChecked == true)
-                {
-                    updateItem["CEM_x0020_Approved"] = "No";
-                }
-                else if (CEM_Yes.IsChecked == true)
-                {
-                    updateItem["CEM_x0020_Approved"] = "Yes";
-                }
-
-                if (topprojectCheckBox.IsChecked == true)
-                {
-                    updateItem["Top_x0020_Project"] = "Yes";
-                }
-                else if (topprojectCheckBox.IsChecked == false)
-                {
-                    updateItem["Top_x0020_Project"] = "";
-                }
-
-                updateItem["Cost_Classification"] = cc.Text;
-
-                updateItem["admin_comments"] = aCommHistoryText.Text;
+                SetFields(updateItem, context);
 
                 updateItem["Idea_x0020_Status"] = statusLevel.Text;
+                updateItem["admin_comments"] = aCommHistoryText.Text;
 
                 if (!status.Equals(NewStatus) && !String.IsNullOrEmpty(NewStatus))
                 {
@@ -3808,9 +3186,6 @@ namespace manage.Controls
 
                 }
                 updateItem["Audit"] = Audit.Text;
-
-
-
 
                 updateItem.Update();
                 //Load the list 
@@ -3989,6 +3364,59 @@ namespace manage.Controls
 
     });
             }
+
+
+        }
+
+        private void LoadRoleItems()
+        {
+            ClientContext context = ClientContext.Current;
+
+            Web web = context.Web;
+            context.Load(web);
+            List list = context.Web.Lists.GetByTitle(GlobalConsts.ROLE_LIST);
+            CamlQuery camlQuery = new CamlQuery();
+            camlQuery.ViewXml = GlobalConsts.ROLE_QUERY;
+            ListItemCollection listItems = list.GetItems(camlQuery);
+            context.Load(listItems);
+            List<RoleItem> roleItems = new List<RoleItem>();
+
+            context.ExecuteQueryAsync((s, ee) =>
+            {
+
+
+                foreach (ListItem listitem in listItems)
+                {
+                    roleItems.Add(new RoleItem { Name = listitem.FieldValues[GlobalConsts.TITLE_COLUMN].ToString() });
+
+                }
+
+                Dispatcher.BeginInvoke(() =>
+                {
+
+                    rolecombo.DisplayMemberPath = GlobalConsts.NAME_FIELD;
+                    rolecombo.SelectedValuePath = GlobalConsts.NAME_FIELD;
+                    rolecombo.SelectedValue = "{Binding Name}";
+                    rolecombo.ItemsSource = roleItems;
+                    rolecombo.DataContext = roleItems;
+
+                }
+
+                    );
+
+
+
+
+            },
+
+
+
+(s, ee) =>
+{
+    Console.WriteLine(ee.Message);
+
+});
+
 
 
         }

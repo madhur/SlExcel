@@ -50,6 +50,7 @@ namespace excel_create
 
             SilverlightOM();
             LoadComboItems();
+            LoadRoleItems();
             btn_draft.IsEnabled = true;
             btn_fp.IsEnabled = true;
             btn_next.IsEnabled = true;
@@ -149,8 +150,7 @@ namespace excel_create
             {
                 if (txtBox.Text.Length != 0)
                     ResetFormatting(peoplePickers[txtBox]);
-                //  else
-                //      FormatControlForValidation(peoplePickers[txtBox]);
+                
             }
 
         }
@@ -1496,149 +1496,9 @@ namespace excel_create
                  ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
                  //Set the new item's properties 
 
+                 SetFields(newItem, context);
 
-                 if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                 {
-
-                     if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                     {
-                         Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                         newItem["Executor"] = Singleuser;
-
-                         Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                         newItem["Director"] = Singleuser1;
-
-                         Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                         newItem["VP"] = Singleuser2;
-
-                     }
-                     if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                     {
-                         List<FieldUserValue> usersList = new List<FieldUserValue>();
-                         foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                         {
-                             usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                         }
-
-                         newItem["FTE_x0020_Contributors"] = usersList;
-                     }
-
-                 }
-
-
-                 //<-----Project Overview Tab ------>
-                 newItem["Idea_x0020_Name"] = ideaname.Text;
-                 newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-              
                  newItem["scale"] = "1";
-
-                 SaveRadios(newItem);
-                
-                 //<------Scope Tab------>
-
-                 MyItem item = aimcombo.SelectedItem as MyItem;
-                 if (item != null)
-                     newItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                // newItem["AIM_x0020_Application_x0020_Name"] = aimcombo.SelectionBoxItem;
-                 newItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                 newItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-
-
-                 if (identify_e.IsChecked == true)
-                 {
-                     newItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-
-                 }
-                 else if (identify_x.IsChecked == true)
-                 {
-                     newItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                 }
-                 else if (identify_c.IsChecked == true)
-                 {
-                     newItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                 }
-                 else if (identify_e2.IsChecked == true)
-                 {
-                     newItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                 }
-                 else if (identify_l.IsChecked == true)
-                 {
-                     newItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                 }
-
-                 //Assumptions, Risk, Business Capability, SDLC
-                 newItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                 if (risk_high.IsChecked == true)
-                 {
-                     newItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                 }
-
-                 else if (risk_med.IsChecked == true)
-                 {
-                     newItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                 }
-                 else if (risk_low.IsChecked == true)
-                 {
-                     newItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                 }
-
-                 newItem["Business_x0020_Capability"] = biz_capability.Text;
-                 newItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                 newItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                 //vendor save
-                 if (vendorSave_yes.IsChecked == true)
-                 {
-                     newItem["Vendor_Save"] = "Yes";
-                 }
-
-                 else if (vendorSave_no.IsChecked == true)
-                 {
-                     newItem["Vendor_Save"] = "No";
-                 }
-
-                 //Cost Type
-                 if (type_Avoid.IsChecked == true)
-                 {
-                     newItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                 }
-
-                 else if (type_reEngineer.IsChecked == true)
-                 {
-                     newItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                     newItem["Tech_Impact"] = tech_impact.Text;
-                 }
-
-                 else if (type_Reduction.IsChecked == true)
-                 {
-                     newItem["Cost_x0020_Type1"] = "Cost Reduction";
-                 }
-                 else if (type_Growth.IsChecked == true)
-                 {
-                     newItem["Cost_x0020_Type1"] = "Growth Reduction";
-                 }
-
-                 //<-----estimated savings----->
-
-                 newItem["SavingsHeader1"] = header1.Text;
-                 newItem["SavingsHeader2"] = header2.Text;
-                 newItem["SavingsHeader3"] = header3.Text;
-                 newItem["SavingsHeader4"] = header4.Text;
-                 newItem["SavingsHeader5"] = header5.Text;
-
-                 newItem["Savings1"] = es1.Value;
-                 newItem["Savings2"] = es2.Value;
-                 newItem["Savings3"] = es3.Value;
-                 newItem["Savings4"] = es4.Value;
-                 newItem["Savings5"] = es5.Value;
-
-                 newItem["Total_x0020_Savings"] = es_Total.Value;
-
-                 //<-----comments, status & audit----->
-
-                 newItem["Project_x0020_Comments"] = projcomText.Text;
                  newItem["Idea_x0020_Status"] = "Draft";
                  newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "swuccessfully submitted the idea as a draft.";
 
@@ -1803,6 +1663,158 @@ namespace excel_create
 
          }
 
+         private void SetFields(ListItem newItem, ClientContext context)
+         {
+
+
+             if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
+             {
+
+                 if (SinglePeopleChooser.selectedAccounts.Count > 0)
+                 {
+                     Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
+                     newItem["Executor"] = Singleuser;
+
+                     Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
+                     newItem["Director"] = Singleuser1;
+
+                     Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
+                     newItem["VP"] = Singleuser2;
+
+                 }
+                 if (MultiplePeopleChooser.selectedAccounts.Count > 0)
+                 {
+                     List<FieldUserValue> usersList = new List<FieldUserValue>();
+                     foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
+                     {
+                         usersList.Add(FieldUserValue.FromUser(ac.AccountName));
+                     }
+
+                     newItem["FTE_x0020_Contributors"] = usersList;
+                 }
+
+             }
+
+
+             //<-----Project Overview Tab ------>
+             newItem["Idea_x0020_Name"] = ideaname.Text;
+             newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
+
+            
+
+             SaveRadios(newItem);
+
+             //<------Scope Tab------>
+
+             MyItem item = aimcombo.SelectedItem as MyItem;
+             if (item != null)
+                 newItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
+
+             // newItem["AIM_x0020_Application_x0020_Name"] = aimcombo.SelectionBoxItem;
+             newItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
+             newItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
+
+
+             if (identify_e.IsChecked == true)
+             {
+                 newItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
+
+             }
+             else if (identify_x.IsChecked == true)
+             {
+                 newItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
+             }
+             else if (identify_c.IsChecked == true)
+             {
+                 newItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
+             }
+             else if (identify_e2.IsChecked == true)
+             {
+                 newItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
+             }
+             else if (identify_l.IsChecked == true)
+             {
+                 newItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
+             }
+
+             //Assumptions, Risk, Business Capability, SDLC
+             newItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
+
+             if (risk_high.IsChecked == true)
+             {
+                 newItem["Risk_x0020_of_x0020_Implementati"] = "High";
+             }
+
+             else if (risk_med.IsChecked == true)
+             {
+                 newItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
+             }
+             else if (risk_low.IsChecked == true)
+             {
+                 newItem["Risk_x0020_of_x0020_Implementati"] = "Low";
+             }
+
+             newItem["Business_x0020_Capability"] = biz_capability.Text;
+             newItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
+             newItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
+
+             //vendor save
+             if (vendorSave_yes.IsChecked == true)
+             {
+                 newItem["Vendor_Save"] = "Yes";
+             }
+
+             else if (vendorSave_no.IsChecked == true)
+             {
+                 newItem["Vendor_Save"] = "No";
+             }
+
+             //Cost Type
+             if (type_Avoid.IsChecked == true)
+             {
+                 newItem["Cost_x0020_Type1"] = "Cost Avoidance";
+             }
+
+             else if (type_reEngineer.IsChecked == true)
+             {
+                 newItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
+                 newItem["Tech_Impact"] = tech_impact.Text;
+             }
+
+             else if (type_Reduction.IsChecked == true)
+             {
+                 newItem["Cost_x0020_Type1"] = "Cost Reduction";
+             }
+             else if (type_Growth.IsChecked == true)
+             {
+                 newItem["Cost_x0020_Type1"] = "Growth Reduction";
+             }
+
+             //<-----estimated savings----->
+
+             newItem["SavingsHeader1"] = header1.Text;
+             newItem["SavingsHeader2"] = header2.Text;
+             newItem["SavingsHeader3"] = header3.Text;
+             newItem["SavingsHeader4"] = header4.Text;
+             newItem["SavingsHeader5"] = header5.Text;
+
+             newItem["Savings1"] = es1.Value;
+             newItem["Savings2"] = es2.Value;
+             newItem["Savings3"] = es3.Value;
+             newItem["Savings4"] = es4.Value;
+             newItem["Savings5"] = es5.Value;
+
+             newItem["Total_x0020_Savings"] = es_Total.Value;
+
+             //<-----comments, status & audit----->
+
+             newItem["Project_x0020_Comments"] = projcomText.Text;
+
+
+
+
+         }
+
         //<~~~~~~~~FUTURE PIPELINE~~~~~~~~>
          private void btn_future_Click(object sender, RoutedEventArgs e)
          {
@@ -1839,152 +1851,11 @@ namespace excel_create
                      ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
                      //Set the new item's properties 
 
-                     if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                     {
+                     SetFields(newItem, context);
 
-                         if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                         {
-                             Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                             newItem["Executor"] = Singleuser;
-
-                             Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                             newItem["Director"] = Singleuser1;
-
-                             Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                             newItem["VP"] = Singleuser2;
-
-                         }
-                         if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                         {
-                             List<FieldUserValue> usersList = new List<FieldUserValue>();
-                             foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                             {
-                                 usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                             }
-
-                             newItem["FTE_x0020_Contributors"] = usersList;
-                         }
-
-                     }
-
-                     //<-----Project Overview Tab ------>
-                     newItem["Idea_x0020_Name"] = ideaname.Text;
-                     newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-                    
-
-                     newItem["scale"] = "8";
-
-                     SaveRadios(newItem);
-                     //<------Scope Tab------>
-
-
-                     MyItem item = aimcombo.SelectedItem as MyItem;
-                     if (item != null)
-                         newItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                     //newItem["AIM_x0020_Application_x0020_Name"] = aimcombo.SelectionBoxItem;
-                     newItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                     newItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-
-
-                     if (identify_e.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                     }
-                     else if (identify_x.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                     }
-                     else if (identify_c.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                     }
-                     else if (identify_e2.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                     }
-                     else if (identify_l.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                     }
-
-                     //Assumptions, Risk, Business Capability, SDLC
-                     newItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                     if (risk_high.IsChecked == true)
-                     {
-                         newItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                     }
-
-                     else if (risk_med.IsChecked == true)
-                     {
-                         newItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                     }
-                     else if (risk_low.IsChecked == true)
-                     {
-                         newItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                     }
-
-                     newItem["Business_x0020_Capability"] = biz_capability.Text;
-                     newItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                     newItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                     //vendor save
-                     if (vendorSave_yes.IsChecked == true)
-                     {
-                         newItem["Vendor_Save"] = "Yes";
-                     }
-
-                     else if (vendorSave_no.IsChecked == true)
-                     {
-                         newItem["Vendor_Save"] = "No";
-                     }
-
-                     //Cost Type
-                     if (type_Avoid.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                     }
-
-                     else if (type_reEngineer.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                         newItem["Tech_Impact"] = tech_impact.Text;
-                     }
-
-                     else if (type_Reduction.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Cost Reduction";
-                     }
-                     else if (type_Growth.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Growth Reduction";
-                     }
-
-                     //<-----estimated savings----->
-
-                     newItem["SavingsHeader1"] = header1.Text;
-                     newItem["SavingsHeader2"] = header2.Text;
-                     newItem["SavingsHeader3"] = header3.Text;
-                     newItem["SavingsHeader4"] = header4.Text;
-                     newItem["SavingsHeader5"] = header5.Text;
-
-                     newItem["Savings1"] = es1.Value;
-                     newItem["Savings2"] = es2.Value;
-                     newItem["Savings3"] = es3.Value;
-                     newItem["Savings4"] = es4.Value;
-                     newItem["Savings5"] = es5.Value;
-
-                     newItem["Total_x0020_Savings"] = es_Total.Value;
-
-                     //<-----comments, status & audit----->
-
-                     newItem["Project_x0020_Comments"] = projcomText.Text;
                      newItem["Idea_x0020_Status"] = "Future Pipeline";
+                     newItem["scale"] = "8";
                      newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea as future pipeline.";
-
-
-
 
                      newItem.Update();
                      //Load the list 
@@ -2069,146 +1940,9 @@ namespace excel_create
                      ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
                      //Set the new item's properties 
 
-                     if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                     {
-
-                         if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                         {
-                             Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                             newItem["Executor"] = Singleuser;
-
-                             Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                             newItem["Director"] = Singleuser1;
-
-                             Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                             newItem["VP"] = Singleuser2;
-
-                         }
-                         if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                         {
-                             List<FieldUserValue> usersList = new List<FieldUserValue>();
-                             foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                             {
-                                 usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                             }
-
-                             newItem["FTE_x0020_Contributors"] = usersList;
-                         }
-
-
-                     }
-
-                     //<-----Project Overview Tab ------>
-                     newItem["Idea_x0020_Name"] = ideaname.Text;
-                     newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
+                     SetFields(newItem, context);
 
                      newItem["scale"] = "2";
-
-                     SaveRadios(newItem);
-
-                     //<------Scope Tab------>
-
-                     MyItem item = aimcombo.SelectedItem as MyItem;
-                     if (item != null)
-                         newItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                     newItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                     newItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-
-
-                     if (identify_e.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                     }
-                     else if (identify_x.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                     }
-                     else if (identify_c.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                     }
-                     else if (identify_e2.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                     }
-                     else if (identify_l.IsChecked == true)
-                     {
-                         newItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                     }
-
-                     //Assumptions, Risk, Business Capability, SDLC
-                     newItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                     if (risk_high.IsChecked == true)
-                     {
-                         newItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                     }
-
-                     else if (risk_med.IsChecked == true)
-                     {
-                         newItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                     }
-                     else if (risk_low.IsChecked == true)
-                     {
-                         newItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                     }
-
-                     newItem["Business_x0020_Capability"] = biz_capability.Text;
-                     newItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                     newItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                     //vendor save
-                     if (vendorSave_yes.IsChecked == true)
-                     {
-                         newItem["Vendor_Save"] = "Yes";
-                     }
-
-                     else if (vendorSave_no.IsChecked == true)
-                     {
-                         newItem["Vendor_Save"] = "No";
-                     }
-
-                     //Cost Type
-                     if (type_Avoid.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                     }
-
-                     else if (type_reEngineer.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                         newItem["Tech_Impact"] = tech_impact.Text;
-                     }
-
-                     else if (type_Reduction.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Cost Reduction";
-                     }
-                     else if (type_Growth.IsChecked == true)
-                     {
-                         newItem["Cost_x0020_Type1"] = "Growth Reduction";
-                     }
-
-                     //<-----estimated savings----->
-
-                     newItem["SavingsHeader1"] = header1.Text;
-                     newItem["SavingsHeader2"] = header2.Text;
-                     newItem["SavingsHeader3"] = header3.Text;
-                     newItem["SavingsHeader4"] = header4.Text;
-                     newItem["SavingsHeader5"] = header5.Text;
-
-                     newItem["Savings1"] = es1.Value;
-                     newItem["Savings2"] = es2.Value;
-                     newItem["Savings3"] = es3.Value;
-                     newItem["Savings4"] = es4.Value;
-                     newItem["Savings5"] = es5.Value;
-
-                     newItem["Total_x0020_Savings"] = es_Total.Value;
-
-                     //<-----comments, status & audit----->
-
-                     newItem["Project_x0020_Comments"] = projcomText.Text;
                      newItem["Idea_x0020_Status"] = "In Progress";
                      newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea in progress.";
 
@@ -2304,149 +2038,10 @@ namespace excel_create
                 Idea = context.Web.Lists.GetByTitle("Idea");
                 ListItem newItem = Idea.AddItem(new ListItemCreationInformation());
                 //Set the new item's properties 
-
-                if (SinglePeopleChooser.selectedAccounts.Count > 0 || MultiplePeopleChooser.selectedAccounts.Count > 0)
-                {
-
-                    if (SinglePeopleChooser.selectedAccounts.Count > 0)
-                    {
-                        Singleuser = context.Web.EnsureUser(SinglePeopleChooser.selectedAccounts[0].AccountName);
-                        newItem["Executor"] = Singleuser;
-
-                        Singleuser1 = context.Web.EnsureUser(SinglePeopleChooser1.selectedAccounts[0].AccountName);
-                        newItem["Director"] = Singleuser1;
-
-                        Singleuser2 = context.Web.EnsureUser(SinglePeopleChooser2.selectedAccounts[0].AccountName);
-                        newItem["VP"] = Singleuser2;
-
-                    }
-                    if (MultiplePeopleChooser.selectedAccounts.Count > 0)
-                    {
-                        List<FieldUserValue> usersList = new List<FieldUserValue>();
-                        foreach (AccountList ac in MultiplePeopleChooser.selectedAccounts)
-                        {
-                            usersList.Add(FieldUserValue.FromUser(ac.AccountName));
-                        }
-
-                        newItem["FTE_x0020_Contributors"] = usersList;
-                    }
-
-
-                }
-
-                //<-----Project Overview Tab ------>
-                newItem["Idea_x0020_Name"] = ideaname.Text;
-                newItem["EXCEL_x0020_Idea_x0020_Descripti"] = description.Text;
-
-
+                SetFields(newItem, context);
+                
+             
                 newItem["scale"] = "3";
-
-                SaveRadios(newItem);
-
-                //<------Scope Tab------>
-
-                MyItem item = aimcombo.SelectedItem as MyItem;
-                if (item != null)
-                    newItem["AIM_x0020_Application_x0020_Name"] = item.AIM_NAME;
-
-                //newItem["AIM_x0020_Application_x0020_Name"] = aimcombo.SelectionBoxItem;
-                newItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
-                newItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
-
-
-                if (identify_e.IsChecked == true)
-                {
-                    newItem["EXCEL_x0020_Identifier"] = "1. E-Excessive Demand";
-                }
-                else if (identify_x.IsChecked == true)
-                {
-                    newItem["EXCEL_x0020_Identifier"] = "2. X-eXpense Reduction";
-                }
-                else if (identify_c.IsChecked == true)
-                {
-                    newItem["EXCEL_x0020_Identifier"] = "3. C–Customization Reduction";
-                }
-                else if (identify_e2.IsChecked == true)
-                {
-                    newItem["EXCEL_x0020_Identifier"] = "4. E–Effective Talent Utilization";
-                }
-                else if (identify_l.IsChecked == true)
-                {
-                    newItem["EXCEL_x0020_Identifier"] = "5. L–Less Duplication";
-                }
-
-                //Assumptions, Risk, Business Capability, SDLC
-                newItem["Assumptions_x0020_or_x0020_Depen"] = assump_depend.Text;
-
-                if (risk_high.IsChecked == true)
-                {
-                    newItem["Risk_x0020_of_x0020_Implementati"] = "High";
-                }
-
-                else if (risk_med.IsChecked == true)
-                {
-                    newItem["Risk_x0020_of_x0020_Implementati"] = "Medium";
-                }
-                else if (risk_low.IsChecked == true)
-                {
-                    newItem["Risk_x0020_of_x0020_Implementati"] = "Low";
-                }
-
-                newItem["Business_x0020_Capability"] = biz_capability.Text;
-                newItem["SDLC_x0020_Project_x0020_ID"] = sdlc_projID.Text;
-                newItem["SDLC_x0020_Project_x0020_Name"] = sdlc_projName.Text;
-
-                //vendor save
-                if (vendorSave_yes.IsChecked == true)
-                {
-                    newItem["Vendor_Save"] = "Yes";
-                }
-
-                else if (vendorSave_no.IsChecked == true)
-                {
-                    newItem["Vendor_Save"] = "No";
-                }
-
-                //Cost Type
-                if (type_Avoid.IsChecked == true)
-                {
-                    newItem["Cost_x0020_Type1"] = "Cost Avoidance";
-                }
-
-                else if (type_reEngineer.IsChecked == true)
-                {
-                    newItem["Cost_x0020_Type1"] = "Re-engineering (REE)";
-                    newItem["Tech_Impact"] = tech_impact.Text;
-                }
-
-                else if (type_Reduction.IsChecked == true)
-                {
-                    newItem["Cost_x0020_Type1"] = "Cost Reduction";
-                }
-                else if (type_Growth.IsChecked == true)
-                {
-                    newItem["Cost_x0020_Type1"] = "Growth Reduction";
-                }
-
-                //<-----estimated savings----->
-
-                newItem["SavingsHeader1"] = header1.Text;
-                newItem["SavingsHeader2"] = header2.Text;
-                newItem["SavingsHeader3"] = header3.Text;
-                newItem["SavingsHeader4"] = header4.Text;
-                newItem["SavingsHeader5"] = header5.Text;
-
-                newItem["Savings1"] = es1.Value;
-                newItem["Savings2"] = es2.Value;
-                newItem["Savings3"] = es3.Value;
-                newItem["Savings4"] = es4.Value;
-                newItem["Savings5"] = es5.Value;
-
-                newItem["Total_x0020_Savings"] = es_Total.Value;
-
-                //<-----comments, status & audit----->
-
-                newItem["Project_x0020_Comments"] = projcomText.Text;
                 newItem["Idea_x0020_Status"] = "Submit for Approval";
                 newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea for approval.";
 
@@ -2504,9 +2099,7 @@ namespace excel_create
                 CamlQuery camlQuery = new CamlQuery();
                 camlQuery.ViewXml = "<View><Query><FieldRef Name='Title' /><FieldRef Name='AIM_x0020_Application_x0020_ID' /><OrderBy> <FieldRef Name='Title'/></OrderBy></Query></View>";
                 ListItemCollection listItems = list.GetItems(camlQuery);
-                // context.Load(list);
                 context.Load(listItems);
-                //  context.ExecuteQueryAsync(webSucceededCallback, OnSiteLoadFailure);
 
                 context.ExecuteQueryAsync((s, ee) =>
                 {
@@ -2551,6 +2144,59 @@ namespace excel_create
 
     });
             }
+
+
+        }
+
+        private void LoadRoleItems()
+        {
+            ClientContext context = ClientContext.Current;
+
+            Web web = context.Web;
+            context.Load(web);
+            List list = context.Web.Lists.GetByTitle(GlobalConsts.ROLE_LIST);
+            CamlQuery camlQuery = new CamlQuery();
+            camlQuery.ViewXml = GlobalConsts.ROLE_QUERY;
+            ListItemCollection listItems = list.GetItems(camlQuery);
+            context.Load(listItems);
+            List<RoleItem> roleItems = new List<RoleItem>();
+
+            context.ExecuteQueryAsync((s, ee) =>
+            {
+
+
+                foreach (ListItem listitem in listItems)
+                {
+                    roleItems.Add(new RoleItem { Name = listitem.FieldValues[GlobalConsts.TITLE_COLUMN].ToString() });
+
+                }
+
+                Dispatcher.BeginInvoke(() =>
+                {
+
+                    rolecombo.DisplayMemberPath = GlobalConsts.NAME_FIELD;
+                    rolecombo.SelectedValuePath = GlobalConsts.NAME_FIELD;
+                    rolecombo.SelectedValue = "{Binding Name}";
+                    rolecombo.ItemsSource = roleItems;
+                    rolecombo.DataContext = roleItems;
+
+                }
+
+                    );
+
+
+
+
+            },
+
+
+
+(s, ee) =>
+{
+    Console.WriteLine(ee.Message);
+
+});
+
 
 
         }
