@@ -2167,7 +2167,10 @@ namespace excel_create
 
                 foreach (ListItem listitem in listItems)
                 {
-                    roleItems.Add(new RoleItem { Name = listitem.FieldValues[GlobalConsts.TITLE_COLUMN].ToString() });
+                    if (listitem.FieldValues[GlobalConsts.TITLE_COLUMN] != null)
+                    {
+                        roleItems.Add(new RoleItem { Name = listitem.FieldValues[GlobalConsts.TITLE_COLUMN].ToString() });
+                    }
 
                 }
 
