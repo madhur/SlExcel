@@ -2473,6 +2473,10 @@ namespace manage.Controls
 
                     updateItem["FTE_x0020_Contributors"] = usersList;
                 }
+                else
+                {
+                    updateItem["FTE_x0020_Contributors"] = null;
+                }
 
             }
 

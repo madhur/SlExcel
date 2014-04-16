@@ -27,12 +27,10 @@ namespace manage.Controls
     public partial class PeopleChooser : UserControl
     {
 
-      //  MenuItem mnuItem;
         public SelectedAccounts selectedAccounts;
         public bool AllowMultiple { get; set; }
         PPLPicker peoplePicker;
         Dictionary<String, PickerEntry> values;
-    //    AutoResetEvent autoResetEvent = new AutoResetEvent(false);
 
          public void SetDisabled()
         {
@@ -102,7 +100,6 @@ namespace manage.Controls
 
         private void ResolveButton_Click(object sender, RoutedEventArgs e)
         {
-        //    autoResetEvent.Reset();
             StartResolve();
 
         }

@@ -1651,6 +1651,10 @@ namespace excel_create
 
                      newItem["FTE_x0020_Contributors"] = usersList;
                  }
+                 else
+                 {
+                     newItem["FTE_x0020_Contributors"] = null;
+                 }
 
              }
 

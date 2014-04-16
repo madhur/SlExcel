@@ -70,7 +70,6 @@ namespace manage.Controls
                 Mode = BindingMode.TwoWay
             };
 
-            // AccountListBox.SetBinding(searc
             AccountListBox.DataContext = selectedAccounts;
             AccountListBox.ItemsSource = selectedAccounts;
 
@@ -79,20 +78,20 @@ namespace manage.Controls
         private void OKBtn_Click(object sender, RoutedEventArgs e)
         {
 
-
-            if (selectedAccounts.Count > 0)
-            {
+            // Fix for fast follower
+            //if (selectedAccounts.Count > 0)
+            //{
                 
-            }
-            else
-            {
-                MessageBox.Show("You must select a user before clicking OK; if you wish to " +
-                  "cancel this operation then click the Cancel button.", "Select User",
-                 MessageBoxButton.OK);
-                CancelBtn.Focus();
-                return;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("You must select a user before clicking OK; if you wish to " +
+            //      "cancel this operation then click the Cancel button.", "Select User",
+            //     MessageBoxButton.OK);
+            //    CancelBtn.Focus();
+            //    return;
 
-            }
+            //}
 
             //plug in the values
             if (SubmitClicked != null)
@@ -268,7 +267,7 @@ namespace manage.Controls
             }
 
 
-            //  syncListBox();
+            
 
         }
 
