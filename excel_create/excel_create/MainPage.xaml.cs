@@ -1478,7 +1478,11 @@ namespace excel_create
                  },
      (s, ee) =>
      {
-         Console.WriteLine(ee.Message);
+         Dispatcher.BeginInvoke(() =>
+         {
+             MessageBox.Show(ee.Message);
+         }
+                       );
 
      });
 
@@ -1834,7 +1838,11 @@ namespace excel_create
                      },
          (s, ee) =>
          {
-             Console.WriteLine(ee.Message);
+             Dispatcher.BeginInvoke(() =>
+             {
+                 MessageBox.Show(ee.Message);
+             }
+                        );
 
          });
                  }
@@ -1921,7 +1929,11 @@ namespace excel_create
                    },
        (s, ee) =>
        {
-           Console.WriteLine(ee.Message);
+           Dispatcher.BeginInvoke(() =>
+           {
+               MessageBox.Show(ee.Message);
+           }
+                       );
 
        });
 
@@ -2013,7 +2025,11 @@ namespace excel_create
             },
 (s, ee) =>
 {
-    Console.WriteLine(ee.Message);
+    Dispatcher.BeginInvoke(() =>
+    {
+        MessageBox.Show(ee.Message);
+    }
+                        );
 
 });
 

@@ -2649,7 +2649,11 @@ namespace manage.Controls
                     },
         (s, ee) =>
         {
-            Console.WriteLine(ee.Message);
+            Dispatcher.BeginInvoke(() =>
+            {
+                MessageBox.Show(ee.Message);
+            }
+                       );
 
         });
                 }
@@ -2734,7 +2738,11 @@ namespace manage.Controls
                     },
         (s, ee) =>
         {
-            Console.WriteLine(ee.Message);
+            Dispatcher.BeginInvoke(() =>
+            {
+                MessageBox.Show(ee.Message);
+            }
+                        );
 
         });
                 }
@@ -2814,7 +2822,11 @@ namespace manage.Controls
                     },
              (s, ee) =>
              {
-                 Console.WriteLine(ee.Message);
+                 Dispatcher.BeginInvoke(() =>
+                 {
+                     MessageBox.Show(ee.Message);
+                 }
+                       );
 
              });
                 }
@@ -2915,7 +2927,11 @@ namespace manage.Controls
             },
 (s, ee) =>
 {
-    Console.WriteLine(ee.Message);
+    Dispatcher.BeginInvoke(() =>
+    {
+        MessageBox.Show(ee.Message);
+    }
+                        );
 
 });
 
@@ -3200,7 +3216,12 @@ namespace manage.Controls
                 },
     (s, ee) =>
     {
-        Console.WriteLine(ee.Message);
+        Dispatcher.BeginInvoke(() =>
+                   {
+                       MessageBox.Show(ee.Message);
+                   }
+                       );
+
 
     });
 
