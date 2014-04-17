@@ -335,7 +335,7 @@
 
                             <telerik:RadGridView.Columns>
                                 <!--<telerik:GridViewCheckBoxColumn Header="Select..."/>-->
-                                <telerik:GridViewDynamicHyperlinkColumn Header="View Idea" DataMemberBinding="{Binding ideaID}" Width="65" IsGroupable="False" MaxWidth="65" MinWidth="65">
+                                <telerik:GridViewDynamicHyperlinkColumn Header="Idea ID" DataMemberBinding="{Binding ideaID}" Width="65" IsGroupable="False" MaxWidth="65" MinWidth="65">
                                     <telerik:GridViewDynamicHyperlinkColumn.CellStyle>
                                         <Style TargetType="telerik:GridViewCell">
                                             <Setter Property="Template">
@@ -456,7 +456,7 @@
 
                             <telerik:RadGridView.Columns>
 
-                                <telerik:GridViewDynamicHyperlinkColumn Header="View Idea" DataMemberBinding="{Binding ideaID}" Width="65" IsGroupable="False" MaxWidth="65" MinWidth="65" TextAlignment="Center">
+                                <telerik:GridViewDynamicHyperlinkColumn Header="Idea ID" DataMemberBinding="{Binding ideaID}" Width="65" IsGroupable="False" MaxWidth="65" MinWidth="65" TextAlignment="Center">
                                     <telerik:GridViewDynamicHyperlinkColumn.CellStyle>
                                         <Style TargetType="telerik:GridViewCell">
                                             <Setter Property="Template">
