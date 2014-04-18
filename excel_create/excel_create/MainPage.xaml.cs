@@ -1481,6 +1481,7 @@ namespace excel_create
          Dispatcher.BeginInvoke(() =>
          {
              MessageBox.Show(ee.Message);
+             EnableStatusButtons();
          }
                        );
 
@@ -1496,6 +1497,15 @@ namespace excel_create
              btn_approve.IsEnabled = false;
              btn_fp.IsEnabled = false;
              btn_inprogress.IsEnabled = false;
+
+         }
+
+         private void EnableStatusButtons()
+         {
+             btn_draft.IsEnabled = true;
+             btn_approve.IsEnabled = true;
+             btn_fp.IsEnabled = true;
+             btn_inprogress.IsEnabled = true;
 
          }
 
@@ -1845,6 +1855,7 @@ namespace excel_create
              Dispatcher.BeginInvoke(() =>
              {
                  MessageBox.Show(ee.Message);
+                 EnableStatusButtons();
              }
                         );
 
@@ -1936,6 +1947,7 @@ namespace excel_create
            Dispatcher.BeginInvoke(() =>
            {
                MessageBox.Show(ee.Message);
+               EnableStatusButtons();
            }
                        );
 
@@ -2032,6 +2044,7 @@ namespace excel_create
     Dispatcher.BeginInvoke(() =>
     {
         MessageBox.Show(ee.Message);
+        EnableStatusButtons();
     }
                         );
 
