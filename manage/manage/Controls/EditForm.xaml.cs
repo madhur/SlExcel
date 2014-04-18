@@ -33,8 +33,8 @@ namespace manage.Controls
 {
     public partial class EditForm
     {
-        Web oWebsite;
-        ListCollection collList;
+       // Web oWebsite;
+        //ListCollection collList;
         User user;
         private List Idea;
         private const string libName = "Idea Attachments";
@@ -50,7 +50,7 @@ namespace manage.Controls
         List<MyItem> items = new List<MyItem>();
         ILoadable mainPage;
         String status, NewStatus;
-        String[] people = new String[3] ;
+        //List<String> people = new List<string>();
         bool formLoad;
         bool isContractor, isEmployee, isReadOnly, isAdmin;
         String createdBy;
@@ -3611,6 +3611,8 @@ namespace manage.Controls
 
             ctx.ExecuteQueryAsync((s, ee) =>
             {
+
+
                 ListItem[] principals = new ListItem[multValue.Length];
 
                 for (int i = 0; i < multValue.Length; i++)
@@ -3621,36 +3623,35 @@ namespace manage.Controls
 
                 ctx.ExecuteQueryAsync((ssss, eeeee) =>
                 {
-                    string username;
-
-                    for (int i = 0; i < multValue.Length; i++)
+                    Dispatcher.BeginInvoke(() =>
                     {
 
+                        string username;
 
-                        try
-                        {
-                            username = principals[i]["Name"] as string;
-                        }
-                        catch (IndexOutOfRangeException ii)
-                        {
-                            return;
-                        }
-
-                        string decodedName = Utils.checkClaimsUser(username);
-                        string dispName = principals[i]["Title"] as string;
-                        people[i] = dispName;
-
-                        Dispatcher.BeginInvoke(() =>
+                        for (int i = 0; i < multValue.Length; i++)
                         {
 
+
+                            try
+                            {
+                                username = principals[i]["Name"] as string;
+                            }
+                            catch (IndexOutOfRangeException ii)
+                            {
+                                return;
+                            }
+
+                            string decodedName = Utils.checkClaimsUser(username);
+                            string dispName = principals[i]["Title"] as string;
 
                             MultiplePeopleChooser.selectedAccounts.Add(new AccountList(decodedName, dispName));
-                            
-
+                            //MessageBox.Show(dispName);
                         }
-                        );
-                       
+
+
                     }
+            );
+
 
 
                 },
@@ -3663,14 +3664,16 @@ namespace manage.Controls
 
 
 
-
             },
+
 
              (ssss, eeeee) =>
              {
                  Console.WriteLine(eeeee.Message);
 
              });
+
+
 
         }
 
@@ -3919,15 +3922,6 @@ namespace manage.Controls
                 //Execute the query to create the new item 
                 context.ExecuteQueryAsync((s, ee) =>
                 {
-
-
-                    Dispatcher.BeginInvoke(() =>
-                    {
-
-
-                    }
-                        );
-
 
                 },
     (s, ee) =>
