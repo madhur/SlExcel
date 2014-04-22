@@ -25,13 +25,13 @@ namespace manage
                 else
                     return ((DateTime)value).ToString("M/d/yyyy");
             }
-            else if (value is double)
-            {
-                if ((double)value == double.Parse("0.0"))
-                    return string.Empty;
-                else
-                    return value;
-            }
+            //else if (value is double)
+            //{
+            //    if ((double)value == double.Parse("0.0"))
+            //        return string.Empty;
+            //    else
+            //        return value;
+            //}
             else
                 return string.Empty;
         }

@@ -91,7 +91,7 @@
                 <telerik:GridViewDataColumn Header="Tech Impact" IsGroupable="False" IsVisible="False" IsFilterable="False" DataMemberBinding="{Binding TechImpact}" TextWrapping="Wrap" MaxWidth="200"/>
 
 
-                <telerik:GridViewDataColumn Header="Total Savings"  IsGroupable="False" IsFilterable="True" DataMemberBinding="{Binding totalSave, Converter={StaticResource ResourceKey=myConverter},  StringFormat='{}{0:c}'}" />
+                <telerik:GridViewDataColumn Header="Total Savings"  IsGroupable="False" IsFilterable="True" DataMemberBinding="{Binding totalSave,   StringFormat='{}{0:c0}'}" />
                 <telerik:GridViewDataColumn Header="1st Mo Saves Date"  IsFilterable="True" DataMemberBinding="{Binding firstMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat='{}{0:M/d/yyyy}'}" IsGroupable="False" Width="100">
 
                 </telerik:GridViewDataColumn>

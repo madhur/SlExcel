@@ -127,7 +127,7 @@
                                 </telerik:GridViewDataColumn>
                                 <telerik:GridViewDataColumn Header="FTE Contributors" IsFilterable="False" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding FTE}" TextWrapping="Wrap" MaxWidth="150" />
 
-                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat='{}{0:c}'}" />
+                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat='{}{0:c0}'}" />
 
                                 <telerik:GridViewDataColumn Header="LOB-T1" IsFilterable="True" DataMemberBinding="{Binding LOBT1}" TextWrapping="Wrap"/>
                                 <telerik:GridViewDataColumn Header="LOB-T2" IsFilterable="True" IsGroupable="False" DataMemberBinding="{Binding LOBT2}" TextWrapping="Wrap"/>
@@ -252,7 +252,7 @@
                                 <telerik:GridViewDataColumn Header="Revised 1st Mo Saves Date" IsFilterable="True" DataMemberBinding="{Binding revisedMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat=\{0:MM/dd/yyyy\}}" IsGroupable="False" Width="150" MaxWidth="150" MinWidth="150"/>
                                 <telerik:GridViewDataColumn Header="FTE Contributors" IsFilterable="False" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding FTE}" TextWrapping="Wrap" MaxWidth="150" />
 
-                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat=\{0:c\}}" />
+                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat=\{0:c0\}}" />
 
                                 <telerik:GridViewDataColumn Header="LOB-T1" IsFilterable="True" DataMemberBinding="{Binding LOBT1}" TextWrapping="Wrap"/>
                                 <telerik:GridViewDataColumn Header="LOB-T2" IsFilterable="True" IsGroupable="False" DataMemberBinding="{Binding LOBT2}" TextWrapping="Wrap"/>
@@ -494,7 +494,7 @@
                                 <telerik:GridViewDataColumn Header="Revised 1st Mo Saves Date" IsFilterable="True" DataMemberBinding="{Binding revisedMonth, Converter={StaticResource ResourceKey=myConverter}, StringFormat=\{0:MM/dd/yyyy\}}" IsGroupable="False" Width="150" MaxWidth="150" MinWidth="150"/>
                                 <telerik:GridViewDataColumn Header="FTE Contributors" IsFilterable="False" IsGroupable="False" IsVisible="False" DataMemberBinding="{Binding FTE}" TextWrapping="Wrap" MaxWidth="150" />
 
-                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat=\{0:c\}}" />
+                                <telerik:GridViewDataColumn Header="Total Savings" IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="False" DataMemberBinding="{Binding totalSave, StringFormat=\{0:c0\}}" />
 
                                 <telerik:GridViewDataColumn Header="LOB-T1" IsFilterable="True" DataMemberBinding="{Binding LOBT1}" TextWrapping="Wrap"/>
                                 <telerik:GridViewDataColumn Header="LOB-T2" IsFilterable="True" IsGroupable="False" DataMemberBinding="{Binding LOBT2}" TextWrapping="Wrap"/>

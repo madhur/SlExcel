@@ -523,8 +523,8 @@ namespace manage.Controls
 
                           else if (statusLevel.Text == "Submit for Approval")
                           {
-
-                              btn_cancel.Visibility = Visibility.Collapsed;
+                              // Fast follower fix, cancel button visible
+                              btn_cancel.Visibility = Visibility.Visible ;
                               
                               btn_inprogress.Visibility = Visibility.Collapsed;
                               btn_approve.Visibility = Visibility.Collapsed;
