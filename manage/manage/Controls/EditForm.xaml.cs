@@ -793,15 +793,16 @@ namespace manage.Controls
                           header4.Text = getItem("SavingsHeader4", listitems[0]);
                           header5.Text = getItem("SavingsHeader5", listitems[0]);
 
-                          es1.Value = Convert.ToDouble(listitems[0].FieldValues["Savings1"]);
+                          es1.Value = Convert.ToInt32(listitems[0].FieldValues["Savings1"]);
                           es2.Value = Convert.ToInt32(listitems[0].FieldValues["Savings2"]);
-                          es3.Value = Convert.ToDouble(listitems[0].FieldValues["Savings3"]);
+                          es3.Value = Convert.ToInt32(listitems[0].FieldValues["Savings3"]);
                           es4.Value = Convert.ToInt32(listitems[0].FieldValues["Savings4"]);
 
                           es5.Value = Convert.ToInt32(listitems[0].FieldValues["Savings5"]);
 
                           totalText.Text = Convert.ToInt32(listitems[0].FieldValues["Total_x0020_Savings"]).ToString();
-                          es_Total.Value = totalText.Text;
+
+                          es_Total.Text = totalText.Text;
 
                           AIM_ID.Text = getItem("AIM_x0020_Application_x0020_ID", listitems[0]);
                           LoadComboItems(getItem("AIM_x0020_Application_x0020_Name", listitems[0]), getItem("AIM_x0020_Application_x0020_ID", listitems[0]));
@@ -1223,12 +1224,12 @@ namespace manage.Controls
         private void MakeReadOnly(bool isAddButtonReadOnly)
         {
             TextBox[] allTexts = new TextBox[] { tech_impact, assump_depend, ideaname, description, SinglePeopleChooser.UserTextBox, SinglePeopleChooser1.UserTextBox, SinglePeopleChooser2.UserTextBox, sdlc_projID, sdlc_projName, biz_capability };
-            RadMaskedTextBox[] allMarks = new RadMaskedTextBox[] { es1, es2, es3, es4, es5, es_Total };
+            RadMaskedCurrencyInput[] allMarks = new RadMaskedCurrencyInput[] { es1, es2, es3, es4, es5, es_Total };
             Dictionary<RadioButton, List<RadioButton>> radios = GetLOBMapping();
             RadioButton[] radioButtons = new RadioButton[] { type_Avoid, type_reEngineer, type_Reduction, type_Growth, vendorSave_yes, vendorSave_no, risk_high, risk_med, risk_low, identify_e, identify_x, identify_c, identify_e2, identify_l };
             foreach (TextBox txtBox in allTexts)
                 txtBox.IsEnabled = false;
-            foreach (RadMaskedTextBox radMask in allMarks)
+            foreach (RadMaskedCurrencyInput radMask in allMarks)
                 radMask.IsEnabled = false;
 
             foreach (RadioButton radio in radios.Keys)
@@ -3750,7 +3751,7 @@ namespace manage.Controls
 
             totalText.Text = (Convert.ToInt32(es1.Value) + Convert.ToInt32(es2.Value) + Convert.ToInt32(es3.Value) + Convert.ToInt32(es4.Value) + Convert.ToInt32(es5.Value)).ToString();
 
-            es_Total.Value = totalText.Text;
+            es_Total.Text = totalText.Text;
             savingsTxt.Foreground = new SolidColorBrush(Colors.Black);
 
 

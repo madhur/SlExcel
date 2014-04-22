@@ -10,10 +10,10 @@
     xmlns:Primitives="clr-namespace:Telerik.Windows.Controls.RibbonView.Primitives;assembly=Telerik.Windows.Controls.RibbonView"
     xmlns:Controls="clr-namespace:excel_create.Controls" 
     xmlns:Controls1="clr-namespace:excel_create.Controls"
-    xmlns:local="clr-namespace:excel_create" x:Class="excel_create.MainPage"
+    xmlns:local="clr-namespace:excel_create" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="excel_create.MainPage"
     mc:Ignorable="d" d:DesignWidth="900" Height="500">
 
-    <telerik:RadBusyIndicator Name="busyIndicator"  IsBusy="False"  BusyContent="Please wait ...">
+    <telerik:RadBusyIndicator x:Name="busyIndicator"  IsBusy="False"  BusyContent="Please wait ...">
         <Grid x:Name="LayoutRoot" Background="White">
 
             <Grid.ColumnDefinitions>
@@ -82,29 +82,27 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock x:Name="requiredfields" FontFamily="Arial" FontSize="13" Margin="25,6,0,0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">                        
-                            <Run Text="All fields marked with" Foreground="#FF002663"/>
-                            <Run Text=" * " Foreground="#FFF30606"/>
-                            <Run Text="are required fields." Foreground="#FF002663"/>
+								<Run Text="All fields marked with" Foreground="#FF002663"/>
+								<Run Text=" * " Foreground="#FFF30606"/>
+								<Run Text="are required fields." Foreground="#FF002663"/>
                             </TextBlock>
                             <TextBlock x:Name="ideanameTxt" HorizontalAlignment="Left" Margin="25,8,0,0" Grid.Row="2" VerticalAlignment="Center" FontFamily="Arial" FontSize="12">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
 
-                            <Run Text="  Idea Name"/>
-                            <LineBreak/>
-                            <Run FontSize="9" Text="     (Character Limit 60)"/>
+								<Run Text="  Idea Name"/>
+								<LineBreak/>
+								<Run FontSize="9" Text="     (Character Limit 60)"/>
 
                             </TextBlock>
-                            <TextBox x:Name="ideaname" HorizontalAlignment="Left" TextChanged="Ideanametextchanged" Height="23" Margin="155,11,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontFamily="Arial" FontSize="12" MaxLength="60">
-
-                            </TextBox>
+                            <TextBox x:Name="ideaname" HorizontalAlignment="Left" TextChanged="Ideanametextchanged" Height="23" Margin="155,11,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontFamily="Arial" FontSize="12" MaxLength="60"/>
 
 
                             <TextBlock x:Name="descriptionTxt" HorizontalAlignment="Left" Margin="24,0,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Arial" FontSize="12">
-							<Run Text="*" FontSize="14" Foreground="#FFF30606"/>   
-                            <Run Text="  Idea Description"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>   
+								<Run Text="  Idea Description"/>
                                                  
-                        <LineBreak/>
-							<Run FontSize="9" Text="      (Character Limit 255)"/>
+								<LineBreak/>
+								<Run FontSize="9" Text="      (Character Limit 255)"/>
                             </TextBlock>
                             <TextBox x:Name="description" HorizontalAlignment="Left" TextChanged="Descriptiontextchanged" Height="150" Margin="155,19,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontFamily="Arial" FontSize="12" MaxLength="255" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto"/>
 
@@ -114,8 +112,8 @@
 
                             <TextBlock x:Name="executorTxt" HorizontalAlignment="Left" Margin="0,14,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Column="1">
                             
-                             <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                            <Run Text="  Idea Executor"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="  Idea Executor"/>
                             </TextBlock>
                             <Controls1:PeopleChooser x:Name="SinglePeopleChooser" AllowMultiple="False"  Grid.Column="1" Margin="133,11,44,0" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Right"/>
                             <Controls1:PeopleChooser x:Name="SinglePeopleChooser1" AllowMultiple="false" Grid.Column="1" Margin="133,15,44,26" Grid.Row="3" Grid.RowSpan="2" HorizontalAlignment="Right"/>
@@ -123,24 +121,24 @@
 
 
                             <TextBlock x:Name="directorTxt" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" FontFamily="Arial" FontSize="12">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
 
-                            <Run Text="  Idea Director"/>
+								<Run Text="  Idea Director"/>
                             </TextBlock>
 
 
                             <TextBlock x:Name="vpTxt" HorizontalAlignment="Left" Margin="0,64,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" FontFamily="Arial" FontSize="12">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                            <Run Text="  Idea VP"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="  Idea VP"/>
 
                             </TextBlock>
 
 
                             <TextBlock x:Name="lobt1Txt" Grid.Column="1" HorizontalAlignment="Left" Margin="0,23,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Width="110" Height="28">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                            <Run Text="  Line of"/>
-                            <LineBreak/>
-                            <Run Text="     Business - Tier 1"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="  Line of"/>
+								<LineBreak/>
+								<Run Text="     Business - Tier 1"/>
 
                             </TextBlock>
 
@@ -157,14 +155,29 @@
                             <TextBox x:Name="resultsLOB2" Margin="129,34,105,2" Grid.Row="5"  Visibility="Collapsed" TextChanged="LOB2textchanged"/>
 
 
+                            <!--<TextBlock x:Name="futureTxt" Margin="24,30,312,0" Grid.Row="4" FontFamily="Arial" FontSize="12" TextWrapping="Wrap" Text="     Future Pipeline"/>
+                        <CheckBox x:Name="fp_check" Content="" HorizontalAlignment="Left" Margin="155,28,0,0" Grid.Row="4" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Height="16" Width="20"/>-->
+
+                            <!--<Image x:Name="imghelp_future" MouseLeftButtonDown="imghelp_future_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="130,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
+                        <Popup x:Name="myPopup_future" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalOffset="3" VerticalOffset="10" Height="0" Margin="-1,2,0,9" Width="0">
+                            <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663" Margin="140,51,263,12" Grid.Row="3" Height="125" Width="323">
+                                <StackPanel Margin="5" Height="115" Width="300">
+                                    <Button x:Name="PopupButton13" Content="X" Click="PopUpButton13_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,0,5,0" />
+                                    <TextBlock x:Name="PopUpText_future" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,2,1,4" Foreground="#FF002663" Width="300" Height="115"/>
+
+                                </StackPanel>
+                            </Border>
+                        </Popup>-->
+
+
                             <!--lob2-->
                             <StackPanel x:Name="LOBT2_stack" DataContext="overview" Grid.Column="1" Margin="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left">
                                 <toolkit:DockPanel x:Name="lobgbt" LastChildFill="False" Margin="0" Visibility="Collapsed">
                                     <TextBlock x:Name="gbtTxt" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left">
-                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                    <Run Text="  Line of"/>
-                                    <LineBreak/>
-                                    <Run Text="     Business - GBT"/>
+										<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+										<Run Text="  Line of"/>
+										<LineBreak/>
+										<Run Text="     Business - GBT"/>
 
 
                                     </TextBlock>
@@ -177,9 +190,9 @@
 
                                 <toolkit:DockPanel x:Name="lobwsgcat" LastChildFill="False" Margin="0" Visibility="Collapsed">
                                     <TextBlock x:Name="wsgcatTxt" TextWrapping="Wrap" Margin="0" FontFamily="Arial" FontSize="12" Height="32">
-                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                    <Run Text="  Line of Business"/><LineBreak/>
-                                    <Run Text="    - WSGCAT"/>
+										<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+										<Run Text="  Line of Business"/><LineBreak/>
+										<Run Text="    - WSGCAT"/>
 
                                     </TextBlock>
                                     <RadioButton x:Name="lobwsgcat_ws" GroupName="lob2" Content="WS" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="44" FontFamily="Arial" FontSize="12"/>
@@ -191,10 +204,10 @@
 
                                 <toolkit:DockPanel x:Name="lobpbmt" LastChildFill="False" Height="40" Margin="0,15,0,0" Visibility="Collapsed">
                                     <TextBlock x:Name="pbmtTxt" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left" Margin="0">
-                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                                                        <Run Text="  Line of "/>
-                                    <LineBreak/>
-                                    <Run Text="     Business - PBMT"/>
+										<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+										<Run Text="  Line of "/>
+										<LineBreak/>
+										<Run Text="     Business - PBMT"/>
 
                                     </TextBlock>
                                     <RadioButton x:Name="lobpbmt_pegasus" GroupName="lob2" Content="GCST Pegasus" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="22,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
@@ -203,10 +216,10 @@
                                 </toolkit:DockPanel>
                                 <toolkit:DockPanel x:Name="lobgbs" LastChildFill="False" Margin="0,15,0,0" Visibility="Collapsed">
                                     <TextBlock x:Name="gbsTxt" TextWrapping="Wrap" Margin="0" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Height="41">
-                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                                                        <Run Text="  Line of"/>
-                                    <LineBreak/>
-                                    <Run Text="     Business - GBS"/>
+										<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+										<Run Text="  Line of"/>
+										<LineBreak/>
+										<Run Text="     Business - GBS"/>
 
                                     </TextBlock>
                                     <RadioButton x:Name="lobgbs_gbt" GroupName="lob2" Content="GBT" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="29,10,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
@@ -218,10 +231,10 @@
                                 </toolkit:DockPanel>
                                 <toolkit:DockPanel x:Name="lobhr" LastChildFill="False" Margin="0,15,0,0" Visibility="Collapsed">
                                     <TextBlock x:Name="hrTxt" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left">
-                                    <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                                                        <Run Text="   Line of"/>
-                                    <LineBreak/>
-                                    <Run Text="      Business - HR"/>
+										<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+										<Run Text="   Line of"/>
+										<LineBreak/>
+										<Run Text="      Business - HR"/>
 
                                     </TextBlock>
                                     <RadioButton x:Name="lobhr_hr" GroupName="lob2" Content="HR" Grid.Column="1" Checked="LOB2RadioButtons_Checked" HorizontalAlignment="Left" Margin="34,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
@@ -265,19 +278,6 @@
                                     </StackPanel>
                                 </Border>
                             </Popup>
-                            <!--<TextBlock x:Name="futureTxt" Margin="24,30,312,0" Grid.Row="4" FontFamily="Arial" FontSize="12" TextWrapping="Wrap" Text="     Future Pipeline"/>
-                        <CheckBox x:Name="fp_check" Content="" HorizontalAlignment="Left" Margin="155,28,0,0" Grid.Row="4" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Height="16" Width="20"/>-->
-
-                            <!--<Image x:Name="imghelp_future" MouseLeftButtonDown="imghelp_future_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="130,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
-                        <Popup x:Name="myPopup_future" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalOffset="3" VerticalOffset="10" Height="0" Margin="-1,2,0,9" Width="0">
-                            <Border CornerRadius="5" Background="#FFF5F6F4" BorderThickness="1,1,3,2" BorderBrush="#FF002663" Margin="140,51,263,12" Grid.Row="3" Height="125" Width="323">
-                                <StackPanel Margin="5" Height="115" Width="300">
-                                    <Button x:Name="PopupButton13" Content="X" Click="PopUpButton13_Click" Cursor="Hand" FontFamily="Arial" FontSize="8" Background="{x:Null}" BorderBrush="#FF002663" Foreground="#FF002663" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Top" Padding="0,2,3,3" Width="13" Height="12" HorizontalContentAlignment="Right" Margin="14,0,5,0" />
-                                    <TextBlock x:Name="PopUpText_future" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Arial" Padding="1,2" Margin="1,2,1,4" Foreground="#FF002663" Width="300" Height="115"/>
-
-                                </StackPanel>
-                            </Border>
-                        </Popup>-->
 
 
                         </Grid>
@@ -295,11 +295,11 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock HorizontalAlignment="Left" Margin="26,4,0,0" VerticalAlignment="Top" Height="34" Width="96" FontFamily="Arial" FontSize="12" TextWrapping="Wrap" Grid.Row="1" >
-                            <Run Text="Other GCST"/>
-                            <LineBreak/>
-                            <Run Text="FTE Contributors"/>
+								<Run Text="Other GCST"/>
+								<LineBreak/>
+								<Run Text="FTE Contributors"/>
                             </TextBlock>
-                            <Controls:PeopleChooser x:Name="MultiplePeopleChooser" AllowMultiple="True" Margin="148,25,509,297" Width="Auto" Grid.RowSpan="2"/>
+                            <Controls1:PeopleChooser x:Name="MultiplePeopleChooser" AllowMultiple="True" Margin="148,25,509,297" Width="Auto" Grid.RowSpan="2"/>
 
                             <TextBlock HorizontalAlignment="Left" Margin="26,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="90" FontFamily="Arial" FontSize="12" Grid.Row="1" Text="AIM Application"/>
                             <ComboBox x:Name="aimcombo" HorizontalAlignment="Left" Margin="148,70,0,0" VerticalAlignment="Top" Grid.Row="1" Height="20" FontFamily="Arial" FontSize="12" MaxWidth="300" Width="200" SelectionChanged="aimcombo_SelectionChanged" />
@@ -309,8 +309,8 @@
 
 
                             <TextBlock x:Name="identifyTxt" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="10,150,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1" Width="200">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                                        <Run Text="  EXCEL Identifier"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="  EXCEL Identifier"/>
 
 
                             </TextBlock>
@@ -324,8 +324,8 @@
                             </StackPanel>
 
                             <TextBlock HorizontalAlignment="Left" Margin="26,263,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" FontFamily="Arial" FontSize="12" Height="48">
-							<Run Text="Assumptions or Dependencies "/>
-							<Run FontSize="9" Text="(Character Limit 255)"/>
+								<Run Text="Assumptions or Dependencies "/>
+								<Run FontSize="9" Text="(Character Limit 255)"/>
                             </TextBlock>
                             <TextBox x:Name="assump_depend" HorizontalAlignment="Left" Height="60" Margin="148,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontFamily="Arial" FontSize="12" Grid.Row="1" AcceptsReturn="True" MaxLength="255"/>
 
@@ -333,10 +333,10 @@
 
 
                             <TextBlock x:Name="riskTxt" HorizontalAlignment="Left" Margin="450,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1" Width="111">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                                        <Run Text="  Risk of"/>
-                            <LineBreak/>
-                            <Run Text="     Implementation"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="  Risk of"/>
+								<LineBreak/>
+								<Run Text="     Implementation"/>
 
                             </TextBlock>
                             <StackPanel x:Name="risk_stack" Margin="585,0,78,362" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
@@ -361,8 +361,8 @@
 
 
                             <TextBlock x:Name="vendorTxt" HorizontalAlignment="Left" Margin="450,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                                                        <Run Text="  Vendor Save?"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="  Vendor Save?"/>
 
                             </TextBlock>
 
@@ -372,18 +372,18 @@
                             </StackPanel>
 
                             <TextBlock x:Name="RoleBasedTxt" HorizontalAlignment="Left" Margin="465,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Grid.Row="1">
-                            <Run Text="Role Family"/>
+								<Run Text="Role Family"/>
 
                             </TextBlock>
                             <ComboBox x:Name="rolecombo" Width="202" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,12,110,0" Height="23" Grid.Row="1"/>
 
                             <TextBlock x:Name="costTxt" HorizontalAlignment="Left" Margin="450,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="100" FontFamily="Arial" FontSize="12" Grid.Row="1">
-                            <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-                            <Run Text="  Cost Type"/>
-                            <LineBreak/>
-                            <Run Text="      Need help?" FontSize="10"/>
-                            <LineBreak/>
-                                 <Run Text="      Click here..." FontSize="10"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="  Cost Type"/>
+								<LineBreak/>
+								<Run Text="      Need help?" FontSize="10"/>
+								<LineBreak/>
+								<Run Text="      Click here..." FontSize="10"/>
 
                             </TextBlock>
 
@@ -395,14 +395,14 @@
                             </StackPanel>
                             <StackPanel x:Name="tech_impact1"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,276,0,0" Grid.Row="1" Orientation="Horizontal" Width="420" Height="76" Visibility="Collapsed">
                                 <TextBlock x:Name="techTxt" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Arial" FontSize="12" Height="47" Margin="-14,0,67,0">
-								                                <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+									<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
 
-                                <Run Text="  Technology"/>
-                                <LineBreak/>
-                                <Run Text="      Impacted"/>
-                                <LineBreak/>
+									<Run Text="  Technology"/>
+									<LineBreak/>
+									<Run Text="      Impacted"/>
+									<LineBreak/>
                                 
-								<Run Text="       (Character Limit 255)" FontSize="9"/>
+									<Run Text="       (Character Limit 255)" FontSize="9"/>
                                 </TextBlock>
                                 <TextBox x:Name="tech_impact" TextWrapping="Wrap" TextChanged="Techimpacttextchanged" VerticalAlignment="Center" FontFamily="Arial" FontSize="12" Margin="-31,0,0,0" MaxLength="255" Height="60" HorizontalAlignment="Center" Width="250"/>
                                 <Image x:Name="imghelp_tech" MouseLeftButtonDown="imghelp_tech_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" VerticalAlignment="Center" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand" Margin="-311,-18,0,0"/>
@@ -484,31 +484,31 @@
 
 
                             <TextBlock x:Name="firstmonthTxt" HorizontalAlignment="Left" Margin="30,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Arial" FontSize="12" Width="80">
-                                                      <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
 
-                            <Run Text="  1st Month"/>
-                            <LineBreak/>
-                            <Run Text="     Saves Date"/>
+								<Run Text="  1st Month"/>
+								<LineBreak/>
+								<Run Text="     Saves Date"/>
                             </TextBlock>
                             <sdk:DatePicker x:Name="firstmonth" HorizontalAlignment="Left" Height="23" Margin="140,23,0,0" VerticalAlignment="Top" Width="178" FontFamily="Arial" FontSize="12" SelectedDateChanged="firstmonth_SelectedDateChanged"/>
 
 
                             <TextBlock x:Name="attachTxt" HorizontalAlignment="Left" Margin="354,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontFamily="Arial" FontSize="12" Height="61">
-                            <Run Text="Please attach documentation that clearly demonstrates how the save is determined."/>
-                            <LineBreak/>
-                            <Run Text=" *" FontSize="16" Foreground="#FFF30606" FontWeight="Bold"/>
-                            <Run Text="  Required to Submit for Approval (Limit 3MB)" FontSize="9" Foreground="#FF002663"/>
+								<Run Text="Please attach documentation that clearly demonstrates how the save is determined."/>
+								<LineBreak/>
+								<Run Text=" *" FontSize="16" Foreground="#FFF30606" FontWeight="Bold"/>
+								<Run Text="  Required to Submit for Approval (Limit 3MB)" FontSize="9" Foreground="#FF002663"/>
                             </TextBlock>
 
 
                             <ListBox x:Name="FileListBox" DataContext="selectedFiles" ItemsSource="{Binding SelectedFiles, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220" Height="69" Margin="0,20,90,0" FontFamily="Arial" />
 
                             <TextBlock x:Name="Attach_Alert" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,89,25,0" FontSize="10" FontFamily="Arial" Width="285">
-                            <Run Text="Please do not include AXP Restricted or AXP Secret information"/>
-                                 <LineBreak/>
-                                <Run Text="(eg. Card #'s, cardholder information, contracts, etc.)."/>
-                            <LineBreak/>
-                            <Run Text="If you have questions, please contact your EXCEL Admin."/>
+								<Run Text="Please do not include AXP Restricted or AXP Secret information"/>
+								<LineBreak/>
+								<Run Text="(eg. Card #'s, cardholder information, contracts, etc.)."/>
+								<LineBreak/>
+								<Run Text="If you have questions, please contact your EXCEL Admin."/>
                             </TextBlock>
 
                             <Button x:Name="Add" Click="FileUpload_Click" Content="Add" FontFamily="Arial" FontSize="12" Width="60" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,25,0"/>
@@ -518,9 +518,9 @@
 
 
                             <TextBlock x:Name="savingsTxt" HorizontalAlignment="Left" Margin="308,-65,0,0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="16" FontFamily="Arial" Foreground="#FF002663">
-                                                       <Run Text="*" FontSize="14" Foreground="#FFF30606"/>
+								<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
 
-                            <Run Text="  Estimated Savings - 12 Months Only"/>
+								<Run Text="  Estimated Savings - 12 Months Only"/>
                             </TextBlock>
                             <Image x:Name="imghelp_firstmonth" MouseLeftButtonDown="imghelp_firstmonth_MouseLeftButtonDown" HorizontalAlignment="Left" Height="20" Margin="109,19,0,0" VerticalAlignment="Top" Width="20" Source="Images/help.png" Stretch="Fill" Cursor="Hand"/>
                             <Popup x:Name="myPopup_firstmonth" Margin="0,0,0,0"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalOffset="16" VerticalOffset="-283">
@@ -579,14 +579,12 @@
                                 <TextBlock x:Name="header3"  Tag="2" TextWrapping="Wrap" Text="" Grid.Column="2" Grid.Row="0" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" Height="18" Margin="0,10" VerticalAlignment="Center" />
                                 <TextBlock x:Name="header4"  Tag="3" TextWrapping="Wrap" Text="" Grid.Column="3" Grid.Row="0" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" Margin="0,10" VerticalAlignment="Center" Height="18" />
                                 <TextBlock x:Name="header5"  Tag="4" TextWrapping="Wrap" Text=""  Grid.Column="4" Grid.Row="0" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" Height="18" Margin="0,11,0,10" VerticalAlignment="Center" />
-
-                                <telerik:RadMaskedTextBox x:Name="es1" UpdateValueEvent="PropertyChanged" Grid.Column="0" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch" Mask="c0" MaskType="Numeric" Value="0" IsSpinEnabled="False" Margin="0" IsEmpty="False" MaskedText=""/>
-                                <telerik:RadMaskedTextBox x:Name="es2" UpdateValueEvent="PropertyChanged" Grid.Column="1" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" Margin="0" HorizontalAlignment="Stretch" Mask="c0" Value="0" MaskType="Numeric" IsSpinEnabled="False" MaskedText=""/>
-                                <telerik:RadMaskedTextBox x:Name="es3" UpdateValueEvent="PropertyChanged" Grid.Column="2" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" Margin="0" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch"  Mask="c0" Value="0" MaskType="Numeric" IsSpinEnabled="False" MaskedText=""/>
-
-                                <telerik:RadMaskedTextBox x:Name="es4" UpdateValueEvent="PropertyChanged" Grid.Column="3" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch" Mask="c0" Value="0" IsSpinEnabled="False" MaskType="Numeric" Margin="0" MaskedText=""/>
-
-                                <telerik:RadMaskedTextBox x:Name="es5" Grid.Column="4" Grid.Row="1" BorderBrush="#FF37AAC7" FontFamily="Arial" FontSize="14" BorderThickness="1,1,0,0" HorizontalContentAlignment="Center" SelectionOnFocus="SelectAll" ValueChanged="es_ValueChanged" HorizontalAlignment="Stretch" Mask="c0" Value="0" MaskType="Numeric" Margin="0" IsSpinEnabled="False" MaskedText=""/>
+                                <telerik:RadMaskedCurrencyInput x:Name="es1" Margin="0" Grid.Row="1" IsClearButtonVisible="False" Mask="c14" ValueChanged="es_ValueChanged" TextMode="PlainText" FontFamily="Arial" FontSize="14" Width="100" InputBehavior="Insert" EmptyContent="$0" SelectionOnFocus="SelectAll" />
+                                <telerik:RadMaskedCurrencyInput x:Name="es2" Margin="0" Grid.Row="1" IsClearButtonVisible="False" Mask="c14" ValueChanged="es_ValueChanged" Grid.Column="1" FontFamily="Arial" FontSize="14" Width="100" SelectionOnFocus="SelectAll" TextMode="PlainText" EmptyContent="$0" />
+                                <telerik:RadMaskedCurrencyInput x:Name="es3" Margin="0" Grid.Row="1" IsClearButtonVisible="False" Mask="c14" ValueChanged="es_ValueChanged" TextMode="PlainText" Grid.Column="2" FontFamily="Arial" FontSize="14" SpinMode="None" Width="100" IsCurrencySymbolVisible="True" />
+                                <telerik:RadMaskedCurrencyInput x:Name="es4" Margin="0" Grid.Row="1" IsClearButtonVisible="False" Mask="c14" ValueChanged="es_ValueChanged" TextMode="PlainText" Grid.Column="3" FontFamily="Arial" FontSize="14" SpinMode="None" Width="100" />
+                                <telerik:RadMaskedCurrencyInput x:Name="es5" Margin="0" Grid.Row="1" IsClearButtonVisible="False" Mask="c14" ValueChanged="es_ValueChanged" TextMode="PlainText" Grid.Column="4" FontFamily="Arial" FontSize="14" SpinMode="None" Width="100" />
+                               
                                 <TextBox x:Name="totalText" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="8,0,0,-57"/>
                                 <TextBox x:Name="firstmonthText" Visibility="Collapsed"/>
                                 <telerik:RadMaskedTextBox x:Name="es_Total" Mask="c0" Value="0" Grid.Column="5" Grid.Row="2" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="Arial" FontSize="14" FontWeight="Bold" Margin="0,-1,0,0" MaskType="Numeric" BorderThickness="0,2,0,0" BorderBrush="#FF37AAC7" MaskedText="" />
@@ -597,7 +595,7 @@
                                 <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" Grid.RowSpan="2" Grid.Column="3" Width="100" HorizontalAlignment="Left"/>
                                 <Border BorderBrush="#FF37AAC7" BorderThickness="1" Grid.RowSpan="2" Grid.Column="4" HorizontalAlignment="Left" Width="100" Grid.ColumnSpan="2"/>
                                 <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,1,0" Grid.Column="5" Grid.RowSpan="4" Margin="0,0,0,23"/>
-                                <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Left" Width="100" Height="64" VerticalAlignment="Top"/>
+                                <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" Grid.Column="0" Width="100" Grid.Row="1"/>
                                 <Border BorderBrush="#FF37AAC7" BorderThickness="1" HorizontalAlignment="Left" Height="63" Grid.RowSpan="3" VerticalAlignment="Top" Width="629" Grid.ColumnSpan="6" Grid.Row="1"/>
                                 <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" HorizontalAlignment="Left" Width="100" Tag="1" Grid.Column="1" Grid.RowSpan="2"/>
                                 <Border BorderBrush="#FF37AAC7" BorderThickness="1,1,0,1" Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Left" Width="100"/>
