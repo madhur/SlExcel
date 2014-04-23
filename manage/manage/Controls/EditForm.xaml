@@ -973,7 +973,7 @@
 
                                 <TextBox x:Name="totalText" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="8,0,0,-57"/>
                                 <TextBox x:Name="firstmonthText" Visibility="Collapsed"/>
-                                <telerik:RadMaskedCurrencyInput x:Name="es_Total" Mask="" HorizontalContentAlignment="Left" FormatString="c0" Value="0" Grid.Column="5" Grid.Row="2" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="Arial" FontSize="14" FontWeight="Bold" Margin="0,-1,0,0" BorderThickness="0,2,0,0" BorderBrush="#FF37AAC7" Placeholder=" " EmptyContent="$0" SelectionOnFocus="Default" Width="129" TextMode="PlainText"/>
+                                <telerik:RadMaskedCurrencyInput x:Name="es_Total" Mask="" HorizontalContentAlignment="Center" FormatString="c0" Value="0" Grid.Column="5" Grid.Row="2" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="Arial" FontSize="14" FontWeight="Bold" Margin="0,-1,0,0" BorderThickness="0,2,0,0" BorderBrush="#FF37AAC7" Placeholder=" " EmptyContent="$0" SelectionOnFocus="Default" Width="129" TextMode="PlainText"/>
 
 
                                 <TextBlock Grid.Column="4" Margin="0" Grid.Row="2" Text="Total Savings" Foreground="#FF002663" FontFamily="Arial" FontSize="14" FontWeight="Bold" Height="16" Width="161"/>

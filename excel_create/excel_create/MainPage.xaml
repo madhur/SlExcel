@@ -587,7 +587,7 @@
                                
                                 <TextBox x:Name="totalText" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="8,0,0,-57"/>
                                 <TextBox x:Name="firstmonthText" Visibility="Collapsed"/>
-                                <telerik:RadMaskedTextBox x:Name="es_Total" Mask="c0" Value="0" Grid.Column="5" Grid.Row="2" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="Arial" FontSize="14" FontWeight="Bold" Margin="0,-1,0,0" MaskType="Numeric" BorderThickness="0,2,0,0" BorderBrush="#FF37AAC7" MaskedText="" />
+                                <telerik:RadMaskedTextBox x:Name="es_Total" Mask="c0" HorizontalContentAlignment="Center" Value="0" Grid.Column="5" Grid.Row="2" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="Arial" FontSize="14" FontWeight="Bold" Margin="0,-1,0,0" MaskType="Numeric" BorderThickness="0,2,0,0" BorderBrush="#FF37AAC7" MaskedText="" />
 
 
 
