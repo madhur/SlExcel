@@ -801,8 +801,8 @@ namespace manage.Controls
                           es5.Value = Convert.ToInt32(listitems[0].FieldValues["Savings5"]);
 
                           totalText.Text = Convert.ToInt32(listitems[0].FieldValues["Total_x0020_Savings"]).ToString();
-
-                          es_Total.Text = totalText.Text;
+                          es_Total.Value = Convert.ToDecimal(totalText.Text);
+                          
 
                           AIM_ID.Text = getItem("AIM_x0020_Application_x0020_ID", listitems[0]);
                           LoadComboItems(getItem("AIM_x0020_Application_x0020_Name", listitems[0]), getItem("AIM_x0020_Application_x0020_ID", listitems[0]));
@@ -3751,7 +3751,7 @@ namespace manage.Controls
 
             totalText.Text = (Convert.ToInt32(es1.Value) + Convert.ToInt32(es2.Value) + Convert.ToInt32(es3.Value) + Convert.ToInt32(es4.Value) + Convert.ToInt32(es5.Value)).ToString();
 
-            es_Total.Text = totalText.Text;
+            es_Total.Value = Convert.ToDecimal(totalText.Text);
             savingsTxt.Foreground = new SolidColorBrush(Colors.Black);
 
 
