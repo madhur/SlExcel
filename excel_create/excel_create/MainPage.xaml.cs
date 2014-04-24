@@ -1447,7 +1447,7 @@ namespace excel_create
 
                  newItem["scale"] = "1";
                  newItem["Idea_x0020_Status"] = "Draft";
-                 newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "swuccessfully submitted the idea as a draft.";
+                 newItem["Audit"] = createdby.Text + " - " + DateTime.Now + " - " + "successfully submitted the idea as a draft.";
 
                  newItem.Update();
                  //Load the list 
