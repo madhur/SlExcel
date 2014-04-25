@@ -2368,11 +2368,12 @@ namespace excel_create
         private void es_ValueChanged(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
             totalText.ClearValue(TextBox.TextProperty);
-
-            totalText.Text = (Convert.ToInt32(es1.Value) + Convert.ToInt32(es2.Value) + Convert.ToInt32(es3.Value) + Convert.ToInt32(es4.Value) + Convert.ToInt32(es5.Value)).ToString();
+            
+            totalText.Text = (es1.Value + es2.Value + es3.Value + es4.Value + es5.Value).ToString();
 
             es_Total.Value = Convert.ToDecimal(totalText.Text);
 
+            
             if (Convert.ToInt32(totalText.Text) > 0)
             {
                 savingsTxt.Foreground = new SolidColorBrush(Colors.Black);
