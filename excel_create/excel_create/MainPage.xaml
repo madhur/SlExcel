@@ -57,7 +57,7 @@
             </StackPanel>
 
             <!--tabcontrol-->
-            <telerik:RadTabControl x:Name="tabcontrol1" Align="Right" Grid.RowSpan="9" Grid.ColumnSpan="5" BorderBrush="{x:Null}" HeaderBackground="{x:Null}" Margin="-165,7,165,29" BorderThickness="0" Style="{StaticResource RadTabControlStyle1}" Height="380" Grid.Row="1">
+            <telerik:RadTabControl x:Name="tabcontrol1" Align="Right" Grid.RowSpan="9" Grid.ColumnSpan="5" BorderBrush="{x:Null}" HeaderBackground="{x:Null}" Margin="0,23,0,0" BorderThickness="0" Style="{StaticResource RadTabControlStyle1}" Height="380" Grid.Row="1">
 
 
                 <!--project overview tab-->
