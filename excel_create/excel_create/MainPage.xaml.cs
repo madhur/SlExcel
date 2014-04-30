@@ -1462,6 +1462,7 @@ namespace excel_create
              if (message.Equals(GlobalConsts.USER_MISSING_MSG, StringComparison.OrdinalIgnoreCase))
              {
                  MessageBox.Show(GlobalConsts.USER_MISSING_MSG_NEW);
+                 NavigateScopeTab();
              }
              else
              {
