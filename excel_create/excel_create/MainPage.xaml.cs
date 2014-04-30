@@ -1420,25 +1420,26 @@ namespace excel_create
                  //Load the list 
                  context.Load(Idea, list => list.Title);
 
+                 busyIndicator.IsBusy = true;
                  //Execute the query to create the new item 
                  context.ExecuteQueryAsync((s, ee) =>
                  {
                      string itemId = newItem.Id.ToString();
 
-                     RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+                     RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully saved as a draft.");
 
-                     Dispatcher.BeginInvoke(() =>
-                     {
-                         newFolderName = itemId;
-                         msgwin= new Messages();
-                         msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                         msgwin.alert.Visibility = Visibility.Collapsed;
-                         msgwin.msgtxt.Text = "Your idea was successfully saved as a draft.";
-                         msgwin.Show();
+                     //Dispatcher.BeginInvoke(() =>
+                     //{
+                     //    newFolderName = itemId;
+                     //    msgwin= new Messages();
+                     //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                     //    msgwin.alert.Visibility = Visibility.Collapsed;
+                     //    msgwin.msgtxt.Text = "Your idea was successfully saved as a draft.";
+                     //    msgwin.Show();
 
 
-                     }
-                         );
+                     //}
+                     //    );
 
 
 
@@ -1447,6 +1448,7 @@ namespace excel_create
      {
          Dispatcher.BeginInvoke(() =>
          {
+             busyIndicator.IsBusy = false;
              HandleSaveException(ee.Message, true);
          }
                        );
@@ -1455,6 +1457,18 @@ namespace excel_create
 
 
              }
+         }
+
+         private void ShowMessage(String message)
+         {
+             
+             msgwin = new Messages();
+             msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+             msgwin.alert.Visibility = Visibility.Collapsed;
+             msgwin.msgtxt.Text = message;
+             msgwin.Show();
+
+
          }
 
          private void HandleSaveException(String  message, bool enableStatusButtons)
@@ -1810,31 +1824,33 @@ namespace excel_create
                      //Load the list 
                      context.Load(Idea, list => list.Title);
                      //Execute the query to create the new item 
+                     busyIndicator.IsBusy = true;
                      context.ExecuteQueryAsync((s, ee) =>
                      {
                          string itemId = newItem.Id.ToString();
 
-                         RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+                         RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted as future pipeline.");
 
-                         Dispatcher.BeginInvoke(() =>
-                         {
-                             newFolderName = itemId;
-                             msgwin = new Messages();
-                             msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                             msgwin.alert.Visibility = Visibility.Collapsed;
+                         //Dispatcher.BeginInvoke(() =>
+                         //{
+                         //    newFolderName = itemId;
+                         //    msgwin = new Messages();
+                         //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                         //    msgwin.alert.Visibility = Visibility.Collapsed;
 
-                             msgwin.msgtxt.Text = "Your idea was successfully submitted as future pipeline.";
-                             msgwin.Show();
+                         //    msgwin.msgtxt.Text = "Your idea was successfully submitted as future pipeline.";
+                         //    msgwin.Show();
 
 
-                         }
-                             );
+                         //}
+                         //    );
 
                      },
          (s, ee) =>
          {
              Dispatcher.BeginInvoke(() =>
              {
+                 busyIndicator.IsBusy = false;
                  HandleSaveException(ee.Message, true);
              }
                         );
@@ -1899,26 +1915,27 @@ namespace excel_create
                      //Load the list 
                      context.Load(Idea, list => list.Title);
                      //Execute the query to create the new item 
+                     busyIndicator.IsBusy = true;
                      context.ExecuteQueryAsync((s, ee) =>
                    {
 
                        string itemId = newItem.Id.ToString();
 
-                       RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+                       RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted in progress");
 
-                       Dispatcher.BeginInvoke(() =>
-                       {
-                           newFolderName = itemId;
-                           msgwin = new Messages();
-                           msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                           msgwin.alert.Visibility = Visibility.Collapsed;
+                       //Dispatcher.BeginInvoke(() =>
+                       //{
+                       //    newFolderName = itemId;
+                       //    msgwin = new Messages();
+                       //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                       //    msgwin.alert.Visibility = Visibility.Collapsed;
 
-                           msgwin.msgtxt.Text = "Your idea was successfully submitted in progress";
-                           msgwin.Show();
+                       //    msgwin.msgtxt.Text = "Your idea was successfully submitted in progress";
+                       //    msgwin.Show();
 
 
-                       }
-                           );
+                       //}
+                       //    );
 
 
                    },
@@ -1926,6 +1943,7 @@ namespace excel_create
        {
            Dispatcher.BeginInvoke(() =>
            {
+               busyIndicator.IsBusy = true;
                HandleSaveException(ee.Message, true);
            }
                        );
@@ -1998,23 +2016,24 @@ namespace excel_create
             //Load the list 
             context.Load(Idea, list => list.Title);
             //Execute the query to create the new item 
+            busyIndicator.IsBusy = true;
             context.ExecuteQueryAsync((s, ee) =>
             {
                 string itemId = newItem.Id.ToString();
 
-                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted for approval.");
 
-                Dispatcher.BeginInvoke(() =>
-                {
-                    newFolderName = itemId;
-                    msgwin = new Messages();
-                    msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
-                    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                    msgwin.alert.Visibility = Visibility.Collapsed;
+                //Dispatcher.BeginInvoke(() =>
+                //{
+                //    newFolderName = itemId;
+                //    msgwin = new Messages();
+                //    msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
+                //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                //    msgwin.alert.Visibility = Visibility.Collapsed;
 
-                    msgwin.Show();
-                }
-                    );
+                //    msgwin.Show();
+                //}
+                //    );
 
 
             },
@@ -2022,6 +2041,7 @@ namespace excel_create
 {
     Dispatcher.BeginInvoke(() =>
     {
+        busyIndicator.IsBusy = false;
         HandleSaveException(ee.Message, true);
     }
                         );
@@ -2590,7 +2610,7 @@ namespace excel_create
             }
         }
 
-        public void RenameFolder(string siteUrl, string listName, string relativePath, string folderName, string folderNewName)
+        public void RenameFolder(string siteUrl, string listName, string relativePath, string folderName, string folderNewName, String message)
         {
             using (ClientContext clientContext = new ClientContext(siteUrl))
             {
@@ -2637,11 +2657,29 @@ namespace excel_create
                         folders[0].Update();
                         clientContext.ExecuteQueryAsync((ss, eee) =>
                         {
+                            newFolderName = folderNewName;
+
+                            Dispatcher.BeginInvoke(() =>
+                            {
+                                //newFolderName = itemId;
+                                busyIndicator.IsBusy = false;
+                                ShowMessage(message);
+
+
+                            }
+                       );
                         
                         },
           (ss, eee) =>
           {
-              Console.WriteLine(eee.Message);
+              Dispatcher.BeginInvoke(() =>
+                            {
+                                //newFolderName = itemId;
+                                busyIndicator.IsBusy = false;
+                                HandleSaveException(eee.Message, false);
+
+
+                            });
 
           });
 
@@ -2649,7 +2687,14 @@ namespace excel_create
                 },
           (s, ee) =>
           {
-              Console.WriteLine(ee.Message);
+              Dispatcher.BeginInvoke(() =>
+              {
+                  //newFolderName = itemId;
+                  busyIndicator.IsBusy = false;
+                  HandleSaveException(ee.Message, false);
+
+
+              });
 
           });
 
@@ -2918,41 +2963,41 @@ namespace excel_create
             }
         }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-            // User Singleuser;
+     //   private void SubmitButton_Click(object sender, RoutedEventArgs e)
+     //   {
+     //       // User Singleuser;
 
-            ClientContext context = ClientContext.Current;
-            List MadhurList = context.Web.Lists.GetByTitle("Idea");
-            ListItem newItem = MadhurList.AddItem(new ListItemCreationInformation());
+     //       ClientContext context = ClientContext.Current;
+     //       List MadhurList = context.Web.Lists.GetByTitle("Idea");
+     //       ListItem newItem = MadhurList.AddItem(new ListItemCreationInformation());
 
-            newItem["Idea_x0020_Status"] = "Draft";
-            newItem.Update();
-            context.Load(MadhurList, list => list.Title);
+     //       newItem["Idea_x0020_Status"] = "Draft";
+     //       newItem.Update();
+     //       context.Load(MadhurList, list => list.Title);
 
-            context.ExecuteQueryAsync((s, ee) =>
-            {
-                string itemId = newItem.Id.ToString();
+     //       context.ExecuteQueryAsync((s, ee) =>
+     //       {
+     //           string itemId = newItem.Id.ToString();
 
-                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+     //           RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
 
-                Dispatcher.BeginInvoke(() =>
-                {
-                    newFolderName = itemId;
-                    MessageBox.Show("Item created and folder renamed", "Item created and folder renamed", MessageBoxButton.OK);
-                }
-                    );
-
-
-            },
-     (s, ee) =>
-     {
-         Console.WriteLine(ee.Message);
-
-     });
+     //           Dispatcher.BeginInvoke(() =>
+     //           {
+     //               newFolderName = itemId;
+     //               MessageBox.Show("Item created and folder renamed", "Item created and folder renamed", MessageBoxButton.OK);
+     //           }
+     //               );
 
 
-        }
+     //       },
+     //(s, ee) =>
+     //{
+     //    Console.WriteLine(ee.Message);
+
+     //});
+
+
+     //   }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {

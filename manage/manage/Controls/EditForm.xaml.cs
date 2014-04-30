@@ -2632,7 +2632,7 @@ namespace manage.Controls
                     context.ExecuteQueryAsync((s, ee) =>
                     {
 
-                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId,"");
 
                         Dispatcher.BeginInvoke(() =>
                         {
@@ -2726,36 +2726,18 @@ namespace manage.Controls
 
 
                     //Execute the query to update the new item 
+                    busyIndicator.IsBusy = true;
                     context.ExecuteQueryAsync((s, ee) =>
                     {
 
-                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
-
-
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            newFolderName = itemId;
-
-                            msgwin = new Messages(this);
-                            msgwin.msgtxt.Text = "Your idea was successfully submitted as future pipeline.";
-                            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                            msgwin.alert.Visibility = Visibility.Collapsed;
-
-                            msgwin.Show();
-                            msgwin.Closed += msgwin_Closed;
-
-
-                        }
-                            );
-
-
-
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted as future pipeline.");
+                     
                     },
         (s, ee) =>
         {
             Dispatcher.BeginInvoke(() =>
             {
+                busyIndicator.IsBusy = false;
                 HandleSaveException(ee.Message);
             }
                         );
@@ -2765,6 +2747,18 @@ namespace manage.Controls
             }
         }
 
+        private void ShowMessage(String message)
+        {
+            msgwin = new Messages(this);
+            msgwin.msgtxt.Text = message;
+            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+            msgwin.alert.Visibility = Visibility.Collapsed;
+
+            msgwin.Show();
+            msgwin.Closed += msgwin_Closed;
+
+        }
 
 
         //<~~~~~~BEGIN IN PROGRESS~~~~~>
@@ -2809,29 +2803,31 @@ namespace manage.Controls
                     //Load the list 
                     context.Load(Idea, list => list.Title);
                     //Execute the query to create the new item 
+
+                    busyIndicator.IsBusy = true;
                     context.ExecuteQueryAsync((s, ee) =>
                     {
-                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted as in progress.");
 
 
 
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            newFolderName = itemId;
+                        //Dispatcher.BeginInvoke(() =>
+                        //{
+                        //    newFolderName = itemId;
 
-                            msgwin = new Messages(this);
-                            msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                            msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                            msgwin.msgtxt.Text = "Your idea was successfully submitted as in progress.";
-                            msgwin.alert.Visibility = Visibility.Collapsed;
+                        //    msgwin = new Messages(this);
+                        //    msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+                        //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                        //    msgwin.msgtxt.Text = "Your idea was successfully submitted as in progress.";
+                        //    msgwin.alert.Visibility = Visibility.Collapsed;
 
-                            msgwin.Show();
-                            msgwin.Closed += msgwin_Closed;
+                        //    msgwin.Show();
+                        //    msgwin.Closed += msgwin_Closed;
 
 
-                        }
+                        //}
 
-                                 );
+                        //         );
 
 
 
@@ -2840,6 +2836,7 @@ namespace manage.Controls
              {
                  Dispatcher.BeginInvoke(() =>
                  {
+                     busyIndicator.IsBusy = false;
                      HandleSaveException(ee.Message);
                  }
                        );
@@ -2916,26 +2913,27 @@ namespace manage.Controls
             //Load the list 
             context.Load(Idea, list => list.Title);
             //Execute the query to create the new item 
+            busyIndicator.IsBusy = true;
             context.ExecuteQueryAsync((s, ee) =>
             {
 
-                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
+                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted for approval.");
 
-                Dispatcher.BeginInvoke(() =>
-                {
-                    newFolderName = itemId;
+                //Dispatcher.BeginInvoke(() =>
+                //{
+                //    newFolderName = itemId;
 
-                    msgwin = new Messages(this);
-                    msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
-                    msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                    msgwin.alert.Visibility = Visibility.Collapsed;
+                //    msgwin = new Messages(this);
+                //    msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
+                //    msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+                //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                //    msgwin.alert.Visibility = Visibility.Collapsed;
 
-                    msgwin.Show();
-                    msgwin.Closed += msgwin_Closed;
+                //    msgwin.Show();
+                //    msgwin.Closed += msgwin_Closed;
 
-                }
-                    );
+                //}
+                //    );
 
 
 
@@ -2945,6 +2943,7 @@ namespace manage.Controls
 {
     Dispatcher.BeginInvoke(() =>
     {
+        busyIndicator.IsBusy = false;
         HandleSaveException(ee.Message);
     }
                         );
@@ -3208,21 +3207,25 @@ namespace manage.Controls
                 //Load the list 
                 context.Load(Idea, list => list.Title);
                 //Execute the query to create the new item 
+                busyIndicator.IsBusy = true;
                 context.ExecuteQueryAsync((s, ee) =>
                 {
 
+                    busyIndicator.IsBusy = false;
 
                     Dispatcher.BeginInvoke(() =>
                     {
 
-                        msgwin = new Messages(this);
-                        msgwin.msgtxt.Text = "Your changes were successfully saved.";
-                        msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                        msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                        msgwin.alert.Visibility = Visibility.Collapsed;
+                        //msgwin = new Messages(this);
+                        //msgwin.msgtxt.Text = "Your changes were successfully saved.";
+                        //msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+                        //msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                        //msgwin.alert.Visibility = Visibility.Collapsed;
 
-                        msgwin.Show();
-                        msgwin.Closed += msgwin_Closed;
+                        //msgwin.Show();
+                        //msgwin.Closed += msgwin_Closed;
+
+                        ShowMessage("Your changes were successfully saved.");
 
 
                     }
@@ -3234,6 +3237,7 @@ namespace manage.Controls
     {
         Dispatcher.BeginInvoke(() =>
                    {
+                       busyIndicator.IsBusy = false;
                        HandleSaveException(ee.Message);
                    }
                        );
@@ -3292,6 +3296,7 @@ namespace manage.Controls
                 //Load the list 
                 context.Load(Idea, list => list.Title);
                 //Execute the query to create the new item 
+                busyIndicator.IsBusy = true;
                 context.ExecuteQueryAsync((s, ee) =>
                 {
 
@@ -3299,13 +3304,15 @@ namespace manage.Controls
                     Dispatcher.BeginInvoke(() =>
                     {
 
-                        msgwin = new Messages(this);
-                        msgwin.msgtxt.Text = "Your idea was successfully canceled.";
-                        msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                        msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                        msgwin.alert.Visibility = Visibility.Collapsed;
-                        msgwin.Show();
-                        msgwin.Closed += msgwin_Closed;
+                        //msgwin = new Messages(this);
+                        //msgwin.msgtxt.Text = "Your idea was successfully canceled.";
+                        //msgwin.SubmitOKButton.Visibility = Visibility.Visible;
+                        //msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
+                        //msgwin.alert.Visibility = Visibility.Collapsed;
+                        //msgwin.Show();
+                        //msgwin.Closed += msgwin_Closed;
+                        busyIndicator.IsBusy = false;
+                        ShowMessage("Your idea was successfully canceled.");
 
                     }
                         );
@@ -3314,7 +3321,13 @@ namespace manage.Controls
                 },
     (s, ee) =>
     {
-        Console.WriteLine(ee.Message);
+        Dispatcher.BeginInvoke(() =>
+        {
+            busyIndicator.IsBusy = false;
+            HandleSaveException(ee.Message);
+
+        }
+                        );
 
     });
             }
@@ -4336,7 +4349,7 @@ namespace manage.Controls
             }
         }
 
-        public void RenameFolder(string siteUrl, string listName, string relativePath, string folderName, string folderNewName)
+        public void RenameFolder(string siteUrl, string listName, string relativePath, string folderName, string folderNewName, string message)
         {
             using (ClientContext clientContext = new ClientContext(siteUrl))
             {
@@ -4393,13 +4406,23 @@ namespace manage.Controls
                         folders[0].Update();
                         clientContext.ExecuteQueryAsync((ss, eee) =>
                         {
+                            newFolderName = folderNewName;
 
+                            Dispatcher.BeginInvoke(() =>
+                           {
+                               //newFolderName = itemId;
+                               busyIndicator.IsBusy = false;
+                               ShowMessage(message);
+
+
+                           });
 
 
                         },
           (ss, eee) =>
           {
-              Console.WriteLine(eee.Message);
+              busyIndicator.IsBusy = false;
+              HandleSaveException(eee.Message);
 
           });
 
@@ -4407,7 +4430,8 @@ namespace manage.Controls
                 },
           (s, ee) =>
           {
-              Console.WriteLine(ee.Message);
+              busyIndicator.IsBusy = false;
+              HandleSaveException(ee.Message);
 
           });
 
