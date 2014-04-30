@@ -18,6 +18,8 @@ namespace Common
         public  const String TITLE_COLUMN = "Title";
         public  const String NAME_FIELD = "Name";
         public const String ROLEFAMILY_COLUMN = "RoleFamily";
+        public const String USER_MISSING_MSG = "The user does not exist or is not unique.";
+        public const String USER_MISSING_MSG_NEW = "One or more FTE Contributors do not exist";
 
     }
 }

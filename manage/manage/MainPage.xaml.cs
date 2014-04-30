@@ -478,10 +478,40 @@ namespace manage
         private void LoadAdminTab()
         {
 
-            //Do nothing on admin tab load
-            //    BindGrid(Consts.LOB1.GBSHR);
+            TextBlock textBlock = GetActiveControl();
+            if (textBlock == null)
+                return;
 
+            if (textBlock == btn_adminGBS)
+                ApplyFilters(Consts.LOB1.GBSHR, TAB.ADMIN, Consts.LOB_COLUMN);
+            else if (textBlock == btn_adminGBT)
+                ApplyFilters(new String[] { Consts.LOB1.GBT }, TAB.ADMIN, Consts.LOB_COLUMN);
+            else if (textBlock == btn_adminGCP)
+                ApplyFilters(new String[] { Consts.LOB1.GCP }, TAB.ADMIN, Consts.LOB_COLUMN);
+            else if (textBlock == btn_adminPBMT)
+                ApplyFilters(new String[] { Consts.LOB1.PBMT }, TAB.ADMIN, Consts.LOB_COLUMN);
+            else if (textBlock == btn_adminWSGCAT)
+                ApplyFilters(new String[] { Consts.LOB1.WSGCAT }, TAB.ADMIN, Consts.LOB_COLUMN);
+            else if (textBlock == btn_adminALL)
+                ApplyFilters(new String[] { }, TAB.FINANCE, Consts.LOB_COLUMN);
+        }
 
+        private TextBlock GetActiveControl()
+        {
+            TextBlock[] textBlocks = null;
+            textBlocks = new TextBlock[] { btn_adminGBS, btn_adminGBT, btn_adminGCP, btn_adminPBMT, btn_adminWSGCAT, btn_adminALL };
+
+            foreach (TextBlock textBlock in textBlocks)
+            {
+                if (textBlock.FontWeight == FontWeights.Bold)
+                {
+                    return textBlock;
+                }
+
+            }
+
+            return null;
+            
         }
 
         #region //-------------MY IDEAS B U T T O N S ------------////
@@ -735,7 +765,7 @@ namespace manage
         void admintab_Loaded(object sender, RoutedEventArgs e)
         {
 
-            LoadAdminTab();
+           // LoadAdminTab();
 
         }
 

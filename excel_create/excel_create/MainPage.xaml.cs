@@ -11,12 +11,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Windows.Resources;
 using System.Windows.Browser;
 using System.Text;
 using Common;
+using Telerik.Windows.Controls;
 
 
 namespace excel_create
@@ -138,8 +137,6 @@ namespace excel_create
 
         }
 
-        
-
         private void UserTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -225,9 +222,6 @@ namespace excel_create
                 //ButtonsEnableDisable();
 
             }
-
-
-
 
         private void LOBRadioButtons_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -747,9 +741,6 @@ namespace excel_create
                 "(*) indicates Required field";
             myPopup_es.IsOpen = true;
         }
-
-        ///COST TYPE CHILD WINDOW BEGIN
-        
     
         private void help_type_Click(object sender, RoutedEventArgs e)
         {
@@ -783,9 +774,6 @@ namespace excel_create
             }
 
         }
-
-      
-
         #endregion
 
         #region N A V   B U T T O N S
@@ -841,8 +829,6 @@ namespace excel_create
             {
 
                 NavigateFinancialTab();
-
-
             }
 
             else if (firstmonth.SelectedDate < DateTime.Now)
@@ -855,8 +841,6 @@ namespace excel_create
 
         private void btn_next3_Click(object sender, RoutedEventArgs e)
         {
-
-
             this.tabcontrol1.SelectedIndex = 3;
             btnstack_scope.Visibility = Visibility.Collapsed;
             btnstack_scopeBack.Visibility = Visibility.Collapsed;
@@ -869,9 +853,6 @@ namespace excel_create
             financials_image.Visibility = Visibility.Collapsed;
             overview_image.Visibility = Visibility.Collapsed;
             scope_image.Visibility = Visibility.Collapsed;
-
-
-
         }
 
         private void btn_back_Click(object sender, RoutedEventArgs e)
@@ -904,8 +885,6 @@ namespace excel_create
             else if (Identify.Text.Length == 0 || Risk.Text.Length == 0 || Save.Text.Length == 0 || CT.Text == "type_reEngineer" && tech_impact.Text.Length == 0)
             {
                 NavigateScopeTab();
-
-
             }
             else
             {
@@ -956,10 +935,6 @@ namespace excel_create
             overview_image.Visibility = Visibility.Collapsed;
             scope_image.Visibility = Visibility.Collapsed;
         }
-
-
-
-
         #endregion
 
         #region ///R E Q U I R E D     L O G I C ///
@@ -1025,8 +1000,6 @@ namespace excel_create
 
             }
 
-
-
             if (!isLob1set)
             {
                 SetFalseResult(result, TAB.OVERVIEW);
@@ -1077,9 +1050,6 @@ namespace excel_create
             {hr_radio, new List<RadioButton> {lobhr_hr, lobhr_tech, lobhr_pmo, lobhr_benefits, lobhr_other }},
             {pbmt_radio, new List<RadioButton> {lobpbmt_pegasus, lobpbmt_busmgmt    }},
             {wsgcat_radio, new List<RadioButton> { lobwsgcat_ws, lobwsgcat_gca, lobwsgcat_both   }}
-
-
-
         };
 
             return lobMapping;
@@ -1276,9 +1246,6 @@ namespace excel_create
             comments_image.Visibility = Visibility.Collapsed;
             btnstack_comments.Visibility = Visibility.Collapsed;
             btn_comments.IsEnabled = true;
-
-
-
             btn_inprogress.Visibility = Visibility.Collapsed;
             btn_approve.Visibility = Visibility.Collapsed;
             btn_fp.Visibility = Visibility.Collapsed;
@@ -1480,8 +1447,7 @@ namespace excel_create
      {
          Dispatcher.BeginInvoke(() =>
          {
-             MessageBox.Show(ee.Message);
-             EnableStatusButtons();
+             HandleSaveException(ee.Message, true);
          }
                        );
 
@@ -1489,6 +1455,22 @@ namespace excel_create
 
 
              }
+         }
+
+         private void HandleSaveException(String  message, bool enableStatusButtons)
+         {
+             if (message.Equals(GlobalConsts.USER_MISSING_MSG, StringComparison.OrdinalIgnoreCase))
+             {
+                 MessageBox.Show(GlobalConsts.USER_MISSING_MSG_NEW);
+             }
+             else
+             {
+                 MessageBox.Show(message);
+             }
+
+             if (enableStatusButtons)
+                 EnableStatusButtons();
+
          }
 
          private void DisableStatusButtons()
@@ -1796,8 +1778,6 @@ namespace excel_create
 
              else
              {
-
-
                  ResetControls();
                  ValidateResult draftResult = ValidateForDraft();
                  ValidateResult result = ValidateForInProgress(draftResult);
@@ -1854,8 +1834,7 @@ namespace excel_create
          {
              Dispatcher.BeginInvoke(() =>
              {
-                 MessageBox.Show(ee.Message);
-                 EnableStatusButtons();
+                 HandleSaveException(ee.Message, true);
              }
                         );
 
@@ -1946,8 +1925,7 @@ namespace excel_create
        {
            Dispatcher.BeginInvoke(() =>
            {
-               MessageBox.Show(ee.Message);
-               EnableStatusButtons();
+               HandleSaveException(ee.Message, true);
            }
                        );
 
@@ -2043,15 +2021,11 @@ namespace excel_create
 {
     Dispatcher.BeginInvoke(() =>
     {
-        MessageBox.Show(ee.Message);
-        EnableStatusButtons();
+        HandleSaveException(ee.Message, true);
     }
                         );
 
 });
-
-
-
         }
         #endregion
 
@@ -2189,15 +2163,11 @@ namespace excel_create
             ctx.Load(users, items => items.Include(
                 item => item.Id, item => item["Name"]));
 
-
-
             ctx.ExecuteQueryAsync((ss, eee) =>
             {
                 ListItem principal = users.GetById(singleValue.LookupId);
 
                 ctx.Load(principal);
-
-
 
                 ctx.ExecuteQueryAsync((sss, eeee) =>
                 {
@@ -2212,8 +2182,6 @@ namespace excel_create
 
                         SinglePeopleChooser.selectedAccounts.Add(new AccountList(decodedName, dispName));
                         SinglePeopleChooser.UserTextBox.Text = dispName;
-
-
                     }
     );
 
@@ -2275,11 +2243,7 @@ namespace excel_create
 
                         Dispatcher.BeginInvoke(() =>
                         {
-
-
                             MultiplePeopleChooser.selectedAccounts.Add(new AccountList(decodedName, dispName));
-
-
                         }
                         );
                     }
@@ -2367,12 +2331,22 @@ namespace excel_create
  
         private void es_ValueChanged(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
-            totalText.ClearValue(TextBox.TextProperty);
+            RadMaskedCurrencyInput[] controls = new RadMaskedCurrencyInput[] { es1, es2, es3, es4, es5 };
+
+           // totalText.ClearValue(TextBox.TextProperty);
             
-            totalText.Text = (es1.Value + es2.Value + es3.Value + es4.Value + es5.Value).ToString();
+            //totalText.Text = (es1.Value + es2.Value + es3.Value + es4.Value + es5.Value).ToString();
 
-            es_Total.Value = Convert.ToDecimal(totalText.Text);
+            decimal? total = 0;
+            foreach (RadMaskedCurrencyInput control in controls)
+            {
+                if (control.Value != null)
+                    total = total + control.Value;
+            }
 
+            //es_Total.Value = Convert.ToDecimal(totalText.Text);
+            es_Total.Value = total;
+            totalText.Text = total.Value.ToString();
             
             if (Convert.ToInt32(totalText.Text) > 0)
             {
@@ -2589,7 +2563,6 @@ namespace excel_create
 
                 ListItemCreationInformation newItem = new ListItemCreationInformation();
                 newItem.UnderlyingObjectType = FileSystemObjectType.Folder;
-                //newItem.FolderUrl = siteUrl + listName;
                 if (!relativePath.Equals(string.Empty))
                 {
                     newItem.FolderUrl += "/" + relativePath;
@@ -2622,8 +2595,6 @@ namespace excel_create
             {
                 Web web = clientContext.Web;
                 List list = web.Lists.GetByTitle(listName);
-
-                //  string FolderFullPath = GetFullPath(listName, relativePath, folderName);
 
                 CamlQuery query = new CamlQuery();
                 query.ViewXml = "<View Scope=\"RecursiveAll\"> " +

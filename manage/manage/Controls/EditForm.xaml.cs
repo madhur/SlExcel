@@ -33,8 +33,6 @@ namespace manage.Controls
 {
     public partial class EditForm
     {
-       // Web oWebsite;
-        //ListCollection collList;
         User user;
         private List Idea;
         private const string libName = "Idea Attachments";
@@ -50,7 +48,6 @@ namespace manage.Controls
         List<MyItem> items = new List<MyItem>();
         ILoadable mainPage;
         String status, NewStatus;
-        //List<String> people = new List<string>();
         bool formLoad;
         bool isContractor, isEmployee, isReadOnly, isAdmin;
         String createdBy;
@@ -341,7 +338,7 @@ namespace manage.Controls
                       }
                       else if (isEmployee)
                       {
-                          MakeReadOnly();
+                          MakeReadOnly(true);
                           isReadOnly = true;
                       }
                       else
@@ -487,7 +484,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly(false);
+                                  MakeReadOnly(true);
                                   isReadOnly = true;
                               }
                           }
@@ -516,7 +513,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly(false);
+                                  MakeReadOnly(true);
                                   isReadOnly = true;
                               }
                           }
@@ -573,7 +570,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly(false);
+                                  MakeReadOnly(true);
                                   isReadOnly = true;
                               }
 
@@ -600,7 +597,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly(false);
+                                  MakeReadOnly(true);
                                   isReadOnly = true;
                               }
 
@@ -627,7 +624,7 @@ namespace manage.Controls
 
                               if (isEmployee || isContractor)
                               {
-                                  MakeReadOnly(false);
+                                  MakeReadOnly(true);
                                   isReadOnly = true;
                               }
 
@@ -793,14 +790,14 @@ namespace manage.Controls
                           header4.Text = getItem("SavingsHeader4", listitems[0]);
                           header5.Text = getItem("SavingsHeader5", listitems[0]);
 
-                          es1.Value = Convert.ToInt32(listitems[0].FieldValues["Savings1"]);
-                          es2.Value = Convert.ToInt32(listitems[0].FieldValues["Savings2"]);
-                          es3.Value = Convert.ToInt32(listitems[0].FieldValues["Savings3"]);
-                          es4.Value = Convert.ToInt32(listitems[0].FieldValues["Savings4"]);
+                          es1.Value = Convert.ToDecimal(listitems[0].FieldValues["Savings1"]);
+                          es2.Value = Convert.ToDecimal(listitems[0].FieldValues["Savings2"]);
+                          es3.Value = Convert.ToDecimal(listitems[0].FieldValues["Savings3"]);
+                          es4.Value = Convert.ToDecimal(listitems[0].FieldValues["Savings4"]);
 
-                          es5.Value = Convert.ToInt32(listitems[0].FieldValues["Savings5"]);
+                          es5.Value = Convert.ToDecimal(listitems[0].FieldValues["Savings5"]);
 
-                          totalText.Text = Convert.ToInt32(listitems[0].FieldValues["Total_x0020_Savings"]).ToString();
+                          totalText.Text = Convert.ToDecimal(listitems[0].FieldValues["Total_x0020_Savings"]).ToString();
                           es_Total.Value = Convert.ToDecimal(totalText.Text);
                           
 
@@ -1214,12 +1211,7 @@ namespace manage.Controls
         }
 
 
-        private void MakeReadOnly()
-        {
-
-            MakeReadOnly(true);
-
-        }
+      
 
         private void MakeReadOnly(bool isAddButtonReadOnly)
         {
@@ -1277,6 +1269,8 @@ namespace manage.Controls
 
 
             btn_cancel.IsEnabled = false;
+
+            rolecombo.IsEnabled = false;
 
        
         }
@@ -2495,6 +2489,8 @@ namespace manage.Controls
 
             updateItem["AIM_x0020_Application_x0020_ID"] = AIM_ID.Text;
             updateItem["_x0031_st_x0020_Mo_x0020_Saves_x"] = firstmonth.SelectedDate;
+            updateItem["Revised_x0020_1st_x0020_Mo_x0020"] = revisedmonth.SelectedDate;
+
 
             RoleItem roleItem = rolecombo.SelectedItem as RoleItem;
             if (roleItem != null)
@@ -2656,7 +2652,7 @@ namespace manage.Controls
         {
             Dispatcher.BeginInvoke(() =>
             {
-                MessageBox.Show(ee.Message);
+                HandleSaveException(ee.Message);
             }
                        );
 
@@ -2664,8 +2660,23 @@ namespace manage.Controls
                 }
             }
         }
-        
 
+
+
+        private void HandleSaveException(String message)
+        {
+            if (message.Equals(GlobalConsts.USER_MISSING_MSG, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(GlobalConsts.USER_MISSING_MSG_NEW);
+                NavigateScopeTab();
+            }
+            else
+            {
+                MessageBox.Show(message);
+            }
+
+          
+        }
 
         //<~~~~~~~~FUTURE PIPELINE~~~~~~~~>
         private void btn_future_Click(object sender, RoutedEventArgs e)
@@ -2745,7 +2756,7 @@ namespace manage.Controls
         {
             Dispatcher.BeginInvoke(() =>
             {
-                MessageBox.Show(ee.Message);
+                HandleSaveException(ee.Message);
             }
                         );
 
@@ -2829,7 +2840,7 @@ namespace manage.Controls
              {
                  Dispatcher.BeginInvoke(() =>
                  {
-                     MessageBox.Show(ee.Message);
+                     HandleSaveException(ee.Message);
                  }
                        );
 
@@ -2934,7 +2945,7 @@ namespace manage.Controls
 {
     Dispatcher.BeginInvoke(() =>
     {
-        MessageBox.Show(ee.Message);
+        HandleSaveException(ee.Message);
     }
                         );
 
@@ -3223,7 +3234,7 @@ namespace manage.Controls
     {
         Dispatcher.BeginInvoke(() =>
                    {
-                       MessageBox.Show(ee.Message);
+                       HandleSaveException(ee.Message);
                    }
                        );
 
@@ -3747,11 +3758,19 @@ namespace manage.Controls
                         
         private void es_ValueChanged(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
-            totalText.ClearValue(TextBox.TextProperty);
+            RadMaskedCurrencyInput[] controls = new RadMaskedCurrencyInput[] { es1, es2, es3, es4, es5 };
 
-            totalText.Text = (es1.Value + es2.Value + es3.Value + es4.Value + es5.Value).ToString();
+          //  totalText.ClearValue(TextBox.TextProperty);
 
-            es_Total.Value = Convert.ToDecimal(totalText.Text);
+            decimal? total = 0;
+            foreach (RadMaskedCurrencyInput control in controls)
+            {
+                if(control.Value!=null)
+                    total=total+control.Value;
+            }
+            totalText.Text = total.Value.ToString();
+
+            es_Total.Value = total;
             savingsTxt.Foreground = new SolidColorBrush(Colors.Black);
 
 
