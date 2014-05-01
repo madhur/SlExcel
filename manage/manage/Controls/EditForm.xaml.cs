@@ -2622,66 +2622,66 @@ namespace manage.Controls
         {
 
             
-            ResetControls();
+        //    ResetControls();
 
-            ValidateResult result = ValidateForDraft();
-            if (!result.IsValid)
-            {
+        //    ValidateResult result = ValidateForDraft();
+        //    if (!result.IsValid)
+        //    {
 
-                GetErrorWindow(result).Show();
-                NavigateTab(result);
-            }
-            else
-            {
-                //Get the current context 
-                using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
-                {
-                    //Get the Idea list and add a new item 
-                    List Idea = context.Web.Lists.GetByTitle("Idea");
-                    context.Load(Idea);
-                    ListItem updateItem = Idea.GetItemById(ideaID.Text);                  //Set the new item's properties 
+        //        GetErrorWindow(result).Show();
+        //        NavigateTab(result);
+        //    }
+        //    else
+        //    {
+        //        //Get the current context 
+        //        using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
+        //        {
+        //            //Get the Idea list and add a new item 
+        //            List Idea = context.Web.Lists.GetByTitle("Idea");
+        //            context.Load(Idea);
+        //            ListItem updateItem = Idea.GetItemById(ideaID.Text);                  //Set the new item's properties 
 
-                    SetFields(updateItem, context);
+        //            SetFields(updateItem, context);
                    
-                    updateItem["scale"] = "1";
-                    updateItem["Idea_x0020_Status"] = "Draft";
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "submitted the Idea in Draft status";
-                    updateItem["Audit"] = Audit.Text;
-                    updateItem.Update();
-                    //Load the list 
-                    context.Load(Idea, list => list.Title);
+        //            updateItem["scale"] = "1";
+        //            updateItem["Idea_x0020_Status"] = "Draft";
+        //            Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "submitted the Idea in Draft status";
+        //            updateItem["Audit"] = Audit.Text;
+        //            updateItem.Update();
+        //            //Load the list 
+        //            context.Load(Idea, list => list.Title);
 
-                    //Execute the query to create the new item 
-                    context.ExecuteQueryAsync((s, ee) =>
-                    {
+        //            //Execute the query to create the new item 
+        //            context.ExecuteQueryAsync((s, ee) =>
+        //            {
 
-                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId,"");
+        //                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId,"");
 
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            newFolderName = itemId;
-                            ChildWindow msg = new Messages(this);
-                            msgwin.alert.Visibility = Visibility.Collapsed;
+        //                Dispatcher.BeginInvoke(() =>
+        //                {
+        //                    newFolderName = itemId;
+        //                    ChildWindow msg = new Messages(this);
+        //                    msgwin.alert.Visibility = Visibility.Collapsed;
 
-                            msg.Show();
-                            msgwin.Closed += msgwin_Closed;
+        //                    msg.Show();
+        //                    msgwin.Closed += msgwin_Closed;
 
-                        }
-                            );
+        //                }
+        //                    );
 
 
-                    },
-        (s, ee) =>
-        {
-            Dispatcher.BeginInvoke(() =>
-            {
-                HandleSaveException(ee.Message);
-            }
-                       );
+        //            },
+        //(s, ee) =>
+        //{
+        //    Dispatcher.BeginInvoke(() =>
+        //    {
+        //        HandleSaveException(ee.Message);
+        //    }
+        //               );
 
-        });
-                }
-            }
+        //});
+        //        }
+        //    }
         }
 
 
