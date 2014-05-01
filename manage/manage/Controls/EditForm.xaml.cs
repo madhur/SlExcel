@@ -49,7 +49,7 @@ namespace manage.Controls
         ILoadable mainPage;
         String status, NewStatus;
         bool formLoad;
-        bool isContractor, isEmployee, isReadOnly, isAdmin;
+        bool isContractor, isEmployee, isReadOnly, isAdmin, isIdeaOwner;
         String createdBy;
         private const Int32 FILE_SIZE_LIMIT = 3145728;
 
@@ -321,8 +321,7 @@ namespace manage.Controls
                   {
                       if (isContractor && (parsedLogin.Equals(SinglePeopleChooser.selectedAccounts[0].AccountName) || parsedLogin.Equals(createdBy, StringComparison.OrdinalIgnoreCase)))
                       {
-                          //do nothing
-                          ;
+                          isIdeaOwner = true;
                       }
                       else if (isContractor)
                       {
@@ -333,8 +332,7 @@ namespace manage.Controls
                       }
                       else if (isEmployee && (parsedLogin.Equals(SinglePeopleChooser.selectedAccounts[0].AccountName) || parsedLogin.Equals(createdBy, StringComparison.OrdinalIgnoreCase)))
                       {
-                          // do nothing
-                          ;
+                          isIdeaOwner = true;
                       }
                       else if (isEmployee)
                       {
@@ -482,7 +480,12 @@ namespace manage.Controls
 
                               FormMsg.Text = "To reactivate this Idea, please contact your EXCEL Admin.";
 
-                              if (isEmployee || isContractor)
+                              if ((isEmployee || isContractor) && isIdeaOwner)
+                              {
+                                  MakeReadOnly(false);
+                                  isReadOnly = true;
+                              }
+                              else if (isEmployee || isContractor)
                               {
                                   MakeReadOnly(true);
                                   isReadOnly = true;
@@ -511,7 +514,12 @@ namespace manage.Controls
 
                               FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
 
-                              if (isEmployee || isContractor)
+                              if ((isEmployee || isContractor) && isIdeaOwner)
+                              {
+                                  MakeReadOnly(false);
+                                  isReadOnly = true;
+                              }
+                              else if (isEmployee || isContractor)
                               {
                                   MakeReadOnly(true);
                                   isReadOnly = true;
@@ -568,7 +576,12 @@ namespace manage.Controls
 
                               FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
 
-                              if (isEmployee || isContractor)
+                              if ((isEmployee || isContractor) && isIdeaOwner)
+                              {
+                                  MakeReadOnly(false);
+                                  isReadOnly = true;
+                              }
+                              else if (isEmployee || isContractor)
                               {
                                   MakeReadOnly(true);
                                   isReadOnly = true;
@@ -595,7 +608,12 @@ namespace manage.Controls
                               FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
 
 
-                              if (isEmployee || isContractor)
+                              if ((isEmployee || isContractor) && isIdeaOwner)
+                              {
+                                  MakeReadOnly(false);
+                                  isReadOnly = true;
+                              }
+                              else if (isEmployee || isContractor)
                               {
                                   MakeReadOnly(true);
                                   isReadOnly = true;
@@ -622,7 +640,12 @@ namespace manage.Controls
 
                               FormMsg.Text = "Idea is no longer Editable (except Project Comments).";
 
-                              if (isEmployee || isContractor)
+                              if ((isEmployee || isContractor) && isIdeaOwner)
+                              {
+                                  MakeReadOnly(false);
+                                  isReadOnly = true;
+                              }
+                              else if (isEmployee || isContractor)
                               {
                                   MakeReadOnly(true);
                                   isReadOnly = true;
