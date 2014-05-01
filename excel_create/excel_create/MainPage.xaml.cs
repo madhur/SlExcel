@@ -2668,7 +2668,7 @@ namespace excel_create
 
                             }
                        );
-                        
+
                         },
           (ss, eee) =>
           {
@@ -2684,6 +2684,22 @@ namespace excel_create
           });
 
                     }
+                    else
+                    {
+
+
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            //newFolderName = itemId;
+                            busyIndicator.IsBusy = false;
+                            ShowMessage(message);
+
+
+                        });
+
+                    }
+
+                    
                 },
           (s, ee) =>
           {

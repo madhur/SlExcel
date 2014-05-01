@@ -3234,7 +3234,7 @@ namespace manage.Controls
                 context.ExecuteQueryAsync((s, ee) =>
                 {
 
-                    busyIndicator.IsBusy = false;
+                    
 
                     Dispatcher.BeginInvoke(() =>
                     {
@@ -3247,7 +3247,7 @@ namespace manage.Controls
 
                         //msgwin.Show();
                         //msgwin.Closed += msgwin_Closed;
-
+                        busyIndicator.IsBusy = false;
                         ShowMessage("Your changes were successfully saved.");
 
 
@@ -4450,6 +4450,18 @@ namespace manage.Controls
           });
 
                     }
+                    else
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            //newFolderName = itemId;
+                            busyIndicator.IsBusy = false;
+                            ShowMessage(message);
+
+
+                        });
+                    }
+
                 },
           (s, ee) =>
           {
