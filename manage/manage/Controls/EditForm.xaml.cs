@@ -364,9 +364,6 @@ namespace manage.Controls
  {
      Console.WriteLine(ee.Message);
  });
-
-          
-
          
       }
 
@@ -448,8 +445,6 @@ namespace manage.Controls
 
                           else if (statusLevel.Text == "In Progress")
                           {
-
-                             
                                   btn_save.Visibility = Visibility.Visible;
                                   btn_save1.Visibility = Visibility.Visible;
                                   btn_save2.Visibility = Visibility.Visible;
@@ -460,8 +455,6 @@ namespace manage.Controls
 
                                   ItemCollection ic = statusCombo.Items;
                                   statusCombo.SelectedItem = ic[1];
-                             
-
 
                           }
                           else if (statusLevel.Text == "Canceled")
@@ -2620,68 +2613,6 @@ namespace manage.Controls
 
         private void btn_draft_Click(object sender, RoutedEventArgs e)
         {
-
-            
-        //    ResetControls();
-
-        //    ValidateResult result = ValidateForDraft();
-        //    if (!result.IsValid)
-        //    {
-
-        //        GetErrorWindow(result).Show();
-        //        NavigateTab(result);
-        //    }
-        //    else
-        //    {
-        //        //Get the current context 
-        //        using (ClientContext context = new ClientContext(Utils.GetSiteUrl()))
-        //        {
-        //            //Get the Idea list and add a new item 
-        //            List Idea = context.Web.Lists.GetByTitle("Idea");
-        //            context.Load(Idea);
-        //            ListItem updateItem = Idea.GetItemById(ideaID.Text);                  //Set the new item's properties 
-
-        //            SetFields(updateItem, context);
-                   
-        //            updateItem["scale"] = "1";
-        //            updateItem["Idea_x0020_Status"] = "Draft";
-        //            Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " - " + DateTime.Now + " - " + "submitted the Idea in Draft status";
-        //            updateItem["Audit"] = Audit.Text;
-        //            updateItem.Update();
-        //            //Load the list 
-        //            context.Load(Idea, list => list.Title);
-
-        //            //Execute the query to create the new item 
-        //            context.ExecuteQueryAsync((s, ee) =>
-        //            {
-
-        //                RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId,"");
-
-        //                Dispatcher.BeginInvoke(() =>
-        //                {
-        //                    newFolderName = itemId;
-        //                    ChildWindow msg = new Messages(this);
-        //                    msgwin.alert.Visibility = Visibility.Collapsed;
-
-        //                    msg.Show();
-        //                    msgwin.Closed += msgwin_Closed;
-
-        //                }
-        //                    );
-
-
-        //            },
-        //(s, ee) =>
-        //{
-        //    Dispatcher.BeginInvoke(() =>
-        //    {
-        //        HandleSaveException(ee.Message);
-        //    }
-        //               );
-
-        //});
-        //        }
-        //    }
         }
 
 
@@ -2831,29 +2762,6 @@ namespace manage.Controls
                     context.ExecuteQueryAsync((s, ee) =>
                     {
                         RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted as in progress.");
-
-
-
-                        //Dispatcher.BeginInvoke(() =>
-                        //{
-                        //    newFolderName = itemId;
-
-                        //    msgwin = new Messages(this);
-                        //    msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                        //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                        //    msgwin.msgtxt.Text = "Your idea was successfully submitted as in progress.";
-                        //    msgwin.alert.Visibility = Visibility.Collapsed;
-
-                        //    msgwin.Show();
-                        //    msgwin.Closed += msgwin_Closed;
-
-
-                        //}
-
-                        //         );
-
-
-
                     },
              (s, ee) =>
              {
@@ -2941,26 +2849,6 @@ namespace manage.Controls
             {
 
                 RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted for approval.");
-
-                //Dispatcher.BeginInvoke(() =>
-                //{
-                //    newFolderName = itemId;
-
-                //    msgwin = new Messages(this);
-                //    msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
-                //    msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                //    msgwin.alert.Visibility = Visibility.Collapsed;
-
-                //    msgwin.Show();
-                //    msgwin.Closed += msgwin_Closed;
-
-                //}
-                //    );
-
-
-
-
             },
 (s, ee) =>
 {
@@ -3026,7 +2914,6 @@ namespace manage.Controls
             {
                 if (revisedmonth.SelectedDate <= DateTime.Today.AddDays(-1) )
                 {
-                    //MessageBox.Show("Revised Date cannot be in the past. Please update date, or if date is correct Submit for Approval", " ", MessageBoxButton.OK);
                     ShowPastDateError(Consts.PAST_DATE_ERROR_REVISED);
                     return false;
                 }
@@ -3233,24 +3120,10 @@ namespace manage.Controls
                 busyIndicator.IsBusy = true;
                 context.ExecuteQueryAsync((s, ee) =>
                 {
-
-                    
-
                     Dispatcher.BeginInvoke(() =>
                     {
-
-                        //msgwin = new Messages(this);
-                        //msgwin.msgtxt.Text = "Your changes were successfully saved.";
-                        //msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                        //msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                        //msgwin.alert.Visibility = Visibility.Collapsed;
-
-                        //msgwin.Show();
-                        //msgwin.Closed += msgwin_Closed;
                         busyIndicator.IsBusy = false;
                         ShowMessage("Your changes were successfully saved.");
-
-
                     }
                         );
 
@@ -3322,18 +3195,8 @@ namespace manage.Controls
                 busyIndicator.IsBusy = true;
                 context.ExecuteQueryAsync((s, ee) =>
                 {
-
-
                     Dispatcher.BeginInvoke(() =>
                     {
-
-                        //msgwin = new Messages(this);
-                        //msgwin.msgtxt.Text = "Your idea was successfully canceled.";
-                        //msgwin.SubmitOKButton.Visibility = Visibility.Visible;
-                        //msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                        //msgwin.alert.Visibility = Visibility.Collapsed;
-                        //msgwin.Show();
-                        //msgwin.Closed += msgwin_Closed;
                         busyIndicator.IsBusy = false;
                         ShowMessage("Your idea was successfully canceled.");
 

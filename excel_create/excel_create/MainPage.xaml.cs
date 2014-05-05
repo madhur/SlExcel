@@ -1428,21 +1428,6 @@ namespace excel_create
 
                      RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully saved as a draft.");
 
-                     //Dispatcher.BeginInvoke(() =>
-                     //{
-                     //    newFolderName = itemId;
-                     //    msgwin= new Messages();
-                     //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                     //    msgwin.alert.Visibility = Visibility.Collapsed;
-                     //    msgwin.msgtxt.Text = "Your idea was successfully saved as a draft.";
-                     //    msgwin.Show();
-
-
-                     //}
-                     //    );
-
-
-
                  },
      (s, ee) =>
      {
@@ -1831,20 +1816,6 @@ namespace excel_create
 
                          RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted as future pipeline.");
 
-                         //Dispatcher.BeginInvoke(() =>
-                         //{
-                         //    newFolderName = itemId;
-                         //    msgwin = new Messages();
-                         //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                         //    msgwin.alert.Visibility = Visibility.Collapsed;
-
-                         //    msgwin.msgtxt.Text = "Your idea was successfully submitted as future pipeline.";
-                         //    msgwin.Show();
-
-
-                         //}
-                         //    );
-
                      },
          (s, ee) =>
          {
@@ -1922,21 +1893,6 @@ namespace excel_create
                        string itemId = newItem.Id.ToString();
 
                        RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted in progress");
-
-                       //Dispatcher.BeginInvoke(() =>
-                       //{
-                       //    newFolderName = itemId;
-                       //    msgwin = new Messages();
-                       //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                       //    msgwin.alert.Visibility = Visibility.Collapsed;
-
-                       //    msgwin.msgtxt.Text = "Your idea was successfully submitted in progress";
-                       //    msgwin.Show();
-
-
-                       //}
-                       //    );
-
 
                    },
        (s, ee) =>
@@ -2022,20 +1978,6 @@ namespace excel_create
                 string itemId = newItem.Id.ToString();
 
                 RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId, "Your idea was successfully submitted for approval.");
-
-                //Dispatcher.BeginInvoke(() =>
-                //{
-                //    newFolderName = itemId;
-                //    msgwin = new Messages();
-                //    msgwin.msgtxt.Text = "Your idea was successfully submitted for approval.";
-                //    msgwin.RequiredOKButton.Visibility = Visibility.Collapsed;
-                //    msgwin.alert.Visibility = Visibility.Collapsed;
-
-                //    msgwin.Show();
-                //}
-                //    );
-
-
             },
 (s, ee) =>
 {
@@ -2166,9 +2108,6 @@ namespace excel_create
             AIM_ID.Text = item.AIM_ID;
 
         }
-
-
-
         #endregion
 
 
@@ -2353,10 +2292,6 @@ namespace excel_create
         private void es_ValueChanged(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
             RadMaskedCurrencyInput[] controls = new RadMaskedCurrencyInput[] { es1, es2, es3, es4, es5 };
-
-           // totalText.ClearValue(TextBox.TextProperty);
-            
-            //totalText.Text = (es1.Value + es2.Value + es3.Value + es4.Value + es5.Value).ToString();
 
             decimal? total = 0;
             foreach (RadMaskedCurrencyInput control in controls)
@@ -2978,42 +2913,6 @@ namespace excel_create
                 CreateFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName);
             }
         }
-
-     //   private void SubmitButton_Click(object sender, RoutedEventArgs e)
-     //   {
-     //       // User Singleuser;
-
-     //       ClientContext context = ClientContext.Current;
-     //       List MadhurList = context.Web.Lists.GetByTitle("Idea");
-     //       ListItem newItem = MadhurList.AddItem(new ListItemCreationInformation());
-
-     //       newItem["Idea_x0020_Status"] = "Draft";
-     //       newItem.Update();
-     //       context.Load(MadhurList, list => list.Title);
-
-     //       context.ExecuteQueryAsync((s, ee) =>
-     //       {
-     //           string itemId = newItem.Id.ToString();
-
-     //           RenameFolder(Utils.GetSiteUrl(), libName, string.Empty, folderName, itemId);
-
-     //           Dispatcher.BeginInvoke(() =>
-     //           {
-     //               newFolderName = itemId;
-     //               MessageBox.Show("Item created and folder renamed", "Item created and folder renamed", MessageBoxButton.OK);
-     //           }
-     //               );
-
-
-     //       },
-     //(s, ee) =>
-     //{
-     //    Console.WriteLine(ee.Message);
-
-     //});
-
-
-     //   }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
