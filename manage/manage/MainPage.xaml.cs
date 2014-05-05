@@ -213,7 +213,7 @@ namespace manage
             if (financetab.Visibility == Visibility.Visible)
                 LoadFinanceTab();
             if (admintab.Visibility == Visibility.Visible)
-                LoadAdminTab();
+                LoadAdminTab(false);
 
         }
 
@@ -475,7 +475,7 @@ namespace manage
 
         }
 
-        private void LoadAdminTab()
+        private void LoadAdminTab(bool resetFilters)
         {
 
             TextBlock textBlock = GetActiveControl();
@@ -483,17 +483,17 @@ namespace manage
                 return;
 
             if (textBlock == btn_adminGBS)
-                ApplyFilters(Consts.LOB1.GBSHR, TAB.ADMIN, Consts.LOB_COLUMN);
+                ApplyFilters(Consts.LOB1.GBSHR, TAB.ADMIN, Consts.LOB_COLUMN, resetFilters);
             else if (textBlock == btn_adminGBT)
-                ApplyFilters(new String[] { Consts.LOB1.GBT }, TAB.ADMIN, Consts.LOB_COLUMN);
+                ApplyFilters(new String[] { Consts.LOB1.GBT }, TAB.ADMIN, Consts.LOB_COLUMN, resetFilters);
             else if (textBlock == btn_adminGCP)
-                ApplyFilters(new String[] { Consts.LOB1.GCP }, TAB.ADMIN, Consts.LOB_COLUMN);
+                ApplyFilters(new String[] { Consts.LOB1.GCP }, TAB.ADMIN, Consts.LOB_COLUMN, resetFilters);
             else if (textBlock == btn_adminPBMT)
-                ApplyFilters(new String[] { Consts.LOB1.PBMT }, TAB.ADMIN, Consts.LOB_COLUMN);
+                ApplyFilters(new String[] { Consts.LOB1.PBMT }, TAB.ADMIN, Consts.LOB_COLUMN, resetFilters);
             else if (textBlock == btn_adminWSGCAT)
-                ApplyFilters(new String[] { Consts.LOB1.WSGCAT }, TAB.ADMIN, Consts.LOB_COLUMN);
+                ApplyFilters(new String[] { Consts.LOB1.WSGCAT }, TAB.ADMIN, Consts.LOB_COLUMN, resetFilters);
             else if (textBlock == btn_adminALL)
-                ApplyFilters(new String[] { }, TAB.FINANCE, Consts.LOB_COLUMN);
+                ApplyFilters(new String[] { }, TAB.ADMIN, Consts.LOB_COLUMN, resetFilters);
         }
 
         private TextBlock GetActiveControl()
@@ -548,9 +548,12 @@ namespace manage
             activeBlock.Foreground = new SolidColorBrush(Colors.Green);
         }
 
-
-
         private void ApplyFilters(String[] statuses, TAB activeTab, string colName)
+        {
+            ApplyFilters(statuses, activeTab, colName, true);
+        }
+
+        private void ApplyFilters(String[] statuses, TAB activeTab, string colName, bool resetFilter)
         {
             GridViewColumn statusColumn = null;
             RadGridView radGrid = null;
@@ -562,24 +565,33 @@ namespace manage
                 radGrid = financeGrid;
             else if (activeTab == TAB.ADMIN)
             {
-                //radGrid = adminGrid;
-                BindGrid(statuses);
+                BindGrid(statuses, resetFilter);
                 return;
             }
 
-            statusColumn = radGrid.Columns[colName];
+           
 
-            IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
-            columnDescriptor.SuspendNotifications();
-            //radGrid.FilterDescriptors.Clear();
-            columnDescriptor.DistinctFilter.Clear();
-            foreach (String status in statuses)
-                columnDescriptor.DistinctFilter.AddDistinctValue(status);
-            columnDescriptor.ResumeNotifications();
+            if (resetFilter)
+            {
+                statusColumn = radGrid.Columns[colName];
+                IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
+                columnDescriptor.SuspendNotifications();
+                //radGrid.FilterDescriptors.Clear();
+                columnDescriptor.DistinctFilter.Clear();
+                foreach (String status in statuses)
+                    columnDescriptor.DistinctFilter.AddDistinctValue(status);
+                columnDescriptor.ResumeNotifications();
+            }
 
         }
 
         private void BindGrid(string[] statuses)
+        {
+
+            BindGrid(statuses, true);
+        }
+
+        private void BindGrid(string[] statuses, bool resetFilters)
         {
 
             List<Idea> ideas = new List<Idea>();
@@ -675,17 +687,18 @@ namespace manage
                     adminGrid.DataContext = ideas;
 
 
+                    if (resetFilters)
+                    {
+                        GridViewColumn statusColumn = adminGrid.Columns[Status.STATUS_COLUMN];
 
-                    GridViewColumn statusColumn = adminGrid.Columns[Status.STATUS_COLUMN];
-
-                    IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
-                    columnDescriptor.SuspendNotifications();
-                    adminGrid.FilterDescriptors.Clear();
-                    columnDescriptor.DistinctFilter.Clear();
-                    foreach (String status in new String[] { Status.SUBMIT_APPROVAL, Status.PENDING_ACTUALS, Status.FINANCE_REVIEW })
-                        columnDescriptor.DistinctFilter.AddDistinctValue(status);
-                    columnDescriptor.ResumeNotifications();
-
+                        IColumnFilterDescriptor columnDescriptor = statusColumn.ColumnFilterDescriptor;
+                        columnDescriptor.SuspendNotifications();
+                        adminGrid.FilterDescriptors.Clear();
+                        columnDescriptor.DistinctFilter.Clear();
+                        foreach (String status in new String[] { Status.SUBMIT_APPROVAL, Status.PENDING_ACTUALS, Status.FINANCE_REVIEW })
+                            columnDescriptor.DistinctFilter.AddDistinctValue(status);
+                        columnDescriptor.ResumeNotifications();
+                    }
 
                     adminGrid.IsBusy = false;
 
@@ -765,7 +778,6 @@ namespace manage
         void admintab_Loaded(object sender, RoutedEventArgs e)
         {
 
-           // LoadAdminTab();
 
         }
 

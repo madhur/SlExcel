@@ -1899,7 +1899,7 @@ namespace excel_create
        {
            Dispatcher.BeginInvoke(() =>
            {
-               busyIndicator.IsBusy = true;
+               busyIndicator.IsBusy = false;
                HandleSaveException(ee.Message, true);
            }
                        );
