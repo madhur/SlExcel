@@ -957,6 +957,10 @@ namespace excel_create
                     SetFalseResult(result, TAB.OVERVIEW);
                 }
             }
+            else
+            {
+                SetFalseResult(result, TAB.OVERVIEW);
+            }
 
 
             foreach (TextBox txtBox in peoplePickers)
@@ -1085,10 +1089,17 @@ namespace excel_create
 
             /* Validate Financial Tabs values first and then scope tab values*/
 
-            if (totalText.Text == "$0.00" || totalText.Text == "0.00" || totalText.Text == "0")
+            //if (totalText.Text == "$0.00" || totalText.Text == "0.00" || totalText.Text == "0")
+            //{
+            //    SetFalseResult(result, TAB.FINANCIAL);
+            //    FormatControlForValidation(savingsTxt);
+            //}
+
+            if (es_Total.Value == 0)
             {
                 SetFalseResult(result, TAB.FINANCIAL);
                 FormatControlForValidation(savingsTxt);
+
             }
 
             if (firstmonth.Text.Length == 0)
@@ -1402,7 +1413,7 @@ namespace excel_create
 
              else
              {
-                 DisableStatusButtons();
+                 //DisableStatusButtons();
                  //Get the current context 
                  ClientContext context = ClientContext.Current;
                  //Get the Idea list and add a new item 
@@ -1434,7 +1445,7 @@ namespace excel_create
          Dispatcher.BeginInvoke(() =>
          {
              busyIndicator.IsBusy = false;
-             HandleSaveException(ee.Message, true);
+             HandleSaveException(ee.Message);
          }
                        );
 
@@ -1456,7 +1467,7 @@ namespace excel_create
 
          }
 
-         private void HandleSaveException(String  message, bool enableStatusButtons)
+         private void HandleSaveException(String  message)
          {
              if (message.Equals(GlobalConsts.USER_MISSING_MSG, StringComparison.OrdinalIgnoreCase))
              {
@@ -1468,28 +1479,28 @@ namespace excel_create
                  MessageBox.Show(message);
              }
 
-             if (enableStatusButtons)
-                 EnableStatusButtons();
+             //if (enableStatusButtons)
+             //    EnableStatusButtons();
 
          }
 
-         private void DisableStatusButtons()
-         {
-             btn_draft.IsEnabled = false;
-             btn_approve.IsEnabled = false;
-             btn_fp.IsEnabled = false;
-             btn_inprogress.IsEnabled = false;
+         //private void DisableStatusButtons()
+         //{
+         //    btn_draft.IsEnabled = false;
+         //    btn_approve.IsEnabled = false;
+         //    btn_fp.IsEnabled = false;
+         //    btn_inprogress.IsEnabled = false;
 
-         }
+         //}
 
-         private void EnableStatusButtons()
-         {
-             btn_draft.IsEnabled = true;
-             btn_approve.IsEnabled = true;
-             btn_fp.IsEnabled = true;
-             btn_inprogress.IsEnabled = true;
+         //private void EnableStatusButtons()
+         //{
+         //    btn_draft.IsEnabled = true;
+         //    btn_approve.IsEnabled = true;
+         //    btn_fp.IsEnabled = true;
+         //    btn_inprogress.IsEnabled = true;
 
-         }
+         //}
 
          private void SaveRadios(ListItem updateItem)
          {
@@ -1791,7 +1802,7 @@ namespace excel_create
 
                  else
                  {
-                     DisableStatusButtons();
+                     //DisableStatusButtons();
                      //Get the current context 
                      ClientContext context = ClientContext.Current;
                      //Get the Idea list and add a new item 
@@ -1822,7 +1833,7 @@ namespace excel_create
              Dispatcher.BeginInvoke(() =>
              {
                  busyIndicator.IsBusy = false;
-                 HandleSaveException(ee.Message, true);
+                 HandleSaveException(ee.Message);
              }
                         );
 
@@ -1868,7 +1879,7 @@ namespace excel_create
 
                  else
                  {
-                     DisableStatusButtons();
+                     //DisableStatusButtons();
 
                      //Get the current context 
                      ClientContext context = ClientContext.Current;
@@ -1900,7 +1911,7 @@ namespace excel_create
            Dispatcher.BeginInvoke(() =>
            {
                busyIndicator.IsBusy = false;
-               HandleSaveException(ee.Message, true);
+               HandleSaveException(ee.Message);
            }
                        );
 
@@ -1952,7 +1963,7 @@ namespace excel_create
         void YesClicked(object sender, EventArgs e)
         {
 
-            DisableStatusButtons();
+            //DisableStatusButtons();
             //Get the current context 
             ClientContext context = ClientContext.Current;
             //Get the Idea list and add a new item 
@@ -1984,7 +1995,7 @@ namespace excel_create
     Dispatcher.BeginInvoke(() =>
     {
         busyIndicator.IsBusy = false;
-        HandleSaveException(ee.Message, true);
+        HandleSaveException(ee.Message);
     }
                         );
 
@@ -2611,7 +2622,7 @@ namespace excel_create
                             {
                                 //newFolderName = itemId;
                                 busyIndicator.IsBusy = false;
-                                HandleSaveException(eee.Message, false);
+                                HandleSaveException(eee.Message);
 
 
                             });
@@ -2642,7 +2653,7 @@ namespace excel_create
               {
                   //newFolderName = itemId;
                   busyIndicator.IsBusy = false;
-                  HandleSaveException(ee.Message, false);
+                  HandleSaveException(ee.Message);
 
 
               });

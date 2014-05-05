@@ -1019,6 +1019,10 @@ namespace manage.Controls
                     SetFalseResult(result, TAB.OVERVIEW);
                 }
             }
+            else
+            {
+                SetFalseResult(result, TAB.OVERVIEW);
+            }
           
 
             foreach (TextBox txtBox in peoplePickers)
@@ -1136,17 +1140,21 @@ namespace manage.Controls
 
             /* Validate Financial Tabs values first and then scope tab values*/
 
-            if (totalText.Text == "$0.00" || totalText.Text == "0.00" || totalText.Text == "0")
+            //if (totalText.Text == "$0.00" || totalText.Text == "0.00" || totalText.Text == "0")
+            //{
+            //    SetFalseResult(result, TAB.FINANCIAL);
+            //    FormatControlForValidation(savingsTxt);
+            //}
+
+            if (es_Total.Value == 0)
             {
                 SetFalseResult(result, TAB.FINANCIAL);
                 FormatControlForValidation(savingsTxt);
             }
-
             if (firstmonth.Text.Length == 0)
             {
                 SetFalseResult(result, TAB.FINANCIAL);
                 FormatControlForValidation(firstmonthTxt);
-
             }
 
             /* Validate scope tabs values */
@@ -3338,9 +3346,6 @@ namespace manage.Controls
 
                     );
 
-
-
-
             },
 
 
@@ -3350,9 +3355,6 @@ namespace manage.Controls
     Console.WriteLine(ee.Message);
 
 });
-
-
-
         }
 
         private void aimcombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
