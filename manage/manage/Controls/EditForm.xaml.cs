@@ -3612,54 +3612,61 @@ namespace manage.Controls
                     mth = firstmonth.SelectedDate.Value.Month;
                     yr = firstmonth.SelectedDate.Value.Year;
 
-
-                    if (mth <= 3)
-                    {
-                        header1.Text = "Q1" + "-" + yr;
-                        header2.Text = "Q2" + "-" + yr;
-                        header3.Text = "Q3" + "-" + yr;
-                        header4.Text = "Q4" + "-" + yr;
-                        header5.Text = "Q1" + "-" + (yr + 1);
-
-                    }
-                    else if (mth > 3 && mth <= 6)
-                    {
-                        header1.Text = "Q2" + "-" + yr;
-                        header2.Text = "Q3" + "-" + yr;
-                        header3.Text = "Q4" + "-" + yr;
-                        header4.Text = "Q1" + "-" + (yr + 1);
-                        header5.Text = "Q2" + "-" + (yr + 1);
-
-                    }
-                    else if (mth > 6 && mth <= 9)
-                    {
-                        header1.Text = "Q3" + "-" + yr;
-                        header2.Text = "Q4" + "-" + yr;
-                        header3.Text = "Q1" + "-" + (yr + 1);
-                        header4.Text = "Q2" + "-" + (yr + 1);
-                        header5.Text = "Q3" + "-" + (yr + 1);
-
-                    }
-                    else if (mth > 9 && mth <= 12)
-                    {
-                        header1.Text = "Q4" + "-" + yr;
-                        header2.Text = "Q1" + "-" + (yr + 1);
-                        header3.Text = "Q2" + "-" + (yr + 1);
-                        header4.Text = "Q3" + "-" + (yr + 1);
-                        header5.Text = "Q4" + "-" + (yr + 1);
-
-                    }
+                    SetHeaders(mth, yr);
+                  
                 }
 
 
             }
         }
+
+
+        private void SetHeaders(int mth, int yr)
+        {
+            if (mth <= 3)
+            {
+                header1.Text = "Q1" + "-" + yr;
+                header2.Text = "Q2" + "-" + yr;
+                header3.Text = "Q3" + "-" + yr;
+                header4.Text = "Q4" + "-" + yr;
+                header5.Text = "Q1" + "-" + (yr + 1);
+
+            }
+            else if (mth > 3 && mth <= 6)
+            {
+                header1.Text = "Q2" + "-" + yr;
+                header2.Text = "Q3" + "-" + yr;
+                header3.Text = "Q4" + "-" + yr;
+                header4.Text = "Q1" + "-" + (yr + 1);
+                header5.Text = "Q2" + "-" + (yr + 1);
+
+            }
+            else if (mth > 6 && mth <= 9)
+            {
+                header1.Text = "Q3" + "-" + yr;
+                header2.Text = "Q4" + "-" + yr;
+                header3.Text = "Q1" + "-" + (yr + 1);
+                header4.Text = "Q2" + "-" + (yr + 1);
+                header5.Text = "Q3" + "-" + (yr + 1);
+
+            }
+            else if (mth > 9 && mth <= 12)
+            {
+                header1.Text = "Q4" + "-" + yr;
+                header2.Text = "Q1" + "-" + (yr + 1);
+                header3.Text = "Q2" + "-" + (yr + 1);
+                header4.Text = "Q3" + "-" + (yr + 1);
+                header5.Text = "Q4" + "-" + (yr + 1);
+
+            }
+
+
+
+        }
                         
         private void es_ValueChanged(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
             RadMaskedCurrencyInput[] controls = new RadMaskedCurrencyInput[] { es1, es2, es3, es4, es5 };
-
-          //  totalText.ClearValue(TextBox.TextProperty);
 
             decimal? total = 0;
             foreach (RadMaskedCurrencyInput control in controls)
@@ -3672,62 +3679,28 @@ namespace manage.Controls
             es_Total.Value = total;
             savingsTxt.Foreground = new SolidColorBrush(Colors.Black);
 
-
-
         }
 
         //<------------BEGIN REVISED FIRST MONTH
 
         private void revisedmonth_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
-
-            int mth;
-            int yr;
+            int mth=0;
+            int yr=0;
 
             if (revisedmonth.SelectedDate != null)
             {
                 mth = revisedmonth.SelectedDate.Value.Month;
                 yr = revisedmonth.SelectedDate.Value.Year;
-
-
-                if (mth <= 3)
-                {
-                    header1.Text = "Q1" + "-" + yr;
-                    header2.Text = "Q2" + "-" + yr;
-                    header3.Text = "Q3" + "-" + yr;
-                    header4.Text = "Q4" + "-" + yr;
-                    header5.Text = "Q1" + "-" + (yr + 1);
-
-                }
-                else if (mth > 3 && mth <= 6)
-                {
-                    header1.Text = "Q2" + "-" + yr;
-                    header2.Text = "Q3" + "-" + yr;
-                    header3.Text = "Q4" + "-" + yr;
-                    header4.Text = "Q1" + "-" + (yr + 1);
-                    header5.Text = "Q2" + "-" + (yr + 1);
-
-                }
-                else if (mth > 6 && mth <= 9)
-                {
-                    header1.Text = "Q3" + "-" + yr;
-                    header2.Text = "Q4" + "-" + yr;
-                    header3.Text = "Q1" + "-" + (yr + 1);
-                    header4.Text = "Q2" + "-" + (yr + 1);
-                    header5.Text = "Q3" + "-" + (yr + 1);
-
-                }
-                else if (mth > 9 && mth <= 12)
-                {
-                    header1.Text = "Q4" + "-" + yr;
-                    header2.Text = "Q1" + "-" + (yr + 1);
-                    header3.Text = "Q2" + "-" + (yr + 1);
-                    header4.Text = "Q3" + "-" + (yr + 1);
-                    header5.Text = "Q4" + "-" + (yr + 1);
-
-                }
             }
+            else if (firstmonth.SelectedDate != null)
+            {
+                mth = firstmonth.SelectedDate.Value.Month;
+                yr = firstmonth.SelectedDate.Value.Year;
+            }
+
+            if(mth!=0 && yr!=0)
+                SetHeaders(mth, yr);
       
         }
 
