@@ -2679,7 +2679,7 @@ namespace manage.Controls
 
                     updateItem["scale"] = "8";
                     updateItem["Idea_x0020_Status"] = "Future Pipeline";
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + "(" + DateTime.Now.ToString("M/d/yyyy") + ")" + "successfully submitted the idea as future pipeline";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea as future pipeline";
                     updateItem["Audit"] = Audit.Text;
 
                     updateItem.Update();
@@ -2759,7 +2759,7 @@ namespace manage.Controls
                     updateItem["Idea_x0020_Status"] = "In Progress";
                     updateItem["scale"] = "2";
 
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + "(" + DateTime.Now.ToString("M/d/yyyy") + ")" + "successfully submitted the idea as in progress";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea as in progress";
                     updateItem["Audit"] = Audit.Text;
                     updateItem.Update();
                     //Load the list 
@@ -2845,7 +2845,7 @@ namespace manage.Controls
             updateItem["scale"] = "3";
 
 
-            Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + "(" + DateTime.Now.ToString("M/d/yyyy") + ")" + "successfully submitted the idea for approval";
+            Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea for approval";
             updateItem["Audit"] = Audit.Text;
 
             updateItem.Update();
@@ -3109,14 +3109,14 @@ namespace manage.Controls
 
                 if (!status.Equals(NewStatus) && !String.IsNullOrEmpty(NewStatus))
                 {
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " " + "(" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
 
                 }
 
                 else
                 {
 
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " " + "(" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully saved changes to the idea";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully saved changes to the idea";
 
                 }
                 updateItem["Audit"] = Audit.Text;
