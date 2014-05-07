@@ -88,12 +88,17 @@ namespace manage.Controls
                 selectedAccounts.Add(new AccountList(ac.AccountName, ac.DisplayName));
             }
 
-            if (!AllowMultiple && selectedAccounts.Count > 0)
+            if (!AllowMultiple)
             {
-                UserTextBox.Text = selectedAccounts[0].DisplayName;
-                UserTextBox.FontStyle = FontStyles.Italic;
-
-
+                if (selectedAccounts.Count > 0)
+                {
+                    UserTextBox.Text = selectedAccounts[0].DisplayName;
+                    UserTextBox.FontStyle = FontStyles.Italic;
+                }
+                else if (selectedAccounts.Count == 0)
+                {
+                    UserTextBox.Text = String.Empty;
+                }
             }
 
         }

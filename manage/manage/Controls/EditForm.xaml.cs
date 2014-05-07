@@ -132,10 +132,7 @@ namespace manage.Controls
                 ListItemCollection listitems = list.GetItems(query);
                 context.Load(listitems);
 
-
                 busyIndicator.IsBusy = true;
-
-
 
                 context.ExecuteQueryAsync((ss, eee) =>
                 {
@@ -431,8 +428,6 @@ namespace manage.Controls
                                   btn_save2.Visibility = Visibility.Visible;
                                   btn_save3.Visibility = Visibility.Visible;
                                   btn_cancel.Visibility = Visibility.Visible;
-
-
 
                                   revisedmonth.Visibility = Visibility.Collapsed;
                                   imghelp_revisedmonth.Visibility = Visibility.Collapsed;
@@ -2613,9 +2608,6 @@ namespace manage.Controls
             //<-----comments, status & audit----->
 
             updateItem["Project_x0020_Comments"] = projcomText.Text;
-
-
-
         }
 
 
@@ -3403,13 +3395,7 @@ namespace manage.Controls
 
                         createdBy = Utils.checkClaimsUser(username);
                         string dispName = principal["Title"] as string;
-
-
-
                     }
-
-
-
                 },
                   (sss, eeee) =>
                   {
@@ -3746,23 +3732,12 @@ namespace manage.Controls
                 }
                 updateItem["Project_x0020_Comments"] = projcomText.Text;
 
-
-
                 updateItem.Update();
                 //Load the list 
                 context.Load(Idea, list => list.Title);
                 //Execute the query to create the new item 
                 context.ExecuteQueryAsync((s, ee) =>
                 {
-
-
-                    Dispatcher.BeginInvoke(() =>
-                    {
-
-
-                    }
-                        );
-
 
                 },
     (s, ee) =>
