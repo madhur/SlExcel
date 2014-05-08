@@ -27,17 +27,12 @@ namespace manage.Controls
     public partial class PeopleChooser : UserControl
     {
 
+        //  MenuItem mnuItem;
         public SelectedAccounts selectedAccounts;
         public bool AllowMultiple { get; set; }
         PPLPicker peoplePicker;
         Dictionary<String, PickerEntry> values;
-
-         public void SetDisabled()
-        {
-            ResolveButton.IsEnabled = false;
-            BrowseButton.IsEnabled = false;
-        }
-
+        //    AutoResetEvent autoResetEvent = new AutoResetEvent(false);
 
         public PeopleChooser()
         {
@@ -45,10 +40,10 @@ namespace manage.Controls
             this.Loaded += PeopleChooser_Loaded;
             InitializeComponent();
             peoplePicker = new PPLPicker();
-        
+
             peoplePicker.SubmitClicked += peoplePicker_SubmitClicked;
             selectedAccounts = new SelectedAccounts();
-        
+
 
         }
         void PeopleChooser_Loaded(object sender, RoutedEventArgs e)
@@ -101,6 +96,8 @@ namespace manage.Controls
                 }
             }
 
+            SetError(false);
+
         }
 
         private void ResolveButton_Click(object sender, RoutedEventArgs e)
@@ -147,9 +144,7 @@ namespace manage.Controls
 
             if (results.Count == 0)
             {
-                nomatch.Visibility = Visibility.Visible;
-                UserTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-
+                SetError(true);
             }
             else if (results.Count > 1)
             {
@@ -166,13 +161,12 @@ namespace manage.Controls
                 {
                     SetSingleResult(values);
                     UserTextBox.FontStyle = FontStyles.Italic;
-                    nomatch.Visibility = Visibility.Collapsed;
-                    UserTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+                    SetError(false);
                 }
                 else
                 {
-                    nomatch.Visibility = Visibility.Visible;
-                    UserTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                    SetError(true);
+
                 }
 
             }
@@ -190,13 +184,28 @@ namespace manage.Controls
 
                 SetSingleResult(values);
                 UserTextBox.FontStyle = FontStyles.Italic;
-                nomatch.Visibility = Visibility.Collapsed;
-                UserTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+                SetError(false);
             }
 
         }
 
-         void  ps_SearchPrincipalsCompleted(object sender, SearchPrincipalsCompletedEventArgs e)
+        private void SetError(bool isTrue)
+        {
+            if (isTrue)
+            {
+                nomatch.Visibility = Visibility.Visible;
+                UserTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                nomatch.Visibility = Visibility.Collapsed;
+                UserTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+
+            }
+
+        }
+
+        void ps_SearchPrincipalsCompleted(object sender, SearchPrincipalsCompletedEventArgs e)
         {
             try
             {
@@ -298,7 +307,12 @@ namespace manage.Controls
             }
         }
 
-       
+
+           public void SetDisabled()
+        {
+            ResolveButton.IsEnabled = false;
+            BrowseButton.IsEnabled = false;
+        }
 
     }
 }

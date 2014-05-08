@@ -96,6 +96,8 @@ namespace excel_create.Controls
                 }
             }
 
+            SetError(false);
+
         }
 
         private void ResolveButton_Click(object sender, RoutedEventArgs e)
@@ -142,9 +144,7 @@ namespace excel_create.Controls
 
             if (results.Count == 0)
             {
-                nomatch.Visibility = Visibility.Visible;
-                UserTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-
+                SetError(true);
             }
             else if (results.Count > 1)
             {
@@ -161,13 +161,12 @@ namespace excel_create.Controls
                 {
                     SetSingleResult(values);
                     UserTextBox.FontStyle = FontStyles.Italic;
-                    nomatch.Visibility = Visibility.Collapsed;
-                    UserTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+                    SetError(false);
                 }
                 else
                 {
-                    nomatch.Visibility = Visibility.Visible;
-                    UserTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                    SetError(true);
+
                 }
 
             }
@@ -185,8 +184,23 @@ namespace excel_create.Controls
 
                 SetSingleResult(values);
                 UserTextBox.FontStyle = FontStyles.Italic;
+                SetError(false);
+            }
+
+        }
+
+        private void SetError(bool isTrue)
+        {
+            if (isTrue)
+            {
+                nomatch.Visibility = Visibility.Visible;
+                UserTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
                 nomatch.Visibility = Visibility.Collapsed;
                 UserTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+
             }
 
         }
