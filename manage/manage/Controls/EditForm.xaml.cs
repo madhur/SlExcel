@@ -2679,7 +2679,7 @@ namespace manage.Controls
 
                     updateItem["scale"] = "8";
                     updateItem["Idea_x0020_Status"] = "Future Pipeline";
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea as future pipeline";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as future pipeline";
                     updateItem["Audit"] = Audit.Text;
 
                     updateItem.Update();
@@ -2759,7 +2759,7 @@ namespace manage.Controls
                     updateItem["Idea_x0020_Status"] = "In Progress";
                     updateItem["scale"] = "2";
 
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea as in progress";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as in progress";
                     updateItem["Audit"] = Audit.Text;
                     updateItem.Update();
                     //Load the list 
@@ -2845,7 +2845,7 @@ namespace manage.Controls
             updateItem["scale"] = "3";
 
 
-            Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea for approval";
+            Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea for approval";
             updateItem["Audit"] = Audit.Text;
 
             updateItem.Update();
@@ -3109,14 +3109,14 @@ namespace manage.Controls
 
                 if (!status.Equals(NewStatus) && !String.IsNullOrEmpty(NewStatus))
                 {
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
 
                 }
 
                 else
                 {
 
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully saved changes to the idea";
+                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully saved changes to the idea";
 
                 }
                 updateItem["Audit"] = Audit.Text;
@@ -3192,7 +3192,7 @@ namespace manage.Controls
                 updateItem["Canceled_Comments"] = cancelwin.cancelComments.Text;
                 updateItem["Idea_x0020_Status"] = "Canceled";
                 updateItem["scale"] = "6";
-                Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + "(" + DateTime.Now.ToString("M/d/yyyy") + ")" + "canceled this idea" + "(" + "Reason:" + "-" + cancelwin.cancelComments.Text.ToString() + ")";
+                Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "canceled this idea" + " (" + "Reason:" + "-" + cancelwin.cancelComments.Text.ToString() + ")";
                 updateItem["Audit"] = Audit.Text;
 
 
@@ -3617,6 +3617,15 @@ namespace manage.Controls
                     SetHeaders(mth, yr);
                   
                 }
+                else 
+               {
+                   header1.Text = "";
+                   header2.Text = "";
+                   header3.Text = "";
+                   header4.Text = "";
+                   header5.Text = "";
+              }
+
 
 
             }
@@ -3735,13 +3744,13 @@ namespace manage.Controls
                 if (projcomText.Text.Length == 0)
                 {
 
-                    projcomText.Text = (user.Title + " " + "(" + DateTime.Now + ")" + " - " + pcomments.Text).ToString();
+                    projcomText.Text = (user.Title + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + pcomments.Text).ToString();
 
                     pcomments.Text = string.Empty;
                 }
                 else if (projcomText.Text.Length > 0)
                 {
-                    projcomText.Text = projcomText.Text + Environment.NewLine + Environment.NewLine + (user.Title + " " + "(" + DateTime.Now + ")" + " - " + pcomments.Text).ToString();
+                    projcomText.Text = projcomText.Text + Environment.NewLine + (user.Title + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + pcomments.Text).ToString();
                     pcomments.Text = string.Empty;
                 }
                 updateItem["Project_x0020_Comments"] = projcomText.Text;
@@ -3798,13 +3807,13 @@ namespace manage.Controls
                 if (aCommHistoryText.Text.Length == 0)
                 {
 
-                    aCommHistoryText.Text = (user.Title + " " + "(" + DateTime.Now + ")" + " - " + acomments.Text).ToString();
+                    aCommHistoryText.Text = (user.Title + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + acomments.Text).ToString();
 
                     acomments.Text = string.Empty;
                 }
                 else if (aCommHistoryText.Text.Length > 0)
                 {
-                    aCommHistoryText.Text = aCommHistoryText.Text + Environment.NewLine + Environment.NewLine + (user.Title + " " + "(" + DateTime.Now + ")" + " - " + acomments.Text).ToString();
+                    aCommHistoryText.Text = aCommHistoryText.Text + Environment.NewLine + (user.Title + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + acomments.Text).ToString();
                     acomments.Text = string.Empty;
                 }
 

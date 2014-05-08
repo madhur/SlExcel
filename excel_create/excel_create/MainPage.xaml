@@ -233,12 +233,12 @@
                                 <toolkit:DockPanel x:Name="lobhr" LastChildFill="False" Margin="0,15,0,0" Visibility="Collapsed">
                                     <TextBlock x:Name="hrTxt" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" FontFamily="Arial" FontSize="12" HorizontalAlignment="Left">
 										<Run Text="*" FontSize="14" Foreground="#FFF30606"/>
-										<Run Text="   Line of"/>
+										<Run Text="  Line of"/>
 										<LineBreak/>
-										<Run Text="      Business - HR"/>
+										<Run Text="     Business - HR"/>
 
                                     </TextBlock>
-                                    <RadioButton x:Name="lobhr_hr" GroupName="lob2" Content="HR" Grid.Column="1" Checked="LOB2RadioButtons_Checked" HorizontalAlignment="Left" Margin="34,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
+                                    <RadioButton x:Name="lobhr_hr" GroupName="lob2" Content="HR" Grid.Column="1" Checked="LOB2RadioButtons_Checked" HorizontalAlignment="Left" Margin="37,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
                                     <RadioButton x:Name="lobhr_tech" GroupName="lob2" Content="Tech" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="22,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
                                     <RadioButton x:Name="lobhr_pmo" GroupName="lob2" Content="PMO Only" Checked="LOB2RadioButtons_Checked" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Arial" FontSize="12"/>
 
@@ -497,7 +497,7 @@
                             <TextBlock x:Name="attachTxt" HorizontalAlignment="Left" Margin="354,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontFamily="Arial" FontSize="12" Height="61">
 								<Run Text="Please attach documentation that clearly demonstrates how the save is determined."/>
 								<LineBreak/>
-								<Run Text=" *" FontSize="16" Foreground="#FFF30606" FontWeight="Bold"/>
+								<Run Text=" *" FontSize="14" Foreground="#FFF30606" FontWeight="Bold"/>
 								<Run Text="  Required to Submit for Approval (Limit 3MB)" FontSize="9" Foreground="#FF002663"/>
                             </TextBlock>
 

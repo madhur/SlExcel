@@ -1425,7 +1425,7 @@ namespace excel_create
 
                  newItem["scale"] = "1";
                  newItem["Idea_x0020_Status"] = "Draft";
-                 newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea as a draft.";
+                 newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as a draft.";
 
                  newItem.Update();
                  //Load the list 
@@ -1814,7 +1814,7 @@ namespace excel_create
 
                      newItem["Idea_x0020_Status"] = "Future Pipeline";
                      newItem["scale"] = "8";
-                     newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea as future pipeline.";
+                     newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as future pipeline.";
 
                      newItem.Update();
                      //Load the list 
@@ -1892,7 +1892,7 @@ namespace excel_create
 
                      newItem["scale"] = "2";
                      newItem["Idea_x0020_Status"] = "In Progress";
-                     newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea in progress.";
+                     newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea in progress.";
                      newItem.Update();
                      //Load the list 
                      context.Load(Idea, list => list.Title);
@@ -1975,7 +1975,7 @@ namespace excel_create
 
             newItem["scale"] = "3";
             newItem["Idea_x0020_Status"] = "Submit for Approval";
-            newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy") + ")" + " - " + "successfully submitted the idea for approval.";
+            newItem["Audit"] = createdby.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea for approval.";
 
 
 
@@ -2295,6 +2295,14 @@ namespace excel_create
 
                     }
                 }
+                else
+                {
+                    header1.Text = "";
+                    header2.Text = "";
+                    header3.Text = "";
+                    header4.Text = "";
+                    header5.Text = "";
+                }
 
              
    
@@ -2371,13 +2379,13 @@ namespace excel_create
             if (projcomText.Text.Length == 0)
             {
 
-                projcomText.Text = (user.Title + " " + "(" + DateTime.Now + ")" + " - " + pcomments.Text).ToString();
+                projcomText.Text = (user.Title + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + pcomments.Text).ToString();
 
                 pcomments.Text = string.Empty;
             }
             else if(projcomText.Text.Length > 0)
             {
-                projcomText.Text = projcomText.Text + Environment.NewLine + (user.Title + " " + "(" + DateTime.Now + ")" + " - " + pcomments.Text).ToString();
+                projcomText.Text = projcomText.Text + Environment.NewLine + (user.Title + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + pcomments.Text).ToString();
                 pcomments.Text = string.Empty;
             }
         }

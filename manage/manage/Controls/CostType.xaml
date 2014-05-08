@@ -118,7 +118,8 @@
                 <Grid>
                     <sdk:Label Content="Cost Type" FontSize="18" Foreground="#FF002E7A" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="234,15,249,0" Width="97"/>
                     <TextBlock x:Name="answersTxt" TextWrapping="NoWrap" Text="Based on your answers, your Cost Type is...." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,51,0,202"/>
-                    <TextBlock x:Name="cost_label" Margin="0,0,0,-24" VerticalAlignment="Center" Foreground="#FF4D4F53" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+                    <TextBlock x:Name="cost_label" Margin="0,0,0,20" VerticalAlignment="Center" Foreground="#FF4D4F53" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+                    <TextBlock x:Name="cost_txt" Margin="0,0,0,-40" VerticalAlignment="Center" Foreground="#FF4D4F53" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
                     <HyperlinkButton x:Name="btn_close" HorizontalAlignment="Left" Margin="511,228,0,0" VerticalAlignment="Top" Click="close_Click" ClickMode="Press" Foreground="#FF002E7A" FontSize="14" BorderThickness="0">
                         <TextBlock Text ="Close" TextDecorations = "Underline" />
 

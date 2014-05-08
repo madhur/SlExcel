@@ -149,8 +149,8 @@ namespace excel_create.Controls
         private void REE(object sender, RoutedEventArgs e)
         {
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the MF HLQ report and do an Add Mainframe on CEM REENGINEERING TRACKER.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Validate against the MF HLQ report and do an Add Mainframe on CEM REENGINEERING TRACKER.";
             result.Text = "2";
         }
 
@@ -198,8 +198,8 @@ namespace excel_create.Controls
         {
 
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against MF HLQ report and do an Add Mainframe on CEM REENGINEERING TRACKER.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Validate against MF HLQ report and do an Add Mainframe on CEM REENGINEERING TRACKER.";
             result.Text = "2";
 
         }
@@ -218,8 +218,8 @@ namespace excel_create.Controls
         {
 
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the Direct Tech Forecast and do an Add Direct Tech on CEM REENGINEERING TRACKER.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Validate against the Direct Tech Forecast and do an Add Direct Tech on CEM REENGINEERING TRACKER.";
             result.Text = "2";
 
         }
@@ -227,8 +227,8 @@ namespace excel_create.Controls
         {
 
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Do an Add other REE on CEM REEGINEERING TRACKER.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Do an Add other REE on CEM REEGINEERING TRACKER.";
             result.Text = "2";
 
         }
@@ -273,8 +273,8 @@ namespace excel_create.Controls
         {
 
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validated against CEM REE report as entered automatically.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Validated against CEM REE report as entered automatically.";
             result.Text = "2";
 
         }
@@ -322,8 +322,8 @@ namespace excel_create.Controls
         {
 
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the MR report and do an Add Midrange Tape on the CEM REENGINEERING TRACKER.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Validate against the MR report and do an Add Midrange Tape on the CEM REENGINEERING TRACKER.";
             result.Text = "2";
         }
 
@@ -343,8 +343,8 @@ namespace excel_create.Controls
         {
 
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Growth Reduction" + "\n" + "\n" +
-                "Attach impacted TI forecast information.";
+            cost_label.Text = "Growth Reduction";
+            cost_txt.Text = "Attach impacted TI forecast information.";
             result.Text = "4";
 
         }
@@ -356,8 +356,8 @@ namespace excel_create.Controls
         {
 
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validate against the MR report and do an Add Rate Change on CEM REENGINEERING TRACKER.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Validate against the MR report and do an Add Rate Change on CEM REENGINEERING TRACKER.";
             result.Text = "2";
 
         }
@@ -366,8 +366,8 @@ namespace excel_create.Controls
         private void type16_no_Checked(object sender, RoutedEventArgs e)
         {
             tabcontrol1.SelectedIndex = 2;
-            cost_label.Text = "Re-Engineering (REE)" + "\n" + "\n" +
-                "Validated against CEM REE report as entered automatically.";
+            cost_label.Text = "Re-Engineering (REE)";
+            cost_txt.Text = "Validated against CEM REE report as entered automatically.";
             result.Text = "2";
 
         }
