@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace manage.Controls
 {
-    public partial class Cancel
+    public partial class Cancel : ChildWindow
     {
         public event EventHandler cancelSaveClicked;
 

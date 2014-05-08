@@ -4,16 +4,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dataInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input"
-        xmlns:maskedInput="clr-namespace:Telerik.Windows.Controls.MaskedInput;assembly=Telerik.Windows.Controls.Input"
-
+    xmlns:maskedInput="clr-namespace:Telerik.Windows.Controls.MaskedInput;assembly=Telerik.Windows.Controls.Input"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
     xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" 
     xmlns:Primitives="clr-namespace:Telerik.Windows.Controls.RibbonView.Primitives;assembly=Telerik.Windows.Controls.RibbonView"
     xmlns:Controls3="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input"
     xmlns:Controls="clr-namespace:manage.Controls" xmlns:Controls1="clr-namespace:manage.Controls" xmlns:Controls2="clr-namespace:manage.Controls"  xmlns:local="clr-namespace:manage"
-           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
-           xmlns:TabControl="clr-namespace:Telerik.Windows.Controls.TabControl;assembly=Telerik.Windows.Controls.Navigation" xmlns:Primitives1="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls.Navigation"
+    xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+    xmlns:TabControl="clr-namespace:Telerik.Windows.Controls.TabControl;assembly=Telerik.Windows.Controls.Navigation" xmlns:Primitives1="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls.Navigation"
     x:Class="manage.Controls.EditForm"
     mc:Ignorable="d"
            Width="910" Height="510" HasCloseButton="False" BorderThickness="0" BorderBrush="{x:Null}">
@@ -883,7 +882,7 @@
                             <TextBlock x:Name="attachTxt" HorizontalAlignment="Left" Margin="83,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontFamily="Arial" FontSize="12" Height="61">
 								<Run Text="Please attach documentation that clearly demonstrates how the save is determined."/>
 								<LineBreak/>
-								<Run Text=" *" FontSize="14" Foreground="#FFF30606" FontWeight="Bold"/>
+								<Run Text=" *" FontSize="14" Foreground="#FFF30606"/>
 								<Run Text="  Required to Submit for Approval (Limit 3MB)" FontSize="9" Foreground="#FF002663"/>
                             </TextBlock>
 
@@ -1097,7 +1096,7 @@
             <TextBlock x:Name="ideaID" Grid.Column="4" Margin="5,0,0,22" FontFamily="Arial" FontSize="12" Foreground="#FF002663" VerticalAlignment="Center" Height="16" Width="160" HorizontalAlignment="Left"/>
 
             <StackPanel Grid.Row="9" Margin="2,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="115" Grid.Column="1">
-                <HyperlinkButton x:Name="btn_cancel" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" ToolTipService.ToolTip="" Cursor="Hand" Click="btn_cancel_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsTabStop="False" Margin="0">
+                <HyperlinkButton x:Name="btn_cancel" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" Cursor="Hand" Click="btn_cancel_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsTabStop="False" Margin="0">
                     <HyperlinkButton.Background>
                         <ImageBrush ImageSource="/manage;component/Images/CancelButton.png" Stretch="None"/>
                     </HyperlinkButton.Background>
@@ -1105,7 +1104,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="9" Margin="2,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="115" Height="39" Grid.Column="1">
-                <HyperlinkButton x:Name="btn_draft" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" ToolTipService.ToolTip="" Cursor="Hand" Click="btn_draft_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsTabStop="False" Visibility="Collapsed">
+                <HyperlinkButton x:Name="btn_draft" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" Cursor="Hand" Click="btn_draft_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsTabStop="False" Visibility="Collapsed">
                     <HyperlinkButton.Background>
                         <ImageBrush ImageSource="Images/DraftButton.png" Stretch="None"/>
                     </HyperlinkButton.Background>
@@ -1129,7 +1128,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="3" Grid.Row="9" Margin="0,0,2,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="115" Height="39">
-                <HyperlinkButton x:Name="btn_approve" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" ToolTipService.ToolTip="" Cursor="Hand" Click="btn_approval_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" IsTabStop="False" Margin="0" BorderThickness="0" Visibility="Collapsed">
+                <HyperlinkButton x:Name="btn_approve" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" Cursor="Hand" Click="btn_approval_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" IsTabStop="False" Margin="0" BorderThickness="0" Visibility="Collapsed">
                     <HyperlinkButton.Background>
                         <ImageBrush ImageSource="/manage;component/Images/ApprovalButton.png" Stretch="None"/>
                     </HyperlinkButton.Background>

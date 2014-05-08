@@ -497,7 +497,7 @@
                             <TextBlock x:Name="attachTxt" HorizontalAlignment="Left" Margin="354,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontFamily="Arial" FontSize="12" Height="61">
 								<Run Text="Please attach documentation that clearly demonstrates how the save is determined."/>
 								<LineBreak/>
-								<Run Text=" *" FontSize="14" Foreground="#FFF30606" FontWeight="Bold"/>
+								<Run Text=" *" FontSize="14" Foreground="#FFF30606"/>
 								<Run Text="  Required to Submit for Approval (Limit 3MB)" FontSize="9" Foreground="#FF002663"/>
                             </TextBlock>
 
@@ -640,7 +640,7 @@
 
 
             <StackPanel Grid.Row="9" Margin="2,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="39" Width="115" Grid.Column="1">
-                <HyperlinkButton x:Name="btn_draft" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" ToolTipService.ToolTip="" Cursor="Hand" Click="btn_draft_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsTabStop="False">
+                <HyperlinkButton x:Name="btn_draft" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" Cursor="Hand" Click="btn_draft_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" IsTabStop="False">
                     <HyperlinkButton.Background>
                         <ImageBrush ImageSource="Images/DraftButton.png" Stretch="None"/>
                     </HyperlinkButton.Background>
@@ -664,7 +664,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="3" Grid.Row="9" Margin="0,0,2,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="115" Height="39">
-                <HyperlinkButton x:Name="btn_approve" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" ToolTipService.ToolTip="" Cursor="Hand" Click="btn_approval_Click" Width="115" IsTabStop="False" Margin="0" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                <HyperlinkButton x:Name="btn_approve" Content="" FontFamily="Arial" FontSize="12" Foreground="{x:Null}" Height="39" Cursor="Hand" Click="btn_approval_Click" Width="115" IsTabStop="False" Margin="0" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                     <HyperlinkButton.Background>
                         <ImageBrush ImageSource="Images/ApprovalButton.png" Stretch="None"/>
                     </HyperlinkButton.Background>

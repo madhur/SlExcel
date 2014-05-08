@@ -3,7 +3,7 @@
            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
            xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
            Width="400" Height="175" 
-           Title="">
+           Title="" HasCloseButton="False">
     <Grid x:Name="LayoutRoot" Margin="2" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition />

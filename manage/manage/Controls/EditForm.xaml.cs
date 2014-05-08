@@ -51,6 +51,7 @@ namespace manage.Controls
         bool formLoad;
         bool isContractor, isEmployee, isReadOnly, isAdmin, isIdeaOwner;
         String createdBy;
+        String varaudit;
         private const Int32 FILE_SIZE_LIMIT = 3145728;
 
 
@@ -936,8 +937,7 @@ namespace manage.Controls
         FTEMsgBox ftewin;
         close closewin;
         Messages msgwin;
-        Cancel cancelwin;
-       
+        ChildWindow2 cancelwin;
 
 
 
@@ -2671,8 +2671,8 @@ namespace manage.Controls
 
                     updateItem["scale"] = "8";
                     updateItem["Idea_x0020_Status"] = "Future Pipeline";
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as future pipeline";
-                    updateItem["Audit"] = Audit.Text;
+                    varaudit = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as future pipeline";
+                    updateItem["Audit"] = varaudit;
 
                     updateItem.Update();
                     //Load the list 
@@ -2751,8 +2751,8 @@ namespace manage.Controls
                     updateItem["Idea_x0020_Status"] = "In Progress";
                     updateItem["scale"] = "2";
 
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as in progress";
-                    updateItem["Audit"] = Audit.Text;
+                    varaudit = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea as in progress";
+                    updateItem["Audit"] = varaudit;
                     updateItem.Update();
                     //Load the list 
                     context.Load(Idea, list => list.Title);
@@ -2837,8 +2837,8 @@ namespace manage.Controls
             updateItem["scale"] = "3";
 
 
-            Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea for approval";
-            updateItem["Audit"] = Audit.Text;
+            varaudit = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully submitted the idea for approval";
+            updateItem["Audit"] = varaudit;
 
             updateItem.Update();
             //Load the list 
@@ -3101,17 +3101,17 @@ namespace manage.Controls
 
                 if (!status.Equals(NewStatus) && !String.IsNullOrEmpty(NewStatus))
                 {
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
+                    varaudit = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully changed the status of the idea to" + " " + NewStatus;
 
                 }
 
                 else
                 {
 
-                    Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully saved changes to the idea";
+                    varaudit = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "successfully saved changes to the idea";
 
                 }
-                updateItem["Audit"] = Audit.Text;
+                updateItem["Audit"] = varaudit;
 
                 updateItem.Update();
                 //Load the list 
@@ -3164,7 +3164,7 @@ namespace manage.Controls
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            cancelwin = new Cancel();
+            cancelwin = new ChildWindow2();
             cancelwin.Show();
             cancelwin.cancelSaveClicked += new EventHandler(Cancel_Message);
         }
@@ -3184,8 +3184,8 @@ namespace manage.Controls
                 updateItem["Canceled_Comments"] = cancelwin.cancelComments.Text;
                 updateItem["Idea_x0020_Status"] = "Canceled";
                 updateItem["scale"] = "6";
-                Audit.Text = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "canceled this idea" + " (" + "Reason:" + "-" + cancelwin.cancelComments.Text.ToString() + ")";
-                updateItem["Audit"] = Audit.Text;
+                varaudit = Audit.Text + Environment.NewLine + currUser.Text + " (" + DateTime.Now.ToString("M/d/yyyy - h:mm:ss tt") + ")" + " - " + "canceled this idea" + " (" + "Reason:" + "-" + cancelwin.cancelComments.Text.ToString() + ")";
+                updateItem["Audit"] = varaudit;
 
 
                 updateItem.Update();

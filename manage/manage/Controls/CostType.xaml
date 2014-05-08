@@ -10,7 +10,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" 
     mc:Ignorable="d" x:Name="cost_type_child" 
     x:Class="manage.Controls.ChildWindow1"
-           Title="" OverlayBrush="{x:Null}" BorderBrush="{x:Null}" FontFamily="Arial" FontSize="12" BorderThickness="0" OverlayOpacity="0" d:DesignWidth="600" d:DesignHeight="300">
+           Title="" FontFamily="Arial" FontSize="12" d:DesignWidth="600" d:DesignHeight="300" HasCloseButton="False">
     <Grid x:Name="LayoutRoot" Margin="2">
         <Grid.RowDefinitions>
             <RowDefinition />
