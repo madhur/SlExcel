@@ -34,7 +34,7 @@ namespace manage
         public const String DRAFT = "Draft";
         public const String PENDING_ACTUALS = "Pending Actuals";
 
-        public static String[] Active = new String[] { IN_PROGRESS, FINANCE_REVIEW, READY_FINANCE_REVIEW, SUBMIT_APPROVAL, FUTURE_PIPELINE };
+        public static String[] Active = new String[] { IN_PROGRESS, FINANCE_REVIEW, READY_FINANCE_REVIEW, SUBMIT_APPROVAL, FUTURE_PIPELINE, PENDING_ACTUALS };
         public static String[] Draft = new String[] { DRAFT };
         public static String[] Admin = new String[] { FINANCE_REVIEW, SUBMIT_APPROVAL, PENDING_ACTUALS};
 

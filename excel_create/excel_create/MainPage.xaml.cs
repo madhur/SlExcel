@@ -1479,28 +1479,7 @@ namespace excel_create
                  MessageBox.Show(message);
              }
 
-             //if (enableStatusButtons)
-             //    EnableStatusButtons();
-
          }
-
-         //private void DisableStatusButtons()
-         //{
-         //    btn_draft.IsEnabled = false;
-         //    btn_approve.IsEnabled = false;
-         //    btn_fp.IsEnabled = false;
-         //    btn_inprogress.IsEnabled = false;
-
-         //}
-
-         //private void EnableStatusButtons()
-         //{
-         //    btn_draft.IsEnabled = true;
-         //    btn_approve.IsEnabled = true;
-         //    btn_fp.IsEnabled = true;
-         //    btn_inprogress.IsEnabled = true;
-
-         //}
 
          private void SaveRadios(ListItem updateItem)
          {
@@ -2307,7 +2286,7 @@ namespace excel_create
              
    
             }
- 
+
         private void es_ValueChanged(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
             RadMaskedCurrencyInput[] controls = new RadMaskedCurrencyInput[] { es1, es2, es3, es4, es5 };

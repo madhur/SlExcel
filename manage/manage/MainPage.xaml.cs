@@ -762,7 +762,6 @@ namespace manage
         }
 
 
-
         #endregion
 
         #region ///----------------TEAM IDEAS BUTTONS----------------/////
@@ -831,6 +830,7 @@ namespace manage
             FormatControls(teamApproved, TAB.TEAM_IDEAS);
             ApplyFilters(new String[] { Status.APPROVED }, TAB.TEAM_IDEAS, Status.STATUS_COLUMN);
         }
+
 
         #endregion
 
