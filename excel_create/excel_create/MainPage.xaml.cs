@@ -2881,7 +2881,14 @@ namespace excel_create
                         continue;
                     }
 
-                    UploadFile(file, libName, GetFolderName());
+                    try
+                    {
+                        UploadFile(file, libName, GetFolderName());
+                    }
+                    catch (Exception ee)
+                    {
+                        MessageBox.Show(ee.Message);
+                    }
 
                 }
             }

@@ -21,5 +21,7 @@ namespace Common
         public const String USER_MISSING_MSG = "The user does not exist or is not unique.";
         public const String USER_MISSING_MSG_NEW = "One or more FTE Contributors do not exist";
 
+        public const String NO_RESULTS_FOUND = "No results found";
+
     }
 }

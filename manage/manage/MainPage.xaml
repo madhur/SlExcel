@@ -101,14 +101,14 @@
 
 
                                 </telerik:GridViewDataColumn>
-                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
+                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
                                     <telerik:GridViewImageColumn.ToolTipTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding AlertTip}" />
                                         </DataTemplate>
                                     </telerik:GridViewImageColumn.ToolTipTemplate>
                                 </local:ImageFilterColumn>
-                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="False" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
+                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="True" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
 
                                 <telerik:GridViewDataColumn Header="Executor" DataMemberBinding="{Binding executor}" IsVisible="True"/>
                                 <telerik:GridViewDataColumn Header="Created By" DataMemberBinding="{Binding CreatedBy}" IsVisible="True"/>
@@ -229,14 +229,14 @@
 
                                 </telerik:GridViewDynamicHyperlinkColumn>
 
-                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
+                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
                                     <telerik:GridViewImageColumn.ToolTipTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding AlertTip}" />
                                         </DataTemplate>
                                     </telerik:GridViewImageColumn.ToolTipTemplate>
                                 </local:ImageFilterColumn>
-                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="False" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
+                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="True" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
 
                                 <telerik:GridViewDataColumn Header="Executor" DataMemberBinding="{Binding executor}" IsVisible="True"/>
                                 <telerik:GridViewDataColumn Header="Director" DataMemberBinding="{Binding director}" IsVisible="True"/>
@@ -354,7 +354,7 @@
 
                                 </telerik:GridViewDynamicHyperlinkColumn>
 
-                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
+                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
                                     <local:ImageFilterColumn.ToolTipTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding AlertTip}" />
@@ -362,7 +362,7 @@
                                     </local:ImageFilterColumn.ToolTipTemplate>
                                 </local:ImageFilterColumn>
 
-                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="False" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
+                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="True" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
                                 <telerik:GridViewDataColumn Header="Idea Status" IsCustomSortingEnabled="False" DataMemberBinding="{Binding ideaStatus}" IsFilterable="True"/>
                                 <telerik:GridViewDataColumn Header="Cost Type" IsCustomSortingEnabled="False" DataMemberBinding="{Binding costType}" IsFilterable="True"/>
 
@@ -475,7 +475,7 @@
 
                                 </telerik:GridViewDynamicHyperlinkColumn>
 
-                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsCustomSortingEnabled="False" IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
+                                <local:ImageFilterColumn Header="Alert" UniqueName="Alert" DataMemberBinding="{Binding Alert}" TextAlignment="Center"  IsGroupable="False" IsFilterable="True" Width="60" MaxWidth="60" MinWidth="60" ImageStretch="None" ImageHeight="30" ImageWidth="30">
                                     <telerik:GridViewImageColumn.ToolTipTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding AlertTip}" />
@@ -484,7 +484,7 @@
                                 </local:ImageFilterColumn>
 
 
-                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="False" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
+                                <telerik:GridViewDataColumn Header="Idea Name" IsGroupable="False"  IsFilterable="True" DataMemberBinding="{Binding ideaName}" TextWrapping="Wrap" MaxWidth="200"/>
                                 <telerik:GridViewDataColumn Header="Idea Status" IsCustomSortingEnabled="False" DataMemberBinding="{Binding ideaStatus}" IsFilterable="True"/>
                                 <telerik:GridViewDataColumn Header="Cost Type" IsCustomSortingEnabled="False" DataMemberBinding="{Binding costType}" IsFilterable="True"/>
 

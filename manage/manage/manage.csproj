@@ -146,14 +146,11 @@
     <Compile Include="Controls\Attachments.xaml.cs">
       <DependentUpon>Attachments.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChildWindow2.xaml.cs">
-      <DependentUpon>ChildWindow2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\close_button.xaml.cs">
       <DependentUpon>close_button.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Cancel.xaml.cs">
-      <DependentUpon>Cancel.xaml</DependentUpon>
+    <Compile Include="Controls\ChildWindow2.xaml.cs">
+      <DependentUpon>ChildWindow2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CostType.xaml.cs">
       <DependentUpon>CostType.xaml</DependentUpon>
@@ -210,15 +207,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ChildWindow2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\close_button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Cancel.xaml">
+    <Page Include="Controls\ChildWindow2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

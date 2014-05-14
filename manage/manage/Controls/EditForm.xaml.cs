@@ -3096,6 +3096,26 @@ namespace manage.Controls
 
                 SetFields(updateItem, context);
 
+                if (CEM_No.IsChecked == true)
+                {
+                    updateItem["CEM_x0020_Approved"] = "No";
+                }
+                else if (CEM_Yes.IsChecked == true)
+                {
+                    updateItem["CEM_x0020_Approved"] = "Yes";
+                }
+
+                if (topprojectCheckBox.IsChecked == true)
+                {
+                    updateItem["Top_x0020_Project"] = "Yes";
+                }
+                else if (topprojectCheckBox.IsChecked == false)
+                {
+                    updateItem["Top_x0020_Project"] = "";
+                }
+
+                updateItem["Cost_Classification"] = cc.Text;
+
                 updateItem["Idea_x0020_Status"] = statusLevel.Text;
                 updateItem["admin_comments"] = aCommHistoryText.Text;
 
@@ -4063,13 +4083,18 @@ namespace manage.Controls
                         selectedFiles.Add(new FileEntry(fileToUpload.Name, fileToUpload.Name, true));                                               
                         attachTxt.Foreground = new SolidColorBrush(Colors.Black);
                         Remove.IsEnabled = true;
+                       
                     }
                     );
 
                 },
                 (s, ee) =>
                 {
-                    Console.WriteLine(ee.Message);
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        MessageBox.Show(ee.Message);
+                        busyIndicator.IsBusy = false;
+                    });
 
                 });
 
@@ -4378,7 +4403,10 @@ namespace manage.Controls
 
                             selectedFiles.Remove(fileName);
                             if (selectedFiles.Count == 0)
+                            {
                                 Remove.IsEnabled = false;
+                               
+                            }
                             btn_approve.IsEnabled = false;
 
                         });
@@ -4453,7 +4481,14 @@ namespace manage.Controls
                         MessageBox.Show(Consts.FILE_SIZE_ERROR);
                         continue;
                     }
-                    UploadFile(file, libName, GetFolderName());
+                    try
+                    {
+                        UploadFile(file, libName, GetFolderName());
+                    }
+                    catch (Exception ee)
+                    {
+                        MessageBox.Show(ee.Message);
+                    }
                     
                 }
             }

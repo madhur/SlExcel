@@ -206,6 +206,11 @@ namespace manage.Controls
 
                     ResultsLst.Items.Clear();
 
+                    if (values.Count == 0)
+                    {
+                        ResultsLst.Items.Add(GlobalConsts.NO_RESULTS_FOUND);
+                    }
+
                     foreach (PickerEntry pi in values.Values)
                     {
                         ResultsLst.Items.Add(new PickerEntry(pi.DisplayName, pi.AccountName, pi.Email, pi.Department));
@@ -246,6 +251,9 @@ namespace manage.Controls
 
             //cast the selected name as a PickerEntry
             PickerEntry pe = (PickerEntry)ResultsLst.SelectedItem;
+
+            if (pe == null)
+                return;
             // UserNameTxt.Text = pe.DisplayName;
             SelectedAccountName = pe.AccountName;
 
