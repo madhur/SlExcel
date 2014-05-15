@@ -2656,7 +2656,7 @@ namespace manage.Controls
                 else
                 {
                     //Get the current context 
-                    ClientContext context = ClientContext.Current;
+                    ClientContext context = new ClientContext(Utils.GetSiteUrl());
                     //Get the Idea list and add a new item 
                     Idea = context.Web.Lists.GetByTitle("Idea");
                     context.Load(Idea);
@@ -2737,12 +2737,13 @@ namespace manage.Controls
                 {
 
                     //Get the current context 
-                    ClientContext context = ClientContext.Current;
+                    ClientContext context = new ClientContext(Utils.GetSiteUrl());
                     //Get the Idea list and add a new item 
                     Idea = context.Web.Lists.GetByTitle("Idea");
 
                     context.Load(Idea);
                     ListItem updateItem = Idea.GetItemById(ideaID.Text);
+                    
                     MarkFilesPermanent();
                     RemoveDeletedFiles();
 
@@ -2819,7 +2820,7 @@ namespace manage.Controls
         {
 
             //Get the current context 
-            ClientContext context = ClientContext.Current;
+            ClientContext context = new ClientContext(Utils.GetSiteUrl());
             //Get the Idea list and add a new item 
             Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -3057,7 +3058,41 @@ namespace manage.Controls
 
         }
 
+        private void LoadListItem(String id)
+        {
+            ClientContext context = ClientContext.Current;
+            Web web = context.Web;
 
+            List list = context.Web.Lists.GetByTitle("Idea");
+            context.Load(list);
+            CamlQuery query = new CamlQuery();
+            query.ViewXml = "<View><Query><Where><Eq><FieldRef Name = 'ID'/><Value Type='Number'>" + ideaID.Text + "</Value></Eq></Where></Query></View>";
+
+            ListItemCollection listitems = list.GetItems(query);
+            context.Load(listitems);
+
+            context.ExecuteQueryAsync((s, ee) =>
+              {
+
+
+
+
+
+              },
+
+
+
+  (s, ee) =>
+  {
+      Console.WriteLine(ee.Message);
+
+  });
+        }
+
+
+
+
+        
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {
@@ -3081,7 +3116,7 @@ namespace manage.Controls
             {
 
                 //Get the current context 
-                ClientContext context = ClientContext.Current;
+                ClientContext context = new ClientContext(Utils.GetSiteUrl());
                 //Get the Idea list and add a new item 
                 Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -3089,7 +3124,7 @@ namespace manage.Controls
                 context.Load(Idea);
 
                 ListItem updateItem = Idea.GetItemById(ideaID.Text);
-
+                context.Load(updateItem);
                 MarkFilesPermanent();
                 RemoveDeletedFiles();
                 //Set the new item's properties 
@@ -3135,7 +3170,7 @@ namespace manage.Controls
 
                 updateItem.Update();
                 //Load the list 
-                context.Load(Idea, list => list.Title);
+                //context.Load(Idea, list => list.Title);
                 //Execute the query to create the new item 
                 busyIndicator.IsBusy = true;
                 context.ExecuteQueryAsync((s, ee) =>
@@ -3738,7 +3773,7 @@ namespace manage.Controls
             }
             else
             {
-                ClientContext context = ClientContext.Current;
+                ClientContext context = new ClientContext(Utils.GetSiteUrl());
                 //Get the Idea list and add a new item 
                 Idea = context.Web.Lists.GetByTitle("Idea");
 
@@ -3790,7 +3825,7 @@ namespace manage.Controls
             else
             {
 
-                ClientContext context = ClientContext.Current;
+                ClientContext context = new ClientContext(Utils.GetSiteUrl());
                 //Get the Idea list and add a new item 
                 Idea = context.Web.Lists.GetByTitle("Idea");
 
