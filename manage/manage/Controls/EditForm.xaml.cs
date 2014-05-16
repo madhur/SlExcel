@@ -2608,6 +2608,44 @@ namespace manage.Controls
             //<-----comments, status & audit----->
 
             updateItem["Project_x0020_Comments"] = projcomText.Text;
+
+            if (statusLevel.Text == "Draft")
+            {
+                updateItem["scale"] = "1";
+            }
+
+            else if (statusLevel.Text == "In Progress")
+            {
+                updateItem["scale"] = "2";
+            }
+            else if (statusLevel.Text == "Submit for Approval")
+            {
+                updateItem["scale"] = "3";
+            }
+            else if (statusLevel.Text == "Ready for Finance Review")
+            {
+                updateItem["scale"] = "4";
+            }
+            else if (statusLevel.Text == "Finance Review Completed")
+            {
+                updateItem["scale"] = "5";
+            }
+            else if (statusLevel.Text == "Canceled")
+            {
+                updateItem["scale"] = "6";
+            }
+            else if (statusLevel.Text == "Approved")
+            {
+                updateItem["scale"] = "7";
+            }
+            else if (statusLevel.Text == "Future Pipeline")
+            {
+                updateItem["scale"] = "8";
+            }
+            else if (statusLevel.Text == "Pending Actuals")
+            {
+                updateItem["scale"] = "9";
+            }
         }
 
 
